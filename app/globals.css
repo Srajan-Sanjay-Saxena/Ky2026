@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+:root {
+  /* Kashi Yatra Color Palette */
+  --saffron: #FF6B00;
+  --ganga-blue: #1A5F7A;
+  --gold: #D4A853;
+  --bright-gold: #FFD700;
+  --maroon: #8B1538;
+  --cream: #FDF6E3;
+  --deep-night: #1A1A2E;
+  --stone: #D4B896;
+  --dark-brown: #2D1810;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--deep-night);
+  color: var(--cream);
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-night);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bright-gold);
+}
+
+/* Selection color */
+::selection {
+  background: var(--maroon);
+  color: var(--bright-gold);
+}
+
+/* Utility classes */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--bright-gold), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.glow-saffron {
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+/* Animation utilities */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ── HeroSection keyframes ── */
+@keyframes ember {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+  50% { transform: translateY(-20px) translateX(6px); opacity: 0.6; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+@keyframes diyaFloat {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(-1deg); }
+  25% { transform: translateY(-8px) translateX(5px) rotate(1deg); }
+  50% { transform: translateY(-12px) translateX(15px) rotate(2deg); }
+  75% { transform: translateY(-6px) translateX(25px) rotate(0deg); }
+}
+@keyframes lotusFloat {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(-2deg); }
+  33% { transform: translateY(-6px) translateX(10px) rotate(1deg); }
+  66% { transform: translateY(-3px) translateX(20px) rotate(-1deg); }
+}
+@keyframes moonReflectionShimmer {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 0.6; transform: translateX(-50%) scaleX(1.1); }
+}
+@keyframes divineAura {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.2; }
+  50% { transform: translateX(-50%) scale(1.1); opacity: 0.4; }
+}
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  50% { transform: translateY(-25px) translateX(5px); opacity: 1; }
+}
+@keyframes templeShimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.03); }
+}
+@keyframes ghatsShimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.05); }
+}
+@keyframes ghatsAura {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.15; }
+  50% { transform: translateX(-50%) scale(1.1); opacity: 0.25; }
+}
+@keyframes cloudDriftRight {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 0.08; }
+  90% { opacity: 0.08; }
+  100% { transform: translateX(140vw); opacity: 0; }
+}
+@keyframes cloudDriftLeft {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { opacity: 0.08; }
+  90% { opacity: 0.08; }
+  100% { transform: translateX(-140vw); opacity: 0; }
+}
+@keyframes kandeelFloatLeft {
+  0% { transform: translate(0, 0) rotate(-5deg); opacity: 0; }
+  8% { opacity: 0.9; }
+  85% { opacity: 0.7; }
+  100% { transform: translate(50vw, -100vh) rotate(10deg); opacity: 0; }
+}
+@keyframes kandeelFloatRight {
+  0% { transform: translate(0, 0) rotate(5deg); opacity: 0; }
+  8% { opacity: 0.9; }
+  85% { opacity: 0.7; }
+  100% { transform: translate(-50vw, -100vh) rotate(-10deg); opacity: 0; }
+}
+@keyframes yearAura {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+@keyframes shimmerSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes textGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+@keyframes sparkleFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-10px) scale(1.3); opacity: 1; }
+}
+@keyframes waveShimmer {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(100%); opacity: 1; }
+}
+@keyframes rippleExpand {
+  0% { transform: scale(0.5); opacity: 0.5; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes boatMoveRight {
+  0% { left: -20vw; }
+  100% { left: 110vw; }
+}
+@keyframes boatMoveLeft {
+  0% { left: 110vw; }
+  100% { left: -20vw; }
+}
+
+/* ── DancerSection keyframes ── */
+@keyframes divineAuraPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+@keyframes innerGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes riseEnergy {
+  0% { transform: translateY(0) scaleY(1); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: translateY(-100px) scaleY(2); opacity: 0; }
+}
+@keyframes divineShimmer {
+  0%, 100% { filter: drop-shadow(0 0 30px rgba(255,215,0,0.4)) drop-shadow(0 0 60px rgba(255,140,0,0.2)); }
+  50% { filter: drop-shadow(0 0 40px rgba(255,215,0,0.6)) drop-shadow(0 0 80px rgba(255,140,0,0.3)); }
+}
+@keyframes bottomGlow {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scaleX(1.1); }
+}
+@keyframes thirdEyePulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.3); }
+}
+@keyframes trishulGlow {
+  0%, 100% { opacity: 0.4; height: 80px; }
+  50% { opacity: 0.8; height: 100px; }
+}
+@keyframes floatOm {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* ── DurgaTempleSection keyframes ── */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes pulseRing {
+  0% { transform: scale(0.9); opacity: 0.4; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+@keyframes durgaAura {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+@keyframes rotateDurga {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes durgaShimmer {
+  0%, 100% { filter: drop-shadow(0 0 30px rgba(255,69,0,0.5)) drop-shadow(0 0 60px rgba(255,215,0,0.3)); }
+  50% { filter: drop-shadow(0 0 40px rgba(255,69,0,0.7)) drop-shadow(0 0 80px rgba(255,215,0,0.4)); }
+}
