@@ -81,6 +81,8 @@ export default function DancerSection() {
       className="relative min-h-screen overflow-hidden py-12 sm:py-16 md:py-20"
       style={{
         background: "linear-gradient(180deg, #0a0a1a 0%, #1a1a40 30%, #2D1810 60%, #1A1A2E 100%)",
+        borderRadius: "24px 24px 0 0",
+        boxShadow: "0 -20px 60px rgba(0,0,0,0.8)",
       }}
     >
       {/* Sacred geometry background */}
@@ -265,7 +267,7 @@ export default function DancerSection() {
                 className="w-full h-auto relative z-10"
                 style={{
                   filter: "drop-shadow(0 0 30px rgba(255,215,0,0.4)) drop-shadow(0 0 60px rgba(255,140,0,0.2))",
-                  animation: "divineShimmer 4s ease-in-out infinite",
+                  animation: "divineShimmer 8s ease-in-out infinite",
                 }}
                 priority
               />

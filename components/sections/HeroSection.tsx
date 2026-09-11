@@ -86,7 +86,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden max-w-[100vw]"
+      className="relative h-screen overflow-hidden max-w-[100vw]"
       style={{
         background: `linear-gradient(180deg, 
           #050510 0%, 
@@ -845,7 +845,9 @@ export default function HeroSection() {
         <div
           className="absolute bottom-[30%] sm:bottom-[33%] w-32 sm:w-40 md:w-52 lg:w-60"
           style={{
+            left: '-20vw',
             animation: 'boatMoveRight 55s linear infinite',
+            animationFillMode: 'forwards',
             filter: 'drop-shadow(0 0 8px rgba(255,200,100,0.3))',
           }}
         >
@@ -856,19 +858,22 @@ export default function HeroSection() {
         <div
           className="absolute bottom-[10%] sm:bottom-[12%] w-36 sm:w-44 md:w-56 lg:w-64"
           style={{
+            left: '110vw',
             animation: 'boatMoveLeft 60s linear infinite',
+            animationFillMode: 'forwards',
             filter: 'drop-shadow(0 0 10px rgba(255,200,100,0.4))',
           }}
         >
           <Steamer className="w-full h-auto transform scale-x-[-1]" />
         </div>
 
-        {/* Row Boat - going right */}
+        {/* Row Boat - going right - starts mid-screen */}
         <div
           className="absolute bottom-[55%] sm:bottom-[58%] w-20 sm:w-24 md:w-28 lg:w-32"
           style={{
-            animation: 'boatMoveRight 38s linear infinite',
-            animationDelay: '10s',
+            left: '30vw',
+            animation: 'boatMoveRightFromMid 38s linear infinite',
+            animationFillMode: 'forwards',
             filter: 'drop-shadow(0 0 6px rgba(255,200,100,0.3))',
           }}
         >
