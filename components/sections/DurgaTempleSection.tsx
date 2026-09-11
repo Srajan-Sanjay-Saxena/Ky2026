@@ -81,6 +81,30 @@ const highlights = [
   { icon: "🎤", title: "Pro Shows", desc: "Celebrity performances & DJ nights" },
 ];
 
+// Confetti/Sparkle component for fest vibe
+const FestSparkles = () => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    {[...Array(20)].map((_, i) => (
+      <div
+        key={`sparkle-${i}`}
+        className="absolute"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          width: 4 + Math.random() * 8,
+          height: 4 + Math.random() * 8,
+          background: ['#FF6B00', '#FFD700', '#FF4500', '#FFA500', '#FF1493', '#00CED1'][Math.floor(Math.random() * 6)],
+          borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+          transform: `rotate(${Math.random() * 360}deg)`,
+          animation: `sparkleFloat ${3 + Math.random() * 4}s ease-in-out infinite`,
+          animationDelay: `${Math.random() * 2}s`,
+          opacity: 0.6 + Math.random() * 0.4,
+        }}
+      />
+    ))}
+  </div>
+);
+
 export default function DurgaTempleSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const templeRef = useRef<HTMLDivElement>(null);
@@ -481,6 +505,63 @@ export default function DurgaTempleSection() {
           background: "linear-gradient(90deg, transparent, #B03F23, #FF4500, #B03F23, transparent)",
         }}
       />
+
+      {/* FEST VIBES - Colorful sparkles and confetti */}
+      <FestSparkles />
+
+      {/* Animated fest banners on sides */}
+      <div className="absolute top-[15%] left-[2%] z-30 hidden lg:block">
+        <div 
+          className="px-3 py-2 rounded-lg transform -rotate-12"
+          style={{
+            background: 'linear-gradient(135deg, #FF1493, #FF6B00)',
+            boxShadow: '0 4px 20px rgba(255,20,147,0.5)',
+            animation: 'bounce 2s ease-in-out infinite',
+          }}
+        >
+          <span className="text-white font-bold text-sm">🎉 3 DAYS</span>
+        </div>
+      </div>
+      
+      <div className="absolute top-[25%] right-[3%] z-30 hidden lg:block">
+        <div 
+          className="px-3 py-2 rounded-lg transform rotate-12"
+          style={{
+            background: 'linear-gradient(135deg, #00CED1, #4169E1)',
+            boxShadow: '0 4px 20px rgba(0,206,209,0.5)',
+            animation: 'bounce 2.5s ease-in-out infinite',
+            animationDelay: '0.5s',
+          }}
+        >
+          <span className="text-white font-bold text-sm">🎵 LIVE MUSIC</span>
+        </div>
+      </div>
+
+      <div className="absolute bottom-[30%] left-[3%] z-30 hidden lg:block">
+        <div 
+          className="px-3 py-2 rounded-lg transform rotate-6"
+          style={{
+            background: 'linear-gradient(135deg, #FFD700, #FF8C00)',
+            boxShadow: '0 4px 20px rgba(255,215,0,0.5)',
+            animation: 'bounce 2.2s ease-in-out infinite',
+            animationDelay: '1s',
+          }}
+        >
+          <span className="text-[#5C0A1F] font-bold text-sm">🏆 ₹10L+ PRIZES</span>
+        </div>
+      </div>
+
+      {/* Keyframes for animations */}
+      <style jsx>{`
+        @keyframes sparkleFloat {
+          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+          50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+          50% { transform: translateY(-10px) rotate(var(--rotate, 0deg)); }
+        }
+      `}</style>
 
 
     </section>

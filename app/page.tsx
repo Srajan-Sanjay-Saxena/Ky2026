@@ -1,6 +1,6 @@
 import {
   HeroSection,
-  DancerSection,
+  KashiVibesSection,
   EventsSection,
   AboutSection,
   TimelineSection,
@@ -16,7 +16,7 @@ export default function Home() {
         <HeroSection />
       </div>
       <div className="sticky top-0 z-10">
-        <DancerSection />
+        <KashiVibesSection />
       </div>
       <div className="sticky top-0 z-20">
         <DurgaTempleSection />
