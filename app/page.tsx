@@ -1,37 +1,26 @@
 import {
   HeroSection,
-  KashiVibesSection,
-  EventsSection,
-  AboutSection,
-  TimelineSection,
-  SponsorsSection,
+  BanarasiVibesSection,
   FooterSection,
-  DurgaTempleSection,
+  FestHighlightsSection,
 } from "@/components/sections";
+import { ScrollNavbar } from "@/components/ScrollNavbar";
 
 export default function Home() {
   return (
     <main>
+      {/* Page-level navbar: hidden over the Hero, revealed for every section
+          below it. Sits above all section wrappers so nothing paints over it. */}
+      <ScrollNavbar />
+
       <div className="sticky top-0 h-screen z-0">
         <HeroSection />
       </div>
       <div className="sticky top-0 z-10">
-        <KashiVibesSection />
+        <BanarasiVibesSection />
       </div>
       <div className="sticky top-0 z-20">
-        <DurgaTempleSection />
-      </div>
-      <div className="sticky top-0 z-30">
-        <AboutSection />
-      </div>
-      <div className="sticky top-0 z-40">
-        <EventsSection />
-      </div>
-      <div className="sticky top-0 z-50">
-        <TimelineSection />
-      </div>
-      <div className="sticky top-0 z-60">
-        <SponsorsSection />
+        <FestHighlightsSection />
       </div>
       <div className="relative z-70">
         <FooterSection />
