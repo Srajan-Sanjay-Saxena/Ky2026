@@ -245,32 +245,38 @@ export function PassesSection() {
       <GeometricPattern />
       <BanarasiPatternAnimated />
 
-      {/* Left Mandala */}
-      <div
-        ref={mandalaLeftRef}
-        className="absolute -left-[15%] top-[15%] w-[350px] h-[350px] md:w-[500px] md:h-[500px] pointer-events-none"
-        style={{ zIndex: Z_INDEX.mandala, opacity: 0.08, color: COLORS.GOLD }}
-      >
-        <MandalaRing className="w-full h-full" />
-      </div>
+      {/* Left Mandala - hidden on mobile */}
+      {!isMobile && (
+        <div
+          ref={mandalaLeftRef}
+          className="absolute -left-[15%] top-[15%] w-[350px] h-[350px] md:w-[500px] md:h-[500px] pointer-events-none"
+          style={{ zIndex: Z_INDEX.mandala, opacity: 0.08, color: COLORS.GOLD }}
+        >
+          <MandalaRing className="w-full h-full" />
+        </div>
+      )}
 
-      {/* Right Mandala */}
-      <div
-        ref={mandalaRightRef}
-        className="absolute -right-[15%] bottom-[10%] w-[400px] h-[400px] md:w-[550px] md:h-[550px] pointer-events-none"
-        style={{ zIndex: Z_INDEX.mandala, opacity: 0.06, color: COLORS.BRIGHT_GOLD }}
-      >
-        <MandalaRing className="w-full h-full" />
-      </div>
+      {/* Right Mandala - hidden on mobile */}
+      {!isMobile && (
+        <div
+          ref={mandalaRightRef}
+          className="absolute -right-[15%] bottom-[10%] w-[400px] h-[400px] md:w-[550px] md:h-[550px] pointer-events-none"
+          style={{ zIndex: Z_INDEX.mandala, opacity: 0.06, color: COLORS.BRIGHT_GOLD }}
+        >
+          <MandalaRing className="w-full h-full" />
+        </div>
+      )}
 
-      {/* Center Mandala (behind cards) */}
-      <div
-        ref={mandalaCenterRef}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
-        style={{ zIndex: 1, opacity: 0.03, color: COLORS.GOLD }}
-      >
-        <MandalaRing className="w-full h-full" />
-      </div>
+      {/* Center Mandala (behind cards) - hidden on mobile */}
+      {!isMobile && (
+        <div
+          ref={mandalaCenterRef}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
+          style={{ zIndex: 1, opacity: 0.03, color: COLORS.GOLD }}
+        >
+          <MandalaRing className="w-full h-full" />
+        </div>
+      )}
 
       {/* Floating particles */}
       <FloatingParticles isMobile={isMobile} isInView={isInView} />
