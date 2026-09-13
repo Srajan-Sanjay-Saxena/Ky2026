@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Navbar } from "@/components/navbar/NavbarDesign";
+import { useScrollPosition } from "@/hooks";
 
 /**
  * ScrollNavbar
@@ -12,35 +12,10 @@ import { Navbar } from "@/components/navbar/NavbarDesign";
  * 3. Hides again when the footer comes into view
  */
 export function ScrollNavbar() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      
-      // Show threshold: past the Hero section (85% of viewport)
-      const showThreshold = viewportHeight * 0.85;
-      
-      // Hide threshold: when approaching footer (last ~50% of viewport from bottom)
-      const hideThreshold = documentHeight - viewportHeight * 1.5;
-      
-      // Visible if: past hero AND not yet at footer
-      const shouldShow = scrollY > showThreshold && scrollY < hideThreshold;
-      
-      setVisible(shouldShow);
-    };
-    
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
+  const { visible } = useScrollPosition({
+    showAfterPercent: 0.85,      // Show after 85% of viewport (past Hero)
+    hideBeforeBottomPercent: 1.5, // Hide when within 1.5 viewports from bottom
+  });
 
   return (
     <div

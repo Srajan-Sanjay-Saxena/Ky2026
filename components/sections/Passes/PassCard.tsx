@@ -1,10 +1,11 @@
 "use client";
 
-import { memo, useState, useEffect } from "react";
+import { memo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { PassConfig } from "./passes.config";
 import { ANIMATION } from "./passes.config";
+import { useIsMobile } from "@/hooks";
 import {
   COLORS,
   SHADOWS,
@@ -234,14 +235,7 @@ function RoyalFrame({ children }: { children: React.ReactNode }) {
 // ============================================
 export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile();
 
   const handleFlip = () => setIsFlipped((prev) => !prev);
   const floatDelay = index * 0.4;
