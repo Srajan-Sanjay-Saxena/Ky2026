@@ -855,20 +855,25 @@ export function HeroSection() {
 
       {/* Stepping Stones — z-[78] keeps them above boats(77), lotus(75), diyas(76) */}
       <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[78] pointer-events-none overflow-hidden">
-        <div className="absolute bottom-[52%] left-[8%] pointer-events-auto">
-          <SteppingStone label="Schedule" href="/schedule" size={110} phase={0} />
+        {/* Schedule - top left on mobile */}
+        <div className="absolute bottom-[65%] left-[5%] sm:bottom-[52%] sm:left-[8%] pointer-events-auto">
+          <SteppingStone label="Schedule" href="/schedule" size={70} sizeDesktop={110} phase={0} />
         </div>
-        <div className="absolute bottom-[44%] left-[28%] pointer-events-auto">
-          <SteppingStone label="Events" href="/events" size={130} phase={-0.8} />
+        {/* Events - middle left on mobile */}
+        <div className="absolute bottom-[35%] left-[3%] sm:bottom-[44%] sm:left-[28%] pointer-events-auto">
+          <SteppingStone label="Events" href="/events" size={75} sizeDesktop={130} phase={-0.8} />
         </div>
-        <div className="absolute bottom-[50%] left-[50%] -translate-x-1/2 pointer-events-auto">
-          <SteppingStone label="Register" href="/register" size={145} phase={-1.6} />
+        {/* Register - center, lower on mobile */}
+        <div className="absolute bottom-[20%] left-[50%] -translate-x-1/2 sm:bottom-[50%] pointer-events-auto">
+          <SteppingStone label="Register" href="/register" size={85} sizeDesktop={145} phase={-1.6} />
         </div>
-        <div className="absolute bottom-[43%] left-[68%] pointer-events-auto">
-          <SteppingStone label="Gallery" href="/gallery" size={120} phase={-0.4} />
+        {/* Gallery - middle right on mobile */}
+        <div className="absolute bottom-[40%] right-[5%] sm:bottom-[43%] sm:left-[68%] sm:right-auto pointer-events-auto">
+          <SteppingStone label="Gallery" href="/gallery" size={70} sizeDesktop={120} phase={-0.4} />
         </div>
-        <div className="absolute bottom-[52%] left-[86%] pointer-events-auto">
-          <SteppingStone label="About" href="/about" size={100} phase={-1.2} />
+        {/* About - top right on mobile */}
+        <div className="absolute bottom-[62%] right-[8%] sm:bottom-[52%] sm:left-[86%] sm:right-auto pointer-events-auto">
+          <SteppingStone label="About" href="/about" size={65} sizeDesktop={100} phase={-1.2} />
         </div>
       </div>
 
@@ -881,55 +886,23 @@ export function HeroSection() {
             "linear-gradient(180deg, #1a4a6e 0%, #15405c 20%, #12354d 40%, #0f2a3e 60%, #0c2030 80%, #081520 100%)",
         }}
       >
-        <RealisticRiver className="w-full h-full" />
+        <RealisticRiver className="hidden sm:block w-full h-full" />
 
-        {/* Mobile water shimmer overlay */}
-        <div className="absolute inset-0 sm:hidden pointer-events-none overflow-hidden">
-          {/* Animated wave lines */}
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={`wave-${i}`}
-              className="absolute left-0 right-0 h-[1px]"
-              style={{
-                top: `${10 + i * 12}%`,
-                background:
-                  "linear-gradient(90deg, transparent, rgba(200,230,255,0.15), transparent)",
-                animation: `waveShimmer ${3 + i * 0.3}s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
-
-          {/* Moon reflection */}
+        {/* Simple still water gradient for mobile */}
+        <div className="sm:hidden absolute inset-0 pointer-events-none">
+          {/* Moon reflection only */}
           <div
             className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[30%] h-[40%]"
             style={{
               background:
-                "radial-gradient(ellipse, rgba(200,220,255,0.15) 0%, transparent 70%)",
-              animation: "moonReflectionShimmer 4s ease-in-out infinite",
+                "radial-gradient(ellipse, rgba(200,220,255,0.12) 0%, transparent 70%)",
             }}
           />
-
-          {/* Ripple effects */}
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={`ripple-${i}`}
-              className="absolute rounded-full border border-white/10"
-              style={{
-                left: `${15 + i * 22}%`,
-                top: `${20 + (i % 2) * 30}%`,
-                width: "40px",
-                height: "20px",
-                animation: `rippleExpand ${3 + i * 0.5}s ease-out infinite`,
-                animationDelay: `${i * 0.8}s`,
-              }}
-            />
-          ))}
         </div>
       </div>
 
-      {/* Boats - only in river area, below buildings */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden z-[77]">
+      {/* Boats - only in river area, hidden on mobile */}
+      <div className="hidden sm:block absolute bottom-0 left-0 right-0 h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden z-[77]">
         {/* Pilgrim Boat - going right */}
         <div
           className="absolute bottom-[30%] sm:bottom-[33%] w-32 sm:w-40 md:w-52 lg:w-60"
