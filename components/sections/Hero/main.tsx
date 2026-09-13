@@ -128,8 +128,11 @@ export function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  // Parallax scroll: Celestial body & Temple (related scroll behavior)
+  // Parallax scroll: Celestial body & Temple (related scroll behavior) - Desktop only
   useEffect(() => {
+    // Skip parallax on mobile for performance
+    if (typeof window !== "undefined" && window.innerWidth < 640) return;
+
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: containerRef.current,

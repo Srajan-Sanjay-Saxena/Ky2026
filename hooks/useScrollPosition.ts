@@ -19,8 +19,10 @@ export interface ScrollPosition {
 export interface ScrollVisibilityConfig {
   /** Show when scrollY > this (default: 85% of viewport) */
   showAfterPercent?: number;
-  /** Hide when within this distance from bottom (default: 150% of viewport from bottom) */
+  /** Hide when within this distance from bottom on desktop (default: 150% of viewport from bottom) */
   hideBeforeBottomPercent?: number;
+  /** Hide when within this distance from bottom on mobile (default: 50% of viewport from bottom) */
+  hideBeforeBottomPercentMobile?: number;
   /** Only update state when progress changes by this amount (default: 0.5% = 0.005) */
   progressThreshold?: number;
 }
@@ -38,13 +40,15 @@ function getInitialPosition(): ScrollPosition {
   return { scrollY, viewportHeight, documentHeight, progress };
 }
 
-function getInitialVisibility(showAfterPercent: number, hideBeforeBottomPercent: number): boolean {
+function getInitialVisibility(showAfterPercent: number, hideBeforeBottomPercent: number, hideBeforeBottomPercentMobile: number): boolean {
   if (typeof window === "undefined") return false;
   const scrollY = window.scrollY;
   const viewportHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
+  const isMobile = window.innerWidth < 640;
+  const hidePercent = isMobile ? hideBeforeBottomPercentMobile : hideBeforeBottomPercent;
   const showThreshold = viewportHeight * showAfterPercent;
-  const hideThreshold = documentHeight - viewportHeight * hideBeforeBottomPercent;
+  const hideThreshold = documentHeight - viewportHeight * hidePercent;
   return scrollY > showThreshold && scrollY < hideThreshold;
 }
 
@@ -56,12 +60,13 @@ export function useScrollPosition(config?: ScrollVisibilityConfig) {
   const { 
     showAfterPercent = 0.85, 
     hideBeforeBottomPercent = 1.5,
+    hideBeforeBottomPercentMobile = 0.5,
     progressThreshold = 0.005,
   } = config || {};
 
   // Lazy initial state - runs only once, no useEffect needed
   const [position, setPosition] = useState<ScrollPosition>(getInitialPosition);
-  const [visible, setVisible] = useState(() => getInitialVisibility(showAfterPercent, hideBeforeBottomPercent));
+  const [visible, setVisible] = useState(() => getInitialVisibility(showAfterPercent, hideBeforeBottomPercent, hideBeforeBottomPercentMobile));
   
   const lastProgressRef = useRef(position.progress);
   const lastVisibleRef = useRef(visible);
@@ -75,8 +80,10 @@ export function useScrollPosition(config?: ScrollVisibilityConfig) {
       const maxScroll = documentHeight - viewportHeight;
       const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
 
+      const isMobile = window.innerWidth < 640;
+      const hidePercent = isMobile ? hideBeforeBottomPercentMobile : hideBeforeBottomPercent;
       const showThreshold = viewportHeight * showAfterPercent;
-      const hideThreshold = documentHeight - viewportHeight * hideBeforeBottomPercent;
+      const hideThreshold = documentHeight - viewportHeight * hidePercent;
       const shouldBeVisible = scrollY > showThreshold && scrollY < hideThreshold;
 
       const progressChanged = Math.abs(progress - lastProgressRef.current) >= progressThreshold;
@@ -99,7 +106,7 @@ export function useScrollPosition(config?: ScrollVisibilityConfig) {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, [showAfterPercent, hideBeforeBottomPercent, progressThreshold]);
+  }, [showAfterPercent, hideBeforeBottomPercent, hideBeforeBottomPercentMobile, progressThreshold]);
 
   return { ...position, visible };
 }
