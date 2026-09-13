@@ -25,7 +25,7 @@ export const PASSES: PassConfig[] = [
     id: "yatri",
     name: "Yatri Pass",
     price: 2399,
-    image: "/YatriPass_nobg.png",
+    image: "https://ik.imagekit.io/bi3ktgt58/passes/yatri-pass.png",
     tagline: "Begin Your Journey",
     accentColor: "#1A5F7A", // Ganga blue
     glowColor: "rgba(26, 95, 122, 0.5)",
@@ -40,7 +40,7 @@ export const PASSES: PassConfig[] = [
     id: "darbar",
     name: "Darbar Pass",
     price: 2699,
-    image: "/darbarPass_nobg.png",
+    image: "https://ik.imagekit.io/bi3ktgt58/passes/darbar-pass.png",
     tagline: "The Royal Experience",
     accentColor: "#D4A853", // Gold
     glowColor: "rgba(212, 168, 83, 0.5)",
@@ -57,7 +57,7 @@ export const PASSES: PassConfig[] = [
     id: "swarnim",
     name: "Swarnim Pass",
     price: 2999,
-    image: "/swarnimPass_nobg.png",
+    image: "https://ik.imagekit.io/bi3ktgt58/passes/swarnim-pass.png",
     tagline: "The Divine Experience",
     accentColor: "#FFD700", // Bright gold
     glowColor: "rgba(255, 215, 0, 0.5)",
