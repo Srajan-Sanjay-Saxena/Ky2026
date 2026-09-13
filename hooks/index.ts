@@ -7,3 +7,4 @@
 export { useIsMobile } from "./useIsMobile";
 export { useScrollPosition } from "./useScrollPosition";
 export { useGsapAnimation } from "./useGsapAnimation";
+export { usePrefersReducedMotion } from "./usePrefersReducedMotion";

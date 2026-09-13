@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { PassCard } from "./PassCard";
 import { PASSES, ANIMATION } from "./passes.config";
 import { Z_INDEX } from "./passes.theme";
+import { useIsMobile, usePrefersReducedMotion } from "@/hooks";
 import {
   COLORS,
   GRADIENT_TEXT_GOLD,
@@ -59,32 +60,56 @@ function MandalaRing({ className = "" }: { className?: string }) {
 
 // ============================================
 // Floating Particles with Glow
+// Pre-generated values to avoid hydration mismatch
 // ============================================
-function FloatingParticles() {
+const PARTICLE_CONFIG = {
+  desktop: 30,
+  mobile: 10,
+};
+
+// Pre-generate particle properties (deterministic, no hydration issues)
+const PARTICLES = Array.from({ length: PARTICLE_CONFIG.desktop }, (_, i) => ({
+  id: i,
+  width: (i * 7 % 5) + 2,           // 2-6px
+  height: (i * 7 % 5) + 2,
+  opacity: 0.2 + (i % 6) * 0.1,     // 0.2-0.7
+  left: (i * 37 % 100),             // 0-99%
+  top: (i * 41 % 100),              // 0-99%
+  shadowSize: 5 + (i % 10),         // 5-14px
+  yOffset: -50 - (i % 30),          // -50 to -79
+  xOffset: (i % 20) - 10,           // -10 to 9
+  duration: 6 + (i % 5),            // 6-10s
+  delay: (i % 4),                   // 0-3s
+}));
+
+function FloatingParticles({ isMobile, isInView }: { isMobile: boolean; isInView: boolean }) {
+  // Reduce particles on mobile for better performance
+  const particles = isMobile ? PARTICLES.slice(0, PARTICLE_CONFIG.mobile) : PARTICLES;
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: Z_INDEX.particles }}>
-      {[...Array(30)].map((_, i) => (
+      {particles.map((p) => (
         <motion.div
-          key={i}
+          key={p.id}
           className="absolute rounded-full"
           style={{
-            width: Math.random() * 5 + 2,
-            height: Math.random() * 5 + 2,
-            background: `radial-gradient(circle, rgba(212, 168, 83, ${Math.random() * 0.6 + 0.2}) 0%, transparent 70%)`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            boxShadow: `0 0 ${Math.random() * 10 + 5}px rgba(212, 168, 83, 0.3)`,
+            width: p.width,
+            height: p.height,
+            background: `radial-gradient(circle, rgba(212, 168, 83, ${p.opacity}) 0%, transparent 70%)`,
+            left: `${p.left}%`,
+            top: `${p.top}%`,
+            boxShadow: `0 0 ${p.shadowSize}px rgba(212, 168, 83, 0.3)`,
           }}
-          animate={{
-            y: [0, -50 - Math.random() * 30, 0],
-            x: [0, Math.random() * 20 - 10, 0],
+          animate={isInView ? {
+            y: [0, p.yOffset, 0],
+            x: [0, p.xOffset, 0],
             opacity: [0.3, 0.8, 0.3],
             scale: [1, 1.2, 1],
-          }}
+          } : undefined}
           transition={{
-            duration: Math.random() * 5 + 6,
+            duration: p.duration,
             repeat: Infinity,
-            delay: Math.random() * 4,
+            delay: p.delay,
             ease: "easeInOut",
           }}
         />
@@ -160,15 +185,25 @@ export function PassesSection() {
   const mandalaRightRef = useRef<HTMLDivElement>(null);
   const mandalaCenterRef = useRef<HTMLDivElement>(null);
 
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+
   useEffect(() => {
+    // Skip GSAP animations if user prefers reduced motion
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
-      gsap.to(mandalaLeftRef.current, { rotation: 360, duration: 80, repeat: -1, ease: "none" });
-      gsap.to(mandalaRightRef.current, { rotation: -360, duration: 100, repeat: -1, ease: "none" });
-      gsap.to(mandalaCenterRef.current, { rotation: 360, duration: 120, repeat: -1, ease: "none" });
+      // Only run mandala animations when in view
+      if (isInView) {
+        gsap.to(mandalaLeftRef.current, { rotation: 360, duration: 80, repeat: -1, ease: "none" });
+        gsap.to(mandalaRightRef.current, { rotation: -360, duration: 100, repeat: -1, ease: "none" });
+        gsap.to(mandalaCenterRef.current, { rotation: 360, duration: 120, repeat: -1, ease: "none" });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isInView, prefersReducedMotion]);
 
   const handleSelect = useCallback((passId: string) => {
     console.log(`Selected pass: ${passId}`);
@@ -210,35 +245,41 @@ export function PassesSection() {
       <GeometricPattern />
       <BanarasiPatternAnimated />
 
-      {/* Left Mandala */}
-      <div
-        ref={mandalaLeftRef}
-        className="absolute -left-[15%] top-[15%] w-[350px] h-[350px] md:w-[500px] md:h-[500px] pointer-events-none"
-        style={{ zIndex: Z_INDEX.mandala, opacity: 0.08, color: COLORS.GOLD }}
-      >
-        <MandalaRing className="w-full h-full" />
-      </div>
+      {/* Left Mandala - hidden on mobile */}
+      {!isMobile && (
+        <div
+          ref={mandalaLeftRef}
+          className="absolute -left-[15%] top-[15%] w-[350px] h-[350px] md:w-[500px] md:h-[500px] pointer-events-none"
+          style={{ zIndex: Z_INDEX.mandala, opacity: 0.08, color: COLORS.GOLD }}
+        >
+          <MandalaRing className="w-full h-full" />
+        </div>
+      )}
 
-      {/* Right Mandala */}
-      <div
-        ref={mandalaRightRef}
-        className="absolute -right-[15%] bottom-[10%] w-[400px] h-[400px] md:w-[550px] md:h-[550px] pointer-events-none"
-        style={{ zIndex: Z_INDEX.mandala, opacity: 0.06, color: COLORS.BRIGHT_GOLD }}
-      >
-        <MandalaRing className="w-full h-full" />
-      </div>
+      {/* Right Mandala - hidden on mobile */}
+      {!isMobile && (
+        <div
+          ref={mandalaRightRef}
+          className="absolute -right-[15%] bottom-[10%] w-[400px] h-[400px] md:w-[550px] md:h-[550px] pointer-events-none"
+          style={{ zIndex: Z_INDEX.mandala, opacity: 0.06, color: COLORS.BRIGHT_GOLD }}
+        >
+          <MandalaRing className="w-full h-full" />
+        </div>
+      )}
 
-      {/* Center Mandala (behind cards) */}
-      <div
-        ref={mandalaCenterRef}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
-        style={{ zIndex: 1, opacity: 0.03, color: COLORS.GOLD }}
-      >
-        <MandalaRing className="w-full h-full" />
-      </div>
+      {/* Center Mandala (behind cards) - hidden on mobile */}
+      {!isMobile && (
+        <div
+          ref={mandalaCenterRef}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
+          style={{ zIndex: 1, opacity: 0.03, color: COLORS.GOLD }}
+        >
+          <MandalaRing className="w-full h-full" />
+        </div>
+      )}
 
       {/* Floating particles */}
-      <FloatingParticles />
+      <FloatingParticles isMobile={isMobile} isInView={isInView} />
 
       {/* Vignette */}
       <VignetteOverlay />
