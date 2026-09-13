@@ -30,10 +30,11 @@ const primaryLinks = [
   { label: "ABOUT", href: "/about" },
 ];
 
-const secondaryLinks: { label: string; href: string; icon: "om" | "lotus" }[] = [
-  { label: "LOGIN", href: "/login", icon: "om" },
-  { label: "CONTACT", href: "#contact", icon: "lotus" },
-];
+const secondaryLinks: { label: string; href: string; icon: "om" | "lotus" }[] =
+  [
+    { label: "LOGIN", href: "/login", icon: "om" },
+    { label: "CONTACT", href: "#contact", icon: "lotus" },
+  ];
 
 /**
  * Small golden four-point sparkle that shines beside each nav link.
@@ -44,7 +45,10 @@ function ShineIcon() {
     <span
       aria-hidden
       className="nav-shine relative inline-block shrink-0"
-      style={{ width: "clamp(9px, 0.85vw, 14px)", height: "clamp(9px, 0.85vw, 14px)" }}
+      style={{
+        width: "clamp(9px, 0.85vw, 14px)",
+        height: "clamp(9px, 0.85vw, 14px)",
+      }}
     >
       <svg viewBox="0 0 24 24" className="w-full h-full">
         <defs>
@@ -77,7 +81,10 @@ function SpiritualIcon({ kind }: { kind: "om" | "lotus" }) {
     <span
       aria-hidden
       className="spirit-icon relative inline-flex items-center justify-center shrink-0"
-      style={{ width: "clamp(15px, 1.3vw, 22px)", height: "clamp(15px, 1.3vw, 22px)" }}
+      style={{
+        width: "clamp(15px, 1.3vw, 22px)",
+        height: "clamp(15px, 1.3vw, 22px)",
+      }}
     >
       {kind === "om" ? (
         <span
@@ -86,7 +93,8 @@ function SpiritualIcon({ kind }: { kind: "om" | "lotus" }) {
             fontFamily: "serif",
             fontWeight: 700,
             fontSize: "clamp(15px, 1.3vw, 22px)",
-            background: "linear-gradient(135deg, #FFF3C4, #FFD700 45%, #C8891F)",
+            background:
+              "linear-gradient(135deg, #FFF3C4, #FFD700 45%, #C8891F)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             color: "transparent",
@@ -104,13 +112,38 @@ function SpiritualIcon({ kind }: { kind: "om" | "lotus" }) {
             </linearGradient>
           </defs>
           {/* center petal + side petals + outer petals = lotus bloom */}
-          <path d="M12 3 C13.6 8 13.6 13 12 17 C10.4 13 10.4 8 12 3 Z" fill="url(#lotusGold)" />
-          <path d="M12 17 C9 13 6.5 10.5 4 9.5 C5 13 8 16 12 17 Z" fill="url(#lotusGold)" opacity="0.92" />
-          <path d="M12 17 C15 13 17.5 10.5 20 9.5 C19 13 16 16 12 17 Z" fill="url(#lotusGold)" opacity="0.92" />
-          <path d="M12 17 C7 15 3.5 13.5 1.5 12.5 C3 16 7 18 12 18 Z" fill="url(#lotusGold)" opacity="0.8" />
-          <path d="M12 17 C17 15 20.5 13.5 22.5 12.5 C21 16 17 18 12 18 Z" fill="url(#lotusGold)" opacity="0.8" />
+          <path
+            d="M12 3 C13.6 8 13.6 13 12 17 C10.4 13 10.4 8 12 3 Z"
+            fill="url(#lotusGold)"
+          />
+          <path
+            d="M12 17 C9 13 6.5 10.5 4 9.5 C5 13 8 16 12 17 Z"
+            fill="url(#lotusGold)"
+            opacity="0.92"
+          />
+          <path
+            d="M12 17 C15 13 17.5 10.5 20 9.5 C19 13 16 16 12 17 Z"
+            fill="url(#lotusGold)"
+            opacity="0.92"
+          />
+          <path
+            d="M12 17 C7 15 3.5 13.5 1.5 12.5 C3 16 7 18 12 18 Z"
+            fill="url(#lotusGold)"
+            opacity="0.8"
+          />
+          <path
+            d="M12 17 C17 15 20.5 13.5 22.5 12.5 C21 16 17 18 12 18 Z"
+            fill="url(#lotusGold)"
+            opacity="0.8"
+          />
           {/* water line */}
-          <path d="M3 19 Q12 21 21 19" stroke="#FFE9A8" strokeWidth="0.8" strokeOpacity="0.5" fill="none" />
+          <path
+            d="M3 19 Q12 21 21 19"
+            stroke="#FFE9A8"
+            strokeWidth="0.8"
+            strokeOpacity="0.5"
+            fill="none"
+          />
         </svg>
       )}
     </span>
@@ -180,7 +213,6 @@ export function Navbar({
             alt=""
             fill
             priority
-            sizes="100vw"
             className="object-fill pointer-events-none select-none"
           />
 
@@ -279,7 +311,11 @@ export function Navbar({
                 className="group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
                            text-[#3a1505] hover:text-[#7a1f10] transition-colors duration-200
                            drop-shadow-[0_1px_1px_rgba(255,245,215,0.7)]"
-                style={{ fontFamily: "var(--font-ethereal), serif", fontWeight: 900, fontSize: "clamp(12px, 1vw, 17px)" }}
+                style={{
+                  fontFamily: "var(--font-ethereal), serif",
+                  fontWeight: 900,
+                  fontSize: "clamp(12px, 1vw, 17px)",
+                }}
               >
                 <SpiritualIcon kind={link.icon} />
                 {link.label}
@@ -387,8 +423,7 @@ function MobileMenu() {
             aria-hidden
             className={`absolute ${pos} w-2 h-2 rotate-45 pointer-events-none`}
             style={{
-              background:
-                "linear-gradient(135deg, #FFD700, #B8860B)",
+              background: "linear-gradient(135deg, #FFD700, #B8860B)",
               boxShadow: "0 0 6px rgba(255,215,0,0.7)",
             }}
           />
@@ -404,7 +439,8 @@ function MobileMenu() {
             <span
               className="text-[18px] leading-none"
               style={{
-                background: "linear-gradient(135deg, #FFF3C4, #FFD700 45%, #B8860B)",
+                background:
+                  "linear-gradient(135deg, #FFF3C4, #FFD700 45%, #B8860B)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
@@ -423,9 +459,19 @@ function MobileMenu() {
               aria-hidden
               className="mt-1.5 flex items-center justify-center gap-2 w-full text-[#8a5a1a] opacity-80"
             >
-              <span className="h-px flex-1" style={{ background: "linear-gradient(90deg, transparent, #8a5a1a)" }} />
+              <span
+                className="h-px flex-1"
+                style={{
+                  background: "linear-gradient(90deg, transparent, #8a5a1a)",
+                }}
+              />
               <span className="text-[9px]">✦</span>
-              <span className="h-px flex-1" style={{ background: "linear-gradient(90deg, #8a5a1a, transparent)" }} />
+              <span
+                className="h-px flex-1"
+                style={{
+                  background: "linear-gradient(90deg, #8a5a1a, transparent)",
+                }}
+              />
             </span>
           </div>
 
@@ -446,9 +492,13 @@ function MobileMenu() {
                   transitionDelay: open ? `${120 + i * 70}ms` : "0ms",
                 }}
               >
-                <span aria-hidden className="text-[#b8860b] text-[9px]">◆</span>
+                <span aria-hidden className="text-[#b8860b] text-[9px]">
+                  ◆
+                </span>
                 {link.label}
-                <span aria-hidden className="text-[#b8860b] text-[9px]">◆</span>
+                <span aria-hidden className="text-[#b8860b] text-[9px]">
+                  ◆
+                </span>
               </Link>
               {/* mystical divider between items */}
               {i < arr.length - 1 && (
@@ -456,9 +506,21 @@ function MobileMenu() {
                   aria-hidden
                   className="flex items-center justify-center gap-2 py-0.5 text-[#8a5a1a] opacity-60"
                 >
-                  <span className="h-px w-8" style={{ background: "linear-gradient(90deg, transparent, #8a5a1a)" }} />
+                  <span
+                    className="h-px w-8"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, #8a5a1a)",
+                    }}
+                  />
                   <span className="text-[9px]">✦</span>
-                  <span className="h-px w-8" style={{ background: "linear-gradient(90deg, #8a5a1a, transparent)" }} />
+                  <span
+                    className="h-px w-8"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #8a5a1a, transparent)",
+                    }}
+                  />
                 </span>
               )}
             </div>

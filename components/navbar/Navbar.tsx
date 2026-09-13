@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/navbar/NavbarDesign";
 
 /**
  * ScrollNavbar
@@ -42,7 +42,7 @@ export function ScrollNavbar() {
       }}
       aria-hidden={!visible}
     >
-      <Navbar position="relative" topOffset={30} />
+      <Navbar position="relative" topOffset={18} />
     </div>
   );
 }

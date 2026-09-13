@@ -1,0 +1,144 @@
+/**
+ * Z-Index Constants for Kashi Yatra 2026
+ * 
+ * Organized by section for easy management.
+ * Higher numbers = closer to viewer (on top)
+ */
+
+// ═══════════════════════════════════════════════════════════════════
+// NAVBAR (Highest priority - always on top)
+// ═══════════════════════════════════════════════════════════════════
+export const Z_NAVBAR = {
+  CONTAINER: 200,
+  BADGE: 10,
+  NAV_LINKS: 10,
+  SECONDARY_LINKS: 10,
+  HAMBURGER: 20,
+  MOBILE_DROPDOWN: 10,
+} as const;
+
+// ═══════════════════════════════════════════════════════════════════
+// HERO SECTION
+// ═══════════════════════════════════════════════════════════════════
+export const Z_HERO = {
+  // Sky layers (background)
+  SKY: 1,
+  MOON_GLOW: 2,
+  CLOUDS: 3,
+  KANDEELS: 4,
+  MOON: 5,
+  VARANASI_BACK: 6,
+  MOON_REFLECTION: 14,
+  
+  // Title area
+  TITLE: 20,
+  BIRDS: 30,
+  
+  // Buildings
+  TEMPLE: 50,
+  GHATS: 100,
+  
+  // River elements (layered from bottom to top)
+  RIVER: 70,
+  
+  // Lotus flowers (individual z-indexes)
+  LOTUS: 75,
+  LOTUS_1: 75,
+  LOTUS_2: 75,
+  LOTUS_3: 76,
+  LOTUS_4: 76,
+  
+  // Diyas (individual z-indexes)
+  DIYAS: 76,
+  DIYA_1: 76,
+  DIYA_2: 76,
+  DIYA_3: 77,
+  DIYA_4: 77,
+  DIYA_5: 77,
+  DIYA_6: 77,
+  
+  // Boats (individual z-indexes)
+  // Outer container for boats
+  BOATS: 77,
+
+  BOAT_PILGRIM: 77,
+  BOAT_STEAMER: 78,
+  BOAT_SIMPLE: 79,
+  
+
+  // The outer container for stones (parent z index should be lowest otherwise it will override the chidlren)
+  STEPPING_STONES: 78,
+  
+  // Individual stone z-indexes (can be customized per stone)
+  STONE_SCHEDULE: 80,
+  STONE_EVENTS: 80,
+  STONE_REGISTER: 80,
+  STONE_GALLERY: 78,
+  STONE_ABOUT: 80,
+} as const;
+
+// ═══════════════════════════════════════════════════════════════════
+// BANARASI VIBES SECTION
+// ═══════════════════════════════════════════════════════════════════
+export const Z_VIBES = {
+  // Background elements
+  MANDALA: 5,
+  
+  // Gate composition
+  GATE: 10,
+  MAHAMANA: 5,
+  GATE_IMAGE: 10,
+  
+  // Food items
+  TABLA_SITAR: 20,
+  PAAN: 20,
+  LASSI: 20,
+  MALAIYO: 20,
+  
+  // Road elements
+  ROAD: 25,
+  LAMPPOST: 28,
+  DIYA_MOBILE: 30,
+  
+  // Rickshaw
+  RICKSHAW: 40,
+  
+  // Road surface
+  ROAD_SURFACE: 60,
+} as const;
+
+// ═══════════════════════════════════════════════════════════════════
+// FEST HIGHLIGHTS SECTION
+// ═══════════════════════════════════════════════════════════════════
+export const Z_HIGHLIGHTS = {
+  BACKGROUND: 1,
+  DURGA: 20,
+  PARTICLES: 30,
+  CONTENT: 10,
+  FLOATING_DIYAS: 30,
+} as const;
+
+// ═══════════════════════════════════════════════════════════════════
+// FOOTER SECTION
+// ═══════════════════════════════════════════════════════════════════
+export const Z_FOOTER = {
+  CONTENT: 10,
+} as const;
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE LEVEL (Sticky sections)
+// ═══════════════════════════════════════════════════════════════════
+export const Z_PAGE = {
+  HERO: 0,
+  BANARASI_VIBES: 10,
+  FEST_HIGHLIGHTS: 20,
+  FOOTER: 70,
+} as const;
+
+// Type exports for TypeScript support
+export type ZNavbar = typeof Z_NAVBAR;
+export type ZHero = typeof Z_HERO;
+export type ZVibes = typeof Z_VIBES;
+export type ZHighlights = typeof Z_HIGHLIGHTS;
+export type ZFooter = typeof Z_FOOTER;
+export type ZPage = typeof Z_PAGE;

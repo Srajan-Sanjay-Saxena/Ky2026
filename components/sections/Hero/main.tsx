@@ -13,8 +13,9 @@ import { PilgrimBoat } from "@/components/sections/Hero/River/boat/PilgrimBoat";
 import { SimpleBoat as RowBoat } from "@/components/sections/Hero/River/boat/SimpleBoat";
 import { Steamer } from "@/components/sections/Hero/River/boat/Steamer";
 import { Water as RealisticRiver } from "@/components/sections/Hero/River/water";
-import { SteppingStone } from "@/components/sections/Hero/River/SteppingStone";
-import { EveningGradient, HeroBgColorGradient } from "./palette/hero.bg.pallete";
+import { SteppingStone } from "@/components/sections/Hero/River/stone/SteppingStone";
+import { EveningGradient } from "./palette/hero.bg.pallete";
+import { Z_HERO } from "@/components/constants";
 
 // Register plugin at module level (runs once when file is imported)
 gsap.registerPlugin(ScrollTrigger);
@@ -752,8 +753,9 @@ export function HeroSection() {
       {/* GHAT PNG - Aligned with temple */}
       <div
         ref={ghatsRef}
-        className="absolute bottom-[29%] sm:bottom-[28%] md:bottom-[25.5%] left-[-5%] sm:left-[-3%] md:left-[-2%] w-[52%] sm:w-[55%] md:w-[50%] z-[100]"
+        className="absolute bottom-[29%] sm:bottom-[28%] md:bottom-[25.5%] left-[-5%] sm:left-[-3%] md:left-[-2%] w-[52%] sm:w-[55%] md:w-[50%]"
         style={{
+          zIndex: Z_HERO.GHATS,
           filter: "drop-shadow(0 0 20px rgba(255,100,100,0.4))",
         }}
       >
@@ -800,8 +802,9 @@ export function HeroSection() {
       {/* TEMPLE PNG - Highest z-index, aligned with ghats */}
       <div
         ref={templeRef}
-        className="absolute bottom-[31%] sm:bottom-[31%] md:bottom-[28%] right-[-9%] sm:right-[-6%] md:right-[-7%] w-[55%] sm:w-[62%] md:w-[56%] lg:w-[48%] z-50"
+        className="absolute bottom-[31%] sm:bottom-[31%] md:bottom-[28%] right-[-9%] sm:right-[-6%] md:right-[-7%] w-[55%] sm:w-[62%] md:w-[56%] lg:w-[48%]"
         style={{
+          zIndex: Z_HERO.TEMPLE,
           filter: "drop-shadow(0 0 25px rgba(255,215,0,0.5))",
         }}
       >
@@ -853,35 +856,39 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Stepping Stones — z-[78] keeps them above boats(77), lotus(75), diyas(76) */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[78] pointer-events-none overflow-hidden">
+      {/* Stepping Stones — individual z-indexes for layering */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden"
+        style={{ zIndex: Z_HERO.STEPPING_STONES }}
+      >
         {/* Schedule - top left on mobile */}
-        <div className="absolute bottom-[65%] left-[5%] sm:bottom-[52%] sm:left-[8%] pointer-events-auto">
-          <SteppingStone label="Schedule" href="/schedule" size={70} sizeDesktop={110} phase={0} />
+        <div className="absolute bottom-[65%] left-[5%] sm:bottom-[54%] sm:left-[8%] pointer-events-auto">
+          <SteppingStone label="Schedule" href="/schedule" size={70} sizeDesktop={110} phase={0} zIndex={Z_HERO.STONE_SCHEDULE} />
         </div>
         {/* Events - middle left on mobile */}
         <div className="absolute bottom-[35%] left-[3%] sm:bottom-[44%] sm:left-[28%] pointer-events-auto">
-          <SteppingStone label="Events" href="/events" size={75} sizeDesktop={130} phase={-0.8} />
+          <SteppingStone label="Events" href="/events" size={75} sizeDesktop={110} phase={-0.8} zIndex={Z_HERO.STONE_EVENTS} />
         </div>
-        {/* Register - center, lower on mobile */}
-        <div className="absolute bottom-[20%] left-[50%] -translate-x-1/2 sm:bottom-[50%] pointer-events-auto">
-          <SteppingStone label="Register" href="/register" size={85} sizeDesktop={145} phase={-1.6} />
+        {/* Register - center of river */}
+        <div className="absolute bottom-[50%] left-[50%] -translate-x-1/2 sm:bottom-[35%] sm:left-[50%] pointer-events-auto">
+          <SteppingStone label="Register" href="/register" size={85} sizeDesktop={125} phase={-1.6} zIndex={Z_HERO.STONE_REGISTER} />
         </div>
         {/* Gallery - middle right on mobile */}
-        <div className="absolute bottom-[40%] right-[5%] sm:bottom-[43%] sm:left-[68%] sm:right-auto pointer-events-auto">
-          <SteppingStone label="Gallery" href="/gallery" size={70} sizeDesktop={120} phase={-0.4} />
+        <div className="absolute bottom-[40%] right-[5%] sm:bottom-[53%] sm:left-[68%] sm:right-auto pointer-events-auto">
+          <SteppingStone label="Gallery" href="/gallery" size={70} sizeDesktop={120} phase={-0.4} zIndex={Z_HERO.STONE_GALLERY} />
         </div>
         {/* About - top right on mobile */}
-        <div className="absolute bottom-[62%] right-[8%] sm:bottom-[52%] sm:left-[86%] sm:right-auto pointer-events-auto">
-          <SteppingStone label="About" href="/about" size={65} sizeDesktop={100} phase={-1.2} />
+        <div className="absolute bottom-[62%] right-[8%] sm:bottom-[64%] sm:left-[86%] sm:right-auto pointer-events-auto">
+          <SteppingStone label="About" href="/about" size={65} sizeDesktop={100} phase={-1.2} zIndex={Z_HERO.STONE_ABOUT} />
         </div>
       </div>
 
       {/* RIVER - Mobile optimized */}
       <div
         ref={riverRef}
-        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[70]"
+        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh]"
         style={{
+          zIndex: Z_HERO.RIVER,
           background:
             "linear-gradient(180deg, #1a4a6e 0%, #15405c 20%, #12354d 40%, #0f2a3e 60%, #0c2030 80%, #081520 100%)",
         }}
@@ -902,12 +909,15 @@ export function HeroSection() {
       </div>
 
       {/* Boats - only in river area, hidden on mobile */}
-      <div className="hidden sm:block absolute bottom-0 left-0 right-0 h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden z-[77]">
+      <div 
+        className="hidden sm:block absolute bottom-0 left-0 right-0 h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden"
+      >
         {/* Pilgrim Boat - going right */}
         <div
           className="absolute bottom-[30%] sm:bottom-[33%] w-32 sm:w-40 md:w-52 lg:w-60"
           style={{
             left: "-20vw",
+            zIndex: Z_HERO.BOAT_PILGRIM,
             animation: "boatMoveRight 55s linear infinite",
             animationFillMode: "forwards",
             filter: "drop-shadow(0 0 8px rgba(255,200,100,0.3))",
@@ -921,6 +931,7 @@ export function HeroSection() {
           className="absolute bottom-[10%] sm:bottom-[12%] w-36 sm:w-44 md:w-56 lg:w-64"
           style={{
             left: "110vw",
+            zIndex: Z_HERO.BOAT_STEAMER,
             animation: "boatMoveLeft 60s linear infinite",
             animationFillMode: "forwards",
             filter: "drop-shadow(0 0 10px rgba(255,200,100,0.4))",
@@ -934,6 +945,7 @@ export function HeroSection() {
           className="absolute bottom-[55%] sm:bottom-[58%] w-20 sm:w-24 md:w-28 lg:w-32"
           style={{
             left: "30vw",
+            zIndex: Z_HERO.BOAT_SIMPLE,
             animation: "boatMoveRightFromMid 38s linear infinite",
             animationFillMode: "forwards",
             filter: "drop-shadow(0 0 6px rgba(255,200,100,0.3))",
@@ -946,56 +958,68 @@ export function HeroSection() {
       {/* Floating Diyas - Scattered across river only */}
       <div
         ref={diyasRef}
-        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[76] pointer-events-none overflow-hidden"
+        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden"
       >
+        {/* Diya 1 */}
         <div
           className="absolute bottom-[18%] sm:bottom-[20%] left-[3%] sm:left-[5%] w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12"
           style={{
+            zIndex: Z_HERO.DIYA_1,
             animation: "diyaFloat 4s ease-in-out infinite",
             animationDelay: "0s",
           }}
         >
           <Diya className="w-full h-full" />
         </div>
+        {/* Diya 2 */}
         <div
           className="absolute bottom-[35%] left-[15%] sm:left-[18%] w-5 h-7 sm:w-7 sm:h-9 md:w-9 md:h-11"
           style={{
+            zIndex: Z_HERO.DIYA_2,
             animation: "diyaFloat 4.5s ease-in-out infinite",
             animationDelay: "0.5s",
           }}
         >
           <Diya className="w-full h-full" />
         </div>
+        {/* Diya 3 */}
         <div
           className="absolute bottom-[22%] sm:bottom-[25%] left-[55%] sm:left-[58%] w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12"
           style={{
+            zIndex: Z_HERO.DIYA_3,
             animation: "diyaFloat 3.8s ease-in-out infinite",
             animationDelay: "1s",
           }}
         >
           <Diya className="w-full h-full" />
         </div>
+        {/* Diya 4 */}
         <div
           className="hidden sm:block absolute bottom-[40%] left-[72%] sm:left-[75%] w-5 h-7 sm:w-6 sm:h-8 md:w-8 md:h-10"
           style={{
+            zIndex: Z_HERO.DIYA_4,
             animation: "diyaFloat 5s ease-in-out infinite",
             animationDelay: "0.3s",
           }}
         >
           <Diya className="w-full h-full" />
         </div>
+        {/* Diya 5 */}
         <div
           className="absolute bottom-[15%] sm:bottom-[18%] left-[88%] sm:left-[90%] w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12"
           style={{
+            zIndex: Z_HERO.DIYA_5,
             animation: "diyaFloat 4.2s ease-in-out infinite",
             animationDelay: "0.7s",
           }}
         >
           <Diya className="w-full h-full" />
         </div>
+        {/* Diya 6 */}
         <div
           className="hidden sm:block absolute bottom-[30%] left-[42%] sm:left-[45%] w-5 h-7 sm:w-7 sm:h-9 md:w-9 md:h-11"
           style={{
+            zIndex: Z_HERO.DIYA_6,
             animation: "diyaFloat 3.5s ease-in-out infinite",
             animationDelay: "1.2s",
           }}
@@ -1005,11 +1029,14 @@ export function HeroSection() {
       </div>
 
       {/* Floating Lotus flowers - clipped to river area only */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[75] pointer-events-none overflow-hidden">
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden"
+      >
         {/* Lotus 1 - Left side */}
         <div
           className="absolute bottom-[28%] left-[12%] sm:left-[15%] w-10 h-8 sm:w-12 sm:h-10 md:w-14 md:h-12"
           style={{
+            zIndex: Z_HERO.LOTUS_1,
             animation: "lotusFloat 5s ease-in-out infinite",
             animationDelay: "0s",
           }}
@@ -1020,6 +1047,7 @@ export function HeroSection() {
         <div
           className="absolute bottom-[20%] left-[48%] sm:left-[50%] w-8 h-6 sm:w-10 sm:h-8 md:w-12 md:h-10"
           style={{
+            zIndex: Z_HERO.LOTUS_2,
             animation: "lotusFloat 6s ease-in-out infinite",
             animationDelay: "1s",
           }}
@@ -1030,6 +1058,7 @@ export function HeroSection() {
         <div
           className="absolute bottom-[25%] left-[78%] sm:left-[80%] w-9 h-7 sm:w-11 sm:h-9 md:w-13 md:h-11"
           style={{
+            zIndex: Z_HERO.LOTUS_3,
             animation: "lotusFloat 5.5s ease-in-out infinite",
             animationDelay: "0.5s",
           }}
@@ -1040,6 +1069,7 @@ export function HeroSection() {
         <div
           className="hidden sm:block absolute bottom-[15%] left-[28%] sm:left-[30%] w-7 h-5 sm:w-9 sm:h-7 md:w-11 md:h-9"
           style={{
+            zIndex: Z_HERO.LOTUS_4,
             animation: "lotusFloat 4.5s ease-in-out infinite",
             animationDelay: "1.5s",
           }}

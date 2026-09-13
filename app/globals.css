@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+/* ── Lenis Smooth Scroll ── */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 :root {
   /* Kashi Yatra Color Palette */
   --saffron: #FF6B00;
@@ -508,13 +529,4 @@ body {
   mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 90%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 90%);
   filter: blur(2px);
-}
-.stone-responsive .stone-label {
-  font-family: var(--font-ethereal), serif;
-  font-weight: 700;
-  font-size: 13%;
-  letter-spacing: 0.5px;
-  color: #f0e8c8;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 0 2px rgba(0,0,0,0.9);
-  padding-bottom: 4%;
 }

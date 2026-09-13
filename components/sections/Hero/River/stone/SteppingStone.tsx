@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { getAnimStyle } from "./helper/constant";
 
 interface SteppingStoneProps {
   label?: string;
@@ -14,6 +15,8 @@ interface SteppingStoneProps {
   sizeDesktop?: number;
   /** phase offset so multiple stones bob out of sync */
   phase?: number;
+  /** z-index for layering stones */
+  zIndex?: number;
   className?: string;
   style?: CSSProperties;
 }
@@ -25,29 +28,26 @@ export function SteppingStone({
   size = 120,
   sizeDesktop,
   phase = 0,
+  zIndex,
   className = "",
   style,
 }: SteppingStoneProps) {
-  // Use mobile size, desktop handled via CSS variable
-  const s = size;
-  const deskS = sizeDesktop || size;
+  const mobileSize = size;
+  const desktopSize = sizeDesktop || size;
 
-  const animStyle: CSSProperties = {
-    animation: `stoneHarmonicBob 3.6s ease-in-out infinite`,
-    animationDelay: `${phase}s`,
-    display: "inline-block",
-    cursor: href || onClick ? "pointer" : "default",
-    // CSS custom properties for responsive sizing
-    "--stone-size-mobile": `${s}px`,
-    "--stone-size-desktop": `${deskS}px`,
-    ...style,
-  } as CSSProperties;
+  const animStyle = getAnimStyle({
+    phase,
+    href,
+    onClick,
+    mobileSize,
+    desktopSize,
+    zIndex,
+    style,
+  });
 
   const stone = (
     <span style={animStyle} className={`stone-responsive ${className}`}>
-      <span
-        className="stone-interactive relative inline-block"
-      >
+      <span className="stone-interactive relative inline-block">
         {/* Ripple rings */}
         <span
           aria-hidden
@@ -84,7 +84,13 @@ export function SteppingStone({
         />
         {/* Label */}
         {label && (
-          <span className="stone-label absolute inset-0 flex items-center justify-center text-center font-bold text-amber-100 uppercase">
+          <span
+            className="stone-label absolute inset-0 flex items-center justify-center text-center font-bold text-amber-100 uppercase text-[8px] sm:text-[15px] tracking-wide pb-1"
+            style={{
+              fontFamily: "var(--font-ethereal), serif",
+              textShadow: "0 1px 4px rgba(0,0,0,0.95), 0 0 2px rgba(0,0,0,0.9)",
+            }}
+          >
             {label}
           </span>
         )}
