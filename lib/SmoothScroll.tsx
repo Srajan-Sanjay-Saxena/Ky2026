@@ -5,9 +5,15 @@ import { useEffect, useRef } from "react";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis
+    // Don't initialize Lenis on mobile - native scroll is smoother
+    if (window.innerWidth < 640) {
+      return;
+    }
+
+    // Initialize Lenis only on desktop
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
@@ -22,13 +28,16 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // RAF loop
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafIdRef.current = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafIdRef.current = requestAnimationFrame(raf);
 
     // Cleanup
     return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
       lenis.destroy();
       lenisRef.current = null;
     };

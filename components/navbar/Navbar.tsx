@@ -19,11 +19,14 @@ export function ScrollNavbar() {
 
   return (
     <div
-      className="fixed inset-x-0 top-0 z-[200] transition-all duration-500 ease-out"
+      className="fixed inset-x-0 top-0 z-[200]"
       style={{
-        transform: visible ? "translateY(0)" : "translateY(-120%)",
+        transform: visible ? "translateY(0) translateZ(0)" : "translateY(-120%) translateZ(0)",
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
+        willChange: "transform, opacity",
+        transition: "transform 0.3s ease-out, opacity 0.3s ease-out",
+        backfaceVisibility: "hidden",
       }}
       aria-hidden={!visible}
     >

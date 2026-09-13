@@ -626,3 +626,62 @@ body {
 
 
 
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Reduce animations and enable hardware acceleration on mobile
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile-specific optimizations (< 640px) */
+@media (max-width: 639px) {
+  /* Slow down or simplify heavy animations on mobile */
+  .vibes-mandala-slow {
+    animation-duration: 120s !important; /* Slower = less CPU */
+  }
+  
+  .vibes-mandala-fast {
+    animation-duration: 30s !important; /* Slower on mobile */
+  }
+  
+  /* Reduce floating animation complexity */
+  .stone-responsive {
+    animation: none !important; /* Disable stone bobbing on mobile */
+  }
+  
+  /* Simplify footer mandala rotations */
+  .footer-mandala-slow,
+  .footer-mandala-reverse,
+  .footer-card-mandala {
+    animation-duration: 180s !important; /* Much slower */
+  }
+  
+  /* Hardware acceleration for common animated elements */
+  [class*="absolute"] {
+    backface-visibility: hidden;
+  }
+}
+
+/* GPU acceleration hints for animated elements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Optimize transitions - use only transform and opacity */
+.perf-transition {
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  will-change: transform, opacity;
+}
