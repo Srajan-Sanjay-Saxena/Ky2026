@@ -5,14 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { PassConfig } from "./passes.config";
 import { ANIMATION } from "./passes.config";
-import {
-  CARD_SHADOW,
-  POPULAR_BADGE_BG,
-  BUTTON_BASE,
-  PRICE_GRADIENT,
-  CHECK_ICON_HIGHLIGHT,
-  PASS_IMAGE_SHADOW,
-} from "./passes.styles";
+import { CARD_SHADOW, POPULAR_BADGE_BG, CHECK_ICON_HIGHLIGHT } from "./passes.styles";
 
 interface PassCardProps {
   pass: PassConfig;
@@ -20,9 +13,142 @@ interface PassCardProps {
   onSelect?: (passId: string) => void;
 }
 
-/**
- * Royal corner ornament - floral/paisley inspired
- */
+// ============================================
+// Task 1: PassIcon Component with Animation
+// ============================================
+function PassIcon({ passId }: { passId: string }) {
+  const icons: Record<string, React.ReactNode> = {
+    yatri: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9H15V22H13V16H11V22H9V9H3V7H21V9Z" />
+      </svg>
+    ),
+    darbar: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5ZM19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z" />
+      </svg>
+    ),
+    swarnim: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <path d="M12 1L9 9H2L7 14L5 22L12 17L19 22L17 14L22 9H15L12 1Z" />
+      </svg>
+    ),
+  };
+
+  return (
+    <motion.span
+      animate={{
+        scale: [1, 1.2, 1],
+        rotate: [0, 10, -10, 0],
+      }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+      className="inline-block"
+    >
+      {icons[passId] || icons.yatri}
+    </motion.span>
+  );
+}
+
+// ============================================
+// Task 2: RoyalPrice Component
+// ============================================
+function RoyalPrice({ price }: { price: number }) {
+  return (
+    <div className="relative inline-flex items-center">
+      {/* Left decorative line */}
+      <span
+        className="w-8 h-[1px] mr-2"
+        style={{
+          background: "linear-gradient(90deg, transparent, #D4A853)",
+        }}
+      />
+
+      {/* Price container */}
+      <div
+        className="px-4 py-2 rounded-lg"
+        style={{
+          background: "linear-gradient(180deg, rgba(212, 168, 83, 0.15) 0%, rgba(184, 134, 11, 0.08) 100%)",
+          border: "1px solid rgba(212, 168, 83, 0.4)",
+          boxShadow: "0 2px 10px rgba(212, 168, 83, 0.2)",
+        }}
+      >
+        <span className="text-[#D4A853] text-sm font-semibold tracking-wide">Price</span>
+        <span className="mx-2 text-[#FFD700] font-light">:</span>
+        <span
+          className="text-2xl font-bold"
+          style={{
+            background: "linear-gradient(180deg, #FFD700 0%, #D4A853 50%, #FFD700 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          ₹{price.toLocaleString("en-IN")}
+        </span>
+      </div>
+
+      {/* Right decorative line */}
+      <span
+        className="w-8 h-[1px] ml-2"
+        style={{
+          background: "linear-gradient(90deg, #D4A853, transparent)",
+        }}
+      />
+    </div>
+  );
+}
+
+// ============================================
+// Task 3: RoyalButton Component
+// ============================================
+function RoyalButton({
+  children,
+  onClick,
+  icon,
+}: {
+  children: React.ReactNode;
+  onClick: (e: React.MouseEvent) => void;
+  icon: React.ReactNode;
+}) {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      onClick={onClick}
+      className="relative w-full py-3 px-4 font-bold uppercase tracking-wider text-sm overflow-hidden rounded-lg"
+      style={{
+        background: "linear-gradient(180deg, #D4A853 0%, #B8860B 50%, #8B6914 100%)",
+        border: "2px solid #FFD700",
+        color: "#1A0A1A",
+        boxShadow: "0 4px 15px rgba(212, 168, 83, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+      }}
+    >
+      {/* Shimmer animation */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ x: ["-100%", "100%"] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)",
+        }}
+      />
+
+      {/* Button content */}
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        {icon}
+        {children}
+      </span>
+    </motion.button>
+  );
+}
+
+// ============================================
+// Existing Components (kept from before)
+// ============================================
 function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
   const rotations = { tl: 0, tr: 90, bl: -90, br: 180 };
   const positions = {
@@ -34,53 +160,17 @@ function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
 
   return (
     <div
-      className={`absolute ${positions[position]} w-12 h-12 pointer-events-none`}
+      className={`absolute ${positions[position]} w-10 h-10 pointer-events-none`}
       style={{ transform: `rotate(${rotations[position]}deg)` }}
     >
       <svg viewBox="0 0 50 50" className="w-full h-full">
-        {/* Main corner flourish */}
-        <path
-          d="M5 5 Q5 25 25 25 Q15 15 5 5"
-          fill="none"
-          stroke="url(#goldGrad)"
-          strokeWidth="1.5"
-          opacity="0.7"
-        />
-        {/* Outer curve */}
-        <path
-          d="M2 2 Q2 30 30 30"
-          fill="none"
-          stroke="url(#goldGrad)"
-          strokeWidth="1"
-          opacity="0.5"
-        />
-        {/* Inner decorative curl */}
-        <path
-          d="M8 8 C12 8 15 12 15 18 C15 12 18 8 24 8"
-          fill="none"
-          stroke="#D4A853"
-          strokeWidth="1"
-          opacity="0.6"
-        />
-        {/* Small leaf/paisley */}
-        <ellipse
-          cx="12"
-          cy="12"
-          rx="4"
-          ry="6"
-          fill="none"
-          stroke="#FFD700"
-          strokeWidth="0.8"
-          opacity="0.5"
-          transform="rotate(-45 12 12)"
-        />
-        {/* Center dot */}
-        <circle cx="8" cy="8" r="2" fill="#D4A853" opacity="0.7" />
-        {/* Gradient definition */}
+        <path d="M5 5 Q5 25 25 25 Q15 15 5 5" fill="none" stroke="url(#goldGradCorner)" strokeWidth="1.5" opacity="0.6" />
+        <path d="M2 2 Q2 28 28 28" fill="none" stroke="#D4A853" strokeWidth="1" opacity="0.4" />
+        <ellipse cx="10" cy="10" rx="3" ry="5" fill="none" stroke="#FFD700" strokeWidth="0.8" opacity="0.5" transform="rotate(-45 10 10)" />
+        <circle cx="6" cy="6" r="2" fill="#D4A853" opacity="0.6" />
         <defs>
-          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FFD700" />
-            <stop offset="50%" stopColor="#D4A853" />
             <stop offset="100%" stopColor="#B8860B" />
           </linearGradient>
         </defs>
@@ -89,69 +179,34 @@ function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
   );
 }
 
-/**
- * Card background pattern - subtle damask/royal textile
- */
 function CardBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden rounded-[7px]">
-      {/* Base gradient */}
       <div
         className="absolute inset-0"
         style={{
-          background: `
-            linear-gradient(180deg,
-              rgba(35, 18, 45, 0.98) 0%,
-              rgba(28, 14, 38, 0.99) 30%,
-              rgba(22, 10, 32, 1) 60%,
-              rgba(18, 8, 28, 1) 100%
-            )
-          `,
+          background: `linear-gradient(180deg,
+            rgba(35, 18, 45, 0.98) 0%,
+            rgba(28, 14, 38, 0.99) 30%,
+            rgba(22, 10, 32, 1) 60%,
+            rgba(18, 8, 28, 1) 100%
+          )`,
         }}
       />
-      
-      {/* Damask pattern overlay */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a853' fill-rule='evenodd'%3E%3Cpath d='M20 20c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm0-2c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5z'/%3E%3Cpath d='M20 10c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a853' fill-rule='evenodd'%3E%3Cpath d='M20 20c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm0-2c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5z'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: "40px 40px",
-        }}
-      />
-
-      {/* Vertical gradient lines - like fabric texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(212, 168, 83, 0.5) 2px,
-            rgba(212, 168, 83, 0.5) 3px
-          )`,
-          backgroundSize: "20px 100%",
-        }}
-      />
-
-      {/* Center vignette glow */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse at 50% 40%, rgba(212, 168, 83, 0.08) 0%, transparent 50%)`,
         }}
       />
     </div>
   );
 }
 
-/**
- * Royal ornate frame
- */
 function RoyalFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative w-full h-full">
-      {/* Outer gold frame */}
       <div
         className="absolute inset-0 rounded-[14px]"
         style={{
@@ -162,17 +217,13 @@ function RoyalFrame({ children }: { children: React.ReactNode }) {
           padding: "3px",
         }}
       >
-        {/* Dark inset */}
         <div
           className="w-full h-full rounded-[11px]"
           style={{
-            background: `linear-gradient(180deg, 
-              #1a0d10 0%, #2a1a18 50%, #1a0d10 100%
-            )`,
+            background: `linear-gradient(180deg, #1a0d10 0%, #2a1a18 50%, #1a0d10 100%)`,
             padding: "2px",
           }}
         >
-          {/* Inner gold line */}
           <div
             className="w-full h-full rounded-[9px]"
             style={{
@@ -182,7 +233,6 @@ function RoyalFrame({ children }: { children: React.ReactNode }) {
               padding: "2px",
             }}
           >
-            {/* Content area */}
             <div className="relative w-full h-full rounded-[7px] overflow-hidden">
               {children}
             </div>
@@ -193,6 +243,9 @@ function RoyalFrame({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ============================================
+// Task 4, 5, 6: Main PassCard Component
+// ============================================
 export const PassCard = memo(function PassCard({
   pass,
   index,
@@ -218,191 +271,158 @@ export const PassCard = memo(function PassCard({
       style={{
         width: "100%",
         maxWidth: "300px",
-        height: "500px",
-        perspective: "1200px",
+        height: "520px",
       }}
     >
       {/* Popular badge */}
       {pass.popular && (
-        <div
+        <motion.div
           className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
           style={{
             background: POPULAR_BADGE_BG,
             color: "#1A0A1A",
             boxShadow: "0 4px 20px rgba(212, 168, 83, 0.6)",
           }}
         >
-          Most Popular
-        </div>
+          ✦ Most Popular ✦
+        </motion.div>
       )}
 
-      {/* Flip container */}
-      <motion.div
-        className="relative w-full h-full cursor-pointer"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        onClick={handleFlip}
-        whileHover={{ scale: 1.02 }}
-      >
-        {/* ===== FRONT SIDE ===== */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-          }}
-        >
-          <RoyalFrame>
-            <div
-              className="relative w-full h-full flex flex-col"
-              style={{ boxShadow: CARD_SHADOW }}
+      {/* Static card frame (doesn't flip) */}
+      <RoyalFrame>
+        <div className="relative w-full h-full flex flex-col" style={{ boxShadow: CARD_SHADOW }}>
+          {/* Background */}
+          <CardBackground />
+
+          {/* Corner ornaments (always visible) */}
+          <CornerOrnament position="tl" />
+          <CornerOrnament position="tr" />
+          <CornerOrnament position="bl" />
+          <CornerOrnament position="br" />
+
+          {/* ===== INTERNAL FLIP CONTAINER (only this flips) ===== */}
+          <div
+            className="relative flex-1 flex items-center justify-center p-3 cursor-pointer z-10"
+            style={{ perspective: "800px" }}
+            onClick={handleFlip}
+          >
+            <motion.div
+              className="relative w-full h-full"
+              style={{ transformStyle: "preserve-3d" }}
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             >
-              {/* Textured background */}
-              <CardBackground />
-
-              {/* Corner ornaments */}
-              <CornerOrnament position="tl" />
-              <CornerOrnament position="tr" />
-              <CornerOrnament position="bl" />
-              <CornerOrnament position="br" />
-
-              {/* Accent glow based on pass type */}
+              {/* ===== FRONT: Pass Image with Glow ===== */}
               <div
-                className="absolute inset-0 opacity-20 pointer-events-none"
+                className="absolute inset-0 flex flex-col items-center justify-center"
                 style={{
-                  background: `radial-gradient(ellipse at 50% 30%, ${pass.glowColor} 0%, transparent 50%)`,
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
                 }}
-              />
-
-              {/* Pass image area */}
-              <div className="relative flex-1 flex items-center justify-center p-2 z-10">
+              >
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{
                     ...ANIMATION.float,
                     delay: floatDelay,
                   }}
+                  className="relative"
                 >
-                  <Image
-                    src={pass.image}
-                    alt={pass.name}
-                    width={250}
-                    height={340}
-                    className="object-contain max-h-[320px] w-auto"
-                    style={{ filter: PASS_IMAGE_SHADOW }}
-                    priority={index === 0}
-                  />
-                </motion.div>
-              </div>
-
-              {/* Bottom info */}
-              <div className="relative z-10 px-4 pb-4 text-center">
-                <div className="mb-3">
-                  <span className="text-sm text-gray-400">Price: </span>
-                  <span className="text-2xl font-bold" style={PRICE_GRADIENT}>
-                    ₹{pass.price.toLocaleString("en-IN")}
-                  </span>
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onSelect?.(pass.id);
-                  }}
-                  className="w-full py-2.5 text-sm font-bold uppercase tracking-wide"
-                  style={BUTTON_BASE}
-                >
-                  Get {pass.name.split(" ")[0]} Pass
-                </motion.button>
-              </div>
-            </div>
-          </RoyalFrame>
-        </div>
-
-        {/* ===== BACK SIDE ===== */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-          }}
-        >
-          <RoyalFrame>
-            <div
-              className="relative w-full h-full flex flex-col"
-              style={{ boxShadow: CARD_SHADOW }}
-            >
-              {/* Textured background */}
-              <CardBackground />
-
-              {/* Corner ornaments */}
-              <CornerOrnament position="tl" />
-              <CornerOrnament position="tr" />
-              <CornerOrnament position="bl" />
-              <CornerOrnament position="br" />
-
-              {/* Accent line at top */}
-              <div
-                className="relative z-10 h-1 w-full"
-                style={{
-                  background: `linear-gradient(90deg, transparent, ${pass.accentColor}, transparent)`,
-                }}
-              />
-
-              {/* Content */}
-              <div className="relative z-10 flex-1 flex flex-col p-4 pt-3">
-                {/* Header */}
-                <div className="text-center mb-3">
-                  <h3
-                    className="text-lg font-bold mb-1 uppercase tracking-wide"
+                  {/* Task 5: Blur glow behind image */}
+                  <div
+                    className="absolute inset-0 blur-2xl"
                     style={{
-                      fontFamily: "var(--font-ethereal), serif",
-                      color: pass.accentColor,
+                      background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`,
+                      transform: "scale(1.3)",
+                      opacity: 0.6,
+                    }}
+                  />
+
+                  {/* Task 5: Animated drop-shadow on image */}
+                  <motion.div
+                    animate={{
+                      filter: [
+                        `drop-shadow(0 0 20px ${pass.glowColor})`,
+                        `drop-shadow(0 0 35px ${pass.glowColor})`,
+                        `drop-shadow(0 0 20px ${pass.glowColor})`,
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
                     }}
                   >
-                    {pass.name.split(" ")[0]} Benefits:
-                  </h3>
-                </div>
+                    <Image
+                      src={pass.image}
+                      alt={pass.name}
+                      width={220}
+                      height={280}
+                      className="object-contain max-h-[260px] w-auto relative z-10"
+                      priority={index === 0}
+                    />
+                  </motion.div>
+                </motion.div>
 
-                {/* Benefits */}
-                <div className="flex-1 mb-3">
-                  <ul className="space-y-1.5">
-                    {pass.benefits.map((benefit, i) => (
-                      <li
-                        key={i}
-                        className={`flex items-start gap-2 text-sm ${
-                          benefit.highlight ? "text-yellow-200" : "text-gray-300"
-                        }`}
-                      >
-                        <span style={{ color: CHECK_ICON_HIGHLIGHT }}>✦</span>
-                        <span>{benefit.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Flip hint */}
+                <p className="absolute bottom-1 text-gray-500 text-xs flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                    <path d="M3 3v5h5" />
+                  </svg>
+                  {isMobile ? "Tap for details" : "Click for details"}
+                </p>
+              </div>
+
+              {/* ===== BACK: Benefits ===== */}
+              <div
+                className="absolute inset-0 flex flex-col p-4 rounded-lg"
+                style={{
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                  transform: "rotateY(180deg)",
+                  background: "linear-gradient(180deg, rgba(35, 18, 45, 0.98) 0%, rgba(22, 10, 32, 1) 100%)",
+                  border: "1px solid rgba(212, 168, 83, 0.25)",
+                }}
+              >
+                {/* Header */}
+                <h3
+                  className="text-lg font-bold text-center mb-3 uppercase tracking-wide"
+                  style={{
+                    fontFamily: "var(--font-ethereal), serif",
+                    color: pass.accentColor,
+                  }}
+                >
+                  {pass.name.split(" ")[0]} Benefits
+                </h3>
+
+                {/* Benefits list */}
+                <ul className="flex-1 space-y-2 overflow-y-auto">
+                  {pass.benefits.map((benefit, i) => (
+                    <li
+                      key={i}
+                      className={`flex items-start gap-2 text-sm ${
+                        benefit.highlight ? "text-yellow-200" : "text-gray-300"
+                      }`}
+                    >
+                      <span style={{ color: CHECK_ICON_HIGHLIGHT }}>✦</span>
+                      <span>{benefit.text}</span>
+                    </li>
+                  ))}
+                </ul>
 
                 {/* QR placeholder */}
-                <div className="flex justify-center mb-3">
+                <div className="flex justify-center my-3">
                   <div
-                    className="w-16 h-16 rounded-lg flex items-center justify-center"
+                    className="w-14 h-14 rounded flex items-center justify-center"
                     style={{
                       background: "rgba(255,255,255,0.03)",
                       border: "1px solid rgba(212, 168, 83, 0.3)",
-                      boxShadow: "inset 0 0 20px rgba(212, 168, 83, 0.1)",
                     }}
                   >
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#D4A853"
-                      strokeWidth="1"
-                    >
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4A853" strokeWidth="1">
                       <rect x="3" y="3" width="7" height="7" rx="1" />
                       <rect x="14" y="3" width="7" height="7" rx="1" />
                       <rect x="3" y="14" width="7" height="7" rx="1" />
@@ -414,32 +434,38 @@ export const PassCard = memo(function PassCard({
                   </div>
                 </div>
 
-                {/* Price */}
-                <div className="text-center mb-3">
-                  <span className="text-sm text-gray-400">Price: </span>
-                  <span className="text-xl font-bold" style={PRICE_GRADIENT}>
-                    ₹{pass.price.toLocaleString("en-IN")}
-                  </span>
-                </div>
-
-                {/* CTA Button */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onSelect?.(pass.id);
-                  }}
-                  className="w-full py-2 text-sm font-bold uppercase tracking-wide"
-                  style={BUTTON_BASE}
-                >
-                  Get {pass.name.split(" ")[0]} Pass
-                </motion.button>
+                {/* Flip back hint */}
+                <p className="text-center text-gray-500 text-xs flex items-center justify-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                    <path d="M3 3v5h5" />
+                  </svg>
+                  {isMobile ? "Tap to flip back" : "Click to flip back"}
+                </p>
               </div>
+            </motion.div>
+          </div>
+
+          {/* ===== BOTTOM SECTION (always visible, moved up) ===== */}
+          <div className="relative z-10 px-4 pb-4 pt-1">
+            {/* Royal Price */}
+            <div className="flex justify-center mb-3">
+              <RoyalPrice price={pass.price} />
             </div>
-          </RoyalFrame>
+
+            {/* Royal Button with Icon */}
+            <RoyalButton
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelect?.(pass.id);
+              }}
+              icon={<PassIcon passId={pass.id} />}
+            >
+              Get {pass.name.split(" ")[0]} Pass
+            </RoyalButton>
+          </div>
         </div>
-      </motion.div>
+      </RoyalFrame>
     </motion.div>
   );
 });
