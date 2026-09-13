@@ -14,7 +14,7 @@ interface PassCardProps {
 }
 
 // ============================================
-// Task 1: PassIcon Component with Animation
+// PassIcon Component with Animation
 // ============================================
 function PassIcon({ passId }: { passId: string }) {
   const icons: Record<string, React.ReactNode> = {
@@ -37,15 +37,8 @@ function PassIcon({ passId }: { passId: string }) {
 
   return (
     <motion.span
-      animate={{
-        scale: [1, 1.2, 1],
-        rotate: [0, 10, -10, 0],
-      }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
+      animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       className="inline-block"
     >
       {icons[passId] || icons.yatri}
@@ -54,20 +47,77 @@ function PassIcon({ passId }: { passId: string }) {
 }
 
 // ============================================
-// Task 2: RoyalPrice Component
+// Animated Mandala Ring for Card Back
+// ============================================
+function AnimatedMandala({ color, size = 200 }: { color: string; size?: number }) {
+  return (
+    <motion.svg
+      viewBox="0 0 200 200"
+      className="absolute"
+      style={{ width: size, height: size }}
+      animate={{ rotate: 360 }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      {/* Outer circles */}
+      <circle cx="100" cy="100" r="95" fill="none" stroke={color} strokeWidth="0.5" opacity="0.3" />
+      <circle cx="100" cy="100" r="85" fill="none" stroke={color} strokeWidth="0.3" opacity="0.2" />
+      <circle cx="100" cy="100" r="75" fill="none" stroke={color} strokeWidth="0.5" opacity="0.25" />
+      <circle cx="100" cy="100" r="65" fill="none" stroke={color} strokeWidth="0.3" opacity="0.2" />
+      
+      {/* Radial lines */}
+      {[...Array(12)].map((_, i) => (
+        <line
+          key={`line-${i}`}
+          x1="100"
+          y1="5"
+          x2="100"
+          y2="25"
+          stroke={color}
+          strokeWidth="0.5"
+          opacity="0.35"
+          transform={`rotate(${i * 30} 100 100)`}
+        />
+      ))}
+      
+      {/* Outer dots */}
+      {[...Array(24)].map((_, i) => (
+        <circle
+          key={`dot-${i}`}
+          cx="100"
+          cy="12"
+          r="2"
+          fill={color}
+          opacity="0.4"
+          transform={`rotate(${i * 15} 100 100)`}
+        />
+      ))}
+      
+      {/* Inner petals */}
+      {[...Array(8)].map((_, i) => (
+        <ellipse
+          key={`petal-${i}`}
+          cx="100"
+          cy="55"
+          rx="6"
+          ry="12"
+          fill="none"
+          stroke={color}
+          strokeWidth="0.5"
+          opacity="0.3"
+          transform={`rotate(${i * 45} 100 100)`}
+        />
+      ))}
+    </motion.svg>
+  );
+}
+
+// ============================================
+// RoyalPrice Component
 // ============================================
 function RoyalPrice({ price }: { price: number }) {
   return (
     <div className="relative inline-flex items-center">
-      {/* Left decorative line */}
-      <span
-        className="w-8 h-[1px] mr-2"
-        style={{
-          background: "linear-gradient(90deg, transparent, #D4A853)",
-        }}
-      />
-
-      {/* Price container */}
+      <span className="w-8 h-[1px] mr-2" style={{ background: "linear-gradient(90deg, transparent, #D4A853)" }} />
       <div
         className="px-4 py-2 rounded-lg"
         style={{
@@ -90,30 +140,15 @@ function RoyalPrice({ price }: { price: number }) {
           ₹{price.toLocaleString("en-IN")}
         </span>
       </div>
-
-      {/* Right decorative line */}
-      <span
-        className="w-8 h-[1px] ml-2"
-        style={{
-          background: "linear-gradient(90deg, #D4A853, transparent)",
-        }}
-      />
+      <span className="w-8 h-[1px] ml-2" style={{ background: "linear-gradient(90deg, #D4A853, transparent)" }} />
     </div>
   );
 }
 
 // ============================================
-// Task 3: RoyalButton Component
+// RoyalButton Component
 // ============================================
-function RoyalButton({
-  children,
-  onClick,
-  icon,
-}: {
-  children: React.ReactNode;
-  onClick: (e: React.MouseEvent) => void;
-  icon: React.ReactNode;
-}) {
+function RoyalButton({ children, onClick, icon }: { children: React.ReactNode; onClick: (e: React.MouseEvent) => void; icon: React.ReactNode }) {
   return (
     <motion.button
       whileHover={{ scale: 1.03 }}
@@ -127,42 +162,26 @@ function RoyalButton({
         boxShadow: "0 4px 15px rgba(212, 168, 83, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
       }}
     >
-      {/* Shimmer animation */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         animate={{ x: ["-100%", "100%"] }}
         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        style={{
-          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)",
-        }}
+        style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)" }}
       />
-
-      {/* Button content */}
-      <span className="relative z-10 flex items-center justify-center gap-2">
-        {icon}
-        {children}
-      </span>
+      <span className="relative z-10 flex items-center justify-center gap-2">{icon}{children}</span>
     </motion.button>
   );
 }
 
 // ============================================
-// Existing Components (kept from before)
+// Existing Components
 // ============================================
 function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
   const rotations = { tl: 0, tr: 90, bl: -90, br: 180 };
-  const positions = {
-    tl: "top-2 left-2",
-    tr: "top-2 right-2",
-    bl: "bottom-2 left-2",
-    br: "bottom-2 right-2",
-  };
+  const positions = { tl: "top-2 left-2", tr: "top-2 right-2", bl: "bottom-2 left-2", br: "bottom-2 right-2" };
 
   return (
-    <div
-      className={`absolute ${positions[position]} w-10 h-10 pointer-events-none`}
-      style={{ transform: `rotate(${rotations[position]}deg)` }}
-    >
+    <div className={`absolute ${positions[position]} w-10 h-10 pointer-events-none`} style={{ transform: `rotate(${rotations[position]}deg)` }}>
       <svg viewBox="0 0 50 50" className="w-full h-full">
         <path d="M5 5 Q5 25 25 25 Q15 15 5 5" fill="none" stroke="url(#goldGradCorner)" strokeWidth="1.5" opacity="0.6" />
         <path d="M2 2 Q2 28 28 28" fill="none" stroke="#D4A853" strokeWidth="1" opacity="0.4" />
@@ -182,24 +201,8 @@ function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
 function CardBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden rounded-[7px]">
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(180deg,
-            rgba(35, 18, 45, 0.98) 0%,
-            rgba(28, 14, 38, 0.99) 30%,
-            rgba(22, 10, 32, 1) 60%,
-            rgba(18, 8, 28, 1) 100%
-          )`,
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a853' fill-rule='evenodd'%3E%3Cpath d='M20 20c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm0-2c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5z'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: "40px 40px",
-        }}
-      />
+      <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, rgba(35, 18, 45, 0.98) 0%, rgba(28, 14, 38, 0.99) 30%, rgba(22, 10, 32, 1) 60%, rgba(18, 8, 28, 1) 100%)` }} />
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a853' fill-rule='evenodd'%3E%3Cpath d='M20 20c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm0-2c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5z'/%3E%3C/g%3E%3C/svg%3E")`, backgroundSize: "40px 40px" }} />
     </div>
   );
 }
@@ -207,35 +210,10 @@ function CardBackground() {
 function RoyalFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative w-full h-full">
-      <div
-        className="absolute inset-0 rounded-[14px]"
-        style={{
-          background: `linear-gradient(180deg, 
-            #4a3510 0%, #8B6914 10%, #D4A853 25%, 
-            #FFD700 50%, #D4A853 75%, #8B6914 90%, #4a3510 100%
-          )`,
-          padding: "3px",
-        }}
-      >
-        <div
-          className="w-full h-full rounded-[11px]"
-          style={{
-            background: `linear-gradient(180deg, #1a0d10 0%, #2a1a18 50%, #1a0d10 100%)`,
-            padding: "2px",
-          }}
-        >
-          <div
-            className="w-full h-full rounded-[9px]"
-            style={{
-              background: `linear-gradient(180deg, 
-                #8B6914 0%, #D4A853 30%, #FFD700 50%, #D4A853 70%, #8B6914 100%
-              )`,
-              padding: "2px",
-            }}
-          >
-            <div className="relative w-full h-full rounded-[7px] overflow-hidden">
-              {children}
-            </div>
+      <div className="absolute inset-0 rounded-[14px]" style={{ background: `linear-gradient(180deg, #4a3510 0%, #8B6914 10%, #D4A853 25%, #FFD700 50%, #D4A853 75%, #8B6914 90%, #4a3510 100%)`, padding: "3px" }}>
+        <div className="w-full h-full rounded-[11px]" style={{ background: `linear-gradient(180deg, #1a0d10 0%, #2a1a18 50%, #1a0d10 100%)`, padding: "2px" }}>
+          <div className="w-full h-full rounded-[9px]" style={{ background: `linear-gradient(180deg, #8B6914 0%, #D4A853 30%, #FFD700 50%, #D4A853 70%, #8B6914 100%)`, padding: "2px" }}>
+            <div className="relative w-full h-full rounded-[7px] overflow-hidden">{children}</div>
           </div>
         </div>
       </div>
@@ -244,13 +222,9 @@ function RoyalFrame({ children }: { children: React.ReactNode }) {
 }
 
 // ============================================
-// Task 4, 5, 6: Main PassCard Component
+// Main PassCard Component
 // ============================================
-export const PassCard = memo(function PassCard({
-  pass,
-  index,
-  onSelect,
-}: PassCardProps) {
+export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -268,11 +242,7 @@ export const PassCard = memo(function PassCard({
     <motion.div
       variants={ANIMATION.card}
       className={`relative ${pass.popular ? "md:-mt-6 lg:-mt-8" : ""}`}
-      style={{
-        width: "100%",
-        maxWidth: "300px",
-        height: "520px",
-      }}
+      style={{ width: "100%", maxWidth: "300px", height: "520px" }}
     >
       {/* Popular badge */}
       {pass.popular && (
@@ -280,34 +250,23 @@ export const PassCard = memo(function PassCard({
           className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
-          style={{
-            background: POPULAR_BADGE_BG,
-            color: "#1A0A1A",
-            boxShadow: "0 4px 20px rgba(212, 168, 83, 0.6)",
-          }}
+          style={{ background: POPULAR_BADGE_BG, color: "#1A0A1A", boxShadow: "0 4px 20px rgba(212, 168, 83, 0.6)" }}
         >
           ✦ Most Popular ✦
         </motion.div>
       )}
 
-      {/* Static card frame (doesn't flip) */}
+      {/* Static card frame */}
       <RoyalFrame>
         <div className="relative w-full h-full flex flex-col" style={{ boxShadow: CARD_SHADOW }}>
-          {/* Background */}
           <CardBackground />
-
-          {/* Corner ornaments (always visible) */}
           <CornerOrnament position="tl" />
           <CornerOrnament position="tr" />
           <CornerOrnament position="bl" />
           <CornerOrnament position="br" />
 
-          {/* ===== INTERNAL FLIP CONTAINER (only this flips) ===== */}
-          <div
-            className="relative flex-1 flex items-center justify-center p-3 cursor-pointer z-10"
-            style={{ perspective: "800px" }}
-            onClick={handleFlip}
-          >
+          {/* Internal flip container */}
+          <div className="relative flex-1 flex items-center justify-center p-3 cursor-pointer z-10" style={{ perspective: "800px" }} onClick={handleFlip}>
             <motion.div
               className="relative w-full h-full"
               style={{ transformStyle: "preserve-3d" }}
@@ -315,152 +274,156 @@ export const PassCard = memo(function PassCard({
               transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             >
               {/* ===== FRONT: Pass Image with Glow ===== */}
-              <div
-                className="absolute inset-0 flex flex-col items-center justify-center"
-                style={{
-                  backfaceVisibility: "hidden",
-                  WebkitBackfaceVisibility: "hidden",
-                }}
-              >
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{
-                    ...ANIMATION.float,
-                    delay: floatDelay,
-                  }}
-                  className="relative"
-                >
-                  {/* Task 5: Blur glow behind image */}
-                  <div
-                    className="absolute inset-0 blur-2xl"
-                    style={{
-                      background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`,
-                      transform: "scale(1.3)",
-                      opacity: 0.6,
-                    }}
-                  />
-
-                  {/* Task 5: Animated drop-shadow on image */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
+                <motion.div animate={{ y: [0, -8, 0] }} transition={{ ...ANIMATION.float, delay: floatDelay }} className="relative">
+                  <div className="absolute inset-0 blur-2xl" style={{ background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`, transform: "scale(1.3)", opacity: 0.6 }} />
                   <motion.div
-                    animate={{
-                      filter: [
-                        `drop-shadow(0 0 20px ${pass.glowColor})`,
-                        `drop-shadow(0 0 35px ${pass.glowColor})`,
-                        `drop-shadow(0 0 20px ${pass.glowColor})`,
-                      ],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={{ filter: [`drop-shadow(0 0 20px ${pass.glowColor})`, `drop-shadow(0 0 35px ${pass.glowColor})`, `drop-shadow(0 0 20px ${pass.glowColor})`] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <Image
-                      src={pass.image}
-                      alt={pass.name}
-                      width={220}
-                      height={280}
-                      className="object-contain max-h-[260px] w-auto relative z-10"
-                      priority={index === 0}
-                    />
+                    <Image src={pass.image} alt={pass.name} width={220} height={280} className="object-contain max-h-[260px] w-auto relative z-10" priority={index === 0} />
                   </motion.div>
                 </motion.div>
-
-                {/* Flip hint */}
                 <p className="absolute bottom-1 text-gray-500 text-xs flex items-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                    <path d="M3 3v5h5" />
-                  </svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
                   {isMobile ? "Tap for details" : "Click for details"}
                 </p>
               </div>
 
-              {/* ===== BACK: Benefits ===== */}
+              {/* ===== BACK: Glamorous Benefits with Mandala ===== */}
               <div
-                className="absolute inset-0 flex flex-col p-4 rounded-lg"
+                className="absolute inset-0 flex flex-col rounded-lg overflow-hidden"
                 style={{
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
                   transform: "rotateY(180deg)",
-                  background: "linear-gradient(180deg, rgba(35, 18, 45, 0.98) 0%, rgba(22, 10, 32, 1) 100%)",
-                  border: "1px solid rgba(212, 168, 83, 0.25)",
                 }}
               >
-                {/* Header */}
-                <h3
-                  className="text-lg font-bold text-center mb-3 uppercase tracking-wide"
+                {/* Rich gradient background */}
+                <div
+                  className="absolute inset-0"
                   style={{
-                    fontFamily: "var(--font-ethereal), serif",
-                    color: pass.accentColor,
+                    background: `
+                      radial-gradient(ellipse at 50% 0%, rgba(212, 168, 83, 0.15) 0%, transparent 50%),
+                      radial-gradient(ellipse at 50% 100%, rgba(139, 69, 19, 0.2) 0%, transparent 50%),
+                      linear-gradient(180deg, 
+                        rgba(45, 22, 55, 0.98) 0%, 
+                        rgba(35, 15, 45, 0.99) 30%,
+                        rgba(28, 12, 38, 1) 60%,
+                        rgba(22, 8, 30, 1) 100%
+                      )
+                    `,
                   }}
-                >
-                  {pass.name.split(" ")[0]} Benefits
-                </h3>
+                />
 
-                {/* Benefits list */}
-                <ul className="flex-1 space-y-2 overflow-y-auto">
-                  {pass.benefits.map((benefit, i) => (
-                    <li
-                      key={i}
-                      className={`flex items-start gap-2 text-sm ${
-                        benefit.highlight ? "text-yellow-200" : "text-gray-300"
-                      }`}
-                    >
-                      <span style={{ color: CHECK_ICON_HIGHLIGHT }}>✦</span>
-                      <span>{benefit.text}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* QR placeholder */}
-                <div className="flex justify-center my-3">
-                  <div
-                    className="w-14 h-14 rounded flex items-center justify-center"
-                    style={{
-                      background: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(212, 168, 83, 0.3)",
-                    }}
-                  >
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4A853" strokeWidth="1">
-                      <rect x="3" y="3" width="7" height="7" rx="1" />
-                      <rect x="14" y="3" width="7" height="7" rx="1" />
-                      <rect x="3" y="14" width="7" height="7" rx="1" />
-                      <rect x="14" y="14" width="3" height="3" />
-                      <rect x="18" y="14" width="3" height="3" />
-                      <rect x="14" y="18" width="3" height="3" />
-                      <rect x="18" y="18" width="3" height="3" />
-                    </svg>
-                  </div>
+                {/* Animated Mandala Background */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                  <AnimatedMandala color={pass.accentColor} size={280} />
                 </div>
 
-                {/* Flip back hint */}
-                <p className="text-center text-gray-500 text-xs flex items-center justify-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                    <path d="M3 3v5h5" />
-                  </svg>
-                  {isMobile ? "Tap to flip back" : "Click to flip back"}
-                </p>
+                {/* Gold border glow */}
+                <div
+                  className="absolute inset-0 rounded-lg pointer-events-none"
+                  style={{
+                    border: "1px solid rgba(212, 168, 83, 0.4)",
+                    boxShadow: "inset 0 0 30px rgba(212, 168, 83, 0.1)",
+                  }}
+                />
+
+                {/* Content */}
+                <div className="relative z-10 flex flex-col h-full p-4">
+                  {/* Header with decorative lines */}
+                  <div className="text-center mb-3">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <span className="w-8 h-[1px]" style={{ background: "linear-gradient(90deg, transparent, #D4A853)" }} />
+                      <motion.span
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        style={{ color: pass.accentColor }}
+                      >
+                        ✦
+                      </motion.span>
+                      <span className="w-8 h-[1px]" style={{ background: "linear-gradient(90deg, #D4A853, transparent)" }} />
+                    </div>
+                    <h3
+                      className="text-xl font-bold uppercase tracking-wider"
+                      style={{
+                        fontFamily: "var(--font-ethereal), serif",
+                        background: `linear-gradient(180deg, ${pass.accentColor} 0%, #FFD700 50%, ${pass.accentColor} 100%)`,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        textShadow: `0 0 30px ${pass.glowColor}`,
+                      }}
+                    >
+                      {pass.name.split(" ")[0]} Benefits
+                    </h3>
+                  </div>
+
+                  {/* Benefits list with royal styling */}
+                  <ul className="flex-1 space-y-2.5 overflow-y-auto px-1">
+                    {pass.benefits.map((benefit, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className={`flex items-start gap-2.5 text-sm ${benefit.highlight ? "text-yellow-200" : "text-gray-200"}`}
+                      >
+                        <motion.span
+                          animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
+                          transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
+                          style={{ color: CHECK_ICON_HIGHLIGHT }}
+                          className="mt-0.5"
+                        >
+                          ✦
+                        </motion.span>
+                        <span className="leading-tight">{benefit.text}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  {/* QR with ornate frame */}
+                  <div className="flex justify-center my-3">
+                    <div
+                      className="relative w-16 h-16 rounded flex items-center justify-center"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(0,0,0,0.3) 100%)",
+                        border: "2px solid rgba(212, 168, 83, 0.5)",
+                        boxShadow: "0 0 15px rgba(212, 168, 83, 0.2), inset 0 0 10px rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4A853" strokeWidth="1.5">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="3" height="3" />
+                        <rect x="18" y="14" width="3" height="3" />
+                        <rect x="14" y="18" width="3" height="3" />
+                        <rect x="18" y="18" width="3" height="3" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Flip back hint */}
+                  <p className="text-center text-gray-400 text-xs flex items-center justify-center gap-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                      <path d="M3 3v5h5" />
+                    </svg>
+                    {isMobile ? "Tap to flip back" : "Click to flip back"}
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
 
-          {/* ===== BOTTOM SECTION (always visible, moved up) ===== */}
+          {/* Bottom section */}
           <div className="relative z-10 px-4 pb-4 pt-1">
-            {/* Royal Price */}
             <div className="flex justify-center mb-3">
               <RoyalPrice price={pass.price} />
             </div>
-
-            {/* Royal Button with Icon */}
-            <RoyalButton
-              onClick={(e) => {
-                e.stopPropagation();
-                onSelect?.(pass.id);
-              }}
-              icon={<PassIcon passId={pass.id} />}
-            >
+            <RoyalButton onClick={(e) => { e.stopPropagation(); onSelect?.(pass.id); }} icon={<PassIcon passId={pass.id} />}>
               Get {pass.name.split(" ")[0]} Pass
             </RoyalButton>
           </div>
