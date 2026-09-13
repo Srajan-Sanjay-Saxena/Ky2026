@@ -448,6 +448,9 @@ body {
 .vibes-mandala-reverse {
   animation: vibesMandalaRotateReverse 50s linear infinite;
 }
+.vibes-mandala-fast {
+  animation: vibesMandalaRotate 15s linear infinite;
+}
 @keyframes vibesMandalaRotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
