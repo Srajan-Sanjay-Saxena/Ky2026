@@ -3,9 +3,7 @@
  * Central source of truth for pass data, pricing, and animation settings
  */
 
-// ImageKit CDN base URL - change this one place to update all images
-const IMAGEKIT_BASE = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || "https://ik.imagekit.io/bi3ktgt58";
-const PASSES_FOLDER = `${IMAGEKIT_BASE}/passes`;
+import { IMAGES } from "@/config/images";
 
 export interface PassBenefit {
   text: string;
@@ -29,7 +27,7 @@ export const PASSES: PassConfig[] = [
     id: "yatri",
     name: "Yatri Pass",
     price: 2399,
-    image: `${PASSES_FOLDER}/yatri-pass.png`,
+    image: IMAGES.passes.yatri,
     tagline: "Begin Your Journey",
     accentColor: "#1A5F7A", // Ganga blue
     glowColor: "rgba(26, 95, 122, 0.5)",
@@ -44,7 +42,7 @@ export const PASSES: PassConfig[] = [
     id: "darbar",
     name: "Darbar Pass",
     price: 2699,
-    image: `${PASSES_FOLDER}/darbar-pass.png`,
+    image: IMAGES.passes.darbar,
     tagline: "The Royal Experience",
     accentColor: "#D4A853", // Gold
     glowColor: "rgba(212, 168, 83, 0.5)",
@@ -61,7 +59,7 @@ export const PASSES: PassConfig[] = [
     id: "swarnim",
     name: "Swarnim Pass",
     price: 2999,
-    image: `${PASSES_FOLDER}/swarnim-pass.png`,
+    image: IMAGES.passes.swarnim,
     tagline: "The Divine Experience",
     accentColor: "#FFD700", // Bright gold
     glowColor: "rgba(255, 215, 0, 0.5)",

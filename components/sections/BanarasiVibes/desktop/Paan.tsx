@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { IMAGES } from "@/config/images";
 
 /**
  * Banarasi Paan image with sway animation
@@ -33,7 +34,7 @@ export function Paan() {
       className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[3%] left-[5%] z-20"
     >
       <Image
-        src="/paan_nobg.png"
+        src={IMAGES.vibes.paan}
         alt="Banarasi Paan"
         width={1200}
         height={1200}

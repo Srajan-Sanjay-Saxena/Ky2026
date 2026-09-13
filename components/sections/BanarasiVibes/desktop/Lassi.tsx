@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { IMAGES } from "@/config/images";
 
 /**
  * Banarasi Lassi image with sway animation
@@ -33,7 +34,7 @@ export function Lassi() {
       className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[35%] right-[1%] z-20"
     >
       <Image
-        src="/lassi_nobg.png"
+        src={IMAGES.vibes.lassi}
         alt="Banarasi Lassi"
         width={1000}
         height={1300}

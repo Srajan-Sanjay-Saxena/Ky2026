@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getAnimStyle } from "./helper/constant";
+import { IMAGES } from "@/config/images";
 
 interface SteppingStoneProps {
   label?: string;
@@ -68,7 +69,7 @@ export function SteppingStone({
           className="stone-reflection absolute left-1/2 pointer-events-none overflow-hidden"
         >
           <Image
-            src="/stone.png"
+            src={IMAGES.hero.steppingStone}
             alt=""
             fill
             className="object-contain object-top select-none"
@@ -76,7 +77,7 @@ export function SteppingStone({
         </span>
         {/* Stone image */}
         <Image
-          src="/stone.png"
+          src={IMAGES.hero.steppingStone}
           alt={label ? `${label} stone` : "stepping stone"}
           fill
           className="stone-img object-contain select-none pointer-events-none relative"

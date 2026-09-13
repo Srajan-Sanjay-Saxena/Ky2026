@@ -10,6 +10,7 @@ import { LotusSVG } from "./Lotus";
 import { Trishul } from "./Trishul";
 import { MandalaRing } from "./MandlaRing";
 import { FestSparkles } from "./Sparkles";
+import { IMAGES } from "@/config/images";
 
 
 
@@ -250,7 +251,7 @@ export function FestHighlightsSection() {
         ))}
 
         <Image
-          src="/durga.svg"
+          src={IMAGES.highlights.durga}
           alt="Goddess Durga"
           width={800}
           height={1000}
@@ -310,7 +311,7 @@ export function FestHighlightsSection() {
 
         {/* Temple Image - LARGE */}
         <Image
-          src="/durga_temple.svg"
+          src={IMAGES.highlights.durgaTemple}
           alt="Kashi Yatra Festival Venue"
           width={1400}
           height={850}
@@ -325,7 +326,7 @@ export function FestHighlightsSection() {
       {/* Mobile Temple - Shows only on mobile/tablet */}
       <div className="lg:hidden w-full px-4 pt-16 sm:pt-20 mb-6 sm:mb-8">
         <Image
-          src="/durga_temple.svg"
+          src={IMAGES.highlights.durgaTemple}
           alt="Kashi Yatra Festival Venue"
           width={800}
           height={500}
