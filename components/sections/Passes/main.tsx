@@ -33,12 +33,12 @@ const headingVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }, // easeOut cubic-bezier
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
 
 /**
- * Decorative floating particles component
+ * Decorative floating particles
  */
 function FloatingParticles() {
   return (
@@ -46,7 +46,7 @@ function FloatingParticles() {
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: Z_INDEX.particles }}
     >
-      {[...Array(20)].map((_, i) => (
+      {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full"
@@ -59,7 +59,7 @@ function FloatingParticles() {
           }}
           animate={{
             y: [0, -30, 0],
-            opacity: [0.2, 0.6, 0.2],
+            opacity: [0.2, 0.5, 0.2],
           }}
           transition={{
             duration: Math.random() * 3 + 4,
@@ -74,30 +74,24 @@ function FloatingParticles() {
 }
 
 /**
- * Decorative mandala background
+ * Decorative mandala elements
  */
 function MandalaDecor() {
   return (
     <div
-      className="absolute inset-0 pointer-events-none opacity-[0.03]"
+      className="absolute inset-0 pointer-events-none opacity-[0.02]"
       style={{ zIndex: Z_INDEX.pattern }}
     >
-      {/* Large mandala - left */}
       <div
-        className="absolute -left-[20%] top-[10%] w-[600px] h-[600px] rounded-full"
+        className="absolute -left-[15%] top-[20%] w-[400px] h-[400px] rounded-full"
         style={{
           border: "1px solid rgba(212, 168, 83, 0.5)",
-          background:
-            "radial-gradient(circle, transparent 30%, rgba(212, 168, 83, 0.1) 70%)",
         }}
       />
-      {/* Large mandala - right */}
       <div
-        className="absolute -right-[15%] bottom-[5%] w-[500px] h-[500px] rounded-full"
+        className="absolute -right-[10%] bottom-[10%] w-[350px] h-[350px] rounded-full"
         style={{
           border: "1px solid rgba(255, 107, 0, 0.5)",
-          background:
-            "radial-gradient(circle, transparent 40%, rgba(255, 107, 0, 0.1) 80%)",
         }}
       />
     </div>
@@ -108,7 +102,6 @@ export function PassesSection() {
   const handleSelect = useCallback((passId: string) => {
     // TODO: Integrate with payment flow
     console.log(`Selected pass: ${passId}`);
-    // Could redirect to payment page or open modal
     // window.location.href = `/checkout?pass=${passId}`;
   }, []);
 
@@ -123,11 +116,11 @@ export function PassesSection() {
         style={{ ...PATTERN_OVERLAY, zIndex: Z_INDEX.background }}
       />
 
-      {/* Decorative elements */}
+      {/* Decorations */}
       <MandalaDecor />
       <FloatingParticles />
 
-      {/* Content container */}
+      {/* Content */}
       <motion.div
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ zIndex: Z_INDEX.cards }}
@@ -136,11 +129,10 @@ export function PassesSection() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {/* Section heading */}
+        {/* Heading */}
         <motion.div
           className="text-center mb-12 md:mb-16"
           variants={headingVariants}
-          style={{ zIndex: Z_INDEX.heading }}
         >
           <h2
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
@@ -157,8 +149,8 @@ export function PassesSection() {
           </p>
         </motion.div>
 
-        {/* Pass cards grid */}
-        <div className="flex flex-col md:flex-row items-center md:items-end justify-center gap-8 md:gap-10 lg:gap-12">
+        {/* Pass cards - 3 col desktop, 1 col mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10 justify-items-center items-end">
           {PASSES.map((pass, index) => (
             <PassCard
               key={pass.id}
@@ -169,7 +161,7 @@ export function PassesSection() {
           ))}
         </div>
 
-        {/* Bottom note */}
+        {/* Footer note */}
         <motion.p
           className="text-center text-gray-500 text-sm mt-12"
           variants={{
@@ -182,7 +174,7 @@ export function PassesSection() {
         </motion.p>
       </motion.div>
 
-      {/* Bottom decorative border */}
+      {/* Bottom decorative line */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px]">
         <div
           className="h-full"

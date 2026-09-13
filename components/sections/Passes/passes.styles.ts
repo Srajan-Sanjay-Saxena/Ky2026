@@ -6,7 +6,7 @@
 import type { CSSProperties } from "react";
 
 /**
- * Background styles
+ * Section background
  */
 export const SECTION_BG: CSSProperties = {
   background: `
@@ -22,7 +22,7 @@ export const SECTION_BG: CSSProperties = {
 };
 
 /**
- * Decorative overlay pattern (subtle mandala/geometric)
+ * Decorative overlay pattern
  */
 export const PATTERN_OVERLAY: CSSProperties = {
   backgroundImage: `
@@ -33,33 +33,67 @@ export const PATTERN_OVERLAY: CSSProperties = {
 };
 
 /**
- * Card glass morphism base
+ * Standardized container - textured dark background with gold border
+ * This is the flip card container that holds the pass image
  */
-export const CARD_GLASS: CSSProperties = {
-  background: "rgba(255, 255, 255, 0.03)",
-  backdropFilter: "blur(10px)",
-  WebkitBackdropFilter: "blur(10px)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
+export const CONTAINER_BASE: CSSProperties = {
+  background: `
+    linear-gradient(145deg, 
+      rgba(30, 25, 40, 0.95) 0%, 
+      rgba(20, 18, 30, 0.98) 50%,
+      rgba(15, 12, 25, 0.99) 100%
+    )
+  `,
+  borderRadius: "16px",
+  border: "2px solid transparent",
+  backgroundClip: "padding-box",
 };
 
 /**
- * Golden border gradient for cards
+ * Gold border gradient for container
  */
-export const GOLDEN_BORDER = `
+export const CONTAINER_BORDER_GRADIENT = `
   linear-gradient(135deg, 
-    rgba(212, 168, 83, 0.4) 0%, 
-    rgba(255, 215, 0, 0.6) 25%,
-    rgba(212, 168, 83, 0.4) 50%,
-    rgba(184, 134, 11, 0.5) 75%,
-    rgba(212, 168, 83, 0.4) 100%
+    #8B6914 0%,
+    #D4A853 20%, 
+    #FFD700 40%,
+    #E8B820 60%,
+    #D4A853 80%,
+    #8B6914 100%
   )
 `;
 
 /**
- * Card shadow with golden tint
+ * Container shadow
  */
-export const CARD_SHADOW = "0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 168, 83, 0.1)";
-export const CARD_SHADOW_HOVER = "0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 168, 83, 0.2)";
+export const CONTAINER_SHADOW = "0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 168, 83, 0.15)";
+export const CONTAINER_SHADOW_HOVER = "0 16px 48px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 168, 83, 0.25)";
+
+/**
+ * Textured background overlay for container (brushed metal effect)
+ */
+export const CONTAINER_TEXTURE = `
+  repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 1px,
+    rgba(255, 255, 255, 0.01) 1px,
+    rgba(255, 255, 255, 0.01) 2px
+  )
+`;
+
+/**
+ * Card back panel styles
+ */
+export const CARD_BACK_BG: CSSProperties = {
+  background: `
+    linear-gradient(180deg, 
+      rgba(26, 26, 46, 0.98) 0%, 
+      rgba(18, 18, 35, 0.99) 50%,
+      rgba(12, 12, 28, 1) 100%
+    )
+  `,
+};
 
 /**
  * Popular badge gradient
@@ -83,15 +117,6 @@ export const BUTTON_BASE: CSSProperties = {
   cursor: "pointer",
 };
 
-export const BUTTON_SHIMMER_GRADIENT = `
-  linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  )
-`;
-
 /**
  * Price text gradient
  */
@@ -113,20 +138,15 @@ export const HEADING_GRADIENT: CSSProperties = {
 };
 
 /**
- * Benefit check icon color
+ * Benefit check icon colors
  */
 export const CHECK_ICON_COLOR = "#D4A853";
 export const CHECK_ICON_HIGHLIGHT = "#FFD700";
 
 /**
- * Responsive container max-widths
+ * Pass image shadow
  */
-export const CONTAINER_MAX_WIDTH = {
-  sm: "100%",
-  md: "960px",
-  lg: "1200px",
-  xl: "1400px",
-} as const;
+export const PASS_IMAGE_SHADOW = "drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5))";
 
 /**
  * Z-index layering
@@ -141,7 +161,15 @@ export const Z_INDEX = {
 } as const;
 
 /**
- * Drop shadow for pass images
+ * Card dimensions
  */
-export const PASS_IMAGE_SHADOW = "drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5))";
-export const PASS_IMAGE_SHADOW_HOVER = "drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6))";
+export const CARD_DIMENSIONS = {
+  mobile: {
+    width: "300px",
+    height: "480px",
+  },
+  desktop: {
+    width: "320px",
+    height: "520px",
+  },
+} as const;
