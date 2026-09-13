@@ -14,10 +14,21 @@ interface ShootingStar {
 
 export const CinematicSky = memo(function CinematicSky({ className = "" }: { className?: string }) {
   const [shootingStars, setShootingStars] = useState<ShootingStar[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Generate shooting stars randomly
+  // Check if mobile on mount
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Generate shooting stars randomly - Desktop only
+  useEffect(() => {
+    if (isMobile) return; // Skip on mobile
+
     const createShootingStar = () => {
       const star: ShootingStar = {
         id: Date.now() + Math.random(),
@@ -30,13 +41,11 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
       };
       setShootingStars(prev => [...prev, star]);
       
-      // Remove after animation completes (with buffer)
       setTimeout(() => {
         setShootingStars(prev => prev.filter(s => s.id !== star.id));
       }, (star.speed * 1000) + 500);
     };
 
-    // Initial delay before first shooting star
     const initialTimeout = setTimeout(() => {
       createShootingStar();
     }, 3000);
@@ -49,10 +58,12 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
       clearTimeout(initialTimeout);
       clearInterval(interval);
     };
-  }, []);
+  }, [isMobile]);
 
-  // Atmospheric clouds canvas
+  // Atmospheric clouds canvas - Desktop only
   useEffect(() => {
+    if (isMobile) return; // Skip on mobile
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -72,7 +83,6 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
       time += 0.0003;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Subtle moving cloud layers
       for (let i = 0; i < 3; i++) {
         const y = canvas.height * (0.2 + i * 0.25);
         const offset = Math.sin(time + i) * 50;
@@ -108,10 +118,11 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isMobile]);
 
-  // Generate varied stars
-  const stars = Array.from({ length: 120 }, (_, i) => {
+  // Generate varied stars - fewer on mobile
+  const starCount = isMobile ? 40 : 120;
+  const stars = Array.from({ length: starCount }, (_, i) => {
     const size = i < 10 ? 2.5 + Math.random() * 1.5 : i < 30 ? 1.5 + Math.random() : 0.8 + Math.random() * 0.8;
     const brightness = i < 10 ? 0.9 : i < 30 ? 0.6 + Math.random() * 0.3 : 0.3 + Math.random() * 0.4;
     return {
@@ -140,8 +151,10 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
         }}
       />
 
-      {/* Subtle cloud canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full opacity-60" />
+      {/* Subtle cloud canvas - Desktop only */}
+      {!isMobile && (
+        <canvas ref={canvasRef} className="absolute inset-0 w-full opacity-60" />
+      )}
 
       {/* Stars with varied sizes and twinkle */}
       {stars.map((star) => (
@@ -159,15 +172,16 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
             boxShadow: star.isBright 
               ? `0 0 ${star.size * 3}px rgba(200,220,255,0.6), 0 0 ${star.size * 6}px rgba(150,180,255,0.3)`
               : 'none',
-            animation: `starTwinkle${star.isBright ? 'Bright' : ''} ${star.duration}s ease-in-out infinite`,
-            animationDelay: `${star.delay}s`,
+            // Disable animation on mobile for performance
+            animation: isMobile ? 'none' : `starTwinkle${star.isBright ? 'Bright' : ''} ${star.duration}s ease-in-out infinite`,
+            animationDelay: isMobile ? '0s' : `${star.delay}s`,
             opacity: star.brightness,
           }}
         />
       ))}
 
-      {/* Shooting stars */}
-      {shootingStars.map((star) => (
+      {/* Shooting stars - Desktop only */}
+      {!isMobile && shootingStars.map((star) => (
         <div
           key={star.id}
           className="absolute shooting-star"
@@ -182,7 +196,6 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
             animation: `shootingStarMove ${star.speed}s ease-out forwards`,
           }}
         >
-          {/* Trail */}
           <div
             className="absolute inset-0"
             style={{
@@ -190,7 +203,6 @@ export const CinematicSky = memo(function CinematicSky({ className = "" }: { cla
               borderRadius: '2px',
             }}
           />
-          {/* Head glow */}
           <div
             className="absolute right-0 top-1/2 -translate-y-1/2"
             style={{

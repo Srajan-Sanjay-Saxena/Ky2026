@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -33,6 +33,21 @@ export function FestHighlightsSection() {
   const templeRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const decorRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  // Intersection Observer to pause animations when off-screen
+  useEffect(() => {
+    const element = sectionRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.05, rootMargin: "100px" }
+    );
+
+    observer.observe(element);
+    return () => observer.unobserve(element);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -120,6 +135,7 @@ export function FestHighlightsSection() {
   return (
     <section
       ref={sectionRef}
+      data-inview={isInView}
       className="relative min-h-screen py-10 sm:py-12 md:py-16 overflow-hidden"
       style={{
         background: `linear-gradient(135deg, 
@@ -134,7 +150,7 @@ export function FestHighlightsSection() {
       {/* Background Mandala - smaller on mobile */}
       <div
         className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[350px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] pointer-events-none opacity-15"
-        style={{ animation: "spin 60s linear infinite" }}
+        style={{ animation: isInView ? "spin 60s linear infinite" : "none" }}
       >
         <MandalaRing className="w-full h-full text-[#FF6B00]" />
       </div>
@@ -180,8 +196,8 @@ export function FestHighlightsSection() {
         </div>
       </div>
 
-      {/* Floating particles - reduced on mobile */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Floating particles - Desktop only */}
+      <div className="hidden sm:block absolute inset-0 pointer-events-none">
         {[...Array(15)].map((_, i) => (
           <div
             key={i}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MandalaRing } from "@/components/sections/FestHighlights/MandlaRing";
@@ -156,6 +156,21 @@ const quickLinks = [
 export function FooterSection() {
   const footerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  // Intersection Observer to pause animations when off-screen
+  useEffect(() => {
+    const element = footerRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.05, rootMargin: "100px" }
+    );
+
+    observer.observe(element);
+    return () => observer.unobserve(element);
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -184,6 +199,7 @@ export function FooterSection() {
     <footer
       id="footer"
       ref={footerRef}
+      data-inview={isInView}
       className="relative pt-16 sm:pt-20 md:pt-28 pb-8 sm:pb-10 overflow-hidden"
       style={{ background: GRADIENT_FOOTER }}
     >

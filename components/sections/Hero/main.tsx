@@ -203,8 +203,8 @@ export function HeroSection() {
         }}
       />
 
-      {/* Faint drifting clouds */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-3">
+      {/* Faint drifting clouds - Desktop only */}
+      <div className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden z-3">
         {[...Array(4)].map((_, i) => (
           <div
             key={`cloud-${i}`}
@@ -224,8 +224,8 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* Floating Kandeels (Sky Lanterns) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-4">
+      {/* Floating Kandeels (Sky Lanterns) - Desktop only */}
+      <div className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden z-4">
         {/* Kandeels scattered across - left side origin */}
         <div
           className="absolute"
@@ -724,21 +724,23 @@ export function HeroSection() {
             </span>
           </div>
 
-          {/* Floating sparkles */}
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={`sparkle-${i}`}
-              className="absolute w-1 h-1 rounded-full"
-              style={{
-                left: `${10 + i * 16}%`,
-                top: `${i % 2 === 0 ? -20 : 120}%`,
-                background: "#FFD700",
-                boxShadow: "0 0 6px #FFD700, 0 0 12px rgba(255,215,0,0.5)",
-                animation: `sparkleFloat ${2 + i * 0.3}s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
+          {/* Floating sparkles - Desktop only */}
+          <div className="hidden sm:block">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={`sparkle-${i}`}
+                className="absolute w-1 h-1 rounded-full"
+                style={{
+                  left: `${10 + i * 16}%`,
+                  top: `${i % 2 === 0 ? -20 : 120}%`,
+                  background: "#FFD700",
+                  boxShadow: "0 0 6px #FFD700, 0 0 12px rgba(255,215,0,0.5)",
+                  animation: `sparkleFloat ${2 + i * 0.3}s ease-in-out infinite`,
+                  animationDelay: `${i * 0.2}s`,
+                }}
+              />
+            ))}
+          </div>
         </div>
       </h1>
 
@@ -748,12 +750,11 @@ export function HeroSection() {
         className="absolute bottom-[29%] sm:bottom-[28%] md:bottom-[25.5%] left-[-5%] sm:left-[-3%] md:left-[-2%] w-[52%] sm:w-[55%] md:w-[50%]"
         style={{
           zIndex: Z_HERO.GHATS,
-          filter: "drop-shadow(0 0 20px rgba(255,100,100,0.4))",
         }}
       >
-        {/* Soft divine glow behind ghats */}
+        {/* Soft divine glow behind ghats - Desktop only */}
         <div
-          className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[70%] h-[50%] rounded-full pointer-events-none"
+          className="hidden sm:block absolute top-[20%] left-1/2 -translate-x-1/2 w-[70%] h-[50%] rounded-full pointer-events-none"
           style={{
             background:
               "radial-gradient(ellipse, rgba(255,150,150,0.15) 0%, transparent 70%)",
@@ -761,32 +762,33 @@ export function HeroSection() {
           }}
         />
 
-        {/* Subtle floating light particles */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`ghat-particle-${i}`}
-            className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
-            style={{
-              left: `${25 + (i % 3) * 25}%`,
-              top: `${30 + Math.floor(i / 3) * 20}%`,
-              background:
-                i % 2 === 0
-                  ? "radial-gradient(circle, #FFB6C1 0%, transparent 70%)"
-                  : "radial-gradient(circle, #FF6B6B 0%, transparent 70%)",
-              animation: `floatParticle ${2.5 + (i % 3)}s ease-in-out infinite`,
-              animationDelay: `${i * 0.3}s`,
-              boxShadow: "0 0 8px rgba(255,150,150,0.6)",
-            }}
-          />
-        ))}
+        {/* Subtle floating light particles - Desktop only */}
+        <div className="hidden sm:block">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={`ghat-particle-${i}`}
+              className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
+              style={{
+                left: `${25 + (i % 3) * 25}%`,
+                top: `${30 + Math.floor(i / 3) * 20}%`,
+                background:
+                  i % 2 === 0
+                    ? "radial-gradient(circle, #FFB6C1 0%, transparent 70%)"
+                    : "radial-gradient(circle, #FF6B6B 0%, transparent 70%)",
+                animation: `floatParticle ${2.5 + (i % 3)}s ease-in-out infinite`,
+                animationDelay: `${i * 0.3}s`,
+                boxShadow: "0 0 8px rgba(255,150,150,0.6)",
+              }}
+            />
+          ))}
+        </div>
 
         <Image
           src={IMAGES.hero.ghats}
           alt="Varanasi Ghats"
           width={1000}
           height={600}
-          className="w-full h-auto max-h-[26vh] sm:max-h-[35vh] md:max-h-[40vh] object-contain"
-          style={{ animation: "ghatsShimmer 4s ease-in-out infinite" }}
+          className="w-full h-auto max-h-[26vh] sm:max-h-[35vh] md:max-h-[40vh] object-contain sm:drop-shadow-[0_0_20px_rgba(255,100,100,0.4)]"
           priority
         />
       </div>
@@ -797,12 +799,11 @@ export function HeroSection() {
         className="absolute bottom-[31%] sm:bottom-[31%] md:bottom-[28%] right-[-9%] sm:right-[-6%] md:right-[-7%] w-[55%] sm:w-[62%] md:w-[56%] lg:w-[48%]"
         style={{
           zIndex: Z_HERO.TEMPLE,
-          filter: "drop-shadow(0 0 25px rgba(255,215,0,0.5))",
         }}
       >
-        {/* Divine aura rings */}
+        {/* Divine aura rings - Desktop only */}
         <div
-          className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[80%] h-[60%] rounded-full pointer-events-none"
+          className="hidden sm:block absolute top-[10%] left-1/2 -translate-x-1/2 w-[80%] h-[60%] rounded-full pointer-events-none"
           style={{
             background:
               "radial-gradient(ellipse, rgba(255,215,0,0.15) 0%, transparent 70%)",
@@ -810,7 +811,7 @@ export function HeroSection() {
           }}
         />
         <div
-          className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[90%] h-[70%] rounded-full pointer-events-none"
+          className="hidden sm:block absolute top-[5%] left-1/2 -translate-x-1/2 w-[90%] h-[70%] rounded-full pointer-events-none"
           style={{
             background:
               "radial-gradient(ellipse, rgba(255,140,0,0.1) 0%, transparent 60%)",
@@ -818,32 +819,33 @@ export function HeroSection() {
           }}
         />
 
-        {/* Floating divine particles */}
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={`particle-${i}`}
-            className="absolute w-2 h-2 rounded-full pointer-events-none"
-            style={{
-              left: `${20 + (i % 4) * 20}%`,
-              top: `${15 + Math.floor(i / 4) * 25}%`,
-              background:
-                i % 2 === 0
-                  ? "radial-gradient(circle, #FFD700 0%, transparent 70%)"
-                  : "radial-gradient(circle, #FFA500 0%, transparent 70%)",
-              animation: `floatParticle ${2 + (i % 3)}s ease-in-out infinite`,
-              animationDelay: `${i * 0.2}s`,
-              boxShadow: "0 0 6px rgba(255,215,0,0.5)",
-            }}
-          />
-        ))}
+        {/* Floating divine particles - Desktop only */}
+        <div className="hidden sm:block">
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={`particle-${i}`}
+              className="absolute w-2 h-2 rounded-full pointer-events-none"
+              style={{
+                left: `${20 + (i % 4) * 20}%`,
+                top: `${15 + Math.floor(i / 4) * 25}%`,
+                background:
+                  i % 2 === 0
+                    ? "radial-gradient(circle, #FFD700 0%, transparent 70%)"
+                    : "radial-gradient(circle, #FFA500 0%, transparent 70%)",
+                animation: `floatParticle ${2 + (i % 3)}s ease-in-out infinite`,
+                animationDelay: `${i * 0.2}s`,
+                boxShadow: "0 0 6px rgba(255,215,0,0.5)",
+              }}
+            />
+          ))}
+        </div>
 
         <Image
           src={IMAGES.hero.temple}
           alt="Kashi Vishwanath Temple"
           width={1000}
           height={1100}
-          className="w-full h-auto"
-          style={{ animation: "templeShimmer 4s ease-in-out infinite" }}
+          className="w-full h-auto sm:drop-shadow-[0_0_25px_rgba(255,215,0,0.5)]"
           priority
         />
       </div>
@@ -851,8 +853,8 @@ export function HeroSection() {
       {/* RIVER - Contains water, lotus, diyas, boats, and stepping stones */}
       <River ref={riverRef} />
 
-      {/* Floating embers */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Floating embers - Desktop only */}
+      <div className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden">
         {[...Array(10)].map((_, i) => (
           <div
             key={i}

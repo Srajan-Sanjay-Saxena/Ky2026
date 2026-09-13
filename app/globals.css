@@ -559,3 +559,58 @@ body {
   animation: bellSwing 3s ease-in-out infinite;
   animation-delay: -0.8s;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   OFF-SCREEN ANIMATION PAUSING
+   Pause animations when elements are not visible to save GPU/CPU
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Parent with data-inview="false" pauses all child animations */
+[data-inview="false"] * {
+  animation-play-state: paused !important;
+}
+
+/* Utility class for pausing animations */
+.animation-paused {
+  animation-play-state: paused !important;
+}
+.animation-running {
+  animation-play-state: running !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE FILTER OPTIMIZATIONS
+   Replace expensive filter animations with static shadows on mobile
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 639px) {
+  /* Disable filter-based glow animations on mobile */
+  .divine-glow,
+  .temple-glow,
+  .durga-glow {
+    filter: none !important;
+    animation: none !important;
+  }
+  
+  /* Use simpler box-shadow instead of drop-shadow filter on mobile */
+  .mobile-shadow-simple {
+    filter: none !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  
+  /* Disable blur filters on mobile - very expensive */
+  .mobile-no-blur {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+  
+  /* Reduce animation complexity on images */
+  img {
+    filter: none !important;
+  }
+  
+  /* Disable GSAP-animated filter effects via class */
+  .gsap-filter-animated {
+    filter: none !important;
+  }
+}

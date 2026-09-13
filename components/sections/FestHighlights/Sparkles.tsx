@@ -1,10 +1,10 @@
 
 import { memo } from "react";
 
-// Confetti/Sparkle component for fest vibe
+// Confetti/Sparkle component for fest vibe - Desktop only for performance
 export const FestSparkles = memo(function FestSparkles() {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden">
       {[...Array(20)].map((_, i) => (
         <div
           key={`sparkle-${i}`}
