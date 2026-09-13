@@ -1,18 +1,19 @@
 "use client";
 
-import { Z_HERO, POS_DIYA } from "@/components/constants";
+import { Z_HERO, POS_DIYA, SIZE_DIYA } from "@/components/constants";
 import { Diya } from "./Diya";
 
 /**
  * All floating diyas in the river
  * Each diya has its own z-index for proper layering
+ * Positions from POS_DIYA, sizes from SIZE_DIYA
  */
 export function Diyas() {
   return (
     <>
       {/* Diya 1 - Far left */}
       <div
-        className="absolute w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
           zIndex: Z_HERO.DIYA_1,
           bottom: POS_DIYA.DIYA_1.mobile.bottom,
@@ -20,12 +21,17 @@ export function Diyas() {
           animation: "diyaFloat 4s ease-in-out infinite",
         }}
       >
-        <Diya className="w-full h-full" />
+        <Diya 
+          style={{
+            width: SIZE_DIYA.DIYA_1.mobile.width,
+            height: SIZE_DIYA.DIYA_1.mobile.height,
+          }}
+        />
       </div>
 
       {/* Diya 2 - Left */}
       <div
-        className="absolute w-5 h-7 sm:w-7 sm:h-9 md:w-9 md:h-11 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
           zIndex: Z_HERO.DIYA_2,
           bottom: POS_DIYA.DIYA_2.mobile.bottom,
@@ -34,12 +40,17 @@ export function Diyas() {
           animationDelay: "0.5s",
         }}
       >
-        <Diya className="w-full h-full" />
+        <Diya 
+          style={{
+            width: SIZE_DIYA.DIYA_2.mobile.width,
+            height: SIZE_DIYA.DIYA_2.mobile.height,
+          }}
+        />
       </div>
 
       {/* Diya 3 - Center-right */}
       <div
-        className="absolute w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
           zIndex: Z_HERO.DIYA_3,
           bottom: POS_DIYA.DIYA_3.mobile.bottom,
@@ -48,12 +59,17 @@ export function Diyas() {
           animationDelay: "1s",
         }}
       >
-        <Diya className="w-full h-full" />
+        <Diya 
+          style={{
+            width: SIZE_DIYA.DIYA_3.mobile.width,
+            height: SIZE_DIYA.DIYA_3.mobile.height,
+          }}
+        />
       </div>
 
       {/* Diya 4 - Right (desktop only) */}
       <div
-        className="hidden sm:block absolute w-5 h-7 sm:w-6 sm:h-8 md:w-8 md:h-10 pointer-events-none"
+        className="hidden sm:block absolute pointer-events-none"
         style={{
           zIndex: Z_HERO.DIYA_4,
           bottom: POS_DIYA.DIYA_4.sm.bottom,
@@ -62,12 +78,17 @@ export function Diyas() {
           animationDelay: "0.3s",
         }}
       >
-        <Diya className="w-full h-full" />
+        <Diya 
+          style={{
+            width: SIZE_DIYA.DIYA_4.sm.width,
+            height: SIZE_DIYA.DIYA_4.sm.height,
+          }}
+        />
       </div>
 
       {/* Diya 5 - Far right */}
       <div
-        className="absolute w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
           zIndex: Z_HERO.DIYA_5,
           bottom: POS_DIYA.DIYA_5.mobile.bottom,
@@ -76,12 +97,17 @@ export function Diyas() {
           animationDelay: "0.7s",
         }}
       >
-        <Diya className="w-full h-full" />
+        <Diya 
+          style={{
+            width: SIZE_DIYA.DIYA_5.mobile.width,
+            height: SIZE_DIYA.DIYA_5.mobile.height,
+          }}
+        />
       </div>
 
       {/* Diya 6 - Center (desktop only) */}
       <div
-        className="hidden sm:block absolute w-5 h-7 sm:w-7 sm:h-9 md:w-9 md:h-11 pointer-events-none"
+        className="hidden sm:block absolute pointer-events-none"
         style={{
           zIndex: Z_HERO.DIYA_6,
           bottom: POS_DIYA.DIYA_6.sm.bottom,
@@ -90,7 +116,12 @@ export function Diyas() {
           animationDelay: "1.2s",
         }}
       >
-        <Diya className="w-full h-full" />
+        <Diya 
+          style={{
+            width: SIZE_DIYA.DIYA_6.sm.width,
+            height: SIZE_DIYA.DIYA_6.sm.height,
+          }}
+        />
       </div>
     </>
   );

@@ -21,67 +21,89 @@ export const SIZE_RIVER = {
 /** Stepping stone sizes (width = height for square stones) */
 export const SIZE_STONES = {
   SCHEDULE: { mobile: 70, desktop: 110 },
-  EVENTS: { mobile: 75, desktop: 110 },
+  EVENTS: { mobile: 100, desktop: 110 },
   REGISTER: { mobile: 85, desktop: 125 },
   GALLERY: { mobile: 70, desktop: 120 },
   ABOUT: { mobile: 65, desktop: 100 },
 } as const;
 
-/** Lotus flower sizes */
+/** Stepping stone label text sizes */
+export const SIZE_STONE_TEXT = {
+  mobile: "8px",
+  desktop: "15px",
+} as const;
+
+/**
+ * Lotus flower sizes
+ * SVG viewBox: 60x50 → Aspect Ratio 6:5 (width:height)
+ * To scale: multiply both width & height by same factor, OR use ratio 1.2:1
+ * Example: height 2.5rem → width should be 3rem
+ */
 export const SIZE_LOTUS = {
+  RATIO: 1.2, // width / height = 60/50 = 1.2
   LOTUS_1: {
-    mobile: { width: "2.5rem", height: "2rem" },      // w-10 h-8
-    sm: { width: "3rem", height: "2.5rem" },          // w-12 h-10
-    md: { width: "3.5rem", height: "3rem" },          // w-14 h-12
+    mobile: { width: "3rem", height: "2.5rem" },
+    sm: { width: "3.6rem", height: "3rem" },
+    md: { width: "4.2rem", height: "3.5rem" },
   },
   LOTUS_2: {
-    mobile: { width: "2rem", height: "1.5rem" },      // w-8 h-6
-    sm: { width: "2.5rem", height: "2rem" },          // w-10 h-8
-    md: { width: "3rem", height: "2.5rem" },          // w-12 h-10
+    mobile: { width: "2.4rem", height: "2rem" },
+    sm: { width: "3rem", height: "2.5rem" },
+    md: { width: "3.6rem", height: "3rem" },
   },
   LOTUS_3: {
-    mobile: { width: "2.25rem", height: "1.75rem" },  // w-9 h-7
-    sm: { width: "2.75rem", height: "2.25rem" },      // w-11 h-9
-    md: { width: "3.25rem", height: "2.75rem" },      // w-13 h-11
+    mobile: { width: "2.4rem", height: "2rem" },
+    sm: { width: "3.3rem", height: "2.75rem" },
+    md: { width: "3.9rem", height: "3.25rem" },
   },
+
+  // Will not be seen on mobile
   LOTUS_4: {
-    mobile: { width: "1.75rem", height: "1.25rem" },  // w-7 h-5
-    sm: { width: "2.25rem", height: "1.75rem" },      // w-9 h-7
-    md: { width: "2.75rem", height: "2.25rem" },      // w-11 h-9
+    // Desktop only
+    sm: { width: "2.7rem", height: "2.25rem" },
+    md: { width: "3.3rem", height: "2.75rem" },
   },
 } as const;
 
-/** Diya sizes */
+/**
+ * Diya sizes
+ * SVG viewBox: 60x85 → Aspect Ratio ~0.7:1 (width:height)
+ * To scale: multiply both width & height by same factor, OR use ratio 0.7:1
+ * Example: height 4rem → width should be ~2.8rem
+ */
 export const SIZE_DIYA = {
+  // RATIO: 0.7, // width / height = 60/85 ≈ 0.7
   DIYA_1: {
-    mobile: { width: "1.5rem", height: "2rem" },      // w-6 h-8
-    sm: { width: "2rem", height: "2.5rem" },          // w-8 h-10
-    md: { width: "2.5rem", height: "3rem" },          // w-10 h-12
+    mobile: { width: "2.1rem", height: "3rem" },
+    sm: { width: "2.1rem", height: "3rem" },
+    md: { width: "2.8rem", height: "4rem" },
   },
   DIYA_2: {
-    mobile: { width: "1.25rem", height: "1.75rem" },  // w-5 h-7
-    sm: { width: "1.75rem", height: "2.25rem" },      // w-7 h-9
-    md: { width: "2.25rem", height: "2.75rem" },      // w-9 h-11
+    mobile: { width: "1rem", height: "1.4rem" },
+    sm: { width: "1.68rem", height: "2.4rem" },
+    md: { width: "2.24rem", height: "3.2rem" },
   },
   DIYA_3: {
-    mobile: { width: "1.5rem", height: "2rem" },      // w-6 h-8
-    sm: { width: "2rem", height: "2.5rem" },          // w-8 h-10
-    md: { width: "2.5rem", height: "3rem" },          // w-10 h-12
+    mobile: { width: "2.8rem", height: "4rem" },
+    sm: { width: "2.1rem", height: "3rem" },
+    md: { width: "2.8rem", height: "4rem" },
   },
   DIYA_4: {
-    mobile: { width: "1.25rem", height: "1.75rem" },  // w-5 h-7
-    sm: { width: "1.5rem", height: "2rem" },          // w-6 h-8
-    md: { width: "2rem", height: "2.5rem" },          // w-8 h-10
+    // Desktop only
+    mobile: { width: "1.12rem", height: "1.6rem" },
+    sm: { width: "1.4rem", height: "2rem" },
+    md: { width: "2.1rem", height: "3rem" },
   },
   DIYA_5: {
-    mobile: { width: "1.5rem", height: "2rem" },      // w-6 h-8
-    sm: { width: "2rem", height: "2.5rem" },          // w-8 h-10
-    md: { width: "2.5rem", height: "3rem" },          // w-10 h-12
+    mobile: { width: "1.4rem", height: "2rem" },
+    sm: { width: "2.1rem", height: "3rem" },
+    md: { width: "2.8rem", height: "4rem" },
   },
   DIYA_6: {
-    mobile: { width: "1.25rem", height: "1.75rem" },  // w-5 h-7
-    sm: { width: "1.75rem", height: "2.25rem" },      // w-7 h-9
-    md: { width: "2.25rem", height: "2.75rem" },      // w-9 h-11
+    // Desktop only
+    mobile: { width: "1.12rem", height: "1.6rem" },
+    sm: { width: "1.68rem", height: "2.4rem" },
+    md: { width: "2.24rem", height: "3.2rem" },
   },
 } as const;
 
