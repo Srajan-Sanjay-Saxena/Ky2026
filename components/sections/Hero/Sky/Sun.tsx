@@ -4,83 +4,265 @@ import { memo } from "react";
 
 export const Sun = memo(function Sun({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 250 250"
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <radialGradient id="sunCore" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#FFFEF5" />
-          <stop offset="15%" stopColor="#FFF8DC" />
-          <stop offset="35%" stopColor="#FFD700" />
-          <stop offset="60%" stopColor="#FFA500" />
-          <stop offset="85%" stopColor="#FF7F00" />
-          <stop offset="100%" stopColor="#FF6000" />
-        </radialGradient>
-        
-        <radialGradient id="sunGlowInner" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(255,220,120,0.9)" />
-          <stop offset="35%" stopColor="rgba(255,180,80,0.6)" />
-          <stop offset="60%" stopColor="rgba(255,140,50,0.3)" />
-          <stop offset="100%" stopColor="rgba(255,100,30,0)" />
-        </radialGradient>
+    <div className={`relative ${className}`}>
+      {/* Outermost atmospheric halo - matches moon scale(4) */}
+      <div
+        className="absolute inset-0 rounded-full sun-halo-outer"
+        style={{
+          transform: "scale(4)",
+          background: "radial-gradient(circle, rgba(255,200,100,0.06) 0%, rgba(255,160,60,0.03) 40%, transparent 70%)",
+        }}
+      />
 
-        <radialGradient id="sunGlowOuter" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(255,200,100,0.5)" />
-          <stop offset="40%" stopColor="rgba(255,160,60,0.2)" />
-          <stop offset="100%" stopColor="rgba(255,120,40,0)" />
-        </radialGradient>
-        
-        <filter id="sunBlur" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="6" />
-        </filter>
+      {/* Outer warm glow - matches moon scale(2.5) */}
+      <div
+        className="absolute inset-0 rounded-full sun-glow-outer"
+        style={{
+          transform: "scale(2.5)",
+          background: "radial-gradient(circle, rgba(255,180,80,0.12) 0%, rgba(255,140,50,0.06) 35%, transparent 65%)",
+        }}
+      />
 
-        <filter id="sunBlurOuter" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="12" />
-        </filter>
-      </defs>
+      {/* Middle intense glow - matches moon scale(1.8) */}
+      <div
+        className="absolute inset-0 rounded-full sun-glow-middle"
+        style={{
+          transform: "scale(1.8)",
+          background: "radial-gradient(circle, rgba(255,220,150,0.2) 0%, rgba(255,180,100,0.1) 45%, transparent 75%)",
+        }}
+      />
 
-      {/* Outermost glow */}
-      <circle cx="125" cy="125" r="115" fill="url(#sunGlowOuter)" filter="url(#sunBlurOuter)">
-        <animate attributeName="r" values="110;120;110" dur="4s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite" />
-      </circle>
+      {/* Inner white-hot glow - matches moon scale(1.3) */}
+      <div
+        className="absolute inset-0 rounded-full sun-glow-inner"
+        style={{
+          transform: "scale(1.3)",
+          background: "radial-gradient(circle, rgba(255,255,240,0.35) 0%, rgba(255,240,200,0.15) 50%, transparent 85%)",
+        }}
+      />
 
-      {/* Inner glow */}
-      <circle cx="125" cy="125" r="80" fill="url(#sunGlowInner)" filter="url(#sunBlur)">
-        <animate attributeName="r" values="75;85;75" dur="3s" repeatCount="indefinite" />
-      </circle>
+      {/* Corona rays - matches moon scale(2.2) */}
+      <div
+        className="absolute inset-0 sun-corona"
+        style={{
+          transform: "scale(2.2)",
+          background: `
+            conic-gradient(
+              from 0deg,
+              transparent 0deg,
+              rgba(255,240,200,0.05) 5deg,
+              transparent 10deg,
+              rgba(255,220,150,0.03) 20deg,
+              transparent 25deg,
+              rgba(255,240,200,0.04) 35deg,
+              transparent 40deg,
+              rgba(255,220,150,0.03) 55deg,
+              transparent 60deg,
+              rgba(255,240,200,0.05) 70deg,
+              transparent 75deg,
+              rgba(255,220,150,0.03) 90deg,
+              transparent 95deg,
+              rgba(255,240,200,0.04) 110deg,
+              transparent 115deg,
+              rgba(255,220,150,0.03) 130deg,
+              transparent 135deg,
+              rgba(255,240,200,0.05) 150deg,
+              transparent 155deg,
+              rgba(255,220,150,0.03) 170deg,
+              transparent 175deg,
+              rgba(255,240,200,0.04) 190deg,
+              transparent 195deg,
+              rgba(255,220,150,0.03) 210deg,
+              transparent 215deg,
+              rgba(255,240,200,0.05) 230deg,
+              transparent 235deg,
+              rgba(255,220,150,0.03) 250deg,
+              transparent 255deg,
+              rgba(255,240,200,0.04) 270deg,
+              transparent 275deg,
+              rgba(255,220,150,0.03) 290deg,
+              transparent 295deg,
+              rgba(255,240,200,0.05) 310deg,
+              transparent 315deg,
+              rgba(255,220,150,0.03) 330deg,
+              transparent 335deg,
+              rgba(255,240,200,0.04) 350deg,
+              transparent 360deg
+            )
+          `,
+          borderRadius: "50%",
+        }}
+      />
 
-      {/* Sun rays */}
-      <g stroke="#FFD700" strokeWidth="2.5" opacity="0.6">
-        {[...Array(16)].map((_, i) => (
-          <line
-            key={i}
-            x1={125 + 45 * Math.cos(i * 22.5 * Math.PI / 180)}
-            y1={125 + 45 * Math.sin(i * 22.5 * Math.PI / 180)}
-            x2={125 + 85 * Math.cos(i * 22.5 * Math.PI / 180)}
-            y2={125 + 85 * Math.sin(i * 22.5 * Math.PI / 180)}
-          >
-            <animate
-              attributeName="opacity"
-              values="0.3;0.8;0.3"
-              dur="2s"
-              begin={`${i * 0.1}s`}
-              repeatCount="indefinite"
-            />
-          </line>
-        ))}
-      </g>
+      {/* Sun surface - the actual disc */}
+      <div
+        className="relative w-full h-full rounded-full overflow-hidden sun-surface"
+        style={{
+          background: `
+            radial-gradient(circle at 35% 35%, 
+              #FFFEF8 0%, 
+              #FFF8E8 15%, 
+              #FFE8C0 30%, 
+              #FFD080 50%, 
+              #FFA840 70%, 
+              #FF8020 85%,
+              #FF6000 100%
+            )
+          `,
+          boxShadow: `
+            0 0 40px rgba(255,200,100,0.8),
+            0 0 80px rgba(255,160,60,0.5),
+            0 0 120px rgba(255,120,40,0.3),
+            0 0 180px rgba(255,100,30,0.15),
+            inset -4px -4px 20px rgba(255,100,0,0.3),
+            inset 4px 4px 15px rgba(255,255,200,0.4)
+          `,
+        }}
+      >
+        {/* Surface shimmer - light sweep */}
+        <div
+          className="absolute inset-0 rounded-full sun-light-sweep"
+          style={{
+            background: "linear-gradient(110deg, transparent 0%, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%, transparent 100%)",
+          }}
+        />
 
-      {/* Main sun disc */}
-      <circle cx="125" cy="125" r="38" fill="url(#sunCore)">
-        <animate attributeName="r" values="36;40;36" dur="4s" repeatCount="indefinite" />
-      </circle>
+        {/* Hot spot - brightest point */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "40%",
+            height: "40%",
+            top: "20%",
+            left: "20%",
+            background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.6) 0%, rgba(255,255,240,0.3) 40%, transparent 70%)",
+          }}
+        />
 
-      {/* Inner highlight */}
-      <circle cx="115" cy="115" r="15" fill="rgba(255,255,255,0.4)" />
-      <circle cx="118" cy="118" r="8" fill="rgba(255,255,255,0.3)" />
-    </svg>
+        {/* Secondary highlight */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "20%",
+            height: "20%",
+            top: "30%",
+            left: "30%",
+            background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* Edge darkening for depth */}
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: "radial-gradient(circle, transparent 50%, rgba(255,80,0,0.2) 85%, rgba(200,50,0,0.3) 100%)",
+          }}
+        />
+
+        {/* Subtle surface texture */}
+        <div
+          className="absolute inset-0 rounded-full opacity-20 sun-texture"
+          style={{
+            background: `
+              radial-gradient(circle at 25% 40%, rgba(255,200,100,0.4) 0%, transparent 20%),
+              radial-gradient(circle at 60% 30%, rgba(255,180,80,0.3) 0%, transparent 15%),
+              radial-gradient(circle at 45% 65%, rgba(255,160,60,0.35) 0%, transparent 18%),
+              radial-gradient(circle at 70% 55%, rgba(255,200,100,0.25) 0%, transparent 12%)
+            `,
+          }}
+        />
+      </div>
+
+      <style jsx>{`
+        .sun-halo-outer {
+          animation: sunHaloOuter 8s ease-in-out infinite;
+        }
+        .sun-glow-outer {
+          animation: sunGlowOuter 6s ease-in-out infinite;
+        }
+        .sun-glow-middle {
+          animation: sunGlowMiddle 4s ease-in-out infinite 0.3s;
+        }
+        .sun-glow-inner {
+          animation: sunGlowInner 3s ease-in-out infinite 0.6s;
+        }
+        .sun-corona {
+          animation: sunCorona 30s linear infinite;
+        }
+        .sun-surface {
+          animation: sunSurfacePulse 5s ease-in-out infinite;
+        }
+        .sun-light-sweep {
+          animation: sunLightSweep 8s ease-in-out infinite;
+        }
+        .sun-texture {
+          animation: sunTexture 10s ease-in-out infinite;
+        }
+
+        @keyframes sunHaloOuter {
+          0%, 100% { opacity: 0.5; transform: scale(4); }
+          50% { opacity: 0.7; transform: scale(4.2); }
+        }
+        @keyframes sunGlowOuter {
+          0%, 100% { opacity: 0.6; transform: scale(2.5); }
+          30% { opacity: 0.75; transform: scale(2.6); }
+          70% { opacity: 0.65; transform: scale(2.55); }
+        }
+        @keyframes sunGlowMiddle {
+          0%, 100% { opacity: 0.7; transform: scale(1.8); }
+          40% { opacity: 0.85; transform: scale(1.85); }
+          60% { opacity: 0.8; transform: scale(1.82); }
+        }
+        @keyframes sunGlowInner {
+          0%, 100% { opacity: 0.8; transform: scale(1.3); }
+          25% { opacity: 0.9; transform: scale(1.32); }
+          50% { opacity: 0.95; transform: scale(1.35); }
+          75% { opacity: 0.85; transform: scale(1.33); }
+        }
+        @keyframes sunCorona {
+          0% { transform: scale(2.2) rotate(0deg); opacity: 0.6; }
+          50% { opacity: 0.8; }
+          100% { transform: scale(2.2) rotate(360deg); opacity: 0.6; }
+        }
+        @keyframes sunSurfacePulse {
+          0%, 100% { 
+            box-shadow: 
+              0 0 40px rgba(255,200,100,0.8),
+              0 0 80px rgba(255,160,60,0.5),
+              0 0 120px rgba(255,120,40,0.3),
+              0 0 180px rgba(255,100,30,0.15),
+              inset -4px -4px 20px rgba(255,100,0,0.3),
+              inset 4px 4px 15px rgba(255,255,200,0.4);
+          }
+          50% { 
+            box-shadow: 
+              0 0 50px rgba(255,200,100,0.9),
+              0 0 100px rgba(255,160,60,0.6),
+              0 0 150px rgba(255,120,40,0.4),
+              0 0 200px rgba(255,100,30,0.2),
+              inset -4px -4px 20px rgba(255,100,0,0.3),
+              inset 4px 4px 15px rgba(255,255,200,0.4);
+          }
+        }
+        @keyframes sunLightSweep {
+          0%, 100% { 
+            opacity: 0;
+            transform: translateX(-30%) rotate(110deg);
+          }
+          40%, 60% {
+            opacity: 1;
+            transform: translateX(0%) rotate(110deg);
+          }
+          50% {
+            opacity: 1;
+            transform: translateX(10%) rotate(110deg);
+          }
+        }
+        @keyframes sunTexture {
+          0%, 100% { opacity: 0.2; }
+          50% { opacity: 0.35; }
+        }
+      `}</style>
+    </div>
   );
 });

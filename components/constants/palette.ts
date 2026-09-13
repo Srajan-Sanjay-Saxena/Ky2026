@@ -1,6 +1,6 @@
 /**
  * Color Palette Constants for Kashi Yatra 2026
- * 
+ *
  * Centralized color definitions, gradients, and backgrounds.
  * Import from this file for consistent theming across components.
  */
@@ -21,23 +21,23 @@ export const COLORS = {
   DARK_MAROON: "#5a0f25",
   ROYAL_MAROON: "#6B1328",
   DEEP_MAROON: "#3d0a18",
-  
+
   // Neutrals
   CREAM: "#FDF6E3",
   STONE: "#D4B896",
   DARK_BROWN: "#2D1810",
   LAVENDER: "#9D8CD9",
-  
+
   // Blues
   GANGA_BLUE: "#1A5F7A",
   DEEP_NIGHT: "#1A1A2E",
   MIDNIGHT: "#0a0a15",
-  
+
   // River blues
   RIVER_SURFACE: "#1a4a6e",
   RIVER_MID: "#15405c",
   RIVER_DEEP: "#0c2030",
-  
+
   // Card backgrounds
   CARD_DARK_PURPLE: "#1A0A1A",
   CARD_FRAME_DARK: "#1a0d10",
@@ -227,12 +227,15 @@ export const BG_SECTIONS = {
 
 export const SHADOWS = {
   /** Royal card shadow with purple glow and gold border hint */
-  CARD_ROYAL: "0 10px 40px rgba(74, 26, 85, 0.5), 0 0 0 1px rgba(212, 168, 83, 0.2)",
-  CARD_ROYAL_HOVER: "0 20px 60px rgba(74, 26, 85, 0.6), 0 0 30px rgba(212, 168, 83, 0.3)",
+  CARD_ROYAL:
+    "0 10px 40px rgba(74, 26, 85, 0.5), 0 0 0 1px rgba(212, 168, 83, 0.2)",
+  CARD_ROYAL_HOVER:
+    "0 20px 60px rgba(74, 26, 85, 0.6), 0 0 30px rgba(212, 168, 83, 0.3)",
   /** Badge shadow */
   BADGE_GOLD: "0 4px 20px rgba(212, 168, 83, 0.6)",
   /** Button shadow */
-  BUTTON_GOLD: "0 4px 15px rgba(212, 168, 83, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+  BUTTON_GOLD:
+    "0 4px 15px rgba(212, 168, 83, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
   /** QR frame shadow */
   QR_FRAME: "0 0 15px rgba(212, 168, 83, 0.2), inset 0 0 10px rgba(0,0,0,0.3)",
 } as const;

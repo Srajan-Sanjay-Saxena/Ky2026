@@ -4,11 +4,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { Moon as CinematicMoon } from "@/components/sections/Hero/Sky/Moon";
+import { Moon } from "@/components/sections/Hero/Sky/Moon";
+import { Sun } from "@/components/sections/Hero/Sky/Sun";
 import { CinematicSky } from "@/components/sections/Hero/Sky/CinematicSky";
 import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
-import { EveningGradient } from "./palette/hero.bg.pallete";
+import { useTimeOfDay } from "@/hooks/useTimeOfDay";
 import { Z_HERO } from "@/components/constants";
 import { IMAGES } from "@/lib/images";
 
@@ -18,16 +19,19 @@ gsap.registerPlugin(ScrollTrigger);
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const templeRef = useRef<HTMLDivElement>(null);
-  const moonRef = useRef<HTMLDivElement>(null);
+  const celestialRef = useRef<HTMLDivElement>(null); // Moon or Sun
   const titleRef = useRef<HTMLHeadingElement>(null);
   const riverRef = useRef<HTMLDivElement>(null);
   const ghatsRef = useRef<HTMLDivElement>(null);
 
-  // Entry animation: Moon
+  // Get current time-based sky configuration
+  const { gradient, showMoon, showStars, starsOpacity } = useTimeOfDay();
+
+  // Entry animation: Celestial body (Moon or Sun)
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(moonRef.current, { scale: 0.5, opacity: 0 });
-      gsap.to(moonRef.current, {
+      gsap.set(celestialRef.current, { scale: 0.5, opacity: 0 });
+      gsap.to(celestialRef.current, {
         scale: 1,
         opacity: 1,
         duration: 1.2,
@@ -124,7 +128,7 @@ export function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  // Parallax scroll: Moon & Temple (related scroll behavior)
+  // Parallax scroll: Celestial body & Temple (related scroll behavior)
   useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -134,7 +138,7 @@ export function HeroSection() {
         scrub: 1,
         onUpdate: (self) => {
           const p = self.progress;
-          gsap.to(moonRef.current, { y: p * -200, duration: 0.1 });
+          gsap.to(celestialRef.current, { y: p * -200, duration: 0.1 });
           gsap.to(templeRef.current, { y: p * 60, duration: 0.1 });
           gsap.to(ghatsRef.current, { x: p * -100, duration: 0.1 });
         },
@@ -149,11 +153,16 @@ export function HeroSection() {
       ref={containerRef}
       className="relative h-screen overflow-hidden max-w-[100vw]"
       style={{
-        background: EveningGradient,
+        background: gradient,
+        transition: "background 2s ease-in-out", // Smooth transition when time changes
       }}
     >
-      {/* Cinematic Sky with stars, clouds, shooting stars */}
-      <CinematicSky className="z-1" />
+      {/* Cinematic Sky with stars, clouds, shooting stars - only visible at night/dusk */}
+      {showStars && (
+        <div style={{ opacity: starsOpacity, transition: "opacity 2s ease-in-out" }}>
+          <CinematicSky className="z-1" />
+        </div>
+      )}
 
       {/* Varanasi Background - Mobile optimized */}
       <div
@@ -625,12 +634,17 @@ export function HeroSection() {
         <FlyingBirds className="w-full h-full" />
       </div>
 
-      {/* Cinematic Moon - Mobile optimized */}
+      {/* Celestial Body - Moon or Sun based on time of day */}
       <div
-        ref={moonRef}
+        ref={celestialRef}
         className="absolute top-[2%] sm:top-[3%] md:top-[4%] left-1/2 -translate-x-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 z-5"
+        style={{ transition: "opacity 1s ease-in-out" }}
       >
-        <CinematicMoon className="w-full h-full" />
+        {showMoon ? (
+          <Moon className="w-full h-full" />
+        ) : (
+          <Sun className="w-full h-full" />
+        )}
       </div>
 
       {/* Title - Mobile optimized */}

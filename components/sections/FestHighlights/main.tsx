@@ -10,6 +10,7 @@ import { LotusSVG } from "./Lotus";
 import { Trishul } from "./Trishul";
 import { MandalaRing } from "./MandlaRing";
 import { FestSparkles } from "./Sparkles";
+import { TempleBell } from "./TempleBell";
 import { IMAGES } from "@/lib/images";
 
 const highlights = [
@@ -199,8 +200,21 @@ export function FestHighlightsSection() {
         ))}
       </div>
 
-      {/* GODDESS DURGA - Divine presence */}
-      <div className="absolute right-0 bottom-0 w-[35%] sm:w-[30%] md:w-[28%] lg:w-[25%] xl:w-[22%] pointer-events-none z-20">
+      {/* TEMPLE BELLS - Desktop only */}
+      <TempleBell 
+        className="hidden lg:flex absolute top-0 right-[12%] z-40" 
+        chainLength={180} 
+        size="md" 
+      />
+      <TempleBell 
+        className="hidden xl:flex absolute top-0 left-[8%] z-40" 
+        chainLength={120} 
+        size="sm" 
+        delayed 
+      />
+
+      {/* GODDESS DURGA - Divine presence - BEHIND content on desktop */}
+      <div className="absolute right-0 bottom-0 w-[50%] sm:w-[40%] md:w-[35%] lg:w-[30%] xl:w-[28%] pointer-events-none z-[5]">
         {/* Divine aura behind Durga */}
         <div
           className="absolute inset-[-30%] rounded-full pointer-events-none"
@@ -275,7 +289,7 @@ export function FestHighlightsSection() {
       {/* TEMPLE - Absolute positioned, large, on left */}
       <div
         ref={templeRef}
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-[55%] lg:w-[52%] xl:w-[50%] pointer-events-none hidden lg:block"
+        className="absolute left-[-15%] top-1/2 -translate-y-1/2 w-[55%] lg:w-[52%] xl:w-[50%] pointer-events-none hidden lg:block"
         style={{ zIndex: 1 }}
       >
         {/* Glow behind temple */}
@@ -335,127 +349,82 @@ export function FestHighlightsSection() {
         />
       </div>
 
-      {/* CONTENT - Right side on desktop, full width on mobile */}
-      <div className="relative z-10 min-h-[50vh] sm:min-h-[60vh] lg:min-h-[85vh] flex items-start sm:items-center pt-4 sm:pt-0">
+      {/* CONTENT - Centered on desktop with temple on left as backdrop */}
+      <div className="relative z-10 min-h-[35vh] sm:min-h-[45vh] lg:min-h-[85vh] flex items-start sm:items-center pt-4 sm:pt-10 lg:pt-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:justify-center">
             <div
               ref={contentRef}
-              className="w-full lg:w-[42%] xl:w-[38%] lg:pr-8 text-center lg:text-left"
+              className="w-full lg:w-[55%] xl:w-[50%] text-center lg:text-center"
             >
-              <span
-                className="inline-block text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-3 sm:mb-4 px-3 sm:px-4 py-1 rounded-full"
-                style={{
-                  color: "#FF6B00",
-                  background: "rgba(255,107,0,0.15)",
-                  border: "1px solid rgba(255,107,0,0.4)",
-                }}
-              >
-                March 15-17, 2026
-              </span>
-
               <h2
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 whitespace-nowrap"
                 style={{
-                  color: "#FFD700",
                   textShadow: "0 0 30px rgba(255,215,0,0.5)",
                 }}
               >
-                The Grand
-                <br />
+                <span style={{ color: "#FFD700" }}>The Grand </span>
                 <span style={{ color: "#FF4500" }}>Cultural Fest</span>
               </h2>
 
               <p
-                className="text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-4 opacity-90"
+                className="text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 opacity-85 max-w-lg mx-auto"
                 style={{ color: "#FDF6E3" }}
               >
-                Step into a world where ancient traditions meet modern
-                celebrations. Three electrifying days of music, dance, and
-                unforgettable experiences.
+                Three electrifying days of music, dance, and unforgettable experiences.
               </p>
 
-              <p
-                className="hidden sm:block text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6 opacity-70"
-                style={{ color: "#FDF6E3" }}
-              >
-                From soul-stirring classical performances to heart-pounding DJ
-                nights, from intense hackathons to creative showcases —
-                there&apos;s something for everyone at the biggest fest of the
-                year.
-              </p>
-
-              {/* Highlight Cards - 2 on mobile, 4 on desktop */}
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-                {highlights.slice(0, 2).map((item, i) => (
-                  <div
-                    key={i}
-                    className="sm:hidden highlight-card p-3 rounded-lg transition-all duration-300"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(176,63,35,0.4), rgba(45,24,16,0.6))",
-                      border: "1px solid rgba(255,107,0,0.4)",
-                      boxShadow: "0 4px 15px rgba(0,0,0,0.4)",
-                    }}
-                  >
-                    <span className="text-2xl mb-1 block">{item.icon}</span>
-                    <h4 className="font-bold text-[#FFD700] text-sm mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs text-[#FDF6E3] opacity-70">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-                {/* All 4 cards on sm+ */}
+              {/* Highlight Cards - Royal ornate design - All 4 cards on all screen sizes */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                 {highlights.map((item, i) => (
                   <div
-                    key={`desktop-${i}`}
-                    className="hidden sm:block highlight-card p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                    key={i}
+                    className="highlight-card relative p-3 sm:p-5 rounded-xl transition-all duration-300 sm:hover:scale-[1.02] cursor-pointer overflow-hidden group"
                     style={{
-                      background:
-                        "linear-gradient(135deg, rgba(176,63,35,0.4), rgba(45,24,16,0.6))",
-                      border: "1px solid rgba(255,107,0,0.4)",
-                      boxShadow: "0 4px 15px rgba(0,0,0,0.4)",
-                      backdropFilter: "blur(10px)",
+                      background: "linear-gradient(145deg, rgba(139,21,56,0.35), rgba(92,10,31,0.4), rgba(45,24,16,0.35))",
+                      border: "2px solid rgba(184,134,11,0.5)",
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,215,0,0.08)",
+                      backdropFilter: "blur(8px)",
                     }}
                   >
-                    <span className="text-xl sm:text-2xl mb-1 block">
-                      {item.icon}
-                    </span>
-                    <h4 className="font-bold text-[#FFD700] text-xs sm:text-sm mb-0.5 sm:mb-1">
+                    {/* Shimmer effect on hover - desktop only */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden sm:block"
+                      style={{
+                        background: "linear-gradient(105deg, transparent 40%, rgba(255,215,0,0.06) 50%, transparent 60%)",
+                      }}
+                    />
+                    
+                    {/* Corner ornaments */}
+                    <div className="absolute top-1 left-1 sm:top-2 sm:left-2 w-4 sm:w-5 h-4 sm:h-5 border-t-2 border-l-2 border-[#FFD700] opacity-60" />
+                    <div className="absolute top-1 right-1 sm:top-2 sm:right-2 w-4 sm:w-5 h-4 sm:h-5 border-t-2 border-r-2 border-[#FFD700] opacity-60" />
+                    <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 w-4 sm:w-5 h-4 sm:h-5 border-b-2 border-l-2 border-[#FFD700] opacity-60" />
+                    <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 w-4 sm:w-5 h-4 sm:h-5 border-b-2 border-r-2 border-[#FFD700] opacity-60" />
+                    
+                    {/* Top decorative line */}
+                    <div 
+                      className="absolute top-2 sm:top-3 left-6 sm:left-8 right-6 sm:right-8 h-[1px]"
+                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.25), transparent)" }}
+                    />
+                    
+                    <span className="text-2xl sm:text-4xl mb-2 sm:mb-3 block relative z-10">{item.icon}</span>
+                    <h4 
+                      className="font-bold text-[#FFD700] text-xs sm:text-base mb-1 sm:mb-1.5 relative z-10 uppercase tracking-wider"
+                      style={{ fontFamily: "var(--font-ethereal), serif", textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}
+                    >
                       {item.title}
                     </h4>
-                    <p className="text-[10px] sm:text-xs text-[#FDF6E3] opacity-70">
+                    <p className="text-[10px] sm:text-sm text-[#FDF6E3] opacity-80 relative z-10">
                       {item.desc}
                     </p>
+                    
+                    {/* Bottom decorative line */}
+                    <div 
+                      className="absolute bottom-2 sm:bottom-3 left-6 sm:left-8 right-6 sm:right-8 h-[1px]"
+                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent)" }}
+                    />
                   </div>
                 ))}
-              </div>
-
-              {/* CTA Buttons - Hidden on mobile */}
-              <div className="hidden sm:flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
-                <button
-                  className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105"
-                  style={{
-                    background: "linear-gradient(135deg, #FF4500, #B03F23)",
-                    color: "#FDF6E3",
-                    boxShadow: "0 4px 20px rgba(255,69,0,0.5)",
-                  }}
-                >
-                  Register Now
-                </button>
-                <button
-                  className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105"
-                  style={{
-                    background: "rgba(0,0,0,0.3)",
-                    color: "#FFD700",
-                    border: "2px solid #FFD700",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  View Events
-                </button>
               </div>
             </div>
           </div>
@@ -473,74 +442,6 @@ export function FestHighlightsSection() {
 
       {/* FEST VIBES - Colorful sparkles and confetti */}
       <FestSparkles />
-
-      {/* Animated fest banners on sides */}
-      <div className="absolute top-[15%] left-[2%] z-30 hidden lg:block">
-        <div
-          className="px-3 py-2 rounded-lg transform -rotate-12"
-          style={{
-            background: "linear-gradient(135deg, #FF1493, #FF6B00)",
-            boxShadow: "0 4px 20px rgba(255,20,147,0.5)",
-            animation: "bounce 2s ease-in-out infinite",
-          }}
-        >
-          <span className="text-white font-bold text-sm">🎉 3 DAYS</span>
-        </div>
-      </div>
-
-      <div className="absolute top-[25%] right-[3%] z-30 hidden lg:block">
-        <div
-          className="px-3 py-2 rounded-lg transform rotate-12"
-          style={{
-            background: "linear-gradient(135deg, #00CED1, #4169E1)",
-            boxShadow: "0 4px 20px rgba(0,206,209,0.5)",
-            animation: "bounce 2.5s ease-in-out infinite",
-            animationDelay: "0.5s",
-          }}
-        >
-          <span className="text-white font-bold text-sm">🎵 LIVE MUSIC</span>
-        </div>
-      </div>
-
-      <div className="absolute bottom-[30%] left-[3%] z-30 hidden lg:block">
-        <div
-          className="px-3 py-2 rounded-lg transform rotate-6"
-          style={{
-            background: "linear-gradient(135deg, #FFD700, #FF8C00)",
-            boxShadow: "0 4px 20px rgba(255,215,0,0.5)",
-            animation: "bounce 2.2s ease-in-out infinite",
-            animationDelay: "1s",
-          }}
-        >
-          <span className="text-[#5C0A1F] font-bold text-sm">
-            🏆 ₹10L+ PRIZES
-          </span>
-        </div>
-      </div>
-
-      {/* Keyframes for animations */}
-      <style jsx>{`
-        @keyframes sparkleFloat {
-          0%,
-          100% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0.6;
-          }
-          50% {
-            transform: translateY(-20px) rotate(180deg);
-            opacity: 1;
-          }
-        }
-        @keyframes bounce {
-          0%,
-          100% {
-            transform: translateY(0) rotate(var(--rotate, 0deg));
-          }
-          50% {
-            transform: translateY(-10px) rotate(var(--rotate, 0deg));
-          }
-        }
-      `}</style>
     </section>
   );
 }
