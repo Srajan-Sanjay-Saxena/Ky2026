@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { PassCard } from "./PassCard";
 import { PASSES, ANIMATION } from "./passes.config";
 import { Z_INDEX } from "./passes.theme";
+import { useIsMobile, usePrefersReducedMotion } from "@/hooks";
 import {
   COLORS,
   GRADIENT_TEXT_GOLD,
@@ -81,10 +82,13 @@ const PARTICLES = Array.from({ length: PARTICLE_CONFIG.desktop }, (_, i) => ({
   delay: (i % 4),                   // 0-3s
 }));
 
-function FloatingParticles() {
+function FloatingParticles({ isMobile, isInView }: { isMobile: boolean; isInView: boolean }) {
+  // Reduce particles on mobile for better performance
+  const particles = isMobile ? PARTICLES.slice(0, PARTICLE_CONFIG.mobile) : PARTICLES;
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: Z_INDEX.particles }}>
-      {PARTICLES.map((p) => (
+      {particles.map((p) => (
         <motion.div
           key={p.id}
           className="absolute rounded-full"
@@ -96,12 +100,12 @@ function FloatingParticles() {
             top: `${p.top}%`,
             boxShadow: `0 0 ${p.shadowSize}px rgba(212, 168, 83, 0.3)`,
           }}
-          animate={{
+          animate={isInView ? {
             y: [0, p.yOffset, 0],
             x: [0, p.xOffset, 0],
             opacity: [0.3, 0.8, 0.3],
             scale: [1, 1.2, 1],
-          }}
+          } : undefined}
           transition={{
             duration: p.duration,
             repeat: Infinity,
@@ -181,15 +185,25 @@ export function PassesSection() {
   const mandalaRightRef = useRef<HTMLDivElement>(null);
   const mandalaCenterRef = useRef<HTMLDivElement>(null);
 
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+
   useEffect(() => {
+    // Skip GSAP animations if user prefers reduced motion
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
-      gsap.to(mandalaLeftRef.current, { rotation: 360, duration: 80, repeat: -1, ease: "none" });
-      gsap.to(mandalaRightRef.current, { rotation: -360, duration: 100, repeat: -1, ease: "none" });
-      gsap.to(mandalaCenterRef.current, { rotation: 360, duration: 120, repeat: -1, ease: "none" });
+      // Only run mandala animations when in view
+      if (isInView) {
+        gsap.to(mandalaLeftRef.current, { rotation: 360, duration: 80, repeat: -1, ease: "none" });
+        gsap.to(mandalaRightRef.current, { rotation: -360, duration: 100, repeat: -1, ease: "none" });
+        gsap.to(mandalaCenterRef.current, { rotation: 360, duration: 120, repeat: -1, ease: "none" });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isInView, prefersReducedMotion]);
 
   const handleSelect = useCallback((passId: string) => {
     console.log(`Selected pass: ${passId}`);
@@ -259,7 +273,7 @@ export function PassesSection() {
       </div>
 
       {/* Floating particles */}
-      <FloatingParticles />
+      <FloatingParticles isMobile={isMobile} isInView={isInView} />
 
       {/* Vignette */}
       <VignetteOverlay />

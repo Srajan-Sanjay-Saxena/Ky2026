@@ -279,12 +279,19 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
               <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ ...ANIMATION.float, delay: floatDelay }} className="relative">
                   <div className="absolute inset-0 blur-2xl" style={{ background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`, transform: "scale(1.3)", opacity: 0.6 }} />
-                  <motion.div
-                    animate={{ filter: [`drop-shadow(0 0 20px ${pass.glowColor})`, `drop-shadow(0 0 35px ${pass.glowColor})`, `drop-shadow(0 0 20px ${pass.glowColor})`] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <Image src={pass.image} alt={pass.name} width={220} height={280} className="object-contain max-h-[260px] w-auto relative z-10" priority={index === 0} />
-                  </motion.div>
+                  {/* Skip expensive filter animation on mobile */}
+                  {isMobile ? (
+                    <div style={{ filter: `drop-shadow(0 0 20px ${pass.glowColor})` }}>
+                      <Image src={pass.image} alt={pass.name} width={220} height={280} className="object-contain max-h-[260px] w-auto relative z-10" priority={index === 0} />
+                    </div>
+                  ) : (
+                    <motion.div
+                      animate={{ filter: [`drop-shadow(0 0 20px ${pass.glowColor})`, `drop-shadow(0 0 35px ${pass.glowColor})`, `drop-shadow(0 0 20px ${pass.glowColor})`] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <Image src={pass.image} alt={pass.name} width={220} height={280} className="object-contain max-h-[260px] w-auto relative z-10" priority={index === 0} />
+                    </motion.div>
+                  )}
                 </motion.div>
                 <p className="absolute bottom-1 text-gray-500 text-xs flex items-center gap-1">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
