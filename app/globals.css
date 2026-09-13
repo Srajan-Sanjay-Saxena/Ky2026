@@ -530,3 +530,85 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 90%);
   filter: blur(2px);
 }
+
+/* ── Footer: Royal Mandala Animations ── */
+.footer-mandala-slow {
+  animation: footerMandalaRotate 120s linear infinite;
+}
+.footer-mandala-reverse {
+  animation: footerMandalaRotate 80s linear infinite reverse;
+}
+.footer-mandala-fast {
+  animation: footerMandalaRotate 45s linear infinite;
+}
+@keyframes footerMandalaRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Stone Positions - CSS classes for responsive positioning
+   Values synced with: /components/constants/position.ts -> POS_STONES
+   Using CSS because inline styles don't support media queries
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.stone-pos-schedule {
+  bottom: 60%;
+  left: 5%;
+}
+@media (min-width: 640px) {
+  .stone-pos-schedule {
+    bottom: 17%;
+    left: 8%;
+  }
+}
+
+.stone-pos-events {
+  bottom: 25%;
+  left: 10%;
+}
+@media (min-width: 640px) {
+  .stone-pos-events {
+    bottom: 14%;
+    left: 28%;
+  }
+}
+
+.stone-pos-register {
+  bottom: 46%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (min-width: 640px) {
+  .stone-pos-register {
+    bottom: 11%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.stone-pos-gallery {
+  bottom: 73%;
+  right: 5%;
+}
+@media (min-width: 640px) {
+  .stone-pos-gallery {
+    bottom: 17%;
+    left: 68%;
+    right: auto;
+  }
+}
+
+.stone-pos-about {
+  bottom: 30%;
+  right: 8%;
+}
+@media (min-width: 640px) {
+  .stone-pos-about {
+    bottom: 20%;
+    left: 86%;
+    right: auto;
+  }
+}
+
+

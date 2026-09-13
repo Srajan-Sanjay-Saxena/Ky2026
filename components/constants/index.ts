@@ -1,144 +1,73 @@
 /**
- * Z-Index Constants for Kashi Yatra 2026
+ * Constants for Kashi Yatra 2026
  * 
- * Organized by section for easy management.
- * Higher numbers = closer to viewer (on top)
+ * Centralized configuration for z-index, sizes, positions, and colors.
+ * Import from this file for all layout and theme constants.
  */
 
-// ═══════════════════════════════════════════════════════════════════
-// NAVBAR (Highest priority - always on top)
-// ═══════════════════════════════════════════════════════════════════
-export const Z_NAVBAR = {
-  CONTAINER: 200,
-  BADGE: 10,
-  NAV_LINKS: 10,
-  SECONDARY_LINKS: 10,
-  HAMBURGER: 20,
-  MOBILE_DROPDOWN: 10,
-} as const;
+// Z-Index constants
+export {
+  Z_NAVBAR,
+  Z_HERO,
+  Z_VIBES,
+  Z_HIGHLIGHTS,
+  Z_FOOTER,
+  Z_PAGE,
+} from "./z-index";
 
-// ═══════════════════════════════════════════════════════════════════
-// HERO SECTION
-// ═══════════════════════════════════════════════════════════════════
-export const Z_HERO = {
-  // Sky layers (background)
-  SKY: 1,
-  MOON_GLOW: 2,
-  CLOUDS: 3,
-  KANDEELS: 4,
-  MOON: 5,
-  VARANASI_BACK: 6,
-  MOON_REFLECTION: 14,
-  
-  // Title area
-  TITLE: 20,
-  BIRDS: 30,
-  
-  // Buildings
-  TEMPLE: 50,
-  GHATS: 100,
-  
-  // River elements (layered from bottom to top)
-  RIVER: 70,
-  
-  // Lotus flowers (individual z-indexes)
-  LOTUS: 75,
-  LOTUS_1: 75,
-  LOTUS_2: 75,
-  LOTUS_3: 76,
-  LOTUS_4: 76,
-  
-  // Diyas (individual z-indexes)
-  DIYAS: 76,
-  DIYA_1: 76,
-  DIYA_2: 76,
-  DIYA_3: 77,
-  DIYA_4: 77,
-  DIYA_5: 77,
-  DIYA_6: 77,
-  
-  // Boats (individual z-indexes)
-  // Outer container for boats
-  BOATS: 77,
+// Size constants
+export {
+  SIZE_RIVER,
+  SIZE_STONES,
+  SIZE_LOTUS,
+  SIZE_DIYA,
+  SIZE_BOATS,
+  SIZE_VIBES_GATE,
+  SIZE_VIBES_MAHAMANA,
+  SIZE_VIBES_RICKSHAW,
+  SIZE_VIBES_LAMPPOST,
+  SIZE_VIBES_FOOD,
+  sizeToWidthClasses,
+} from "./size";
 
-  BOAT_PILGRIM: 77,
-  BOAT_STEAMER: 78,
-  BOAT_SIMPLE: 79,
-  
+// Position constants
+export {
+  POS_STONES,
+  POS_LOTUS,
+  POS_DIYA,
+  POS_BOATS,
+  POS_HERO_TEMPLE,
+  POS_HERO_GHATS,
+  POS_HERO_MOON,
+  POS_HERO_TITLE,
+  POS_VIBES_GATE,
+  POS_VIBES_MAHAMANA,
+  POS_VIBES_LAMPPOST,
+  POS_VIBES_RICKSHAW,
+  POS_VIBES_FOOD,
+  POS_VIBES_DIYA_MOBILE,
+  posToClasses,
+  getTransform,
+} from "./position";
 
-  // The outer container for stones (parent z index should be lowest otherwise it will override the chidlren)
-  STEPPING_STONES: 78,
-  
-  // Individual stone z-indexes (can be customized per stone)
-  STONE_SCHEDULE: 80,
-  STONE_EVENTS: 80,
-  STONE_REGISTER: 80,
-  STONE_GALLERY: 78,
-  STONE_ABOUT: 80,
-} as const;
-
-// ═══════════════════════════════════════════════════════════════════
-// BANARASI VIBES SECTION
-// ═══════════════════════════════════════════════════════════════════
-export const Z_VIBES = {
-  // Background elements
-  MANDALA: 5,
-  
-  // Gate composition
-  GATE: 10,
-  MAHAMANA: 5,
-  GATE_IMAGE: 10,
-  
-  // Food items
-  TABLA_SITAR: 20,
-  PAAN: 20,
-  LASSI: 20,
-  MALAIYO: 20,
-  
-  // Road elements
-  ROAD: 25,
-  LAMPPOST: 28,
-  DIYA_MOBILE: 30,
-  
-  // Rickshaw
-  RICKSHAW: 40,
-  
-  // Road surface
-  ROAD_SURFACE: 60,
-} as const;
-
-// ═══════════════════════════════════════════════════════════════════
-// FEST HIGHLIGHTS SECTION
-// ═══════════════════════════════════════════════════════════════════
-export const Z_HIGHLIGHTS = {
-  BACKGROUND: 1,
-  DURGA: 20,
-  PARTICLES: 30,
-  CONTENT: 10,
-  FLOATING_DIYAS: 30,
-} as const;
-
-// ═══════════════════════════════════════════════════════════════════
-// FOOTER SECTION
-// ═══════════════════════════════════════════════════════════════════
-export const Z_FOOTER = {
-  CONTENT: 10,
-} as const;
-
-// ═══════════════════════════════════════════════════════════════════
-// PAGE LEVEL (Sticky sections)
-// ═══════════════════════════════════════════════════════════════════
-export const Z_PAGE = {
-  HERO: 0,
-  BANARASI_VIBES: 10,
-  FEST_HIGHLIGHTS: 20,
-  FOOTER: 70,
-} as const;
-
-// Type exports for TypeScript support
-export type ZNavbar = typeof Z_NAVBAR;
-export type ZHero = typeof Z_HERO;
-export type ZVibes = typeof Z_VIBES;
-export type ZHighlights = typeof Z_HIGHLIGHTS;
-export type ZFooter = typeof Z_FOOTER;
-export type ZPage = typeof Z_PAGE;
+// Palette constants (colors, gradients, effects)
+export {
+  COLORS,
+  GRADIENT_SKY_NIGHT,
+  GRADIENT_SKY_EVENING,
+  GRADIENT_RIVER,
+  GRADIENT_MOON_REFLECTION,
+  GRADIENT_FOOTER,
+  GRADIENT_FOOTER_DARK,
+  GRADIENT_FOOTER_GLOW,
+  GRADIENT_FOOTER_AMBIENT,
+  GRADIENT_BORDER_GOLD,
+  GRADIENT_BORDER_ROYAL,
+  GRADIENT_DIVIDER_GOLD,
+  GRADIENT_BUTTON_GOLD,
+  GRADIENT_SHIMMER,
+  GRADIENT_TEXT_SHIMMER,
+  GLOW,
+  TEXT_SHADOW,
+  BG_SECTIONS,
+} from "./palette";
