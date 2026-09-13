@@ -1,102 +1,108 @@
 /**
  * Style constants for Passes section
- * Centralized for easy theming and adjustments
+ * Matching Kashiyatra'26 royal purple/maroon theme with Banarasi patterns
  */
 
 import type { CSSProperties } from "react";
 
 /**
- * Section background
+ * Section background - deep purple to maroon gradient like reference
  */
 export const SECTION_BG: CSSProperties = {
   background: `
     linear-gradient(180deg,
-      #1A1A2E 0%,
-      #16162a 20%,
-      #121228 40%,
-      #0f0f24 60%,
-      #0c0c20 80%,
-      #0a0a1a 100%
+      #1a0a1a 0%,
+      #2a1030 15%,
+      #3d1545 35%,
+      #4a1a55 50%,
+      #3d1545 65%,
+      #2a1030 85%,
+      #1a0a1a 100%
     )
   `,
 };
 
 /**
- * Decorative overlay pattern
+ * Banarasi saree pattern overlay - golden paisley/floral motif
  */
-export const PATTERN_OVERLAY: CSSProperties = {
-  backgroundImage: `
-    radial-gradient(circle at 20% 80%, rgba(212, 168, 83, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 107, 0, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(26, 95, 122, 0.02) 0%, transparent 70%)
-  `,
-};
+export const BANARASI_PATTERN = `
+  url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a853' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10zm-20 0c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+`;
 
 /**
- * Standardized container - textured dark background with gold border
- * This is the flip card container that holds the pass image
+ * Top border pattern - Banarasi zari style
  */
-export const CONTAINER_BASE: CSSProperties = {
+export const TOP_BORDER_PATTERN: CSSProperties = {
+  height: "60px",
   background: `
-    linear-gradient(145deg, 
-      rgba(30, 25, 40, 0.95) 0%, 
-      rgba(20, 18, 30, 0.98) 50%,
-      rgba(15, 12, 25, 0.99) 100%
+    linear-gradient(180deg, 
+      rgba(212, 168, 83, 0.15) 0%,
+      transparent 100%
     )
   `,
-  borderRadius: "16px",
-  border: "2px solid transparent",
-  backgroundClip: "padding-box",
+  borderTop: "3px solid",
+  borderImage: `linear-gradient(90deg, 
+    transparent 0%,
+    #8B6914 10%,
+    #D4A853 25%, 
+    #FFD700 50%,
+    #D4A853 75%,
+    #8B6914 90%,
+    transparent 100%
+  ) 1`,
 };
 
 /**
- * Gold border gradient for container
+ * Card container - rounded rectangle with ornate gold border
  */
-export const CONTAINER_BORDER_GRADIENT = `
-  linear-gradient(135deg, 
-    #8B6914 0%,
-    #D4A853 20%, 
-    #FFD700 40%,
-    #E8B820 60%,
-    #D4A853 80%,
-    #8B6914 100%
+export const CARD_CONTAINER: CSSProperties = {
+  background: `
+    linear-gradient(180deg, 
+      rgba(30, 15, 35, 0.95) 0%, 
+      rgba(20, 10, 25, 0.98) 50%,
+      rgba(15, 8, 20, 0.99) 100%
+    )
+  `,
+  borderRadius: "20px",
+  border: "3px solid transparent",
+};
+
+/**
+ * Ornate gold border for cards - thick Banarasi style
+ */
+export const CARD_BORDER_GRADIENT = `
+  linear-gradient(180deg, 
+    #B8860B 0%,
+    #D4A853 15%, 
+    #FFD700 30%,
+    #D4A853 50%,
+    #B8860B 70%,
+    #D4A853 85%,
+    #FFD700 100%
   )
 `;
 
 /**
- * Container shadow
+ * Card shadow with purple glow
  */
-export const CONTAINER_SHADOW = "0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 168, 83, 0.15)";
-export const CONTAINER_SHADOW_HOVER = "0 16px 48px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 168, 83, 0.25)";
+export const CARD_SHADOW = "0 10px 40px rgba(74, 26, 85, 0.5), 0 0 0 1px rgba(212, 168, 83, 0.2)";
+export const CARD_SHADOW_HOVER = "0 20px 60px rgba(74, 26, 85, 0.6), 0 0 30px rgba(212, 168, 83, 0.3)";
 
 /**
- * Textured background overlay for container (brushed metal effect)
- */
-export const CONTAINER_TEXTURE = `
-  repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 1px,
-    rgba(255, 255, 255, 0.01) 1px,
-    rgba(255, 255, 255, 0.01) 2px
-  )
-`;
-
-/**
- * Card back panel styles
+ * Card back panel - slightly different shade
  */
 export const CARD_BACK_BG: CSSProperties = {
   background: `
     linear-gradient(180deg, 
-      rgba(26, 26, 46, 0.98) 0%, 
-      rgba(18, 18, 35, 0.99) 50%,
-      rgba(12, 12, 28, 1) 100%
+      rgba(35, 18, 42, 0.98) 0%, 
+      rgba(25, 12, 32, 0.99) 50%,
+      rgba(18, 8, 25, 1) 100%
     )
   `,
 };
 
 /**
- * Popular badge gradient
+ * Popular badge
  */
 export const POPULAR_BADGE_BG = `
   linear-gradient(135deg, 
@@ -111,10 +117,11 @@ export const POPULAR_BADGE_BG = `
  */
 export const BUTTON_BASE: CSSProperties = {
   background: "linear-gradient(135deg, #D4A853 0%, #B8860B 100%)",
-  border: "none",
-  color: "#1A1A2E",
+  border: "2px solid #FFD700",
+  color: "#1A0A1A",
   fontWeight: 700,
   cursor: "pointer",
+  borderRadius: "8px",
 };
 
 /**
@@ -138,6 +145,11 @@ export const HEADING_GRADIENT: CSSProperties = {
 };
 
 /**
+ * Subheading color
+ */
+export const SUBHEADING_COLOR = "#9D8CD9";
+
+/**
  * Benefit check icon colors
  */
 export const CHECK_ICON_COLOR = "#D4A853";
@@ -146,7 +158,7 @@ export const CHECK_ICON_HIGHLIGHT = "#FFD700";
 /**
  * Pass image shadow
  */
-export const PASS_IMAGE_SHADOW = "drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5))";
+export const PASS_IMAGE_SHADOW = "drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6))";
 
 /**
  * Z-index layering
@@ -154,22 +166,10 @@ export const PASS_IMAGE_SHADOW = "drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5))";
 export const Z_INDEX = {
   background: 0,
   pattern: 1,
-  particles: 2,
+  mandala: 2,
+  particles: 3,
   cards: 10,
   popularBadge: 15,
   heading: 20,
-} as const;
-
-/**
- * Card dimensions
- */
-export const CARD_DIMENSIONS = {
-  mobile: {
-    width: "300px",
-    height: "480px",
-  },
-  desktop: {
-    width: "320px",
-    height: "520px",
-  },
+  topBorder: 25,
 } as const;

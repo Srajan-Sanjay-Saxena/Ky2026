@@ -6,11 +6,10 @@ import { motion } from "framer-motion";
 import type { PassConfig } from "./passes.config";
 import { ANIMATION } from "./passes.config";
 import {
-  CONTAINER_BASE,
-  CONTAINER_BORDER_GRADIENT,
-  CONTAINER_SHADOW,
-  CONTAINER_SHADOW_HOVER,
-  CONTAINER_TEXTURE,
+  CARD_CONTAINER,
+  CARD_BORDER_GRADIENT,
+  CARD_SHADOW,
+  CARD_SHADOW_HOVER,
   CARD_BACK_BG,
   POPULAR_BADGE_BG,
   BUTTON_BASE,
@@ -30,8 +29,8 @@ interface PassCardProps {
 function CheckIcon({ highlight }: { highlight?: boolean }) {
   return (
     <svg
-      width="16"
-      height="16"
+      width="14"
+      height="14"
       viewBox="0 0 16 16"
       fill="none"
       className="flex-shrink-0 mt-0.5"
@@ -55,7 +54,6 @@ export const PassCard = memo(function PassCard({
   const [isFlipped, setIsFlipped] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect mobile for hint text
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -65,17 +63,16 @@ export const PassCard = memo(function PassCard({
 
   const handleFlip = () => setIsFlipped((prev) => !prev);
 
-  // Float animation delay based on index
   const floatDelay = index * 0.4;
 
   return (
     <motion.div
       variants={ANIMATION.card}
-      className={`relative ${pass.popular ? "md:-mt-4 lg:-mt-6" : ""}`}
+      className={`relative ${pass.popular ? "md:-mt-6 lg:-mt-8" : ""}`}
       style={{
         width: "100%",
-        maxWidth: "320px",
-        height: "520px",
+        maxWidth: "300px",
+        height: "480px",
         perspective: "1200px",
       }}
     >
@@ -85,8 +82,8 @@ export const PassCard = memo(function PassCard({
           className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap"
           style={{
             background: POPULAR_BADGE_BG,
-            color: "#1A1A2E",
-            boxShadow: "0 4px 15px rgba(212, 168, 83, 0.5)",
+            color: "#1A0A1A",
+            boxShadow: "0 4px 20px rgba(212, 168, 83, 0.6)",
           }}
         >
           Most Popular
@@ -100,45 +97,45 @@ export const PassCard = memo(function PassCard({
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
         onClick={handleFlip}
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.03 }}
       >
         {/* ===== FRONT SIDE ===== */}
         <div
-          className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden"
+          className="absolute inset-0 w-full h-full rounded-[20px] overflow-hidden"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
           }}
         >
-          {/* Gold border wrapper */}
+          {/* Ornate gold border */}
           <div
-            className="absolute inset-0 rounded-2xl p-[2px]"
-            style={{ background: CONTAINER_BORDER_GRADIENT }}
+            className="absolute inset-0 rounded-[20px] p-[3px]"
+            style={{ background: CARD_BORDER_GRADIENT }}
           >
-            {/* Inner container with texture */}
+            {/* Inner container */}
             <div
-              className="relative w-full h-full rounded-[14px] overflow-hidden flex flex-col"
+              className="relative w-full h-full rounded-[17px] overflow-hidden flex flex-col"
               style={{
-                ...CONTAINER_BASE,
-                boxShadow: CONTAINER_SHADOW,
+                ...CARD_CONTAINER,
+                boxShadow: CARD_SHADOW,
               }}
             >
-              {/* Texture overlay */}
-              <div
-                className="absolute inset-0 pointer-events-none opacity-50"
-                style={{ background: CONTAINER_TEXTURE }}
-              />
+              {/* Corner decorations */}
+              <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-[#D4A853] rounded-tl-lg opacity-60" />
+              <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-[#D4A853] rounded-tr-lg opacity-60" />
+              <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-[#D4A853] rounded-bl-lg opacity-60" />
+              <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-[#D4A853] rounded-br-lg opacity-60" />
 
-              {/* Glow effect */}
+              {/* Subtle inner glow */}
               <div
-                className="absolute inset-0 opacity-30 pointer-events-none"
+                className="absolute inset-0 opacity-20 pointer-events-none"
                 style={{
-                  background: `radial-gradient(ellipse at 50% 30%, ${pass.glowColor} 0%, transparent 60%)`,
+                  background: `radial-gradient(ellipse at 50% 20%, ${pass.glowColor} 0%, transparent 50%)`,
                 }}
               />
 
               {/* Pass image area */}
-              <div className="relative flex-1 flex items-center justify-center p-4">
+              <div className="relative flex-1 flex items-center justify-center p-3">
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{
@@ -149,19 +146,20 @@ export const PassCard = memo(function PassCard({
                   <Image
                     src={pass.image}
                     alt={pass.name}
-                    width={280}
-                    height={360}
-                    className="object-contain max-h-[340px] w-auto"
+                    width={250}
+                    height={320}
+                    className="object-contain max-h-[300px] w-auto"
                     style={{ filter: PASS_IMAGE_SHADOW }}
                     priority={index === 0}
                   />
                 </motion.div>
               </div>
 
-              {/* Bottom info area */}
-              <div className="relative z-10 px-5 pb-5 pt-2 text-center">
+              {/* Bottom info */}
+              <div className="relative z-10 px-4 pb-4 text-center">
                 {/* Price */}
                 <div className="mb-2">
+                  <span className="text-sm text-gray-400">Price: </span>
                   <span
                     className="text-2xl font-bold"
                     style={PRICE_GRADIENT}
@@ -170,26 +168,19 @@ export const PassCard = memo(function PassCard({
                   </span>
                 </div>
 
-                {/* Short description */}
-                <p className="text-gray-400 text-sm mb-3">
-                  {pass.tagline}
-                </p>
-
-                {/* Flip hint */}
-                <p className="text-gray-500 text-xs flex items-center justify-center gap-1.5">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                    <path d="M3 3v5h5" />
-                  </svg>
-                  {isMobile ? "Tap for Benefits" : "Hover & Click for Benefits"}
-                </p>
+                {/* CTA Button */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelect?.(pass.id);
+                  }}
+                  className="w-full py-2.5 text-sm font-bold uppercase tracking-wide"
+                  style={BUTTON_BASE}
+                >
+                  Get {pass.name.split(" ")[0]} Pass
+                </motion.button>
               </div>
             </div>
           </div>
@@ -197,26 +188,32 @@ export const PassCard = memo(function PassCard({
 
         {/* ===== BACK SIDE ===== */}
         <div
-          className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden"
+          className="absolute inset-0 w-full h-full rounded-[20px] overflow-hidden"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          {/* Gold border wrapper */}
+          {/* Ornate gold border */}
           <div
-            className="absolute inset-0 rounded-2xl p-[2px]"
-            style={{ background: CONTAINER_BORDER_GRADIENT }}
+            className="absolute inset-0 rounded-[20px] p-[3px]"
+            style={{ background: CARD_BORDER_GRADIENT }}
           >
             {/* Inner container */}
             <div
-              className="relative w-full h-full rounded-[14px] overflow-hidden flex flex-col"
+              className="relative w-full h-full rounded-[17px] overflow-hidden flex flex-col"
               style={{
                 ...CARD_BACK_BG,
-                boxShadow: CONTAINER_SHADOW,
+                boxShadow: CARD_SHADOW,
               }}
             >
+              {/* Corner decorations */}
+              <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-[#D4A853] rounded-tl-lg opacity-60" />
+              <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-[#D4A853] rounded-tr-lg opacity-60" />
+              <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-[#D4A853] rounded-bl-lg opacity-60" />
+              <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-[#D4A853] rounded-br-lg opacity-60" />
+
               {/* Accent line at top */}
               <div
                 className="h-1 w-full"
@@ -228,31 +225,20 @@ export const PassCard = memo(function PassCard({
               {/* Content */}
               <div className="flex-1 flex flex-col p-5 pt-4">
                 {/* Header */}
-                <div className="text-center mb-4">
+                <div className="text-center mb-3">
                   <h3
-                    className="text-xl font-bold mb-1"
+                    className="text-xl font-bold mb-1 uppercase tracking-wide"
                     style={{
                       fontFamily: "var(--font-ethereal), serif",
                       color: pass.accentColor,
                     }}
                   >
-                    {pass.name}
+                    {pass.name.split(" ")[0]} Benefits:
                   </h3>
-                  <p className="text-gray-400 text-sm">{pass.tagline}</p>
-                </div>
-
-                {/* Price */}
-                <div className="text-center mb-4">
-                  <span className="text-3xl font-bold" style={PRICE_GRADIENT}>
-                    ₹{pass.price.toLocaleString("en-IN")}
-                  </span>
                 </div>
 
                 {/* Benefits */}
                 <div className="flex-1 mb-4">
-                  <p className="text-xs uppercase tracking-wider text-gray-500 mb-2">
-                    Benefits
-                  </p>
                   <ul className="space-y-2">
                     {pass.benefits.map((benefit, i) => (
                       <li
@@ -261,11 +247,47 @@ export const PassCard = memo(function PassCard({
                           benefit.highlight ? "text-yellow-200" : "text-gray-300"
                         }`}
                       >
-                        <CheckIcon highlight={benefit.highlight} />
+                        <span className="text-[#D4A853]">•</span>
                         <span>{benefit.text}</span>
                       </li>
                     ))}
                   </ul>
+                </div>
+
+                {/* QR placeholder */}
+                <div className="flex justify-center mb-4">
+                  <div
+                    className="w-20 h-20 rounded-lg flex items-center justify-center"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "2px solid rgba(212, 168, 83, 0.3)",
+                    }}
+                  >
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#D4A853"
+                      strokeWidth="1"
+                    >
+                      <rect x="3" y="3" width="7" height="7" rx="1" />
+                      <rect x="14" y="3" width="7" height="7" rx="1" />
+                      <rect x="3" y="14" width="7" height="7" rx="1" />
+                      <rect x="14" y="14" width="3" height="3" />
+                      <rect x="18" y="14" width="3" height="3" />
+                      <rect x="14" y="18" width="3" height="3" />
+                      <rect x="18" y="18" width="3" height="3" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Price */}
+                <div className="text-center mb-3">
+                  <span className="text-sm text-gray-400">Price: </span>
+                  <span className="text-2xl font-bold" style={PRICE_GRADIENT}>
+                    ₹{pass.price.toLocaleString("en-IN")}
+                  </span>
                 </div>
 
                 {/* CTA Button */}
@@ -276,37 +298,11 @@ export const PassCard = memo(function PassCard({
                     e.stopPropagation();
                     onSelect?.(pass.id);
                   }}
-                  className="relative w-full py-3 rounded-xl text-base font-bold uppercase tracking-wide overflow-hidden"
+                  className="w-full py-2.5 text-sm font-bold uppercase tracking-wide"
                   style={BUTTON_BASE}
                 >
-                  {/* Shimmer */}
-                  <motion.div
-                    className="absolute inset-0"
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={ANIMATION.shimmer}
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
-                    }}
-                  />
-                  <span className="relative z-10">Get Pass</span>
+                  Get {pass.name.split(" ")[0]} Pass
                 </motion.button>
-
-                {/* Flip back hint */}
-                <p className="text-center text-gray-500 text-xs mt-3 flex items-center justify-center gap-1">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                    <path d="M3 3v5h5" />
-                  </svg>
-                  {isMobile ? "Tap to flip back" : "Click to flip back"}
-                </p>
               </div>
             </div>
           </div>
