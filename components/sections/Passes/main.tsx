@@ -59,32 +59,53 @@ function MandalaRing({ className = "" }: { className?: string }) {
 
 // ============================================
 // Floating Particles with Glow
+// Pre-generated values to avoid hydration mismatch
 // ============================================
+const PARTICLE_CONFIG = {
+  desktop: 30,
+  mobile: 10,
+};
+
+// Pre-generate particle properties (deterministic, no hydration issues)
+const PARTICLES = Array.from({ length: PARTICLE_CONFIG.desktop }, (_, i) => ({
+  id: i,
+  width: (i * 7 % 5) + 2,           // 2-6px
+  height: (i * 7 % 5) + 2,
+  opacity: 0.2 + (i % 6) * 0.1,     // 0.2-0.7
+  left: (i * 37 % 100),             // 0-99%
+  top: (i * 41 % 100),              // 0-99%
+  shadowSize: 5 + (i % 10),         // 5-14px
+  yOffset: -50 - (i % 30),          // -50 to -79
+  xOffset: (i % 20) - 10,           // -10 to 9
+  duration: 6 + (i % 5),            // 6-10s
+  delay: (i % 4),                   // 0-3s
+}));
+
 function FloatingParticles() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: Z_INDEX.particles }}>
-      {[...Array(30)].map((_, i) => (
+      {PARTICLES.map((p) => (
         <motion.div
-          key={i}
+          key={p.id}
           className="absolute rounded-full"
           style={{
-            width: Math.random() * 5 + 2,
-            height: Math.random() * 5 + 2,
-            background: `radial-gradient(circle, rgba(212, 168, 83, ${Math.random() * 0.6 + 0.2}) 0%, transparent 70%)`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            boxShadow: `0 0 ${Math.random() * 10 + 5}px rgba(212, 168, 83, 0.3)`,
+            width: p.width,
+            height: p.height,
+            background: `radial-gradient(circle, rgba(212, 168, 83, ${p.opacity}) 0%, transparent 70%)`,
+            left: `${p.left}%`,
+            top: `${p.top}%`,
+            boxShadow: `0 0 ${p.shadowSize}px rgba(212, 168, 83, 0.3)`,
           }}
           animate={{
-            y: [0, -50 - Math.random() * 30, 0],
-            x: [0, Math.random() * 20 - 10, 0],
+            y: [0, p.yOffset, 0],
+            x: [0, p.xOffset, 0],
             opacity: [0.3, 0.8, 0.3],
             scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: Math.random() * 5 + 6,
+            duration: p.duration,
             repeat: Infinity,
-            delay: Math.random() * 4,
+            delay: p.delay,
             ease: "easeInOut",
           }}
         />
