@@ -853,8 +853,8 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Stepping Stones — z-[74] keeps them below diyas(76), lotus(75), boats(77) */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[74] pointer-events-none overflow-hidden">
+      {/* Stepping Stones — z-[78] keeps them above boats(77), lotus(75), diyas(76) */}
+      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[78] pointer-events-none overflow-hidden">
         <div className="absolute bottom-[52%] left-[8%] pointer-events-auto">
           <SteppingStone label="Schedule" href="/schedule" size={110} phase={0} />
         </div>

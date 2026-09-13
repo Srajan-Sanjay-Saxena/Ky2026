@@ -42,7 +42,7 @@ export function ScrollNavbar() {
       }}
       aria-hidden={!visible}
     >
-      <Navbar position="relative" topOffset={12} />
+      <Navbar position="relative" topOffset={30} />
     </div>
   );
 }

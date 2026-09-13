@@ -27,13 +27,12 @@ const primaryLinks = [
   { label: "HOME", href: "#hero" },
   { label: "EVENTS", href: "/events" },
   { label: "SCHEDULE", href: "/schedule" },
-  { label: "GALLERY", href: "/gallery" },
   { label: "ABOUT", href: "/about" },
 ];
 
-const secondaryLinks = [
-  { label: "LOGIN", href: "/login" },
-  { label: "CONTACT", href: "#contact" },
+const secondaryLinks: { label: string; href: string; icon: "om" | "lotus" }[] = [
+  { label: "LOGIN", href: "/login", icon: "om" },
+  { label: "CONTACT", href: "#contact", icon: "lotus" },
 ];
 
 /**
@@ -63,6 +62,57 @@ function ShineIcon() {
         {/* bright center */}
         <circle cx="12" cy="12" r="2.2" fill="#FFFBEA" />
       </svg>
+    </span>
+  );
+}
+
+/**
+ * Small spiritual / ethereal glyph that sits beside a secondary link.
+ * - "om"    → sacred ॐ rendered in gold with a soft breathing glow.
+ * - "lotus" → a lotus bloom (purity / awakening) drawn in gold.
+ * Both share the ethereal gold gradient + a gentle pulsing halo.
+ */
+function SpiritualIcon({ kind }: { kind: "om" | "lotus" }) {
+  return (
+    <span
+      aria-hidden
+      className="spirit-icon relative inline-flex items-center justify-center shrink-0"
+      style={{ width: "clamp(15px, 1.3vw, 22px)", height: "clamp(15px, 1.3vw, 22px)" }}
+    >
+      {kind === "om" ? (
+        <span
+          className="leading-none"
+          style={{
+            fontFamily: "serif",
+            fontWeight: 700,
+            fontSize: "clamp(15px, 1.3vw, 22px)",
+            background: "linear-gradient(135deg, #FFF3C4, #FFD700 45%, #C8891F)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          ॐ
+        </span>
+      ) : (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          <defs>
+            <linearGradient id="lotusGold" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFF3C4" />
+              <stop offset="50%" stopColor="#FFD700" />
+              <stop offset="100%" stopColor="#C8891F" />
+            </linearGradient>
+          </defs>
+          {/* center petal + side petals + outer petals = lotus bloom */}
+          <path d="M12 3 C13.6 8 13.6 13 12 17 C10.4 13 10.4 8 12 3 Z" fill="url(#lotusGold)" />
+          <path d="M12 17 C9 13 6.5 10.5 4 9.5 C5 13 8 16 12 17 Z" fill="url(#lotusGold)" opacity="0.92" />
+          <path d="M12 17 C15 13 17.5 10.5 20 9.5 C19 13 16 16 12 17 Z" fill="url(#lotusGold)" opacity="0.92" />
+          <path d="M12 17 C7 15 3.5 13.5 1.5 12.5 C3 16 7 18 12 18 Z" fill="url(#lotusGold)" opacity="0.8" />
+          <path d="M12 17 C17 15 20.5 13.5 22.5 12.5 C21 16 17 18 12 18 Z" fill="url(#lotusGold)" opacity="0.8" />
+          {/* water line */}
+          <path d="M3 19 Q12 21 21 19" stroke="#FFE9A8" strokeWidth="0.8" strokeOpacity="0.5" fill="none" />
+        </svg>
+      )}
     </span>
   );
 }
@@ -141,7 +191,7 @@ export function Navbar({
             href="#hero"
             aria-label="Kashi Yatra — Home"
             className="absolute left-[16.18%] top-[52%] -translate-x-1/2 -translate-y-1/2 z-10
-                       h-[150%] sm:h-[162%] md:h-[172%] aspect-square
+                       h-[116%] sm:h-[124%] md:h-[132%] aspect-square
                        transition-transform duration-300 hover:scale-105"
           >
             {/* ── Ethereal divine glow radiating from BEHIND the crest ──
@@ -178,7 +228,7 @@ export function Navbar({
               alt="IIT BHU"
               fill
               priority
-              sizes="120px"
+              sizes="100px"
               className="relative object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
             />
           </Link>
@@ -186,75 +236,56 @@ export function Navbar({
           {/* ── PRIMARY NAV — centered on the bar midline (matches the golden
                  plate's vertical center). ── */}
           <nav
-            className="absolute left-[19%] right-[26%] inset-y-0 hidden md:flex items-center justify-center gap-3 lg:gap-6 z-10"
+            className="absolute left-[19%] right-[26%] inset-y-0 hidden md:flex items-center justify-center gap-4 lg:gap-8 z-10"
             aria-label="Primary"
-            style={{ transform: "translateY(11%)" }}
+            style={{ transform: "translateY(8%)" }}
           >
             {primaryLinks.map((link) => (
-              <div
+              <Link
                 key={link.label}
-                className="flex items-center gap-3 lg:gap-6"
+                href={link.href}
+                className="nav-pill group flex items-center gap-1.5 lg:gap-2
+                           px-3 lg:px-4 py-1 lg:py-1.5 rounded-full
+                           tracking-[0.12em] uppercase whitespace-nowrap
+                           text-[#3a1505] hover:text-[#5a1205]
+                           transition-all duration-300 hover:scale-[1.05]"
+                style={{
+                  fontFamily: "var(--font-ethereal), serif",
+                  fontWeight: 900,
+                  fontSize: "clamp(12px, 1.05vw, 18px)",
+                  background:
+                    "linear-gradient(135deg, rgba(255,215,0,0.28) 0%, rgba(212,168,83,0.18) 50%, rgba(184,134,11,0.28) 100%)",
+                  border: "1px solid rgba(255,215,0,0.55)",
+                  boxShadow:
+                    "0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,245,200,0.35)",
+                  textShadow: "0 1px 1px rgba(255,245,215,0.7)",
+                }}
               >
-                <span className="flex items-center gap-1.5 lg:gap-2 group">
-                  <ShineIcon />
-                  <Link
-                    href={link.href}
-                    className="tracking-[0.12em] uppercase whitespace-nowrap
-                               text-[#3a1505] group-hover:text-[#7a1f10]
-                               transition-colors duration-200
-                               drop-shadow-[0_1px_1px_rgba(255,245,215,0.7)]"
-                    style={{
-                      fontFamily: "var(--font-ethereal), serif",
-                      fontWeight: 900,
-                      fontSize: "clamp(13px, 1.15vw, 20px)",
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                </span>
-              </div>
+                <ShineIcon />
+                {link.label}
+              </Link>
             ))}
           </nav>
 
-          {/* ── SECONDARY LINKS (LOGIN / CONTACT) — left of the golden plate ── */}
+          {/* ── SECONDARY LINKS (LOGIN / CONTACT) with spiritual icons ── */}
           <div
-            className="absolute right-[13%] inset-y-0 hidden md:flex items-center gap-3 lg:gap-4 z-10"
+            className="absolute right-[2%] inset-y-0 hidden md:flex items-center gap-4 lg:gap-6 z-10"
             style={{ transform: "translateY(11%)" }}
           >
             {secondaryLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="tracking-[0.1em] uppercase whitespace-nowrap
+                className="group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
                            text-[#3a1505] hover:text-[#7a1f10] transition-colors duration-200
                            drop-shadow-[0_1px_1px_rgba(255,245,215,0.7)]"
-                style={{ fontFamily: "var(--font-ethereal), serif", fontWeight: 700, fontSize: "clamp(12px, 1vw, 17px)" }}
+                style={{ fontFamily: "var(--font-ethereal), serif", fontWeight: 900, fontSize: "clamp(12px, 1vw, 17px)" }}
               >
+                <SpiritualIcon kind={link.icon} />
                 {link.label}
               </Link>
             ))}
           </div>
-
-          {/* ── CTA — positioned directly over the golden plate baked into
-                 Nav.png. The plate sits lower than the bar midline (~58% down)
-                 and around 93.5% across, so this is anchored independently of
-                 the link rows. ── */}
-          <Link
-            href="/register"
-            className="absolute right-[3.6%] top-[67%] -translate-y-1/2 z-10
-                       hidden md:flex items-center justify-center whitespace-nowrap
-                       uppercase tracking-[0.08em]
-                       text-[#5a2d0a] hover:text-[#3d1e05]
-                       transition-transform duration-200 hover:scale-[1.04]"
-            style={{
-              textShadow: "0 1px 0 rgba(255,240,200,0.6)",
-              fontFamily: "var(--font-ethereal), serif",
-              fontWeight: 900,
-              fontSize: "clamp(12px, 1vw, 17px)",
-            }}
-          >
-            APPLY NOW
-          </Link>
 
           {/* ── MOBILE menu button ── */}
           <MobileMenu />
@@ -275,69 +306,163 @@ function MobileMenu() {
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="absolute right-[3%] top-1/2 -translate-y-1/2 z-20
+        className="absolute right-[2%] top-[58%] -translate-y-1/2 z-20
                    flex h-8 w-8 flex-col items-center justify-center gap-1.5"
       >
         <span
-          className="block h-0.5 w-5 rounded-full bg-[#4a2410] transition-transform duration-300"
-          style={{ transform: open ? "translateY(6px) rotate(45deg)" : "none" }}
+          className="hamburger-line block h-[3px] w-6 rounded-full transition-transform duration-300"
+          style={{ transform: open ? "translateY(7px) rotate(45deg)" : "none" }}
         />
         <span
-          className="block h-0.5 w-5 rounded-full bg-[#4a2410] transition-opacity duration-300"
+          className="hamburger-line hamburger-line-2 block h-[3px] w-6 rounded-full transition-opacity duration-300"
           style={{ opacity: open ? 0 : 1 }}
         />
         <span
-          className="block h-0.5 w-5 rounded-full bg-[#4a2410] transition-transform duration-300"
+          className="hamburger-line hamburger-line-3 block h-[3px] w-6 rounded-full transition-transform duration-300"
           style={{
-            transform: open ? "translateY(-6px) rotate(-45deg)" : "none",
+            transform: open ? "translateY(-7px) rotate(-45deg)" : "none",
           }}
         />
       </button>
 
       {/* Dropdown panel */}
       <div
-        className={`absolute left-2 right-2 top-[calc(100%+6px)] z-10 origin-top overflow-hidden rounded-xl
-                    transition-all duration-300 ${
+        className={`naksha-panel absolute left-2 right-2 top-[calc(100%+8px)] z-10 origin-top overflow-hidden
+                    transition-all duration-500 ${
                       open
-                        ? "max-h-[420px] opacity-100"
+                        ? "max-h-[560px] opacity-100"
                         : "pointer-events-none max-h-0 opacity-0"
                     }`}
         style={{
+          borderRadius: "14px",
+          // Aged golden parchment / naksha
           background:
-            "linear-gradient(180deg, rgba(196,160,110,0.97) 0%, rgba(150,110,70,0.97) 100%)",
-          border: "1px solid rgba(255,215,0,0.4)",
-          boxShadow: "0 12px 30px rgba(0,0,0,0.5)",
-          backdropFilter: "blur(6px)",
+            "radial-gradient(ellipse at 30% 20%, rgba(245,222,164,0.98) 0%, rgba(214,176,110,0.98) 45%, rgba(168,124,64,0.98) 100%)",
+          border: "2px solid rgba(255,215,0,0.55)",
+          boxShadow:
+            "0 14px 34px rgba(0,0,0,0.55), inset 0 0 24px rgba(120,72,20,0.4), inset 0 0 2px rgba(255,240,200,0.6)",
         }}
       >
+        {/* Mottled parchment texture */}
+        <span
+          aria-hidden
+          className="absolute inset-0 pointer-events-none opacity-30 mix-blend-multiply"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")",
+          }}
+        />
+
+        {/* Faint mystical mandala watermark behind the links */}
+        <span
+          aria-hidden
+          className="naksha-mandala absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{
+            width: "78%",
+            aspectRatio: "1",
+            opacity: 0.14,
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%235a3410' stroke-width='1'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='78'/%3E%3Ccircle cx='100' cy='100' r='54'/%3E%3Ccircle cx='100' cy='100' r='30'/%3E%3Cg%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(45 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(90 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(135 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(180 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(225 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(270 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(315 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        />
+
+        {/* Inner ornamental frame */}
+        <span
+          aria-hidden
+          className="absolute inset-[6px] rounded-[10px] pointer-events-none"
+          style={{ border: "1px solid rgba(122,61,16,0.5)" }}
+        />
+        {/* Decorative corner diamonds */}
+        {[
+          "top-[10px] left-[10px]",
+          "top-[10px] right-[10px]",
+          "bottom-[10px] left-[10px]",
+          "bottom-[10px] right-[10px]",
+        ].map((pos) => (
+          <span
+            key={pos}
+            aria-hidden
+            className={`absolute ${pos} w-2 h-2 rotate-45 pointer-events-none`}
+            style={{
+              background:
+                "linear-gradient(135deg, #FFD700, #B8860B)",
+              boxShadow: "0 0 6px rgba(255,215,0,0.7)",
+            }}
+          />
+        ))}
+
         <nav
-          className="flex flex-col p-3"
+          className="relative flex flex-col px-5 pb-4 pt-3 gap-1"
           aria-label="Mobile"
           style={{ fontFamily: "var(--font-ethereal), serif" }}
         >
-          {[...primaryLinks, ...secondaryLinks].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-sm font-semibold uppercase tracking-[0.1em]
-                         text-[#3d1e0a] hover:bg-[rgba(255,215,0,0.2)] transition-colors"
+          {/* Mystical header — ॐ crowned title */}
+          <div className="flex flex-col items-center pb-2">
+            <span
+              className="text-[18px] leading-none"
+              style={{
+                background: "linear-gradient(135deg, #FFF3C4, #FFD700 45%, #B8860B)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                filter: "drop-shadow(0 0 4px rgba(255,215,0,0.6))",
+              }}
             >
-              {link.label}
-            </Link>
+              ॐ
+            </span>
+            <span
+              className="mt-1 text-[10px] tracking-[0.4em] uppercase"
+              style={{ color: "#6b3f14", fontWeight: 900 }}
+            >
+              नक्शा
+            </span>
+            <span
+              aria-hidden
+              className="mt-1.5 flex items-center justify-center gap-2 w-full text-[#8a5a1a] opacity-80"
+            >
+              <span className="h-px flex-1" style={{ background: "linear-gradient(90deg, transparent, #8a5a1a)" }} />
+              <span className="text-[9px]">✦</span>
+              <span className="h-px flex-1" style={{ background: "linear-gradient(90deg, #8a5a1a, transparent)" }} />
+            </span>
+          </div>
+
+          {[...primaryLinks, ...secondaryLinks].map((link, i, arr) => (
+            <div key={link.label} className="flex flex-col">
+              <Link
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="naksha-link naksha-item flex items-center justify-center gap-2 px-3 py-2 rounded-md
+                           text-[15px] uppercase tracking-[0.18em] text-center
+                           text-[#3d1e0a] transition-all duration-300"
+                style={{
+                  fontWeight: 900,
+                  textShadow: "0 1px 1px rgba(255,245,215,0.6)",
+                  // staggered entrance when the panel opens
+                  opacity: open ? 1 : 0,
+                  transform: open ? "translateY(0)" : "translateY(-8px)",
+                  transitionDelay: open ? `${120 + i * 70}ms` : "0ms",
+                }}
+              >
+                <span aria-hidden className="text-[#b8860b] text-[9px]">◆</span>
+                {link.label}
+                <span aria-hidden className="text-[#b8860b] text-[9px]">◆</span>
+              </Link>
+              {/* mystical divider between items */}
+              {i < arr.length - 1 && (
+                <span
+                  aria-hidden
+                  className="flex items-center justify-center gap-2 py-0.5 text-[#8a5a1a] opacity-60"
+                >
+                  <span className="h-px w-8" style={{ background: "linear-gradient(90deg, transparent, #8a5a1a)" }} />
+                  <span className="text-[9px]">✦</span>
+                  <span className="h-px w-8" style={{ background: "linear-gradient(90deg, #8a5a1a, transparent)" }} />
+                </span>
+              )}
+            </div>
           ))}
-          <Link
-            href="/register"
-            onClick={() => setOpen(false)}
-            className="mt-2 px-3 py-2.5 rounded-lg text-center text-sm font-bold uppercase tracking-[0.1em]
-                       text-[#5a2d0a]"
-            style={{
-              background: "linear-gradient(135deg, #FFD700, #E8B820)",
-              boxShadow: "0 3px 10px rgba(0,0,0,0.35)",
-            }}
-          >
-            APPLY NOW
-          </Link>
         </nav>
       </div>
     </div>

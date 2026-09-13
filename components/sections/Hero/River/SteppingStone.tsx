@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 
@@ -15,8 +16,6 @@ interface SteppingStoneProps {
   style?: CSSProperties;
 }
 
-const STONE_ID_PREFIX = "stone";
-
 export function SteppingStone({
   label,
   href,
@@ -26,7 +25,6 @@ export function SteppingStone({
   className = "",
   style,
 }: SteppingStoneProps) {
-  const height = size * 0.42;
   const animStyle: CSSProperties = {
     animation: `stoneHarmonicBob 3.6s ease-in-out infinite`,
     animationDelay: `${phase}s`,
@@ -37,109 +35,100 @@ export function SteppingStone({
 
   const stone = (
     <span style={animStyle} className={className}>
-      <svg
-        width={size}
-        height={height + size * 0.18}
-        viewBox={`0 0 120 62`}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ display: "block", overflow: "visible" }}
+      {/* Stone + its water-contact effects, stacked vertically */}
+      <span
+        className="stone-interactive relative inline-block"
+        style={{ width: size, height: size }}
       >
-        <defs>
-          {/* Dark basalt/granite — wet Ganga stone */}
-          <radialGradient id={`${STONE_ID_PREFIX}Base`} cx="38%" cy="32%" r="62%">
-            <stop offset="0%" stopColor="#6e6e6e" />
-            <stop offset="30%" stopColor="#4a4a4a" />
-            <stop offset="65%" stopColor="#2e2e2e" />
-            <stop offset="100%" stopColor="#1a1a1a" />
-          </radialGradient>
+        {/* ── Water effects BELOW the stone (sit behind it) ── */}
+        {/* Expanding ripple rings around the water-line */}
+        <span
+          aria-hidden
+          className="stone-ripple absolute left-1/2 -translate-x-1/2 rounded-[50%] pointer-events-none"
+          style={{
+            bottom: size * 0.14,
+            width: size * 0.86,
+            height: size * 0.22,
+            border: "1px solid rgba(180,225,255,0.35)",
+          }}
+        />
+        <span
+          aria-hidden
+          className="stone-ripple stone-ripple-2 absolute left-1/2 -translate-x-1/2 rounded-[50%] pointer-events-none"
+          style={{
+            bottom: size * 0.15,
+            width: size * 0.66,
+            height: size * 0.17,
+            border: "1px solid rgba(150,210,245,0.3)",
+          }}
+        />
+        {/* Soft water-contact glow where the stone meets the river */}
+        <span
+          aria-hidden
+          className="stone-waterglow absolute left-1/2 -translate-x-1/2 rounded-[50%] pointer-events-none"
+          style={{
+            bottom: size * 0.1,
+            width: size * 0.82,
+            height: size * 0.2,
+            background:
+              "radial-gradient(ellipse at center, rgba(126,200,227,0.55) 0%, rgba(74,154,186,0.28) 45%, rgba(26,74,110,0) 75%)",
+            filter: "blur(3px)",
+          }}
+        />
+        {/* Faint shimmering reflection of the stone below the water-line */}
+        <span
+          aria-hidden
+          className="absolute left-1/2 -translate-x-1/2 pointer-events-none overflow-hidden"
+          style={{
+            bottom: -size * 0.02,
+            width: size * 0.7,
+            height: size * 0.22,
+            opacity: 0.28,
+            transform: "translateX(-50%) scaleY(-1)",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 90%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 90%)",
+            filter: "blur(2px)",
+          }}
+        >
+          <Image
+            src="/stone.png"
+            alt=""
+            fill
+            sizes={`${size}px`}
+            className="object-contain object-top select-none"
+          />
+        </span>
 
-          {/* Side/thickness — darker underside */}
-          <linearGradient id={`${STONE_ID_PREFIX}Edge`} x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#3a3a3a" stopOpacity="1" />
-            <stop offset="100%" stopColor="#0d0d0d" stopOpacity="1" />
-          </linearGradient>
-
-          {/* Wet sheen — specular highlight */}
-          <radialGradient id={`${STONE_ID_PREFIX}Wet`} cx="36%" cy="28%" r="38%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.28" />
-            <stop offset="60%" stopColor="#aaccdd" stopOpacity="0.08" />
-            <stop offset="100%" stopColor="#aaccdd" stopOpacity="0" />
-          </radialGradient>
-
-          {/* Water-line shimmer at base */}
-          <linearGradient id={`${STONE_ID_PREFIX}Water`} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#1a4a6e" stopOpacity="0" />
-            <stop offset="30%" stopColor="#4a9aba" stopOpacity="0.5" />
-            <stop offset="50%" stopColor="#7ec8e3" stopOpacity="0.65" />
-            <stop offset="70%" stopColor="#4a9aba" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#1a4a6e" stopOpacity="0" />
-          </linearGradient>
-
-          {/* Algae/moss tint — subtle green on lower half */}
-          <radialGradient id={`${STONE_ID_PREFIX}Moss`} cx="55%" cy="75%" r="55%">
-            <stop offset="0%" stopColor="#3a5c30" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#3a5c30" stopOpacity="0" />
-          </radialGradient>
-
-          <filter id={`${STONE_ID_PREFIX}Shadow`} x="-20%" y="-20%" width="140%" height="170%">
-            <feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#000000" floodOpacity="0.7" />
-          </filter>
-        </defs>
-
-        {/* ── Stone side/thickness ── */}
-        <ellipse cx="60" cy="53" rx="52" ry="11" fill="url(#stoneEdge)" />
-
-        {/* ── Main stone top face ── */}
-        <ellipse
-          cx="60" cy="33"
-          rx="52" ry="19"
-          fill="url(#stoneBase)"
-          filter={`url(#${STONE_ID_PREFIX}Shadow)`}
+        {/* ── The stone itself ── */}
+        <Image
+          src="/stone.png"
+          alt={label ? `${label} stone` : "stepping stone"}
+          fill
+          sizes={`${size}px`}
+          className="stone-img object-contain select-none pointer-events-none relative"
+          style={{ filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.55))" }}
         />
 
-        {/* ── Moss/algae overlay ── */}
-        <ellipse cx="60" cy="33" rx="52" ry="19" fill="url(#stoneMoss)" />
-
-        {/* ── Wet specular sheen ── */}
-        <ellipse cx="60" cy="33" rx="52" ry="19" fill="url(#stoneWet)" />
-
-        {/* ── Crack lines — sharp, realistic ── */}
-        <path d="M34 28 Q42 31 48 29 Q54 27 60 31" stroke="#111" strokeWidth="0.9" strokeOpacity="0.7" fill="none" />
-        <path d="M60 31 Q65 34 72 32" stroke="#111" strokeWidth="0.7" strokeOpacity="0.5" fill="none" />
-        <path d="M72 26 Q80 29 88 27 Q93 26 98 29" stroke="#111" strokeWidth="0.7" strokeOpacity="0.45" fill="none" />
-        <path d="M44 37 Q52 39 58 37 Q64 35 70 38" stroke="#222" strokeWidth="0.5" strokeOpacity="0.4" fill="none" />
-        {/* tiny pore dots */}
-        <circle cx="38" cy="30" r="0.8" fill="#111" opacity="0.5" />
-        <circle cx="82" cy="28" r="0.7" fill="#111" opacity="0.4" />
-        <circle cx="55" cy="40" r="0.6" fill="#111" opacity="0.35" />
-
-        {/* ── Water shimmer at base ── */}
-        <ellipse cx="60" cy="53" rx="52" ry="5" fill="url(#stoneWater)" opacity="0.75">
-          <animate attributeName="opacity" values="0.55;0.85;0.55" dur="2.4s" repeatCount="indefinite" />
-        </ellipse>
-
-        {/* ── Label text ── */}
         {label && (
-          <text
-            x="60"
-            y="37"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontSize="9"
-            fontFamily="serif"
-            fontWeight="600"
-            fill="#f0e8c8"
-            style={{ textShadow: "0 1px 4px rgba(0,0,0,0.95)", letterSpacing: "0.5px" }}
-            paintOrder="stroke"
-            stroke="#000000"
-            strokeWidth="3"
-            strokeLinejoin="round"
+          <span
+            className="stone-label absolute inset-0 flex items-center justify-center text-center"
+            style={{
+              fontFamily: "var(--font-ethereal), serif",
+              fontWeight: 700,
+              fontSize: size * 0.13,
+              letterSpacing: "0.5px",
+              color: "#f0e8c8",
+              textShadow:
+                "0 1px 4px rgba(0,0,0,0.95), 0 0 2px rgba(0,0,0,0.9)",
+              paddingBottom: size * 0.04,
+            }}
           >
             {label}
-          </text>
+          </span>
         )}
-      </svg>
+      </span>
     </span>
   );
 
@@ -161,3 +150,4 @@ export function SteppingStone({
 
   return stone;
 }
+
