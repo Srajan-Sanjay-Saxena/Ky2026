@@ -140,10 +140,10 @@ export function FestHighlightsSection() {
         <MandalaRing className="w-full h-full text-[#FF6B00]" />
       </div>
 
-      {/* Floating Decorative Elements - reduced on mobile */}
+      {/* Floating Decorative Elements - hidden on mobile */}
       <div
         ref={decorRef}
-        className="absolute inset-0 pointer-events-none overflow-hidden z-30"
+        className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden z-30"
       >
         {/* Trishuls - hidden on small mobile */}
         <div className="decor-item hidden sm:block absolute top-[10%] left-[5%] w-8 sm:w-10 md:w-12 h-16 sm:h-20 md:h-24 text-[#FFD700] opacity-30">
@@ -323,7 +323,7 @@ export function FestHighlightsSection() {
       </div>
 
       {/* Mobile Temple - Shows only on mobile/tablet */}
-      <div className="lg:hidden w-full px-4 mb-6 sm:mb-8">
+      <div className="lg:hidden w-full px-4 pt-16 sm:pt-20 mb-6 sm:mb-8">
         <Image
           src="/durga_temple.svg"
           alt="Kashi Yatra Festival Venue"
@@ -338,7 +338,7 @@ export function FestHighlightsSection() {
       </div>
 
       {/* CONTENT - Right side on desktop, full width on mobile */}
-      <div className="relative z-10 min-h-[60vh] sm:min-h-[70vh] lg:min-h-[85vh] flex items-center">
+      <div className="relative z-10 min-h-[50vh] sm:min-h-[60vh] lg:min-h-[85vh] flex items-start sm:items-center pt-4 sm:pt-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center lg:justify-end">
             <div
@@ -369,16 +369,15 @@ export function FestHighlightsSection() {
               </h2>
 
               <p
-                className="text-sm sm:text-base md:text-lg leading-relaxed mb-3 sm:mb-4 opacity-90"
+                className="text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-4 opacity-90"
                 style={{ color: "#FDF6E3" }}
               >
                 Step into a world where ancient traditions meet modern
-                celebrations. Kashi Yatra brings you three electrifying days of
-                music, dance, competitions, and unforgettable experiences.
+                celebrations. Three electrifying days of music, dance, and unforgettable experiences.
               </p>
 
               <p
-                className="text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6 opacity-70"
+                className="hidden sm:block text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6 opacity-70"
                 style={{ color: "#FDF6E3" }}
               >
                 From soul-stirring classical performances to heart-pounding DJ
@@ -387,12 +386,35 @@ export function FestHighlightsSection() {
                 year.
               </p>
 
-              {/* Highlight Cards */}
+              {/* Highlight Cards - 2 on mobile, 4 on desktop */}
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-                {highlights.map((item, i) => (
+                {highlights.slice(0, 2).map((item, i) => (
                   <div
                     key={i}
-                    className="highlight-card p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                    className="sm:hidden highlight-card p-3 rounded-lg transition-all duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(176,63,35,0.4), rgba(45,24,16,0.6))",
+                      border: "1px solid rgba(255,107,0,0.4)",
+                      boxShadow: "0 4px 15px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    <span className="text-2xl mb-1 block">
+                      {item.icon}
+                    </span>
+                    <h4 className="font-bold text-[#FFD700] text-sm mb-1">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-[#FDF6E3] opacity-70">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+                {/* All 4 cards on sm+ */}
+                {highlights.map((item, i) => (
+                  <div
+                    key={`desktop-${i}`}
+                    className="hidden sm:block highlight-card p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(176,63,35,0.4), rgba(45,24,16,0.6))",
@@ -414,8 +436,8 @@ export function FestHighlightsSection() {
                 ))}
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
+              {/* CTA Buttons - Hidden on mobile */}
+              <div className="hidden sm:flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                 <button
                   className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105"
                   style={{
