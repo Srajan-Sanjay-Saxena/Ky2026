@@ -6,15 +6,10 @@ import { motion } from "framer-motion";
 import type { PassConfig } from "./passes.config";
 import { ANIMATION } from "./passes.config";
 import {
-  CARD_CONTAINER,
-  CARD_FRAME_OUTER,
-  CARD_FRAME_INNER,
   CARD_SHADOW,
-  CARD_BACK_BG,
   POPULAR_BADGE_BG,
   BUTTON_BASE,
   PRICE_GRADIENT,
-  CHECK_ICON_COLOR,
   CHECK_ICON_HIGHLIGHT,
   PASS_IMAGE_SHADOW,
 } from "./passes.styles";
@@ -25,54 +20,165 @@ interface PassCardProps {
   onSelect?: (passId: string) => void;
 }
 
-// Check icon component
-function CheckIcon({ highlight }: { highlight?: boolean }) {
+/**
+ * Royal corner ornament - floral/paisley inspired
+ */
+function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
+  const rotations = { tl: 0, tr: 90, bl: -90, br: 180 };
+  const positions = {
+    tl: "top-2 left-2",
+    tr: "top-2 right-2",
+    bl: "bottom-2 left-2",
+    br: "bottom-2 right-2",
+  };
+
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 16 16"
-      fill="none"
-      className="flex-shrink-0 mt-0.5"
+    <div
+      className={`absolute ${positions[position]} w-12 h-12 pointer-events-none`}
+      style={{ transform: `rotate(${rotations[position]}deg)` }}
     >
-      <path
-        d="M13.5 4.5L6 12L2.5 8.5"
-        stroke={highlight ? CHECK_ICON_HIGHLIGHT : CHECK_ICON_COLOR}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+      <svg viewBox="0 0 50 50" className="w-full h-full">
+        {/* Main corner flourish */}
+        <path
+          d="M5 5 Q5 25 25 25 Q15 15 5 5"
+          fill="none"
+          stroke="url(#goldGrad)"
+          strokeWidth="1.5"
+          opacity="0.7"
+        />
+        {/* Outer curve */}
+        <path
+          d="M2 2 Q2 30 30 30"
+          fill="none"
+          stroke="url(#goldGrad)"
+          strokeWidth="1"
+          opacity="0.5"
+        />
+        {/* Inner decorative curl */}
+        <path
+          d="M8 8 C12 8 15 12 15 18 C15 12 18 8 24 8"
+          fill="none"
+          stroke="#D4A853"
+          strokeWidth="1"
+          opacity="0.6"
+        />
+        {/* Small leaf/paisley */}
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="4"
+          ry="6"
+          fill="none"
+          stroke="#FFD700"
+          strokeWidth="0.8"
+          opacity="0.5"
+          transform="rotate(-45 12 12)"
+        />
+        {/* Center dot */}
+        <circle cx="8" cy="8" r="2" fill="#D4A853" opacity="0.7" />
+        {/* Gradient definition */}
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFD700" />
+            <stop offset="50%" stopColor="#D4A853" />
+            <stop offset="100%" stopColor="#B8860B" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
   );
 }
 
 /**
- * Royal ornate frame component - creates the thick decorative border
+ * Card background pattern - subtle damask/royal textile
+ */
+function CardBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden rounded-[7px]">
+      {/* Base gradient */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            linear-gradient(180deg,
+              rgba(35, 18, 45, 0.98) 0%,
+              rgba(28, 14, 38, 0.99) 30%,
+              rgba(22, 10, 32, 1) 60%,
+              rgba(18, 8, 28, 1) 100%
+            )
+          `,
+        }}
+      />
+      
+      {/* Damask pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a853' fill-rule='evenodd'%3E%3Cpath d='M20 20c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm0-2c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5z'/%3E%3Cpath d='M20 10c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* Vertical gradient lines - like fabric texture */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(212, 168, 83, 0.5) 2px,
+            rgba(212, 168, 83, 0.5) 3px
+          )`,
+          backgroundSize: "20px 100%",
+        }}
+      />
+
+      {/* Center vignette glow */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse at 50% 40%, rgba(212, 168, 83, 0.08) 0%, transparent 50%)`,
+        }}
+      />
+    </div>
+  );
+}
+
+/**
+ * Royal ornate frame
  */
 function RoyalFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative w-full h-full">
       {/* Outer gold frame */}
       <div
-        className="absolute inset-0 rounded-[16px]"
+        className="absolute inset-0 rounded-[14px]"
         style={{
-          background: CARD_FRAME_OUTER,
-          padding: "4px",
+          background: `linear-gradient(180deg, 
+            #4a3510 0%, #8B6914 10%, #D4A853 25%, 
+            #FFD700 50%, #D4A853 75%, #8B6914 90%, #4a3510 100%
+          )`,
+          padding: "3px",
         }}
       >
-        {/* Dark inset line */}
+        {/* Dark inset */}
         <div
-          className="absolute inset-[4px] rounded-[12px]"
+          className="w-full h-full rounded-[11px]"
           style={{
-            background: CARD_FRAME_INNER,
-            padding: "3px",
+            background: `linear-gradient(180deg, 
+              #1a0d10 0%, #2a1a18 50%, #1a0d10 100%
+            )`,
+            padding: "2px",
           }}
         >
           {/* Inner gold line */}
           <div
-            className="absolute inset-[3px] rounded-[9px]"
+            className="w-full h-full rounded-[9px]"
             style={{
-              background: CARD_FRAME_OUTER,
+              background: `linear-gradient(180deg, 
+                #8B6914 0%, #D4A853 30%, #FFD700 50%, #D4A853 70%, #8B6914 100%
+              )`,
               padding: "2px",
             }}
           >
@@ -82,58 +188,6 @@ function RoyalFrame({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Corner ornaments - top left */}
-      <div className="absolute top-0 left-0 w-8 h-8">
-        <svg viewBox="0 0 32 32" className="w-full h-full">
-          <path
-            d="M0 8 L0 0 L8 0"
-            fill="none"
-            stroke="#FFD700"
-            strokeWidth="3"
-          />
-          <circle cx="4" cy="4" r="3" fill="#D4A853" />
-        </svg>
-      </div>
-
-      {/* Corner ornaments - top right */}
-      <div className="absolute top-0 right-0 w-8 h-8">
-        <svg viewBox="0 0 32 32" className="w-full h-full">
-          <path
-            d="M32 8 L32 0 L24 0"
-            fill="none"
-            stroke="#FFD700"
-            strokeWidth="3"
-          />
-          <circle cx="28" cy="4" r="3" fill="#D4A853" />
-        </svg>
-      </div>
-
-      {/* Corner ornaments - bottom left */}
-      <div className="absolute bottom-0 left-0 w-8 h-8">
-        <svg viewBox="0 0 32 32" className="w-full h-full">
-          <path
-            d="M0 24 L0 32 L8 32"
-            fill="none"
-            stroke="#FFD700"
-            strokeWidth="3"
-          />
-          <circle cx="4" cy="28" r="3" fill="#D4A853" />
-        </svg>
-      </div>
-
-      {/* Corner ornaments - bottom right */}
-      <div className="absolute bottom-0 right-0 w-8 h-8">
-        <svg viewBox="0 0 32 32" className="w-full h-full">
-          <path
-            d="M32 24 L32 32 L24 32"
-            fill="none"
-            stroke="#FFD700"
-            strokeWidth="3"
-          />
-          <circle cx="28" cy="28" r="3" fill="#D4A853" />
-        </svg>
       </div>
     </div>
   );
@@ -155,7 +209,6 @@ export const PassCard = memo(function PassCard({
   }, []);
 
   const handleFlip = () => setIsFlipped((prev) => !prev);
-
   const floatDelay = index * 0.4;
 
   return (
@@ -203,21 +256,27 @@ export const PassCard = memo(function PassCard({
           <RoyalFrame>
             <div
               className="relative w-full h-full flex flex-col"
-              style={{
-                ...CARD_CONTAINER,
-                boxShadow: CARD_SHADOW,
-              }}
+              style={{ boxShadow: CARD_SHADOW }}
             >
-              {/* Subtle inner glow */}
+              {/* Textured background */}
+              <CardBackground />
+
+              {/* Corner ornaments */}
+              <CornerOrnament position="tl" />
+              <CornerOrnament position="tr" />
+              <CornerOrnament position="bl" />
+              <CornerOrnament position="br" />
+
+              {/* Accent glow based on pass type */}
               <div
-                className="absolute inset-0 opacity-25 pointer-events-none"
+                className="absolute inset-0 opacity-20 pointer-events-none"
                 style={{
-                  background: `radial-gradient(ellipse at 50% 30%, ${pass.glowColor} 0%, transparent 60%)`,
+                  background: `radial-gradient(ellipse at 50% 30%, ${pass.glowColor} 0%, transparent 50%)`,
                 }}
               />
 
               {/* Pass image area */}
-              <div className="relative flex-1 flex items-center justify-center p-2">
+              <div className="relative flex-1 flex items-center justify-center p-2 z-10">
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{
@@ -239,7 +298,6 @@ export const PassCard = memo(function PassCard({
 
               {/* Bottom info */}
               <div className="relative z-10 px-4 pb-4 text-center">
-                {/* Price */}
                 <div className="mb-3">
                   <span className="text-sm text-gray-400">Price: </span>
                   <span className="text-2xl font-bold" style={PRICE_GRADIENT}>
@@ -247,7 +305,6 @@ export const PassCard = memo(function PassCard({
                   </span>
                 </div>
 
-                {/* CTA Button */}
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -277,21 +334,27 @@ export const PassCard = memo(function PassCard({
           <RoyalFrame>
             <div
               className="relative w-full h-full flex flex-col"
-              style={{
-                ...CARD_BACK_BG,
-                boxShadow: CARD_SHADOW,
-              }}
+              style={{ boxShadow: CARD_SHADOW }}
             >
+              {/* Textured background */}
+              <CardBackground />
+
+              {/* Corner ornaments */}
+              <CornerOrnament position="tl" />
+              <CornerOrnament position="tr" />
+              <CornerOrnament position="bl" />
+              <CornerOrnament position="br" />
+
               {/* Accent line at top */}
               <div
-                className="h-1 w-full"
+                className="relative z-10 h-1 w-full"
                 style={{
                   background: `linear-gradient(90deg, transparent, ${pass.accentColor}, transparent)`,
                 }}
               />
 
               {/* Content */}
-              <div className="flex-1 flex flex-col p-4 pt-3">
+              <div className="relative z-10 flex-1 flex flex-col p-4 pt-3">
                 {/* Header */}
                 <div className="text-center mb-3">
                   <h3
@@ -315,7 +378,7 @@ export const PassCard = memo(function PassCard({
                           benefit.highlight ? "text-yellow-200" : "text-gray-300"
                         }`}
                       >
-                        <span className="text-[#D4A853]">•</span>
+                        <span style={{ color: CHECK_ICON_HIGHLIGHT }}>✦</span>
                         <span>{benefit.text}</span>
                       </li>
                     ))}
@@ -327,8 +390,9 @@ export const PassCard = memo(function PassCard({
                   <div
                     className="w-16 h-16 rounded-lg flex items-center justify-center"
                     style={{
-                      background: "rgba(255,255,255,0.05)",
-                      border: "2px solid rgba(212, 168, 83, 0.4)",
+                      background: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(212, 168, 83, 0.3)",
+                      boxShadow: "inset 0 0 20px rgba(212, 168, 83, 0.1)",
                     }}
                   >
                     <svg
