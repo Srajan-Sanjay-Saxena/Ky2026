@@ -20,11 +20,11 @@ export const SIZE_RIVER = {
 
 /** Stepping stone sizes (width = height for square stones) */
 export const SIZE_STONES = {
-  SCHEDULE: { mobile: 70, desktop: 110 },
-  EVENTS: { mobile: 100, desktop: 110 },
-  REGISTER: { mobile: 85, desktop: 125 },
+  SCHEDULE: { mobile: 70, desktop: 130},
+  EVENTS: { mobile: 100, desktop: 130 },
+  REGISTER: { mobile: 85, desktop: 130 },
   GALLERY: { mobile: 70, desktop: 120 },
-  ABOUT: { mobile: 65, desktop: 100 },
+  ABOUT: { mobile: 65, desktop: 120 },
 } as const;
 
 /** Stepping stone label text sizes */
@@ -43,17 +43,17 @@ export const SIZE_LOTUS = {
   RATIO: 1.2, // width / height = 60/50 = 1.2
   LOTUS_1: {
     mobile: { width: "3rem", height: "2.5rem" },
-    sm: { width: "3.6rem", height: "3rem" },
+    sm: { width: "2.6rem", height: "1.8rem" },
     md: { width: "4.2rem", height: "3.5rem" },
   },
   LOTUS_2: {
     mobile: { width: "2.4rem", height: "2rem" },
-    sm: { width: "3rem", height: "2.5rem" },
+    sm: { width: "2.5rem", height: "1.5rem" },
     md: { width: "3.6rem", height: "3rem" },
   },
   LOTUS_3: {
     mobile: { width: "2.4rem", height: "2rem" },
-    sm: { width: "3.3rem", height: "2.75rem" },
+    sm: { width: "2.3rem", height: "1.75rem" },
     md: { width: "3.9rem", height: "3.25rem" },
   },
 

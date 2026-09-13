@@ -1,0 +1,105 @@
+"use client";
+
+import { Z_HERO, POS_STONES, SIZE_STONES } from "@/components/constants";
+import { SteppingStone } from "./SteppingStone";
+
+/**
+ * Mobile stones - shown only on mobile (< 640px)
+ * Uses mobile positions and sizes from constants
+ */
+export function StonesMobile() {
+  return (
+    <>
+      {/* Schedule - left side */}
+      <div
+        className="absolute pointer-events-auto sm:opacity-0 sm:pointer-events-none"
+        style={{
+          zIndex: Z_HERO.STONE_SCHEDULE,
+          bottom: POS_STONES.SCHEDULE.mobile.bottom,
+          left: POS_STONES.SCHEDULE.mobile.left,
+        }}
+      >
+        <SteppingStone
+          label="Schedule"
+          href="/schedule"
+          size={SIZE_STONES.SCHEDULE.mobile}
+          sizeDesktop={SIZE_STONES.SCHEDULE.mobile}
+          phase={0}
+        />
+      </div>
+
+      {/* Events - left-center */}
+      <div
+        className="absolute pointer-events-auto sm:opacity-0 sm:pointer-events-none"
+        style={{
+          zIndex: Z_HERO.STONE_EVENTS,
+          bottom: POS_STONES.EVENTS.mobile.bottom,
+          left: POS_STONES.EVENTS.mobile.left,
+        }}
+      >
+        <SteppingStone
+          label="Events"
+          href="/events"
+          size={SIZE_STONES.EVENTS.mobile}
+          sizeDesktop={SIZE_STONES.EVENTS.mobile}
+          phase={-0.8}
+        />
+      </div>
+
+      {/* Register - center (main CTA) */}
+      <div
+        className="absolute pointer-events-auto sm:opacity-0 sm:pointer-events-none"
+        style={{
+          zIndex: Z_HERO.STONE_REGISTER,
+          bottom: POS_STONES.REGISTER.mobile.bottom,
+          left: POS_STONES.REGISTER.mobile.left,
+          transform: POS_STONES.REGISTER.mobile.transform,
+        }}
+      >
+        <SteppingStone
+          label="Register"
+          href="/register"
+          size={SIZE_STONES.REGISTER.mobile}
+          sizeDesktop={SIZE_STONES.REGISTER.mobile}
+          phase={-1.6}
+        />
+      </div>
+
+      {/* Gallery - right-center */}
+      <div
+        className="absolute pointer-events-auto sm:opacity-0 sm:pointer-events-none"
+        style={{
+          zIndex: Z_HERO.STONE_GALLERY,
+          bottom: POS_STONES.GALLERY.mobile.bottom,
+          right: POS_STONES.GALLERY.mobile.right,
+        }}
+      >
+        <SteppingStone
+          label="Gallery"
+          href="/gallery"
+          size={SIZE_STONES.GALLERY.mobile}
+          sizeDesktop={SIZE_STONES.GALLERY.mobile}
+          phase={-0.4}
+        />
+      </div>
+
+      {/* About - right side */}
+      <div
+        className="absolute pointer-events-auto sm:opacity-0 sm:pointer-events-none"
+        style={{
+          zIndex: Z_HERO.STONE_ABOUT,
+          bottom: POS_STONES.ABOUT.mobile.bottom,
+          right: POS_STONES.ABOUT.mobile.right,
+        }}
+      >
+        <SteppingStone
+          label="About"
+          href="/about"
+          size={SIZE_STONES.ABOUT.mobile}
+          sizeDesktop={SIZE_STONES.ABOUT.mobile}
+          phase={-1.2}
+        />
+      </div>
+    </>
+  );
+}

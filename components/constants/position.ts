@@ -14,7 +14,7 @@
 export const POS_STONES = {
   SCHEDULE: {
     mobile: { bottom: "60%", left: "5%" },
-    sm: { bottom: "17%", left: "8%" },
+    sm: { bottom: "27%", left: "8%" },
   },
   EVENTS: {
     mobile: { bottom: "25%", left: "10%" },
@@ -22,7 +22,7 @@ export const POS_STONES = {
   },
   REGISTER: {
     mobile: { bottom: "46%", left: "50%", transform: "translateX(-50%)" },
-    sm: { bottom: "11%", left: "50%", transform: "translateX(-50%)" },
+    sm: { bottom: "41%", left: "50%", transform: "translateX(-50%)" },
   },
   GALLERY: {
     mobile: { bottom: "73%", right: "5%" },
@@ -30,7 +30,7 @@ export const POS_STONES = {
   },
   ABOUT: {
     mobile: { bottom: "30%", right: "8%" },
-    sm: { bottom: "20%", left: "86%", right: "auto" },
+    sm: { bottom: "50%", left: "86%", right: "auto" },
   },
 } as const;
 
@@ -38,18 +38,18 @@ export const POS_STONES = {
 export const POS_LOTUS = {
   LOTUS_1: {
     mobile: { bottom: "53%", left: "12%" },
-    sm: { bottom: "13%", left: "15%" },
+    sm: { bottom: "65%", left: "15%" },
   },
   LOTUS_2: {
     mobile: { bottom: "36%", left: "48%" },
-    sm: { bottom: "6%", left: "50%" },
+    sm: { bottom: "85%", left: "55%" },
   },
   LOTUS_3: {
     mobile: { bottom: "65%", left: "78%" },
-    sm: { bottom: "7%", left: "80%" },
+    sm: { bottom: "77%", left: "80%" },
   },
   LOTUS_4: {
-    sm: { bottom: "5%", left: "30%" },
+    sm: { bottom: "5%", left: "40%" },
     desktopOnly: true,
   },
 } as const;

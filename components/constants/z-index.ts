@@ -64,7 +64,7 @@ export const Z_HERO = {
   STONE_SCHEDULE: 80,
   STONE_EVENTS: 80,
   STONE_REGISTER: 80,
-  STONE_GALLERY: 78,
+  STONE_GALLERY: 80,
   STONE_ABOUT: 80,
 } as const;
 

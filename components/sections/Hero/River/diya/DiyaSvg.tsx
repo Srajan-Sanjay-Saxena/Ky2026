@@ -7,7 +7,7 @@ interface DiyaProps {
   style?: CSSProperties;
 }
 
-export const Diya = memo(function Diya({ className = "", style }: DiyaProps) {
+export const DiyaSvg = memo(function Diya({ className = "", style }: DiyaProps) {
   // Generate unique IDs for gradients/filters to avoid conflicts when multiple diyas render
   const uid = useId().replace(/:/g, "");
   
