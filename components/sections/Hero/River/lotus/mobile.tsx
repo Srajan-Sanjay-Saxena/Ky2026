@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Z_HERO, POS_LOTUS, SIZE_LOTUS } from "@/components/constants";
 import { FloatingLotus } from "./FloatingLotus";
 
@@ -7,7 +8,7 @@ import { FloatingLotus } from "./FloatingLotus";
  * Mobile lotus flowers - shown only on mobile (< 640px)
  * Uses mobile positions and sizes from constants
  */
-export function LotusesMobile() {
+export const LotusesMobile = memo(function LotusesMobile() {
   return (
     <>
       {/* Lotus 1 - Left side */}
@@ -67,4 +68,4 @@ export function LotusesMobile() {
       </div>
     </>
   );
-}
+});

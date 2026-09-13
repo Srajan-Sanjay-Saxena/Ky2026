@@ -10,7 +10,7 @@ import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
 import { EveningGradient } from "./palette/hero.bg.pallete";
 import { Z_HERO } from "@/components/constants";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 // Register plugin at module level (runs once when file is imported)
 gsap.registerPlugin(ScrollTrigger);

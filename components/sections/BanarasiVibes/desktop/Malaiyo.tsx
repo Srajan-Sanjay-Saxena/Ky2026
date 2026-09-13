@@ -1,15 +1,16 @@
 "use client";
 
+import { memo } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 /**
  * Banarasi Malaiyo image with sway animation
  * Desktop only - positioned left side
  */
-export function Malaiyo() {
+export const Malaiyo = memo(function Malaiyo() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,4 +44,4 @@ export function Malaiyo() {
       />
     </div>
   );
-}
+});

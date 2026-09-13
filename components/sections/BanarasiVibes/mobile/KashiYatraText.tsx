@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 /**
  * Kashi Yatra text in Hindi with year
  * Mobile only - displayed below the diya
  */
-export function KashiYatraText() {
+export const KashiYatraText = memo(function KashiYatraText() {
   return (
     <div className="mt-4 flex flex-col items-center">
       <span
@@ -27,4 +29,4 @@ export function KashiYatraText() {
       </span>
     </div>
   );
-}
+});

@@ -56,8 +56,8 @@ export const Z_HERO = {
   DIYA_6: 77,
   
   // Boats (individual z-indexes)
-  BOAT_PILGRIM: 77,
-  BOAT_STEAMER: 78,
+  BOAT_PILGRIM: 81,
+  BOAT_STEAMER: 82,
   BOAT_SIMPLE: 79,
   
   // Stepping stones (individual z-indexes)

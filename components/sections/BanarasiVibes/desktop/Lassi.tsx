@@ -1,15 +1,16 @@
 "use client";
 
+import { memo } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 /**
  * Banarasi Lassi image with sway animation
  * Desktop only - positioned right side
  */
-export function Lassi() {
+export const Lassi = memo(function Lassi() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,4 +44,4 @@ export function Lassi() {
       />
     </div>
   );
-}
+});

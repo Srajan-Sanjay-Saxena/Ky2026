@@ -58,7 +58,7 @@ export const POS_LOTUS = {
 export const POS_DIYA = {
   DIYA_1: {
     mobile: { bottom: "16%", left: "13%" },
-    sm: { bottom: "6%", left: "5%" },
+    sm: { bottom: "76%", left: "5%" },
   },
   DIYA_2: {
     mobile: { bottom: "81%", left: "45%" },
@@ -70,16 +70,16 @@ export const POS_DIYA = {
   },
   DIYA_4: {
     mobile: { bottom: "13%", left: "72%" },
-    sm: { bottom: "13%", left: "75%" },
+    sm: { bottom: "83%", left: "75%" },
     desktopOnly: true,
   },
   DIYA_5: {
     mobile: { bottom: "25%", left: "88%" },
-    sm: { bottom: "6%", left: "90%" },
+    sm: { bottom: "46%", left: "90%" },
   },
   DIYA_6: {
     mobile: { bottom: "10%", left: "42%" },
-    sm: { bottom: "10%", left: "45%" },
+    sm: { bottom: "85%", left: "45%" },
     desktopOnly: true,
   },
 } as const;
@@ -87,15 +87,15 @@ export const POS_DIYA = {
 /** Boat positions and animation start points */
 export const POS_BOATS = {
   PILGRIM: {
-    bottom: { mobile: "10%", sm: "10%" },
+    bottom: { sm: "20%" },
     startLeft: "-20vw",
   },
   STEAMER: {
-    bottom: { mobile: "3%", sm: "4%" },
+    bottom: { sm: "4%" },
     startLeft: "110vw",
   },
   SIMPLE: {
-    bottom: { mobile: "18%", sm: "18%" },
+    bottom: { sm: "38%" },
     startLeft: "30vw",
   },
 } as const;

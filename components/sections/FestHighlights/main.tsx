@@ -10,9 +10,7 @@ import { LotusSVG } from "./Lotus";
 import { Trishul } from "./Trishul";
 import { MandalaRing } from "./MandlaRing";
 import { FestSparkles } from "./Sparkles";
-import { IMAGES } from "@/config/images";
-
-
+import { IMAGES } from "@/lib/images";
 
 const highlights = [
   {
@@ -28,7 +26,6 @@ const highlights = [
     desc: "Celebrity performances & DJ nights",
   },
 ];
-
 
 export function FestHighlightsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -374,7 +371,8 @@ export function FestHighlightsSection() {
                 style={{ color: "#FDF6E3" }}
               >
                 Step into a world where ancient traditions meet modern
-                celebrations. Three electrifying days of music, dance, and unforgettable experiences.
+                celebrations. Three electrifying days of music, dance, and
+                unforgettable experiences.
               </p>
 
               <p
@@ -400,9 +398,7 @@ export function FestHighlightsSection() {
                       boxShadow: "0 4px 15px rgba(0,0,0,0.4)",
                     }}
                   >
-                    <span className="text-2xl mb-1 block">
-                      {item.icon}
-                    </span>
+                    <span className="text-2xl mb-1 block">{item.icon}</span>
                     <h4 className="font-bold text-[#FFD700] text-sm mb-1">
                       {item.title}
                     </h4>

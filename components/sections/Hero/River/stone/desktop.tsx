@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Z_HERO, POS_STONES, SIZE_STONES } from "@/components/constants";
 import { SteppingStone } from "./SteppingStone";
 
@@ -7,7 +8,7 @@ import { SteppingStone } from "./SteppingStone";
  * Desktop stones - shown only on sm+ (>= 640px)
  * Uses sm positions and desktop sizes from constants
  */
-export function StonesDesktop() {
+export const StonesDesktop = memo(function StonesDesktop() {
   return (
     <>
       {/* Schedule - left side */}
@@ -102,4 +103,4 @@ export function StonesDesktop() {
       </div>
     </>
   );
-}
+});

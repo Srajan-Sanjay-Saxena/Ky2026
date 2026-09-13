@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { OuterMandala } from "./OuterMandala";
 import { InnerMandala } from "./InnerMandala";
 import { MobileDiya } from "./MobileDiya";
@@ -10,7 +11,7 @@ import { KashiYatraText } from "./KashiYatraText";
  * Shows: Mandala Rangoli, Glowing Diya with Kashi Yatra text
  * Hidden on sm+ (>= 640px)
  */
-export function BanarasiVibesMobile() {
+export const BanarasiVibesMobile = memo(function BanarasiVibesMobile() {
   return (
     <>
       {/* Animated Mandala Rangoli - Mobile Only */}
@@ -37,4 +38,4 @@ export function BanarasiVibesMobile() {
       </div>
     </>
   );
-}
+});

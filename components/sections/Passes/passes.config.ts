@@ -3,7 +3,7 @@
  * Central source of truth for pass data, pricing, and animation settings
  */
 
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 export interface PassBenefit {
   text: string;

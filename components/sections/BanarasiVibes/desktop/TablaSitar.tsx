@@ -1,15 +1,16 @@
 "use client";
 
+import { memo } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 /**
  * Tabla & Sitar image with sway animation
  * Desktop only - positioned top right
  */
-export function TablaSitar() {
+export const TablaSitar = memo(function TablaSitar() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,4 +43,4 @@ export function TablaSitar() {
       />
     </div>
   );
-}
+});

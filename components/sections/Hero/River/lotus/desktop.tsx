@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Z_HERO, POS_LOTUS, SIZE_LOTUS } from "@/components/constants";
 import { FloatingLotus } from "./FloatingLotus";
 
@@ -7,7 +8,7 @@ import { FloatingLotus } from "./FloatingLotus";
  * Desktop lotus flowers - shown only on sm+ (>= 640px)
  * Uses sm positions and sizes from constants
  */
-export function LotusesDesktop() {
+export const LotusesDesktop = memo(function LotusesDesktop() {
   return (
     <>
       {/* Lotus 1 - Left side */}
@@ -87,4 +88,4 @@ export function LotusesDesktop() {
       </div>
     </>
   );
-}
+});

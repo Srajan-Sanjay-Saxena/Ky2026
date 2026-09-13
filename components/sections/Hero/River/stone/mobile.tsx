@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Z_HERO, POS_STONES, SIZE_STONES } from "@/components/constants";
 import { SteppingStone } from "./SteppingStone";
 
@@ -7,7 +8,7 @@ import { SteppingStone } from "./SteppingStone";
  * Mobile stones - shown only on mobile (< 640px)
  * Uses mobile positions and sizes from constants
  */
-export function StonesMobile() {
+export const StonesMobile = memo(function StonesMobile() {
   return (
     <>
       {/* Schedule - left side */}
@@ -102,4 +103,4 @@ export function StonesMobile() {
       </div>
     </>
   );
-}
+});

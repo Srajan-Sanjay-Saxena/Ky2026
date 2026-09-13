@@ -75,7 +75,7 @@ export const SIZE_DIYA = {
   // RATIO: 0.7, // width / height = 60/85 ≈ 0.7
   DIYA_1: {
     mobile: { width: "2.1rem", height: "3rem" },
-    sm: { width: "2.1rem", height: "3rem" },
+    sm: { width: "1.1rem", height: "2rem" },
     md: { width: "2.8rem", height: "4rem" },
   },
   DIYA_2: {

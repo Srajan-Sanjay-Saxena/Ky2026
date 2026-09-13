@@ -7,7 +7,7 @@ import { Road } from "./Road";
 import { LampPost } from "./LampPost";
 import { BanarasiVibesMobile } from "./mobile";
 import { BanarasiVibesDesktop } from "./desktop";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 export function BanarasiVibesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -103,7 +103,7 @@ export function BanarasiVibesSection() {
             }}
           />
         </div>
-        
+
         {/* Gate image on top */}
         <Image
           src={IMAGES.vibes.bhuGate}
@@ -159,8 +159,17 @@ export function BanarasiVibesSection() {
         className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none"
         style={{ height: "6px" }}
       >
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #8B6914, #FFD700, #E8B820, #FFD700, #C8960C, #FFD700, #8B6914)" }} />
-        <div className="absolute top-0 left-0 right-0" style={{ height: "1px", background: "rgba(255,255,255,0.3)" }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, #8B6914, #FFD700, #E8B820, #FFD700, #C8960C, #FFD700, #8B6914)",
+          }}
+        />
+        <div
+          className="absolute top-0 left-0 right-0"
+          style={{ height: "1px", background: "rgba(255,255,255,0.3)" }}
+        />
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Z_HERO, POS_DIYA, SIZE_DIYA } from "@/components/constants";
 import { DiyaSvg } from "./DiyaSvg";
 
@@ -7,7 +8,7 @@ import { DiyaSvg } from "./DiyaSvg";
  * Mobile diyas - shown only on mobile (< 640px)
  * Uses mobile positions and sizes from constants
  */
-export function DiyasMobile() {
+export const DiyasMobile = memo(function DiyasMobile() {
   return (
     <>
       {/* Diya 1 - Far left */}
@@ -86,4 +87,4 @@ export function DiyasMobile() {
       </div>
     </>
   );
-}
+});

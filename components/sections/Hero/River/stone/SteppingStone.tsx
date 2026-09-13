@@ -1,10 +1,11 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getAnimStyle } from "./helper/constant";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 interface SteppingStoneProps {
   label?: string;
@@ -22,7 +23,7 @@ interface SteppingStoneProps {
   style?: CSSProperties;
 }
 
-export function SteppingStone({
+export const SteppingStone = memo(function SteppingStone({
   label,
   href,
   onClick,
@@ -109,11 +110,14 @@ export function SteppingStone({
 
   if (onClick) {
     return (
-      <button onClick={onClick} style={{ background: "none", border: "none", padding: 0 }}>
+      <button
+        onClick={onClick}
+        style={{ background: "none", border: "none", padding: 0 }}
+      >
         {stone}
       </button>
     );
   }
 
   return stone;
-}
+});

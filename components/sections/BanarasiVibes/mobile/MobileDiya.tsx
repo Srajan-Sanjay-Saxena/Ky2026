@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 /**
  * Realistic Diya SVG with flame animation
  * Mobile only - central decorative element
  */
-export function MobileDiya() {
+export const MobileDiya = memo(function MobileDiya() {
   return (
     <div className="relative w-20 h-24">
       <svg viewBox="0 0 80 96" className="w-full h-full">
@@ -93,4 +95,4 @@ export function MobileDiya() {
       </svg>
     </div>
   );
-}
+});

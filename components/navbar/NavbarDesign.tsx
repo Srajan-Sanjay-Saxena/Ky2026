@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { IMAGES } from "@/config/images";
+import { IMAGES } from "@/lib/images";
 
 /**
  * Kashi Yatra ornate Navbar.

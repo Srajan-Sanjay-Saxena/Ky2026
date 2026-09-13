@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 /**
  * Inner mandala surrounding diya with fast rotation
  * Mobile only - decorative element around the diya
  */
-export function InnerMandala() {
+export const InnerMandala = memo(function InnerMandala() {
   return (
     <div
       className="absolute w-[50vw] h-[50vw] opacity-[0.25] vibes-mandala-fast"
@@ -17,4 +19,4 @@ export function InnerMandala() {
       }}
     />
   );
-}
+});

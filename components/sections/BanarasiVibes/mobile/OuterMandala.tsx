@@ -1,8 +1,10 @@
+import { memo } from "react";
+
 /**
  * Large outer mandala with slow rotation
  * Mobile only - decorative background element
  */
-export function OuterMandala() {
+export const OuterMandala = memo(function OuterMandala() {
   return (
     <div
       className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] opacity-[0.25] vibes-mandala-slow"
@@ -14,4 +16,4 @@ export function OuterMandala() {
       }}
     />
   );
-}
+});
