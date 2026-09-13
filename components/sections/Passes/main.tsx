@@ -5,7 +5,14 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { PassCard } from "./PassCard";
 import { PASSES, ANIMATION } from "./passes.config";
-import { HEADING_GRADIENT, SUBHEADING_COLOR, Z_INDEX } from "./passes.styles";
+import { Z_INDEX } from "./passes.theme";
+import {
+  COLORS,
+  GRADIENT_TEXT_GOLD,
+  GRADIENT_LINE_GOLD_LEFT,
+  GRADIENT_LINE_GOLD_RIGHT,
+  GRADIENT_BORDER_ORNATE,
+} from "@/components/constants/palette";
 
 // ============================================
 // Animation Variants
@@ -92,14 +99,13 @@ function FloatingParticles() {
 function GeometricPattern() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03]">
-      {/* Diagonal lines */}
       <svg className="absolute inset-0 w-full h-full">
         <defs>
           <pattern id="diagonalLines" patternUnits="userSpaceOnUse" width="60" height="60" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="60" stroke="#D4A853" strokeWidth="1" />
+            <line x1="0" y1="0" x2="0" y2="60" stroke={COLORS.GOLD} strokeWidth="1" />
           </pattern>
           <pattern id="dots" patternUnits="userSpaceOnUse" width="40" height="40">
-            <circle cx="20" cy="20" r="1.5" fill="#D4A853" />
+            <circle cx="20" cy="20" r="1.5" fill={COLORS.GOLD} />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#diagonalLines)" />
@@ -156,11 +162,8 @@ export function PassesSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Left mandala - clockwise
       gsap.to(mandalaLeftRef.current, { rotation: 360, duration: 80, repeat: -1, ease: "none" });
-      // Right mandala - counter-clockwise
       gsap.to(mandalaRightRef.current, { rotation: -360, duration: 100, repeat: -1, ease: "none" });
-      // Center mandala - slow clockwise
       gsap.to(mandalaCenterRef.current, { rotation: 360, duration: 120, repeat: -1, ease: "none" });
     }, sectionRef);
 
@@ -198,7 +201,7 @@ export function PassesSection() {
           height: "80px",
           background: `linear-gradient(180deg, rgba(212, 168, 83, 0.12) 0%, transparent 100%)`,
           borderTop: "3px solid transparent",
-          borderImage: `linear-gradient(90deg, transparent 0%, #8B6914 15%, #D4A853 30%, #FFD700 50%, #D4A853 70%, #8B6914 85%, transparent 100%) 1`,
+          borderImage: `${GRADIENT_BORDER_ORNATE} 1`,
           zIndex: Z_INDEX.topBorder,
         }}
       />
@@ -211,27 +214,27 @@ export function PassesSection() {
       <div
         ref={mandalaLeftRef}
         className="absolute -left-[15%] top-[15%] w-[350px] h-[350px] md:w-[500px] md:h-[500px] pointer-events-none"
-        style={{ zIndex: Z_INDEX.mandala, opacity: 0.08 }}
+        style={{ zIndex: Z_INDEX.mandala, opacity: 0.08, color: COLORS.GOLD }}
       >
-        <MandalaRing className="w-full h-full text-[#D4A853]" />
+        <MandalaRing className="w-full h-full" />
       </div>
 
       {/* Right Mandala */}
       <div
         ref={mandalaRightRef}
         className="absolute -right-[15%] bottom-[10%] w-[400px] h-[400px] md:w-[550px] md:h-[550px] pointer-events-none"
-        style={{ zIndex: Z_INDEX.mandala, opacity: 0.06 }}
+        style={{ zIndex: Z_INDEX.mandala, opacity: 0.06, color: COLORS.BRIGHT_GOLD }}
       >
-        <MandalaRing className="w-full h-full text-[#FFD700]" />
+        <MandalaRing className="w-full h-full" />
       </div>
 
       {/* Center Mandala (behind cards) */}
       <div
         ref={mandalaCenterRef}
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
-        style={{ zIndex: 1, opacity: 0.03 }}
+        style={{ zIndex: 1, opacity: 0.03, color: COLORS.GOLD }}
       >
-        <MandalaRing className="w-full h-full text-[#D4A853]" />
+        <MandalaRing className="w-full h-full" />
       </div>
 
       {/* Floating particles */}
@@ -253,37 +256,37 @@ export function PassesSection() {
         <motion.div className="text-center mb-8 md:mb-12" variants={headingVariants}>
           {/* Decorative top element */}
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-16 h-[1px]" style={{ background: "linear-gradient(90deg, transparent, #D4A853)" }} />
+            <span className="w-16 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_LEFT }} />
             <motion.span
               animate={{ rotate: 360, scale: [1, 1.2, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               className="text-2xl"
-              style={{ color: "#FFD700" }}
+              style={{ color: COLORS.BRIGHT_GOLD }}
             >
               ✦
             </motion.span>
-            <span className="w-16 h-[1px]" style={{ background: "linear-gradient(90deg, #D4A853, transparent)" }} />
+            <span className="w-16 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_RIGHT }} />
           </div>
 
           <h2
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3"
             style={{
               fontFamily: "var(--font-ethereal), serif",
-              ...HEADING_GRADIENT,
-              textShadow: "0 0 40px rgba(212, 168, 83, 0.3)",
+              ...GRADIENT_TEXT_GOLD,
+              textShadow: `0 0 40px rgba(212, 168, 83, 0.3)`,
             }}
           >
             KASHIYATRA&apos;26 - Pass Selection
           </h2>
-          <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: SUBHEADING_COLOR }}>
+          <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: COLORS.LAVENDER }}>
             Choose your journey to the cultural extravaganza
           </p>
 
           {/* Decorative bottom element */}
           <div className="flex items-center justify-center gap-2 mt-4">
-            <span className="w-6 h-6 border border-[#D4A853] rotate-45 opacity-40" />
-            <span className="w-3 h-3 bg-[#D4A853] rotate-45 opacity-60" />
-            <span className="w-6 h-6 border border-[#D4A853] rotate-45 opacity-40" />
+            <span className="w-6 h-6 rotate-45 opacity-40" style={{ border: `1px solid ${COLORS.GOLD}` }} />
+            <span className="w-3 h-3 rotate-45 opacity-60" style={{ background: COLORS.GOLD }} />
+            <span className="w-6 h-6 rotate-45 opacity-40" style={{ border: `1px solid ${COLORS.GOLD}` }} />
           </div>
         </motion.div>
 
@@ -322,9 +325,7 @@ export function PassesSection() {
       {/* Bottom ornate border */}
       <div
         className="absolute bottom-0 left-0 right-0 h-[3px]"
-        style={{
-          background: `linear-gradient(90deg, transparent 0%, #8B6914 15%, #D4A853 30%, #FFD700 50%, #D4A853 70%, #8B6914 85%, transparent 100%)`,
-        }}
+        style={{ background: GRADIENT_BORDER_ORNATE }}
       />
     </section>
   );

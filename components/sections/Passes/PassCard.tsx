@@ -5,7 +5,17 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { PassConfig } from "./passes.config";
 import { ANIMATION } from "./passes.config";
-import { CARD_SHADOW, POPULAR_BADGE_BG, CHECK_ICON_HIGHLIGHT } from "./passes.styles";
+import {
+  COLORS,
+  SHADOWS,
+  GRADIENT_BADGE_GOLD,
+  GRADIENT_BUTTON_ROYAL,
+  GRADIENT_FRAME_GOLD,
+  GRADIENT_FRAME_DARK,
+  GRADIENT_LINE_GOLD_LEFT,
+  GRADIENT_LINE_GOLD_RIGHT,
+  GRADIENT_TEXT_GOLD_VERTICAL,
+} from "@/components/constants/palette";
 
 interface PassCardProps {
   pass: PassConfig;
@@ -117,32 +127,30 @@ function AnimatedMandala({ color, size = 200 }: { color: string; size?: number }
 function RoyalPrice({ price }: { price: number }) {
   return (
     <div className="relative inline-flex items-center">
-      <span className="w-8 h-[1px] mr-2" style={{ background: "linear-gradient(90deg, transparent, #D4A853)" }} />
+      <span className="w-8 h-[1px] mr-2" style={{ background: GRADIENT_LINE_GOLD_LEFT }} />
       <div
         className="px-4 py-2 rounded-lg"
         style={{
-          background: "linear-gradient(180deg, rgba(212, 168, 83, 0.15) 0%, rgba(184, 134, 11, 0.08) 100%)",
-          border: "1px solid rgba(212, 168, 83, 0.4)",
-          boxShadow: "0 2px 10px rgba(212, 168, 83, 0.2)",
+          background: `linear-gradient(180deg, rgba(${hexToRgb(COLORS.GOLD)}, 0.15) 0%, rgba(${hexToRgb(COLORS.GOLD_BROWN)}, 0.08) 100%)`,
+          border: `1px solid rgba(${hexToRgb(COLORS.GOLD)}, 0.4)`,
+          boxShadow: `0 2px 10px rgba(${hexToRgb(COLORS.GOLD)}, 0.2)`,
         }}
       >
-        <span className="text-[#D4A853] text-sm font-semibold tracking-wide">Price</span>
-        <span className="mx-2 text-[#FFD700] font-light">:</span>
-        <span
-          className="text-2xl font-bold"
-          style={{
-            background: "linear-gradient(180deg, #FFD700 0%, #D4A853 50%, #FFD700 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
+        <span className="text-sm font-semibold tracking-wide" style={{ color: COLORS.GOLD }}>Price</span>
+        <span className="mx-2 font-light" style={{ color: COLORS.BRIGHT_GOLD }}>:</span>
+        <span className="text-2xl font-bold" style={GRADIENT_TEXT_GOLD_VERTICAL}>
           ₹{price.toLocaleString("en-IN")}
         </span>
       </div>
-      <span className="w-8 h-[1px] ml-2" style={{ background: "linear-gradient(90deg, #D4A853, transparent)" }} />
+      <span className="w-8 h-[1px] ml-2" style={{ background: GRADIENT_LINE_GOLD_RIGHT }} />
     </div>
   );
+}
+
+// Helper to convert hex to rgb string
+function hexToRgb(hex: string): string {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : "0, 0, 0";
 }
 
 // ============================================
@@ -156,10 +164,10 @@ function RoyalButton({ children, onClick, icon }: { children: React.ReactNode; o
       onClick={onClick}
       className="relative w-full py-3 px-4 font-bold uppercase tracking-wider text-sm overflow-hidden rounded-lg"
       style={{
-        background: "linear-gradient(180deg, #D4A853 0%, #B8860B 50%, #8B6914 100%)",
-        border: "2px solid #FFD700",
-        color: "#1A0A1A",
-        boxShadow: "0 4px 15px rgba(212, 168, 83, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+        background: GRADIENT_BUTTON_ROYAL,
+        border: `2px solid ${COLORS.BRIGHT_GOLD}`,
+        color: COLORS.CARD_DARK_PURPLE,
+        boxShadow: SHADOWS.BUTTON_GOLD,
       }}
     >
       <motion.div
@@ -184,13 +192,13 @@ function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
     <div className={`absolute ${positions[position]} w-10 h-10 pointer-events-none`} style={{ transform: `rotate(${rotations[position]}deg)` }}>
       <svg viewBox="0 0 50 50" className="w-full h-full">
         <path d="M5 5 Q5 25 25 25 Q15 15 5 5" fill="none" stroke="url(#goldGradCorner)" strokeWidth="1.5" opacity="0.6" />
-        <path d="M2 2 Q2 28 28 28" fill="none" stroke="#D4A853" strokeWidth="1" opacity="0.4" />
-        <ellipse cx="10" cy="10" rx="3" ry="5" fill="none" stroke="#FFD700" strokeWidth="0.8" opacity="0.5" transform="rotate(-45 10 10)" />
-        <circle cx="6" cy="6" r="2" fill="#D4A853" opacity="0.6" />
+        <path d="M2 2 Q2 28 28 28" fill="none" stroke={COLORS.GOLD} strokeWidth="1" opacity="0.4" />
+        <ellipse cx="10" cy="10" rx="3" ry="5" fill="none" stroke={COLORS.BRIGHT_GOLD} strokeWidth="0.8" opacity="0.5" transform="rotate(-45 10 10)" />
+        <circle cx="6" cy="6" r="2" fill={COLORS.GOLD} opacity="0.6" />
         <defs>
           <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFD700" />
-            <stop offset="100%" stopColor="#B8860B" />
+            <stop offset="0%" stopColor={COLORS.BRIGHT_GOLD} />
+            <stop offset="100%" stopColor={COLORS.GOLD_BROWN} />
           </linearGradient>
         </defs>
       </svg>
@@ -210,9 +218,9 @@ function CardBackground() {
 function RoyalFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative w-full h-full">
-      <div className="absolute inset-0 rounded-[14px]" style={{ background: `linear-gradient(180deg, #4a3510 0%, #8B6914 10%, #D4A853 25%, #FFD700 50%, #D4A853 75%, #8B6914 90%, #4a3510 100%)`, padding: "3px" }}>
-        <div className="w-full h-full rounded-[11px]" style={{ background: `linear-gradient(180deg, #1a0d10 0%, #2a1a18 50%, #1a0d10 100%)`, padding: "2px" }}>
-          <div className="w-full h-full rounded-[9px]" style={{ background: `linear-gradient(180deg, #8B6914 0%, #D4A853 30%, #FFD700 50%, #D4A853 70%, #8B6914 100%)`, padding: "2px" }}>
+      <div className="absolute inset-0 rounded-[14px]" style={{ background: GRADIENT_FRAME_GOLD, padding: "3px" }}>
+        <div className="w-full h-full rounded-[11px]" style={{ background: GRADIENT_FRAME_DARK, padding: "2px" }}>
+          <div className="w-full h-full rounded-[9px]" style={{ background: GRADIENT_FRAME_GOLD, padding: "2px" }}>
             <div className="relative w-full h-full rounded-[7px] overflow-hidden">{children}</div>
           </div>
         </div>
@@ -250,7 +258,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
           className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
-          style={{ background: POPULAR_BADGE_BG, color: "#1A0A1A", boxShadow: "0 4px 20px rgba(212, 168, 83, 0.6)" }}
+          style={{ background: GRADIENT_BADGE_GOLD, color: COLORS.CARD_DARK_PURPLE, boxShadow: SHADOWS.BADGE_GOLD }}
         >
           ✦ Most Popular ✦
         </motion.div>
@@ -258,7 +266,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
 
       {/* Static card frame */}
       <RoyalFrame>
-        <div className="relative w-full h-full flex flex-col" style={{ boxShadow: CARD_SHADOW }}>
+        <div className="relative w-full h-full flex flex-col" style={{ boxShadow: SHADOWS.CARD_ROYAL }}>
           <CardBackground />
           <CornerOrnament position="tl" />
           <CornerOrnament position="tr" />
@@ -304,7 +312,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                   className="absolute inset-0"
                   style={{
                     background: `
-                      radial-gradient(ellipse at 50% 0%, rgba(212, 168, 83, 0.15) 0%, transparent 50%),
+                      radial-gradient(ellipse at 50% 0%, rgba(${hexToRgb(COLORS.GOLD)}, 0.15) 0%, transparent 50%),
                       radial-gradient(ellipse at 50% 100%, rgba(139, 69, 19, 0.2) 0%, transparent 50%),
                       linear-gradient(180deg, 
                         rgba(45, 22, 55, 0.98) 0%, 
@@ -325,8 +333,8 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                 <div
                   className="absolute inset-0 rounded-lg pointer-events-none"
                   style={{
-                    border: "1px solid rgba(212, 168, 83, 0.4)",
-                    boxShadow: "inset 0 0 30px rgba(212, 168, 83, 0.1)",
+                    border: `1px solid rgba(${hexToRgb(COLORS.GOLD)}, 0.4)`,
+                    boxShadow: `inset 0 0 30px rgba(${hexToRgb(COLORS.GOLD)}, 0.1)`,
                   }}
                 />
 
@@ -335,7 +343,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                   {/* Header with decorative lines */}
                   <div className="text-center mb-3">
                     <div className="flex items-center justify-center gap-2 mb-1">
-                      <span className="w-8 h-[1px]" style={{ background: "linear-gradient(90deg, transparent, #D4A853)" }} />
+                      <span className="w-8 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_LEFT }} />
                       <motion.span
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
@@ -343,13 +351,13 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                       >
                         ✦
                       </motion.span>
-                      <span className="w-8 h-[1px]" style={{ background: "linear-gradient(90deg, #D4A853, transparent)" }} />
+                      <span className="w-8 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_RIGHT }} />
                     </div>
                     <h3
                       className="text-xl font-bold uppercase tracking-wider"
                       style={{
                         fontFamily: "var(--font-ethereal), serif",
-                        background: `linear-gradient(180deg, ${pass.accentColor} 0%, #FFD700 50%, ${pass.accentColor} 100%)`,
+                        background: `linear-gradient(180deg, ${pass.accentColor} 0%, ${COLORS.BRIGHT_GOLD} 50%, ${pass.accentColor} 100%)`,
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text",
@@ -373,7 +381,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                         <motion.span
                           animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
                           transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
-                          style={{ color: CHECK_ICON_HIGHLIGHT }}
+                          style={{ color: COLORS.BRIGHT_GOLD }}
                           className="mt-0.5"
                         >
                           ✦
@@ -388,12 +396,12 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                     <div
                       className="relative w-16 h-16 rounded flex items-center justify-center"
                       style={{
-                        background: "linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(0,0,0,0.3) 100%)",
-                        border: "2px solid rgba(212, 168, 83, 0.5)",
-                        boxShadow: "0 0 15px rgba(212, 168, 83, 0.2), inset 0 0 10px rgba(0,0,0,0.3)",
+                        background: `linear-gradient(135deg, rgba(${hexToRgb(COLORS.GOLD)}, 0.1) 0%, rgba(0,0,0,0.3) 100%)`,
+                        border: `2px solid rgba(${hexToRgb(COLORS.GOLD)}, 0.5)`,
+                        boxShadow: SHADOWS.QR_FRAME,
                       }}
                     >
-                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4A853" strokeWidth="1.5">
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={COLORS.GOLD} strokeWidth="1.5">
                         <rect x="3" y="3" width="7" height="7" rx="1" />
                         <rect x="14" y="3" width="7" height="7" rx="1" />
                         <rect x="3" y="14" width="7" height="7" rx="1" />
