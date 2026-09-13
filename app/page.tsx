@@ -4,7 +4,7 @@ import {
   FooterSection,
   FestHighlightsSection,
 } from "@/components/sections";
-import { ScrollNavbar } from "@/components/ScrollNavbar";
+import { ScrollNavbar } from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
@@ -28,4 +28,4 @@ export default function Home() {
     </main>
   );
 }
-// see the iamge lord shiva animation is feeling like cartoonish not a god feel 
+// see the iamge lord shiva animation is feeling like cartoonish not a god feel

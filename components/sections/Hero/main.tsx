@@ -7,14 +7,9 @@ import { useEffect, useRef } from "react";
 import { Moon as CinematicMoon } from "@/components/sections/Hero/Sky/Moon";
 import { CinematicSky } from "@/components/sections/Hero/Sky/CinematicSky";
 import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
-import { Diya } from "@/components/sections/Hero/River/Diya";
-import { FloatingLotus } from "@/components/sections/Hero/River/FloatingLotus";
-import { PilgrimBoat } from "@/components/sections/Hero/River/boat/PilgrimBoat";
-import { SimpleBoat as RowBoat } from "@/components/sections/Hero/River/boat/SimpleBoat";
-import { Steamer } from "@/components/sections/Hero/River/boat/Steamer";
-import { Water as RealisticRiver } from "@/components/sections/Hero/River/water";
-import { SteppingStone } from "@/components/sections/Hero/River/SteppingStone";
-import { EveningGradient, HeroBgColorGradient } from "./palette/hero.bg.pallete";
+import { River } from "@/components/sections/Hero/River";
+import { EveningGradient } from "./palette/hero.bg.pallete";
+import { Z_HERO } from "@/components/constants";
 
 // Register plugin at module level (runs once when file is imported)
 gsap.registerPlugin(ScrollTrigger);
@@ -25,7 +20,6 @@ export function HeroSection() {
   const moonRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const riverRef = useRef<HTMLDivElement>(null);
-  const diyasRef = useRef<HTMLDivElement>(null);
   const ghatsRef = useRef<HTMLDivElement>(null);
 
   // Entry animation: Moon
@@ -99,22 +93,6 @@ export function HeroSection() {
         { x: -40, opacity: 1, duration: 0.5, ease: "none" },
         "<",
       );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Entry animation: Diyas
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.set(diyasRef.current, { y: 30, opacity: 0 });
-      gsap.to(diyasRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        delay: 1.4,
-        ease: "power2.out",
-      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -752,8 +730,9 @@ export function HeroSection() {
       {/* GHAT PNG - Aligned with temple */}
       <div
         ref={ghatsRef}
-        className="absolute bottom-[29%] sm:bottom-[28%] md:bottom-[25.5%] left-[-5%] sm:left-[-3%] md:left-[-2%] w-[52%] sm:w-[55%] md:w-[50%] z-[100]"
+        className="absolute bottom-[29%] sm:bottom-[28%] md:bottom-[25.5%] left-[-5%] sm:left-[-3%] md:left-[-2%] w-[52%] sm:w-[55%] md:w-[50%]"
         style={{
+          zIndex: Z_HERO.GHATS,
           filter: "drop-shadow(0 0 20px rgba(255,100,100,0.4))",
         }}
       >
@@ -800,8 +779,9 @@ export function HeroSection() {
       {/* TEMPLE PNG - Highest z-index, aligned with ghats */}
       <div
         ref={templeRef}
-        className="absolute bottom-[31%] sm:bottom-[31%] md:bottom-[28%] right-[-9%] sm:right-[-6%] md:right-[-7%] w-[55%] sm:w-[62%] md:w-[56%] lg:w-[48%] z-50"
+        className="absolute bottom-[31%] sm:bottom-[31%] md:bottom-[28%] right-[-9%] sm:right-[-6%] md:right-[-7%] w-[55%] sm:w-[62%] md:w-[56%] lg:w-[48%]"
         style={{
+          zIndex: Z_HERO.TEMPLE,
           filter: "drop-shadow(0 0 25px rgba(255,215,0,0.5))",
         }}
       >
@@ -853,237 +833,8 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Stepping Stones — z-[78] keeps them above boats(77), lotus(75), diyas(76) */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[78] pointer-events-none overflow-hidden">
-        <div className="absolute bottom-[52%] left-[8%] pointer-events-auto">
-          <SteppingStone label="Schedule" href="/schedule" size={110} phase={0} />
-        </div>
-        <div className="absolute bottom-[44%] left-[28%] pointer-events-auto">
-          <SteppingStone label="Events" href="/events" size={130} phase={-0.8} />
-        </div>
-        <div className="absolute bottom-[50%] left-[50%] -translate-x-1/2 pointer-events-auto">
-          <SteppingStone label="Register" href="/register" size={145} phase={-1.6} />
-        </div>
-        <div className="absolute bottom-[43%] left-[68%] pointer-events-auto">
-          <SteppingStone label="Gallery" href="/gallery" size={120} phase={-0.4} />
-        </div>
-        <div className="absolute bottom-[52%] left-[86%] pointer-events-auto">
-          <SteppingStone label="About" href="/about" size={100} phase={-1.2} />
-        </div>
-      </div>
-
-      {/* RIVER - Mobile optimized */}
-      <div
-        ref={riverRef}
-        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[70]"
-        style={{
-          background:
-            "linear-gradient(180deg, #1a4a6e 0%, #15405c 20%, #12354d 40%, #0f2a3e 60%, #0c2030 80%, #081520 100%)",
-        }}
-      >
-        <RealisticRiver className="w-full h-full" />
-
-        {/* Mobile water shimmer overlay */}
-        <div className="absolute inset-0 sm:hidden pointer-events-none overflow-hidden">
-          {/* Animated wave lines */}
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={`wave-${i}`}
-              className="absolute left-0 right-0 h-[1px]"
-              style={{
-                top: `${10 + i * 12}%`,
-                background:
-                  "linear-gradient(90deg, transparent, rgba(200,230,255,0.15), transparent)",
-                animation: `waveShimmer ${3 + i * 0.3}s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
-
-          {/* Moon reflection */}
-          <div
-            className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[30%] h-[40%]"
-            style={{
-              background:
-                "radial-gradient(ellipse, rgba(200,220,255,0.15) 0%, transparent 70%)",
-              animation: "moonReflectionShimmer 4s ease-in-out infinite",
-            }}
-          />
-
-          {/* Ripple effects */}
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={`ripple-${i}`}
-              className="absolute rounded-full border border-white/10"
-              style={{
-                left: `${15 + i * 22}%`,
-                top: `${20 + (i % 2) * 30}%`,
-                width: "40px",
-                height: "20px",
-                animation: `rippleExpand ${3 + i * 0.5}s ease-out infinite`,
-                animationDelay: `${i * 0.8}s`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Boats - only in river area, below buildings */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] pointer-events-none overflow-hidden z-[77]">
-        {/* Pilgrim Boat - going right */}
-        <div
-          className="absolute bottom-[30%] sm:bottom-[33%] w-32 sm:w-40 md:w-52 lg:w-60"
-          style={{
-            left: "-20vw",
-            animation: "boatMoveRight 55s linear infinite",
-            animationFillMode: "forwards",
-            filter: "drop-shadow(0 0 8px rgba(255,200,100,0.3))",
-          }}
-        >
-          <PilgrimBoat className="w-full h-auto" />
-        </div>
-
-        {/* Steamer - going left */}
-        <div
-          className="absolute bottom-[10%] sm:bottom-[12%] w-36 sm:w-44 md:w-56 lg:w-64"
-          style={{
-            left: "110vw",
-            animation: "boatMoveLeft 60s linear infinite",
-            animationFillMode: "forwards",
-            filter: "drop-shadow(0 0 10px rgba(255,200,100,0.4))",
-          }}
-        >
-          <Steamer className="w-full h-auto transform scale-x-[-1]" />
-        </div>
-
-        {/* Row Boat - going right - starts mid-screen */}
-        <div
-          className="absolute bottom-[55%] sm:bottom-[58%] w-20 sm:w-24 md:w-28 lg:w-32"
-          style={{
-            left: "30vw",
-            animation: "boatMoveRightFromMid 38s linear infinite",
-            animationFillMode: "forwards",
-            filter: "drop-shadow(0 0 6px rgba(255,200,100,0.3))",
-          }}
-        >
-          <RowBoat className="w-full h-auto" />
-        </div>
-      </div>
-
-      {/* Floating Diyas - Scattered across river only */}
-      <div
-        ref={diyasRef}
-        className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[76] pointer-events-none overflow-hidden"
-      >
-        <div
-          className="absolute bottom-[18%] sm:bottom-[20%] left-[3%] sm:left-[5%] w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12"
-          style={{
-            animation: "diyaFloat 4s ease-in-out infinite",
-            animationDelay: "0s",
-          }}
-        >
-          <Diya className="w-full h-full" />
-        </div>
-        <div
-          className="absolute bottom-[35%] left-[15%] sm:left-[18%] w-5 h-7 sm:w-7 sm:h-9 md:w-9 md:h-11"
-          style={{
-            animation: "diyaFloat 4.5s ease-in-out infinite",
-            animationDelay: "0.5s",
-          }}
-        >
-          <Diya className="w-full h-full" />
-        </div>
-        <div
-          className="absolute bottom-[22%] sm:bottom-[25%] left-[55%] sm:left-[58%] w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12"
-          style={{
-            animation: "diyaFloat 3.8s ease-in-out infinite",
-            animationDelay: "1s",
-          }}
-        >
-          <Diya className="w-full h-full" />
-        </div>
-        <div
-          className="hidden sm:block absolute bottom-[40%] left-[72%] sm:left-[75%] w-5 h-7 sm:w-6 sm:h-8 md:w-8 md:h-10"
-          style={{
-            animation: "diyaFloat 5s ease-in-out infinite",
-            animationDelay: "0.3s",
-          }}
-        >
-          <Diya className="w-full h-full" />
-        </div>
-        <div
-          className="absolute bottom-[15%] sm:bottom-[18%] left-[88%] sm:left-[90%] w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12"
-          style={{
-            animation: "diyaFloat 4.2s ease-in-out infinite",
-            animationDelay: "0.7s",
-          }}
-        >
-          <Diya className="w-full h-full" />
-        </div>
-        <div
-          className="hidden sm:block absolute bottom-[30%] left-[42%] sm:left-[45%] w-5 h-7 sm:w-7 sm:h-9 md:w-9 md:h-11"
-          style={{
-            animation: "diyaFloat 3.5s ease-in-out infinite",
-            animationDelay: "1.2s",
-          }}
-        >
-          <Diya className="w-full h-full" />
-        </div>
-      </div>
-
-      {/* Floating Lotus flowers - clipped to river area only */}
-      <div className="absolute bottom-0 left-0 right-0 h-[32vh] sm:h-[30vh] md:h-[32vh] z-[75] pointer-events-none overflow-hidden">
-        {/* Lotus 1 - Left side */}
-        <div
-          className="absolute bottom-[28%] left-[12%] sm:left-[15%] w-10 h-8 sm:w-12 sm:h-10 md:w-14 md:h-12"
-          style={{
-            animation: "lotusFloat 5s ease-in-out infinite",
-            animationDelay: "0s",
-          }}
-        >
-          <FloatingLotus className="w-full h-full" />
-        </div>
-        {/* Lotus 2 - Center */}
-        <div
-          className="absolute bottom-[20%] left-[48%] sm:left-[50%] w-8 h-6 sm:w-10 sm:h-8 md:w-12 md:h-10"
-          style={{
-            animation: "lotusFloat 6s ease-in-out infinite",
-            animationDelay: "1s",
-          }}
-        >
-          <FloatingLotus className="w-full h-full" />
-        </div>
-        {/* Lotus 3 - Right side */}
-        <div
-          className="absolute bottom-[25%] left-[78%] sm:left-[80%] w-9 h-7 sm:w-11 sm:h-9 md:w-13 md:h-11"
-          style={{
-            animation: "lotusFloat 5.5s ease-in-out infinite",
-            animationDelay: "0.5s",
-          }}
-        >
-          <FloatingLotus className="w-full h-full" />
-        </div>
-        {/* Lotus 4 */}
-        <div
-          className="hidden sm:block absolute bottom-[15%] left-[28%] sm:left-[30%] w-7 h-5 sm:w-9 sm:h-7 md:w-11 md:h-9"
-          style={{
-            animation: "lotusFloat 4.5s ease-in-out infinite",
-            animationDelay: "1.5s",
-          }}
-        >
-          <FloatingLotus className="w-full h-full" />
-        </div>
-        {/* Lotus 5 */}
-        <div
-          className="hidden sm:block absolute bottom-[18%] left-[65%] sm:left-[68%] w-8 h-6 sm:w-10 sm:h-8 md:w-12 md:h-10"
-          style={{
-            animation: "lotusFloat 5.2s ease-in-out infinite",
-            animationDelay: "2s",
-          }}
-        >
-          <FloatingLotus className="w-full h-full" />
-        </div>
-      </div>
+      {/* RIVER - Contains water, lotus, diyas, boats, and stepping stones */}
+      <River ref={riverRef} />
 
       {/* Floating embers */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

@@ -4,125 +4,14 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { LampSVG } from "./Lamp";
+import { BellSVG } from "./Bell";
+import { LotusSVG } from "./Lotus";
+import { Trishul } from "./Trishul";
+import { MandalaRing } from "./MandlaRing";
+import { FestSparkles } from "./Sparkles";
 
-// Trishul SVG Component
-const Trishul = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 60 120" className={className} fill="currentColor">
-    <path
-      d="M28 120V45M28 45L15 25L28 35L28 10L32 10L32 35L45 25L32 45M30 10L30 0M25 8L30 0L35 8"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="none"
-    />
-    <circle cx="30" cy="5" r="3" fill="currentColor" />
-  </svg>
-);
 
-// Diya/Lamp SVG Component
-const LampSVG = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 50 60" className={className}>
-    <ellipse cx="25" cy="50" rx="20" ry="8" fill="#B8860B" />
-    <ellipse cx="25" cy="48" rx="15" ry="5" fill="#DAA520" />
-    <path d="M25 48 Q20 35 25 20 Q30 35 25 48" fill="#FF6B00">
-      <animate
-        attributeName="d"
-        values="M25 48 Q20 35 25 20 Q30 35 25 48;M25 48 Q18 32 25 18 Q32 32 25 48;M25 48 Q20 35 25 20 Q30 35 25 48"
-        dur="0.5s"
-        repeatCount="indefinite"
-      />
-    </path>
-    <ellipse cx="25" cy="20" rx="4" ry="6" fill="#FFD700" opacity="0.8">
-      <animate
-        attributeName="ry"
-        values="6;8;6"
-        dur="0.3s"
-        repeatCount="indefinite"
-      />
-    </ellipse>
-  </svg>
-);
-
-// Bell SVG Component
-const BellSVG = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 40 60" className={className}>
-    <path d="M20 5 L20 0" stroke="#B8860B" strokeWidth="2" />
-    <circle cx="20" cy="8" r="3" fill="#DAA520" />
-    <path d="M8 45 Q8 20 20 10 Q32 20 32 45 Z" fill="#B8860B" />
-    <ellipse cx="20" cy="45" rx="14" ry="4" fill="#DAA520" />
-    <circle cx="20" cy="52" r="4" fill="#8B7355" />
-    <line x1="20" y1="45" x2="20" y2="52" stroke="#8B7355" strokeWidth="2" />
-  </svg>
-);
-
-// Lotus SVG Component
-const LotusSVG = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 80 50" className={className}>
-    <ellipse cx="40" cy="45" rx="35" ry="5" fill="#2D5016" opacity="0.5" />
-    <path d="M40 40 Q30 30 25 15 Q40 25 40 40" fill="#FF69B4" opacity="0.8" />
-    <path d="M40 40 Q50 30 55 15 Q40 25 40 40" fill="#FF69B4" opacity="0.8" />
-    <path d="M40 40 Q25 35 10 25 Q30 30 40 40" fill="#FFB6C1" opacity="0.7" />
-    <path d="M40 40 Q55 35 70 25 Q50 30 40 40" fill="#FFB6C1" opacity="0.7" />
-    <path d="M40 40 Q35 25 40 10 Q45 25 40 40" fill="#FFC0CB" />
-    <circle cx="40" cy="35" r="5" fill="#FFD700" />
-  </svg>
-);
-
-// Decorative Mandala Ring
-const MandalaRing = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 200 200" className={className}>
-    <circle
-      cx="100"
-      cy="100"
-      r="95"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="0.5"
-      opacity="0.3"
-    />
-    <circle
-      cx="100"
-      cy="100"
-      r="80"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="0.5"
-      opacity="0.4"
-    />
-    <circle
-      cx="100"
-      cy="100"
-      r="65"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="0.5"
-      opacity="0.5"
-    />
-    {[...Array(12)].map((_, i) => (
-      <line
-        key={i}
-        x1="100"
-        y1="5"
-        x2="100"
-        y2="25"
-        stroke="currentColor"
-        strokeWidth="0.5"
-        opacity="0.4"
-        transform={`rotate(${i * 30} 100 100)`}
-      />
-    ))}
-    {[...Array(24)].map((_, i) => (
-      <circle
-        key={i}
-        cx="100"
-        cy="15"
-        r="2"
-        fill="currentColor"
-        opacity="0.3"
-        transform={`rotate(${i * 15} 100 100)`}
-      />
-    ))}
-  </svg>
-);
 
 const highlights = [
   {
@@ -139,36 +28,6 @@ const highlights = [
   },
 ];
 
-// Confetti/Sparkle component for fest vibe
-const FestSparkles = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    {[...Array(20)].map((_, i) => (
-      <div
-        key={`sparkle-${i}`}
-        className="absolute"
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          width: 4 + Math.random() * 8,
-          height: 4 + Math.random() * 8,
-          background: [
-            "#FF6B00",
-            "#FFD700",
-            "#FF4500",
-            "#FFA500",
-            "#FF1493",
-            "#00CED1",
-          ][Math.floor(Math.random() * 6)],
-          borderRadius: Math.random() > 0.5 ? "50%" : "2px",
-          transform: `rotate(${Math.random() * 360}deg)`,
-          animation: `sparkleFloat ${3 + Math.random() * 4}s ease-in-out infinite`,
-          animationDelay: `${Math.random() * 2}s`,
-          opacity: 0.6 + Math.random() * 0.4,
-        }}
-      />
-    ))}
-  </div>
-);
 
 export function FestHighlightsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
