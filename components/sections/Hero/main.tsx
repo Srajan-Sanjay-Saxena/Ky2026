@@ -10,6 +10,7 @@ import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
 import { EveningGradient } from "./palette/hero.bg.pallete";
 import { Z_HERO } from "@/components/constants";
+import { IMAGES } from "@/config/images";
 
 // Register plugin at module level (runs once when file is imported)
 gsap.registerPlugin(ScrollTrigger);
@@ -158,7 +159,7 @@ export function HeroSection() {
       <div
         className="absolute bottom-[26%] sm:bottom-[27%] md:bottom-[26%] left-0 right-0 h-[25%] sm:h-[28%] md:h-[30%] z-6 pointer-events-none"
         style={{
-          backgroundImage: "url('/varanasiBack.png')",
+          backgroundImage: `url('${IMAGES.hero.varanasiBack}')`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
           backgroundRepeat: "no-repeat",
@@ -638,7 +639,7 @@ export function HeroSection() {
         className="absolute top-[12%] sm:top-[14%] md:top-[18%] left-1/2 -translate-x-1/2 text-center z-20 w-full px-4"
       >
         <Image
-          src="/kashiyatra.png"
+          src={IMAGES.hero.logo}
           alt="काशी यात्रा"
           width={500}
           height={150}
@@ -766,7 +767,7 @@ export function HeroSection() {
         ))}
 
         <Image
-          src="/ghats.png"
+          src={IMAGES.hero.ghats}
           alt="Varanasi Ghats"
           width={1000}
           height={600}
@@ -823,7 +824,7 @@ export function HeroSection() {
         ))}
 
         <Image
-          src="/kashivishwanath.png"
+          src={IMAGES.hero.temple}
           alt="Kashi Vishwanath Temple"
           width={1000}
           height={1100}

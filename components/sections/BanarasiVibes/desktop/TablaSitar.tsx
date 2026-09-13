@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { IMAGES } from "@/config/images";
 
 /**
  * Tabla & Sitar image with sway animation
@@ -32,7 +33,7 @@ export function TablaSitar() {
       className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[-2%] right-[5%] md:right-[7%] z-20"
     >
       <Image
-        src="/tabla_sitar_nobg.png"
+        src={IMAGES.vibes.tablaSitar}
         alt="Tabla & Sitar"
         width={1600}
         height={1600}

@@ -7,6 +7,7 @@ import { Road } from "./Road";
 import { LampPost } from "./LampPost";
 import { BanarasiVibesMobile } from "./mobile";
 import { BanarasiVibesDesktop } from "./desktop";
+import { IMAGES } from "@/config/images";
 
 export function BanarasiVibesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -65,7 +66,7 @@ export function BanarasiVibesSection() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "url('/vibesBG.png')",
+          backgroundImage: `url('${IMAGES.vibes.background}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -92,7 +93,7 @@ export function BanarasiVibesSection() {
           }}
         >
           <Image
-            src="/mahamana.png"
+            src={IMAGES.vibes.mahamana}
             alt="Mahamana Malviya"
             width={500}
             height={600}
@@ -105,7 +106,7 @@ export function BanarasiVibesSection() {
         
         {/* Gate image on top */}
         <Image
-          src="/bhuGate.png"
+          src={IMAGES.vibes.bhuGate}
           alt="IIT BHU Gate"
           width={1400}
           height={900}
@@ -141,7 +142,7 @@ export function BanarasiVibesSection() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/rickshaw_nobg.png"
+          src={IMAGES.vibes.rickshaw}
           alt="Auto Rickshaw"
           style={{
             width: "100%",

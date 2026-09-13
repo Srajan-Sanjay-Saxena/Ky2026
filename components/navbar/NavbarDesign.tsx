@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { IMAGES } from "@/config/images";
 
 /**
  * Kashi Yatra ornate Navbar.
@@ -209,7 +210,7 @@ export function Navbar({
         >
           {/* Background carved bar */}
           <Image
-            src="/Nav.png"
+            src={IMAGES.navbar.background}
             alt=""
             fill
             priority
@@ -256,7 +257,7 @@ export function Navbar({
             />
 
             <Image
-              src="/NavBadge.png"
+              src={IMAGES.navbar.badge}
               alt="IIT BHU"
               fill
               priority

@@ -3,6 +3,7 @@
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { IMAGES } from "@/config/images";
 
 /**
  * Banarasi Malaiyo image with sway animation
@@ -33,7 +34,7 @@ export function Malaiyo() {
       className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[28%] left-[1%] z-20"
     >
       <Image
-        src="/malaiyo_nobg.png"
+        src={IMAGES.vibes.malaiyo}
         alt="Banarasi Malaiyo"
         width={800}
         height={800}
