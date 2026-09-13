@@ -541,9 +541,19 @@ body {
 .footer-mandala-fast {
   animation: footerMandalaRotate 45s linear infinite;
 }
+.footer-card-mandala {
+  animation: footerCardMandalaRotate 30s linear infinite;
+}
+.footer-card-mandala-reverse {
+  animation: footerCardMandalaRotate 25s linear infinite reverse;
+}
 @keyframes footerMandalaRotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes footerCardMandalaRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════

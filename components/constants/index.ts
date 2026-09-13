@@ -19,6 +19,7 @@ export {
 export {
   SIZE_RIVER,
   SIZE_STONES,
+  SIZE_STONE_TEXT,
   SIZE_LOTUS,
   SIZE_DIYA,
   SIZE_BOATS,

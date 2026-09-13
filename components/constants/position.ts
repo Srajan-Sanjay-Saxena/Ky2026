@@ -37,7 +37,7 @@ export const POS_STONES = {
 /** Lotus flower positions */
 export const POS_LOTUS = {
   LOTUS_1: {
-    mobile: { bottom: "50%", left: "12%" },
+    mobile: { bottom: "53%", left: "12%" },
     sm: { bottom: "13%", left: "15%" },
   },
   LOTUS_2: {
@@ -61,7 +61,7 @@ export const POS_DIYA = {
     sm: { bottom: "6%", left: "5%" },
   },
   DIYA_2: {
-    mobile: { bottom: "71%", left: "25%" },
+    mobile: { bottom: "81%", left: "45%" },
     sm: { bottom: "10%", left: "18%" },
   },
   DIYA_3: {
