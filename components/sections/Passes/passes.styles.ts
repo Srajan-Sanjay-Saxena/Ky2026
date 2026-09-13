@@ -53,32 +53,41 @@ export const TOP_BORDER_PATTERN: CSSProperties = {
 };
 
 /**
- * Card container - rounded rectangle with ornate gold border
+ * Card container - with royal ornate frame
  */
 export const CARD_CONTAINER: CSSProperties = {
   background: `
     linear-gradient(180deg, 
-      rgba(30, 15, 35, 0.95) 0%, 
-      rgba(20, 10, 25, 0.98) 50%,
-      rgba(15, 8, 20, 0.99) 100%
+      rgba(25, 12, 35, 0.97) 0%, 
+      rgba(18, 8, 28, 0.98) 50%,
+      rgba(12, 5, 20, 0.99) 100%
     )
   `,
-  borderRadius: "20px",
-  border: "3px solid transparent",
+  borderRadius: "12px",
 };
 
 /**
- * Ornate gold border for cards - thick Banarasi style
+ * Royal ornate frame border - thick with inner/outer lines
  */
-export const CARD_BORDER_GRADIENT = `
+export const CARD_FRAME_OUTER = `
   linear-gradient(180deg, 
-    #B8860B 0%,
-    #D4A853 15%, 
-    #FFD700 30%,
-    #D4A853 50%,
-    #B8860B 70%,
-    #D4A853 85%,
-    #FFD700 100%
+    #4a3510 0%,
+    #8B6914 10%,
+    #D4A853 25%, 
+    #FFD700 50%,
+    #D4A853 75%,
+    #8B6914 90%,
+    #4a3510 100%
+  )
+`;
+
+export const CARD_FRAME_INNER = `
+  linear-gradient(180deg, 
+    #2a1a08 0%,
+    #5a4012 20%,
+    #8B6914 50%,
+    #5a4012 80%,
+    #2a1a08 100%
   )
 `;
 
