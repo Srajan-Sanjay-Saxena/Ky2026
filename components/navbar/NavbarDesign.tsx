@@ -196,7 +196,7 @@ export function Navbar({
       }}
     >
       {/* Wrapper keeps the bar centered and constrained on large screens */}
-      <div className="relative mx-auto w-full max-w-[1600px] px-2 sm:px-3 md:px-4 pt-2 md:pt-3">
+      <div className="relative mx-auto w-full max-w-[1600px] px-2 sm:px-3 pt-2">
         {/* The ornate bar — its height is driven by width to preserve aspect */}
         <div
           className="relative w-full"
@@ -205,7 +205,7 @@ export function Navbar({
             // Clamp so the bar never gets absurdly short on huge screens or
             // uselessly thin on small ones.
             minHeight: 56,
-            maxHeight: 120,
+            maxHeight: 85,
           }}
         >
           {/* Background carved bar */}

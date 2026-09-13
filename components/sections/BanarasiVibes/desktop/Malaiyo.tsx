@@ -32,14 +32,14 @@ export const Malaiyo = memo(function Malaiyo() {
   return (
     <div
       ref={ref}
-      className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[28%] left-[1%] z-20"
+      className="pointer-events-none hidden sm:block sm:absolute top-[8%] left-[15%] z-20"
     >
       <Image
         src={IMAGES.vibes.malaiyo}
         alt="Banarasi Malaiyo"
         width={800}
         height={800}
-        className="w-20 h-20 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px] object-contain"
+        className="sm:w-72 sm:h-72 object-contain"
         style={{ filter: "drop-shadow(0 15px 40px rgba(0,0,0,0.6))" }}
       />
     </div>

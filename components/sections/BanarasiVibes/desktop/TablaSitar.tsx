@@ -31,14 +31,14 @@ export const TablaSitar = memo(function TablaSitar() {
   return (
     <div
       ref={ref}
-      className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[-2%] right-[5%] md:right-[7%] z-20"
-    >
+      className="pointer-events-none hidden sm:block sm:absolute top-[5%] right-[3%] z-20"
+      >
       <Image
         src={IMAGES.vibes.tablaSitar}
         alt="Tabla & Sitar"
-        width={1600}
-        height={1600}
-        className="w-32 h-32 sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] object-contain"
+        width={1000}
+        height={1000}
+        className="sm:w-[450px] sm:h-[450px] object-contain"
         style={{ filter: "drop-shadow(0 15px 40px rgba(0,0,0,0.6))" }}
       />
     </div>

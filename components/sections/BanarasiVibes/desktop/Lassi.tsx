@@ -32,14 +32,14 @@ export const Lassi = memo(function Lassi() {
   return (
     <div
       ref={ref}
-      className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[35%] right-[1%] z-20"
+      className="pointer-events-none hidden sm:block sm:absolute  top-[45%] right-[9%] z-20"
     >
       <Image
         src={IMAGES.vibes.lassi}
         alt="Banarasi Lassi"
         width={1000}
         height={1300}
-        className="w-20 h-28 sm:w-72 sm:h-96 md:w-96 md:h-[500px] lg:w-[450px] lg:h-[600px] object-contain"
+        className="sm:w-72 sm:h-96 object-contain"
         style={{ filter: "drop-shadow(0 15px 40px rgba(0,0,0,0.6))" }}
       />
     </div>

@@ -82,15 +82,12 @@ export function BanarasiVibesSection() {
       {/* BHU Gate - both mobile and desktop */}
       <div
         ref={gateRef}
-        className="absolute left-1/2 -translate-x-1/2 w-[85%] sm:w-[65%] md:w-[55%] lg:w-[48%] bhu-gate-position"
+        className="absolute left-1/2 -translate-x-1/2 w-[85%] sm:w-[65%] md:w-[55%] lg:w-[48%] bottom-[60px] sm:bottom-[-150px]"
         style={{ zIndex: 10 }}
       >
         {/* Mahamana statue - positioned in center archway */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 w-[58%] sm:w-[30%] md:w-[53%] z-[5]"
-          style={{
-            bottom: "8%",
-          }}
+          className="absolute left-1/2 -translate-x-1/2 w-[58%] sm:w-[45%] z-[5] bottom-[50px] sm:bottom-[280px]"
         >
           <Image
             src={IMAGES.vibes.mahamana}
@@ -110,7 +107,7 @@ export function BanarasiVibesSection() {
           alt="IIT BHU Gate"
           width={1400}
           height={900}
-          className="w-full h-auto relative z-10"
+          className="sm:bottom-62 bottom-7 absolute z-10"
           style={{
             filter:
               "drop-shadow(0 0 40px rgba(255,215,0,0.3)) drop-shadow(0 15px 30px rgba(0,0,0,0.5))",
@@ -133,7 +130,7 @@ export function BanarasiVibesSection() {
       {/* RICKSHAW - moving on road, smaller on mobile, starts closer */}
       <div
         ref={rickshawRef}
-        className="absolute w-[180px] h-[120px] sm:w-[600px] sm:h-[400px]"
+        className="pointer-events-none hidden sm:block sm:absolute  sm:w-[500px] sm:h-[300px]"
         style={{
           left: "-200px",
           bottom: "5px",

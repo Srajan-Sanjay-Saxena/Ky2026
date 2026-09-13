@@ -32,14 +32,14 @@ export const Paan = memo(function Paan() {
   return (
     <div
       ref={ref}
-      className="absolute pointer-events-none opacity-0 sm:opacity-100 top-[3%] left-[5%] z-20"
+      className="pointer-events-none hidden sm:block sm:absolute  top-[40%] left-[9%] z-20"
     >
       <Image
         src={IMAGES.vibes.paan}
         alt="Banarasi Paan"
         width={1200}
         height={1200}
-        className="w-28 h-28 sm:w-96 sm:h-96 md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] object-contain"
+        className="sm:w-[250px] sm:h-[250px] object-contain"
         style={{ filter: "drop-shadow(0 15px 40px rgba(0,0,0,0.6))" }}
       />
     </div>

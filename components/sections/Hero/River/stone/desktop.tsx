@@ -24,7 +24,6 @@ export const StonesDesktop = memo(function StonesDesktop() {
           label="Schedule"
           href="/schedule"
           size={SIZE_STONES.SCHEDULE.desktop}
-          sizeDesktop={SIZE_STONES.SCHEDULE.desktop}
           phase={0}
         />
       </div>
@@ -42,7 +41,6 @@ export const StonesDesktop = memo(function StonesDesktop() {
           label="Events"
           href="/events"
           size={SIZE_STONES.EVENTS.desktop}
-          sizeDesktop={SIZE_STONES.EVENTS.desktop}
           phase={-0.8}
         />
       </div>
@@ -61,7 +59,6 @@ export const StonesDesktop = memo(function StonesDesktop() {
           label="Register"
           href="/register"
           size={SIZE_STONES.REGISTER.desktop}
-          sizeDesktop={SIZE_STONES.REGISTER.desktop}
           phase={-1.6}
         />
       </div>
@@ -79,7 +76,6 @@ export const StonesDesktop = memo(function StonesDesktop() {
           label="Gallery"
           href="/gallery"
           size={SIZE_STONES.GALLERY.desktop}
-          sizeDesktop={SIZE_STONES.GALLERY.desktop}
           phase={-0.4}
         />
       </div>
@@ -97,7 +93,6 @@ export const StonesDesktop = memo(function StonesDesktop() {
           label="About"
           href="/about"
           size={SIZE_STONES.ABOUT.desktop}
-          sizeDesktop={SIZE_STONES.ABOUT.desktop}
           phase={-1.2}
         />
       </div>

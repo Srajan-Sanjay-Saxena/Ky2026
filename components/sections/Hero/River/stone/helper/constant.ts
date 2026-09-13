@@ -4,8 +4,7 @@ interface AnimStyleParams {
   phase: number;
   href?: string;
   onClick?: () => void;
-  mobileSize: number;
-  desktopSize: number;
+  size: number;
   zIndex?: number;
   style?: CSSProperties;
 }
@@ -14,8 +13,7 @@ export const getAnimStyle = ({
   phase,
   href,
   onClick,
-  mobileSize,
-  desktopSize,
+  size,
   zIndex,
   style,
 }: AnimStyleParams): CSSProperties => ({
@@ -25,8 +23,6 @@ export const getAnimStyle = ({
   cursor: href || onClick ? "pointer" : "default",
   position: "relative",
   zIndex: zIndex,
-  // CSS custom properties for responsive sizing
-  "--stone-size-mobile": `${mobileSize}px`,
-  "--stone-size-desktop": `${desktopSize}px`,
+  "--stone-size": `${size}px`,
   ...style,
 } as CSSProperties);

@@ -24,7 +24,6 @@ export const StonesMobile = memo(function StonesMobile() {
           label="Schedule"
           href="/schedule"
           size={SIZE_STONES.SCHEDULE.mobile}
-          sizeDesktop={SIZE_STONES.SCHEDULE.mobile}
           phase={0}
         />
       </div>
@@ -42,7 +41,6 @@ export const StonesMobile = memo(function StonesMobile() {
           label="Events"
           href="/events"
           size={SIZE_STONES.EVENTS.mobile}
-          sizeDesktop={SIZE_STONES.EVENTS.mobile}
           phase={-0.8}
         />
       </div>
@@ -61,7 +59,6 @@ export const StonesMobile = memo(function StonesMobile() {
           label="Register"
           href="/register"
           size={SIZE_STONES.REGISTER.mobile}
-          sizeDesktop={SIZE_STONES.REGISTER.mobile}
           phase={-1.6}
         />
       </div>
@@ -79,7 +76,6 @@ export const StonesMobile = memo(function StonesMobile() {
           label="Gallery"
           href="/gallery"
           size={SIZE_STONES.GALLERY.mobile}
-          sizeDesktop={SIZE_STONES.GALLERY.mobile}
           phase={-0.4}
         />
       </div>
@@ -97,7 +93,6 @@ export const StonesMobile = memo(function StonesMobile() {
           label="About"
           href="/about"
           size={SIZE_STONES.ABOUT.mobile}
-          sizeDesktop={SIZE_STONES.ABOUT.mobile}
           phase={-1.2}
         />
       </div>

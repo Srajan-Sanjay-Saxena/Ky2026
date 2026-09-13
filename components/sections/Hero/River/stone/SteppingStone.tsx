@@ -11,10 +11,8 @@ interface SteppingStoneProps {
   label?: string;
   href?: string;
   onClick?: () => void;
-  /** width in px — mobile size */
+  /** width/height in px */
   size?: number;
-  /** width in px for sm+ screens (desktop size) - if not provided, uses size */
-  sizeDesktop?: number;
   /** phase offset so multiple stones bob out of sync */
   phase?: number;
   /** z-index for layering stones */
@@ -28,21 +26,16 @@ export const SteppingStone = memo(function SteppingStone({
   href,
   onClick,
   size = 120,
-  sizeDesktop,
   phase = 0,
   zIndex,
   className = "",
   style,
 }: SteppingStoneProps) {
-  const mobileSize = size;
-  const desktopSize = sizeDesktop || size;
-
   const animStyle = getAnimStyle({
     phase,
     href,
     onClick,
-    mobileSize,
-    desktopSize,
+    size,
     zIndex,
     style,
   });

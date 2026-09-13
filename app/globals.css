@@ -73,52 +73,6 @@ body {
   color: var(--bright-gold);
 }
 
-/* Utility classes */
-.text-gradient-gold {
-  background: linear-gradient(135deg, var(--bright-gold), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.glow-gold {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-}
-
-.glow-saffron {
-  box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
-}
-
-/* Animation utilities */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
 /* ── HeroSection keyframes ── */
 @keyframes ember {
   0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
@@ -481,26 +435,10 @@ body {
   100% { transform: scale(1.15); opacity: 1; }
 }
 
-/* ── BanarasiVibes: BHU Gate responsive positioning ── */
-.bhu-gate-position {
-  bottom: 60px; /* Mobile: sits above road */
-}
-@media (min-width: 640px) {
-  .bhu-gate-position {
-    bottom: -150px; /* Desktop: extends below, partially cut off */
-  }
-}
-
-/* ── SteppingStone: Responsive sizing via CSS variables ── */
+/* ── SteppingStone: Sizing ── */
 .stone-responsive .stone-interactive {
-  width: var(--stone-size-mobile);
-  height: var(--stone-size-mobile);
-}
-@media (min-width: 640px) {
-  .stone-responsive .stone-interactive {
-    width: var(--stone-size-desktop);
-    height: var(--stone-size-desktop);
-  }
+  width: var(--stone-size);
+  height: var(--stone-size);
 }
 
 /* Stone sub-elements sizing (relative to container) */
@@ -559,72 +497,6 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ══════════════════════════════════════════════════════════════════════════════
-   Stone Positions - CSS classes for responsive positioning
-   Values synced with: /components/constants/position.ts -> POS_STONES
-   Using CSS because inline styles don't support media queries
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-.stone-pos-schedule {
-  bottom: 60%;
-  left: 5%;
-}
-@media (min-width: 640px) {
-  .stone-pos-schedule {
-    bottom: 17%;
-    left: 8%;
-  }
-}
-
-.stone-pos-events {
-  bottom: 25%;
-  left: 10%;
-}
-@media (min-width: 640px) {
-  .stone-pos-events {
-    bottom: 14%;
-    left: 28%;
-  }
-}
-
-.stone-pos-register {
-  bottom: 46%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-@media (min-width: 640px) {
-  .stone-pos-register {
-    bottom: 11%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.stone-pos-gallery {
-  bottom: 73%;
-  right: 5%;
-}
-@media (min-width: 640px) {
-  .stone-pos-gallery {
-    bottom: 17%;
-    left: 68%;
-    right: auto;
-  }
-}
-
-.stone-pos-about {
-  bottom: 30%;
-  right: 8%;
-}
-@media (min-width: 640px) {
-  .stone-pos-about {
-    bottom: 20%;
-    left: 86%;
-    right: auto;
-  }
-}
-
-
 
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -670,18 +542,4 @@ body {
   [class*="absolute"] {
     backface-visibility: hidden;
   }
-}
-
-/* GPU acceleration hints for animated elements */
-.gpu-accelerated {
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-/* Optimize transitions - use only transform and opacity */
-.perf-transition {
-  transition-property: transform, opacity;
-  transition-timing-function: ease-out;
-  will-change: transform, opacity;
 }
