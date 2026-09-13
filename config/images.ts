@@ -5,7 +5,7 @@
  * All images served from ImageKit CDN.
  */
 
-const IMAGEKIT_BASE = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || "https://ik.imagekit.io/bi3ktgt58";
+const IMAGEKIT_BASE = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
 
 export const IMAGES = {
   passes: {
@@ -52,6 +52,6 @@ export function getImageUrl(path: string, transformations?: string): string {
   if (!transformations) return path;
   
   // Insert transformations after base URL
-  const imagePath = path.replace(IMAGEKIT_BASE, "");
+  const imagePath = path.replace(IMAGEKIT_BASE as string, "");
   return `${IMAGEKIT_BASE}/${transformations}${imagePath}`;
 }
