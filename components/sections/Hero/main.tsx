@@ -10,6 +10,7 @@ import { CinematicSky } from "@/components/sections/Hero/Sky/CinematicSky";
 import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
 import { useTimeOfDay } from "@/hooks/useTimeOfDay";
+import { MotionZone } from "@/components/motion";
 import { Z_HERO } from "@/components/constants";
 import { IMAGES } from "@/lib/images";
 
@@ -628,17 +629,17 @@ export function HeroSection() {
       </div>
 
       {/* Flying Birds - Mobile optimized */}
-      <div className="absolute top-[6%] sm:top-[8%] left-0 w-full h-10 sm:h-14 md:h-18 z-30 overflow-hidden">
+      {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
+      <MotionZone className="absolute top-[6%] sm:top-[8%] left-0 w-full h-10 sm:h-14 md:h-18 z-30 overflow-hidden">
         <FlyingBirds className="w-full h-full" />
-      </div>
+      </MotionZone>
 
       {/* Second flock - hidden on mobile for performance */}
-      <div
+      <MotionZone
         className="hidden sm:block absolute top-[12%] sm:top-[15%] left-0 w-full h-10 sm:h-12 md:h-16 z-30 overflow-hidden opacity-60"
-        style={{ animationDelay: "10s" }}
       >
         <FlyingBirds className="w-full h-full" />
-      </div>
+      </MotionZone>
 
       {/* Celestial Body - Moon or Sun based on time of day */}
       {/* Sun is smaller during morning (rising sun effect) */}
@@ -955,7 +956,11 @@ export function HeroSection() {
       </div>
 
       {/* RIVER - Contains water, lotus, diyas, boats, and stepping stones */}
-      <River ref={riverRef} />
+      {/* RIVER - Contains water, lotus, diyas, boats, and stepping stones */}
+      {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
+      <MotionZone>
+        <River ref={riverRef} />
+      </MotionZone>
 
       {/* Floating embers - Desktop only */}
       <div className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden">

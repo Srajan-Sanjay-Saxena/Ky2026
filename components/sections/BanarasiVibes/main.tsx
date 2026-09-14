@@ -8,6 +8,7 @@ import { LampPost } from "./LampPost";
 import { BanarasiVibesMobile } from "./mobile";
 import { BanarasiVibesDesktop } from "./desktop";
 import { IMAGES } from "@/lib/images";
+import { MotionZone } from "@/components/motion";
 
 export function BanarasiVibesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -150,12 +151,13 @@ export function BanarasiVibesSection() {
       <Road />
 
       {/* Lamp Post - ON the road, smaller on mobile */}
-      <div
+      {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
+      <MotionZone
         className="absolute left-[2%] sm:left-[5%] w-10 h-32 sm:w-20 sm:h-80 md:w-24 md:h-96 lg:w-28 lg:h-[420px]"
         style={{ bottom: "70px", zIndex: 28 }}
       >
         <LampPost className="w-full h-full" />
-      </div>
+      </MotionZone>
 
       {/* RICKSHAW - moving on road, smaller on mobile, starts closer */}
       <div
