@@ -48,13 +48,12 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
                   ? "2px solid rgba(255,230,100,1)" 
                   : "1px solid rgba(255,215,0,0.55)",
                 boxShadow: active
-                  ? "0 0 25px rgba(255,215,0,0.9), 0 0 50px rgba(255,180,0,0.7), 0 0 80px rgba(255,215,0,0.5), 0 0 120px rgba(255,200,50,0.3), inset 0 0 20px rgba(255,255,200,0.5), 0 2px 8px rgba(0,0,0,0.3)"
+                  ? "0 0 25px rgba(255,215,0,0.9), 0 0 50px rgba(255,180,0,0.7), 0 0 80px rgba(255,215,0,0.5), inset 0 0 20px rgba(255,255,200,0.5), 0 2px 8px rgba(0,0,0,0.3)"
                   : "0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,245,200,0.35)",
                 textShadow: active
                   ? "0 0 8px rgba(255,215,0,0.8), 0 0 15px rgba(255,180,0,0.6), 0 1px 1px rgba(255,245,215,0.9)"
                   : "0 1px 1px rgba(255,245,215,0.7)",
                 transform: active ? "scale(1.08)" : undefined,
-                animation: active ? "goldenPulse 2s ease-in-out infinite" : undefined,
               }}
             >
               <ShineIcon />
