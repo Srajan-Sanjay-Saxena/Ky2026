@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { IMAGES } from "@/lib/images";
+import { usePrefersReducedMotion } from "@/hooks";
 
 /**
  * Banarasi Lassi image with sway animation
@@ -12,8 +13,11 @@ import { IMAGES } from "@/lib/images";
  */
 export const Lassi = memo(function Lassi() {
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       gsap.to(ref.current, {
         y: -10,
@@ -27,7 +31,7 @@ export const Lassi = memo(function Lassi() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div

@@ -1,6 +1,9 @@
 /**
  * Upload ALL images to ImageKit
- * Run with: npx tsx scripts/upload-to-imagekit.ts
+ * 
+ * Usage:
+ *   npx tsx scripts/upload-to-imagekit.ts          # skip existing files
+ *   npx tsx scripts/upload-to-imagekit.ts --force  # overwrite all files
  */
 
 import ImageKit from "imagekit";
@@ -9,13 +12,16 @@ import * as path from "path";
 import * as dotenv from "dotenv";
 
 // Load environment variables
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
 
 const imagekit = new ImageKit({
   publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
   urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT!,
 });
+
+// Parse CLI args
+const forceUpload = process.argv.includes("--force");
 
 interface ImageToUpload {
   localFile: string;
@@ -59,20 +65,51 @@ const IMAGES_TO_UPLOAD: ImageToUpload[] = [
   // Misc
   { localFile: "lord_shiva.png", remoteName: "lord-shiva.png", folder: "/misc" },
   { localFile: "MoonBG.png", remoteName: "moon-bg.png", folder: "/misc" },
-  { localFile: "Dj.png", remoteName: "dj.png", folder: "/misc" },
+  { localFile: "DJ.png", remoteName: "dj.png", folder: "/misc" },
   { localFile: "silhoutte.png", remoteName: "concert-crowd.png", folder: "/misc" },
   { localFile: "SareeDrape.png", remoteName: "saree-drape.png", folder: "/misc" },
   { localFile: "welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
   { localFile: "kites.png", remoteName: "kites.png", folder: "/misc" },
   { localFile: "rockstar.png", remoteName: "rockstar.png", folder: "/misc" },
+
+  // About page
+  { localFile: "about/mandlaOrnament.png", remoteName: "mandala-ornament.png", folder: "/about" },
+  { localFile: "about/peacock_nobg.png", remoteName: "peacock.png", folder: "/about" },
+  { localFile: "about/omLotus.png", remoteName: "om-lotus.png", folder: "/about" },
+  { localFile: "about/mysticDivider.png", remoteName: "mystic-divider.png", folder: "/about" },
+  { localFile: "about/diyaCluster.png", remoteName: "diya-cluster.png", folder: "/about" },
+  { localFile: "about/cornerOrnament.png", remoteName: "corner-ornament.png", folder: "/about" },
+  { localFile: "about/bhuRoyalGate.png", remoteName: "bhu-royal-gate.png", folder: "/about" },
+  { localFile: "about/ghatSaloutte.png", remoteName: "ghats-silhouette.png", folder: "/about" },
 ];
 
-async function uploadImage(img: ImageToUpload, publicDir: string): Promise<{ name: string; url: string } | null> {
+async function checkIfExists(folder: string, fileName: string): Promise<boolean> {
+  try {
+    const files = await imagekit.listFiles({
+      path: folder,
+      name: fileName,
+    });
+    return files.length > 0;
+  } catch {
+    return false;
+  }
+}
+
+async function uploadImage(img: ImageToUpload, publicDir: string): Promise<{ name: string; url: string; skipped?: boolean } | null> {
   const filePath = path.join(publicDir, img.localFile);
 
   if (!fs.existsSync(filePath)) {
     console.log(`⚠️  Skipping (not found): ${img.localFile}`);
     return null;
+  }
+
+  // Check if file already exists on ImageKit (unless --force)
+  if (!forceUpload) {
+    const exists = await checkIfExists(img.folder, img.remoteName);
+    if (exists) {
+      console.log(`⏭️  Skipping (exists): ${img.folder}/${img.remoteName}`);
+      return { name: `${img.folder}/${img.remoteName}`, url: "", skipped: true };
+    }
   }
 
   const fileBuffer = fs.readFileSync(filePath);
@@ -91,9 +128,10 @@ async function uploadImage(img: ImageToUpload, publicDir: string): Promise<{ nam
 async function main() {
   const publicDir = path.join(process.cwd(), "public");
 
-  console.log("🚀 Uploading all images to ImageKit...\n");
+  console.log(`🚀 Uploading images to ImageKit... ${forceUpload ? "(FORCE MODE - overwriting all)" : "(skip existing)"}\n`);
 
   const results: { name: string; url: string }[] = [];
+  const skipped: string[] = [];
   const failed: string[] = [];
 
   for (const img of IMAGES_TO_UPLOAD) {
@@ -101,8 +139,12 @@ async function main() {
       console.log(`📤 Uploading ${img.localFile} → ${img.folder}/${img.remoteName}...`);
       const result = await uploadImage(img, publicDir);
       if (result) {
-        results.push(result);
-        console.log(`   ✅ ${result.url}\n`);
+        if (result.skipped) {
+          skipped.push(result.name);
+        } else {
+          results.push(result);
+          console.log(`   ✅ ${result.url}\n`);
+        }
       }
     } catch (error) {
       console.error(`   ❌ Failed: ${error}\n`);
@@ -114,7 +156,8 @@ async function main() {
   console.log("📋 UPLOAD SUMMARY");
   console.log("═".repeat(60));
   console.log(`✅ Uploaded: ${results.length}`);
-  console.log(`❌ Failed: ${failed.length}`);
+  console.log(`⏭️  Skipped:  ${skipped.length}`);
+  console.log(`❌ Failed:   ${failed.length}`);
   
   if (failed.length > 0) {
     console.log("\nFailed files:", failed.join(", "));

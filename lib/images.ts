@@ -41,23 +41,23 @@ export const IMAGES = {
   },
   misc: {
     lordShiva: `${IMAGEKIT_BASE}/misc/lord-shiva.png`,
-    moonBg: "/MoonBG.png",  // Local public folder - large decorative moon
-    dj: "/Dj.png",  // Local public folder - DJ character for ProNites
-    concertCrowd: "/silhoutte.png",  // Concert crowd silhouette for ProNites
-    sareeDrape: "/SareeDrape.png",  // Banarasi saree drape for FestivalVibes
-    welcomeFlag: "/welcomeFlag.png",  // Welcome flag for Hero section
-    kites: "/kites.png",  // Kites for Hero section - morning/evening only
-    rockstar: "/rockstar.png",  // Rockstar for ProNites section
+    moonBg: `${IMAGEKIT_BASE}/misc/moon-bg.png`,
+    dj: `${IMAGEKIT_BASE}/misc/dj.png`,
+    concertCrowd: `${IMAGEKIT_BASE}/misc/concert-crowd.png`,
+    sareeDrape: `${IMAGEKIT_BASE}/misc/saree-drape.png`,
+    welcomeFlag: `${IMAGEKIT_BASE}/misc/welcome-flag.png`,
+    kites: `${IMAGEKIT_BASE}/misc/kites.png`,
+    rockstar: `${IMAGEKIT_BASE}/misc/rockstar.png`,
   },
   about: {
-    mandalaOrnament: "/about/mandlaOrnament.png",  // Gold mandala frame with hollow center
-    peacock: "/about/peacock_nobg.png",  // Royal peacock motif
-    omLotus: "/about/omLotus.png",  // Pink lotus with Om symbol
-    mysticDivider: "/about/mysticDivider.png",  // Gold horizontal divider
-    diyaCluster: "/about/diyaCluster.png",  // Cluster of brass diyas
-    cornerOrnament: "/about/cornerOrnament.png",  // Gold corner ornament
-    bhuGate: "/about/bhuRoyalGate.png",  // IIT BHU gate illustration
-    ghatsSilhouette: "/about/ghatSaloutte.png",  // Varanasi ghats panoramic
+    mandalaOrnament: `${IMAGEKIT_BASE}/about/mandala-ornament.png`,
+    peacock: `${IMAGEKIT_BASE}/about/peacock.png`,
+    omLotus: `${IMAGEKIT_BASE}/about/om-lotus.png`,
+    mysticDivider: `${IMAGEKIT_BASE}/about/mystic-divider.png`,
+    diyaCluster: `${IMAGEKIT_BASE}/about/diya-cluster.png`,
+    cornerOrnament: `${IMAGEKIT_BASE}/about/corner-ornament.png`,
+    bhuGate: `${IMAGEKIT_BASE}/about/bhu-royal-gate.png`,
+    ghatsSilhouette: `${IMAGEKIT_BASE}/about/ghats-silhouette.png`,
   },
   contact: {
     // Reused from the About page for visual consistency

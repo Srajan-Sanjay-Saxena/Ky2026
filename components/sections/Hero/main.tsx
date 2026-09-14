@@ -10,6 +10,7 @@ import { CinematicSky } from "@/components/sections/Hero/Sky/CinematicSky";
 import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
 import { useTimeOfDay } from "@/hooks/useTimeOfDay";
+import { useIsMobile, usePrefersReducedMotion } from "@/hooks";
 import { MotionZone } from "@/components/motion";
 import { Z_HERO } from "@/components/constants";
 import { IMAGES } from "@/lib/images";
@@ -29,6 +30,8 @@ export function HeroSection() {
 
   // Get current time-based sky configuration
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Show kites in all times except night
   const showKites = timeOfDay !== 'night';
@@ -148,6 +151,8 @@ export function HeroSection() {
 
   // Continuous glow: Temple & Ghats (related visual effect)
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       gsap.to(templeRef.current, {
         filter:
@@ -169,14 +174,21 @@ export function HeroSection() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   // Parallax scroll: Celestial body & Temple (related scroll behavior) - Desktop only
   useEffect(() => {
     // Skip parallax on mobile for performance
     if (typeof window !== "undefined" && window.innerWidth < 640) return;
+    if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
+      // Use quickTo for performant scroll-driven animations
+      // quickTo creates a reusable setter instead of spawning new tweens
+      const celestialY = gsap.quickTo(celestialRef.current, "y", { duration: 0.1, ease: "none" });
+      const templeY = gsap.quickTo(templeRef.current, "y", { duration: 0.1, ease: "none" });
+      const ghatsX = gsap.quickTo(ghatsRef.current, "x", { duration: 0.1, ease: "none" });
+
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
@@ -184,15 +196,15 @@ export function HeroSection() {
         scrub: 1,
         onUpdate: (self) => {
           const p = self.progress;
-          gsap.to(celestialRef.current, { y: p * -200, duration: 0.1 });
-          gsap.to(templeRef.current, { y: p * 60, duration: 0.1 });
-          gsap.to(ghatsRef.current, { x: p * -100, duration: 0.1 });
+          celestialY(p * -200);
+          templeY(p * 60);
+          ghatsX(p * -100 - 40); // -40 is the base x position from entry animation
         },
       });
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section
@@ -694,9 +706,9 @@ export function HeroSection() {
         style={{ transition: "all 1s ease-in-out" }}
       >
         {showMoon ? (
-          <Moon className="w-full h-full" />
+          <Moon className="w-full h-full" isMobile={isMobile} />
         ) : (
-          <Sun className="w-full h-full" />
+          <Sun className="w-full h-full" isMobile={isMobile} />
         )}
       </div>
 

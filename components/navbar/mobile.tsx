@@ -7,7 +7,7 @@ import { primaryLinks, secondaryLinks } from "./constants";
 
 /**
  * Mobile Navbar - Hamburger menu with dropdown panel
- * Visible on mobile (md:hidden)
+ * Visible on mobile (sm:hidden)
  */
 export const NavbarMobile = memo(function NavbarMobile() {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export const NavbarMobile = memo(function NavbarMobile() {
   const allLinks = [...primaryLinks, ...secondaryLinks];
 
   return (
-    <div className="md:hidden">
+    <div className="sm:hidden">
       {/* Hamburger sits on the right of the bar */}
       <button
         type="button"
@@ -50,11 +50,11 @@ export const NavbarMobile = memo(function NavbarMobile() {
 
       {/* Dropdown panel */}
       <div
-        className={`naksha-panel absolute left-2 right-2 top-[calc(100%+8px)] z-10 origin-top overflow-hidden
-                    transition-all duration-500 ${
+        className={`naksha-panel absolute left-2 right-2 top-[calc(100%+8px)] z-10 origin-top
+                    transition-all duration-300 ease-out ${
                       open
-                        ? "max-h-[560px] opacity-100"
-                        : "pointer-events-none max-h-0 opacity-0"
+                        ? "opacity-100 scale-y-100 pointer-events-auto"
+                        : "opacity-0 scale-y-0 pointer-events-none"
                     }`}
         style={{
           borderRadius: "14px",
@@ -63,6 +63,7 @@ export const NavbarMobile = memo(function NavbarMobile() {
           border: "2px solid rgba(255,215,0,0.55)",
           boxShadow:
             "0 14px 34px rgba(0,0,0,0.55), inset 0 0 24px rgba(120,72,20,0.4), inset 0 0 2px rgba(255,240,200,0.6)",
+          willChange: "transform, opacity",
         }}
       >
         {/* Mottled parchment texture */}
@@ -198,7 +199,7 @@ export const NavbarMobile = memo(function NavbarMobile() {
                     border: active ? "1px solid rgba(255,230,100,0.9)" : "1px solid transparent",
                     opacity: open ? 1 : 0,
                     transform: open ? (active ? "translateY(0) scale(1.02)" : "translateY(0)") : "translateY(-8px)",
-                    transitionDelay: open ? `${120 + i * 70}ms` : "0ms",
+                    transitionDelay: open ? `${50 + i * 30}ms` : "0ms",
                   }}
                 >
                   <span 

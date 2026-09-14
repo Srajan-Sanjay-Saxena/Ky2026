@@ -25,9 +25,9 @@ interface PassCardProps {
 }
 
 // ============================================
-// PassIcon Component with Animation
+// PassIcon Component with Animation (desktop only)
 // ============================================
-function PassIcon({ passId }: { passId: string }) {
+function PassIcon({ passId, isMobile }: { passId: string; isMobile: boolean }) {
   const icons: Record<string, React.ReactNode> = {
     yatri: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -46,6 +46,10 @@ function PassIcon({ passId }: { passId: string }) {
     ),
   };
 
+  if (isMobile) {
+    return <span className="inline-block">{icons[passId] || icons.yatri}</span>;
+  }
+
   return (
     <motion.span
       animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
@@ -60,13 +64,13 @@ function PassIcon({ passId }: { passId: string }) {
 // ============================================
 // Animated Mandala Ring for Card Back
 // ============================================
-function AnimatedMandala({ color, size = 200 }: { color: string; size?: number }) {
+function AnimatedMandala({ color, size = 200, isAnimating = true }: { color: string; size?: number; isAnimating?: boolean }) {
   return (
     <motion.svg
       viewBox="0 0 200 200"
       className="absolute"
       style={{ width: size, height: size }}
-      animate={{ rotate: 360 }}
+      animate={isAnimating ? { rotate: 360 } : undefined}
       transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
     >
       {/* Outer circles */}
@@ -171,12 +175,6 @@ function RoyalButton({ children, onClick, icon }: { children: React.ReactNode; o
         boxShadow: SHADOWS.BUTTON_GOLD,
       }}
     >
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        animate={{ x: ["-100%", "100%"] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)" }}
-      />
       <span className="relative z-10 flex items-center justify-center gap-2">{icon}{children}</span>
     </motion.button>
   );
@@ -248,14 +246,12 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
     >
       {/* Popular badge */}
       {pass.popular && (
-        <motion.div
+        <div
           className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
           style={{ background: GRADIENT_BADGE_GOLD, color: COLORS.CARD_DARK_PURPLE, boxShadow: SHADOWS.BADGE_GOLD }}
         >
           ✦ Most Popular ✦
-        </motion.div>
+        </div>
       )}
 
       {/* Static card frame */}
@@ -277,22 +273,26 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
             >
               {/* ===== FRONT: Pass Image with Glow ===== */}
               <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
-                <motion.div animate={{ y: [0, -8, 0] }} transition={{ ...ANIMATION.float, delay: floatDelay }} className="relative">
-                  <div className="absolute inset-0 blur-2xl" style={{ background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`, transform: "scale(1.3)", opacity: 0.6 }} />
-                  {/* Skip expensive filter animation on mobile */}
-                  {isMobile ? (
+                {isMobile ? (
+                  /* Static on mobile */
+                  <div className="relative">
+                    <div className="absolute inset-0 blur-2xl" style={{ background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`, transform: "scale(1.3)", opacity: 0.6 }} />
                     <div style={{ filter: `drop-shadow(0 0 20px ${pass.glowColor})` }}>
                       <Image src={pass.image} alt={pass.name} width={220} height={280} className="object-contain max-h-[260px] w-auto relative z-10" priority={index === 0} />
                     </div>
-                  ) : (
+                  </div>
+                ) : (
+                  /* Animated on desktop */
+                  <motion.div animate={{ y: [0, -8, 0] }} transition={{ ...ANIMATION.float, delay: floatDelay }} className="relative">
+                    <div className="absolute inset-0 blur-2xl" style={{ background: `radial-gradient(ellipse, ${pass.glowColor} 0%, transparent 70%)`, transform: "scale(1.3)", opacity: 0.6 }} />
                     <motion.div
                       animate={{ filter: [`drop-shadow(0 0 20px ${pass.glowColor})`, `drop-shadow(0 0 35px ${pass.glowColor})`, `drop-shadow(0 0 20px ${pass.glowColor})`] }}
                       transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <Image src={pass.image} alt={pass.name} width={220} height={280} className="object-contain max-h-[260px] w-auto relative z-10" priority={index === 0} />
                     </motion.div>
-                  )}
-                </motion.div>
+                  </motion.div>
+                )}
                 <p className="absolute bottom-1 text-gray-500 text-xs flex items-center gap-1">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
                   {isMobile ? "Tap for details" : "Click for details"}
@@ -325,9 +325,9 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                   }}
                 />
 
-                {/* Animated Mandala Background */}
+                {/* Animated Mandala Background - only animate when flipped and not on mobile */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                  <AnimatedMandala color={pass.accentColor} size={280} />
+                  <AnimatedMandala color={pass.accentColor} size={280} isAnimating={isFlipped && !isMobile} />
                 </div>
 
                 {/* Gold border glow */}
@@ -345,13 +345,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                   <div className="text-center mb-3">
                     <div className="flex items-center justify-center gap-2 mb-1">
                       <span className="w-8 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_LEFT }} />
-                      <motion.span
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        style={{ color: pass.accentColor }}
-                      >
-                        ✦
-                      </motion.span>
+                      <span style={{ color: pass.accentColor }}>✦</span>
                       <span className="w-8 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_RIGHT }} />
                     </div>
                     <h3
@@ -372,23 +366,33 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
                   {/* Benefits list with royal styling */}
                   <ul className="flex-1 space-y-2.5 overflow-y-auto px-1">
                     {pass.benefits.map((benefit, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className={`flex items-start gap-2.5 text-sm ${benefit.highlight ? "text-yellow-200" : "text-gray-200"}`}
-                      >
-                        <motion.span
-                          animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
-                          transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
-                          style={{ color: COLORS.BRIGHT_GOLD }}
-                          className="mt-0.5"
+                      isMobile ? (
+                        <li
+                          key={i}
+                          className={`flex items-start gap-2.5 text-sm ${benefit.highlight ? "text-yellow-200" : "text-gray-200"}`}
                         >
-                          ✦
-                        </motion.span>
-                        <span className="leading-tight">{benefit.text}</span>
-                      </motion.li>
+                          <span style={{ color: COLORS.BRIGHT_GOLD }} className="mt-0.5">✦</span>
+                          <span className="leading-tight">{benefit.text}</span>
+                        </li>
+                      ) : (
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className={`flex items-start gap-2.5 text-sm ${benefit.highlight ? "text-yellow-200" : "text-gray-200"}`}
+                        >
+                          <motion.span
+                            animate={{ scale: [1, 1.3, 1], rotate: [0, 180, 360] }}
+                            transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
+                            style={{ color: COLORS.BRIGHT_GOLD }}
+                            className="mt-0.5"
+                          >
+                            ✦
+                          </motion.span>
+                          <span className="leading-tight">{benefit.text}</span>
+                        </motion.li>
+                      )
                     ))}
                   </ul>
 
@@ -432,7 +436,7 @@ export const PassCard = memo(function PassCard({ pass, index, onSelect }: PassCa
             <div className="flex justify-center mb-3">
               <RoyalPrice price={pass.price} />
             </div>
-            <RoyalButton onClick={(e) => { e.stopPropagation(); onSelect?.(pass.id); }} icon={<PassIcon passId={pass.id} />}>
+            <RoyalButton onClick={(e) => { e.stopPropagation(); onSelect?.(pass.id); }} icon={<PassIcon passId={pass.id} isMobile={isMobile} />}>
               Get {pass.name.split(" ")[0]} Pass
             </RoyalButton>
           </div>

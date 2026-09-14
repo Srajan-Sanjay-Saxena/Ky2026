@@ -254,11 +254,15 @@ body {
 .nav-shine {
   filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.8))
     drop-shadow(0 0 6px rgba(255, 165, 0, 0.4));
-  animation: navSparkle 2.4s ease-in-out infinite;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+/* Animate sparkle only on hover */
+.nav-pill:hover .nav-shine {
+  animation: navSparkle 0.6s ease-in-out;
 }
 @keyframes navSparkle {
-  0%, 100% { transform: scale(0.82) rotate(0deg); opacity: 0.65; }
-  50% { transform: scale(1.15) rotate(90deg); opacity: 1; }
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(90deg); }
 }
 
 /* ── Navbar: ethereal glow behind the IIT BHU badge ── */
@@ -293,15 +297,16 @@ body {
   50% { opacity: 0.85; transform: translateX(-50%) scaleX(1.08); }
 }
 
-/* ── Navbar: spiritual icon (Om / Lotus) breathing glow ── */
+/* ── Navbar: spiritual icon (Om / Lotus) - static glow ── */
 .spirit-icon {
   filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.7))
     drop-shadow(0 0 7px rgba(255, 170, 60, 0.35));
-  animation: spiritGlow 3s ease-in-out infinite;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-@keyframes spiritGlow {
-  0%, 100% { opacity: 0.85; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
+/* Animate only on hover */
+.spirit-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }
 
 /* ── Navbar: golden pill links ── */
@@ -561,7 +566,14 @@ body {
    Pause animations when elements are not visible to save GPU/CPU
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Parent with data-inview="false" pauses all child animations */
+/* MotionZone: pause all descendant CSS animations when zone is paused */
+[data-motion-paused="true"] *,
+[data-motion-paused="true"] *::before,
+[data-motion-paused="true"] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Legacy: Parent with data-inview="false" pauses all child animations */
 [data-inview="false"] * {
   animation-play-state: paused !important;
 }

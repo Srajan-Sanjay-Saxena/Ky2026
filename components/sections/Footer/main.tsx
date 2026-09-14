@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MandalaRing } from "@/components/sections/FestHighlights/MandlaRing";
 import { DiyaSvg } from "@/components/sections/Hero/River/diya/DiyaSvg";
 import { MotionZone } from "@/components/motion";
+import { usePrefersReducedMotion } from "@/hooks";
 import {
   COLORS,
   GRADIENT_FOOTER,
@@ -157,8 +158,11 @@ const quickLinks = [
 export function FooterSection() {
   const footerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -179,7 +183,7 @@ export function FooterSection() {
     }, footerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <footer
@@ -228,10 +232,10 @@ export function FooterSection() {
         <div className="absolute top-16 sm:top-18 right-[5%] sm:right-[8%] w-6 h-8 sm:w-8 sm:h-10 opacity-50">
           <DiyaSvg className="w-full h-full" />
         </div>
-        <div className="hidden md:block absolute top-24 left-[20%] w-5 h-7 opacity-40">
+        <div className="hidden sm:block absolute top-24 left-[20%] w-5 h-7 opacity-40">
           <DiyaSvg className="w-full h-full" />
         </div>
-        <div className="hidden md:block absolute top-20 right-[22%] w-6 h-8 opacity-45">
+        <div className="hidden sm:block absolute top-20 right-[22%] w-6 h-8 opacity-45">
           <DiyaSvg className="w-full h-full" />
         </div>
       </MotionZone>
