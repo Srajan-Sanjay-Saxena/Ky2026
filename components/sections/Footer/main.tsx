@@ -189,27 +189,11 @@ export function FooterSection() {
       className="relative pt-16 sm:pt-20 md:pt-28 pb-8 sm:pb-10 overflow-hidden"
       style={{ background: GRADIENT_FOOTER }}
     >
-      {/* ═══ Animated Background Mandalas ═══ */}
+      {/* ═══ Animated Background Mandala ═══ */}
 
-      {/* Large outer mandala - slow clockwise */}
+      {/* Single large mandala - slow clockwise rotation */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] sm:w-[80vw] sm:h-[80vw] pointer-events-none footer-mandala-slow"
-        style={{ opacity: 0.15 }}
-      >
-        <MandalaRing className="w-full h-full text-[#FFD700]" />
-      </div>
-
-      {/* Inner mandala - counter-clockwise */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] sm:w-[45vw] sm:h-[45vw] pointer-events-none footer-mandala-reverse"
-        style={{ opacity: 0.18 }}
-      >
-        <MandalaRing className="w-full h-full text-[#FF6B00]" />
-      </div>
-
-      {/* Smallest mandala - faster rotation */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[35vw] h-[35vw] sm:w-[25vw] sm:h-[25vw] pointer-events-none footer-mandala-fast"
         style={{ opacity: 0.12 }}
       >
         <MandalaRing className="w-full h-full text-[#FFD700]" />
@@ -238,16 +222,16 @@ export function FooterSection() {
       {/* ═══ Corner Diyas ═══ */}
       {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
       <MotionZone className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-6 left-[5%] sm:left-[8%] w-8 h-10 sm:w-10 sm:h-12 opacity-70">
+        <div className="absolute top-14 sm:top-16 left-[5%] sm:left-[8%] w-8 h-10 sm:w-10 sm:h-12 opacity-70">
           <DiyaSvg className="w-full h-full" />
         </div>
-        <div className="absolute top-8 right-[5%] sm:right-[8%] w-6 h-8 sm:w-8 sm:h-10 opacity-50">
+        <div className="absolute top-16 sm:top-18 right-[5%] sm:right-[8%] w-6 h-8 sm:w-8 sm:h-10 opacity-50">
           <DiyaSvg className="w-full h-full" />
         </div>
-        <div className="hidden md:block absolute top-16 left-[20%] w-5 h-7 opacity-40">
+        <div className="hidden md:block absolute top-24 left-[20%] w-5 h-7 opacity-40">
           <DiyaSvg className="w-full h-full" />
         </div>
-        <div className="hidden md:block absolute top-12 right-[22%] w-6 h-8 opacity-45">
+        <div className="hidden md:block absolute top-20 right-[22%] w-6 h-8 opacity-45">
           <DiyaSvg className="w-full h-full" />
         </div>
       </MotionZone>

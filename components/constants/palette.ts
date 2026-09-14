@@ -309,21 +309,23 @@ export const CONCERT_COLORS = {
   WARM_PINK: "#FF6B9D",
   SUNSET_ORANGE: "#FF8C42",
   
-  // Backgrounds
-  STAGE_TOP: "#0d0a18",
-  STAGE_DARK: "#0a0612",
-  STAGE_PURPLE: "#1a0a2e",
-  STAGE_GLOW: "#2d1052",
-  CARD_BG: "#120820",
+  // Backgrounds - Night sky bluish-black theme (matching Hero night)
+  STAGE_TOP: "#050510",
+  STAGE_DARK: "#0a0a1a",
+  STAGE_PURPLE: "#0f1025",
+  STAGE_GLOW: "#1a1a40",
+  CARD_BG: "#0d0d20",
 } as const;
 
 export const GRADIENT_STAGE = `linear-gradient(180deg, 
-  ${CONCERT_COLORS.STAGE_TOP} 0%,
-  ${CONCERT_COLORS.STAGE_DARK} 15%,
-  ${CONCERT_COLORS.STAGE_PURPLE} 35%,
-  ${CONCERT_COLORS.STAGE_GLOW} 60%,
-  ${CONCERT_COLORS.STAGE_PURPLE} 80%,
-  ${CONCERT_COLORS.STAGE_DARK} 100%
+  #030308 0%,
+  #050510 10%,
+  #080815 25%,
+  #0a0a1a 40%,
+  #0d0d22 55%,
+  #0a0a1a 70%,
+  #050510 85%,
+  #030308 100%
 )`;
 
 // ═══════════════════════════════════════════════════════════════════
