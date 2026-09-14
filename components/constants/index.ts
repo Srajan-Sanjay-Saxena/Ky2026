@@ -1,6 +1,6 @@
 /**
- * Constants for Kashi Yatra 2026
- * 
+ * Constants for Kashi Yatra 2027
+ *
  * Centralized configuration for z-index, sizes, positions, and colors.
  * Import from this file for all layout and theme constants.
  */

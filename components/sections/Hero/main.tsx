@@ -29,12 +29,17 @@ export function HeroSection() {
   const kitesRef = useRef<HTMLDivElement>(null);
 
   // Get current time-based sky configuration
+<<<<<<< Updated upstream
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
   const isMobile = useIsMobile();
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Show kites in all times except night
   const showKites = timeOfDay !== 'night';
+=======
+  const { gradient, showMoon, showStars, starsOpacity, timeOfDay } =
+    useTimeOfDay();
+>>>>>>> Stashed changes
 
   // Entry animation: Celestial body (Moon or Sun)
   useEffect(() => {
@@ -103,36 +108,45 @@ export function HeroSection() {
         opacity: 1,
         duration: 0.5,
         ease: "none",
-      }).to(
-        ghatsRef.current,
-        { x: -40, opacity: 1, duration: 0.5, ease: "none" },
-        "<",
-      ).to(
-        welcomeFlagRef.current,
-        { 
-          y: 0, 
-          opacity: 1, 
-          scale: 1, 
-          duration: 0.6, 
-          ease: "back.out(1.7)" 
-        },
-        ">0.2", // Start 0.2s after temple/ghats animation ends
-      );
+      })
+        .to(
+          ghatsRef.current,
+          { x: -40, opacity: 1, duration: 0.5, ease: "none" },
+          "<",
+        )
+        .to(
+          welcomeFlagRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          ">0.2", // Start 0.2s after temple/ghats animation ends
+        );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Entry animation: Kites - Desktop only, flies in after temple
+  // Entry animation: Kites - Desktop only, flies in after temple (not at night)
   useEffect(() => {
-    // Skip on mobile or if kites not shown
-    if (typeof window === "undefined" || window.innerWidth < 640 || !showKites) return;
+    // Skip on mobile or if it's night time
+    if (typeof window === "undefined" || window.innerWidth < 640) return;
+    if (timeOfDay === "night") return;
     if (!kitesRef.current) return;
 
     const ctx = gsap.context(() => {
       // Set initial state
-      gsap.set(kitesRef.current, { x: -150, y: 50, opacity: 0, scale: 0.6, rotation: -30 });
-      
+      gsap.set(kitesRef.current, {
+        x: -150,
+        y: 50,
+        opacity: 0,
+        scale: 0.6,
+        rotation: -30,
+      });
+
       // Animate in after temple (delay matches temple timeline: 0.8 + 0.5 + 0.2 = 1.5s)
       gsap.to(kitesRef.current, {
         x: 0,
@@ -147,7 +161,7 @@ export function HeroSection() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [showKites]);
+  }, [timeOfDay]);
 
   // Continuous glow: Temple & Ghats (related visual effect)
   useEffect(() => {
@@ -217,7 +231,12 @@ export function HeroSection() {
     >
       {/* Cinematic Sky with stars, clouds, shooting stars - only visible at night/dusk */}
       {showStars && (
-        <div style={{ opacity: starsOpacity, transition: "opacity 2s ease-in-out" }}>
+        <div
+          style={{
+            opacity: starsOpacity,
+            transition: "opacity 2s ease-in-out",
+          }}
+        >
           <CinematicSky className="z-1" />
         </div>
       )}
@@ -686,9 +705,7 @@ export function HeroSection() {
       </MotionZone>
 
       {/* Second flock - hidden on mobile for performance */}
-      <MotionZone
-        className="hidden sm:block absolute top-[12%] sm:top-[15%] left-0 w-full h-10 sm:h-12 md:h-16 z-30 overflow-hidden opacity-60"
-      >
+      <MotionZone className="hidden sm:block absolute top-[12%] sm:top-[15%] left-0 w-full h-10 sm:h-12 md:h-16 z-30 overflow-hidden opacity-60">
         <FlyingBirds className="w-full h-full" />
       </MotionZone>
 
@@ -698,10 +715,10 @@ export function HeroSection() {
         ref={celestialRef}
         className={`absolute top-[2%] sm:top-[3%] left-1/2 -translate-x-1/2 z-5 ${
           showMoon
-            ? "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28"  // Original moon size
-            : timeOfDay === 'morning'
-              ? "w-12 h-12 sm:w-14 sm:h-14"  // Smaller sun in morning only
-              : "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28"  // Normal sun size
+            ? "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" // Original moon size
+            : timeOfDay === "morning"
+              ? "w-12 h-12 sm:w-14 sm:h-14" // Smaller sun in morning only
+              : "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" // Normal sun size
         }`}
         style={{ transition: "all 1s ease-in-out" }}
       >
@@ -736,8 +753,8 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Kites - Desktop only, top-left, visible during morning & evening only */}
-      {showKites && (
+      {/* Kites - Desktop only, top-left, hidden at night */}
+      {timeOfDay !== "night" && (
         <div
           ref={kitesRef}
           className="hidden sm:block absolute top-[8%] left-[5%] w-[20vw] max-w-[280px] pointer-events-none z-50"
@@ -778,7 +795,7 @@ export function HeroSection() {
           priority
         />
 
-        {/* 2026 Ethereal Badge */}
+        {/* 2027 Ethereal Badge */}
         <div className="relative mt-4 sm:mt-5 md:mt-6 inline-block">
           {/* Outer divine glow rings */}
           <div
@@ -875,7 +892,8 @@ export function HeroSection() {
             className="text-lg tracking-wide font-semibold mt-1"
             style={{
               fontFamily: "'Georgia', 'Times New Roman', serif",
-              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)",
+              background:
+                "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -883,15 +901,16 @@ export function HeroSection() {
           >
             the rhythm of celebration
           </p>
-          
+
           {/* Subtle divider */}
-          <div 
+          <div
             className="mx-auto mt-4 mb-3 w-12 h-px"
             style={{
-              background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent)",
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent)",
             }}
           />
-          
+
           {/* Date badge */}
           <p
             className="text-xs uppercase tracking-[0.25em] font-medium"
@@ -899,7 +918,7 @@ export function HeroSection() {
               color: "rgba(255,215,0,0.7)",
             }}
           >
-            February 2026
+            February 2027
           </p>
         </div>
       </h1>

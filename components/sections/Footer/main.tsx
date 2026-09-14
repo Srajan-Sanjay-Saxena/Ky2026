@@ -267,7 +267,7 @@ export function FooterSection() {
               textShadow: "0 0 15px rgba(255,215,0,0.3)",
             }}
           >
-            2026
+            2027
           </p>
           <p
             className="mt-5 text-base sm:text-lg max-w-lg mx-auto"
@@ -457,7 +457,7 @@ export function FooterSection() {
                 <span className="text-xl" style={{ color: COLORS.SAFFRON }}>
                   ✦
                 </span>
-                <span>March 15-17, 2026</span>
+                <span>March 15-17, 2027</span>
               </li>
             </ul>
           </div>
@@ -556,7 +556,7 @@ export function FooterSection() {
               letterSpacing: "0.05em",
             }}
           >
-            © 2026 Kashi Yatra • IIT (BHU) Varanasi
+            © 2027 Kashi Yatra • IIT (BHU) Varanasi
           </p>
           <p
             className="text-sm sm:text-base flex items-center gap-2"

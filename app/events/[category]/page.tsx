@@ -13,19 +13,21 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { category: slug } = await params;
   const category = getCategoryBySlug(slug);
 
   if (!category) {
     return {
-      title: "Category Not Found | Kashi Yatra 2026",
+      title: "Category Not Found | Kashi Yatra 2027",
     };
   }
 
   return {
-    title: `${category.name} | Kashi Yatra 2026`,
-    description: `${category.description} Explore all ${category.name} events at Kashi Yatra 2026.`,
+    title: `${category.name} | Kashi Yatra 2027`,
+    description: `${category.description} Explore all ${category.name} events at Kashi Yatra 2027.`,
   };
 }
 

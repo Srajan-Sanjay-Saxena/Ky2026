@@ -23,9 +23,16 @@ const cinzel = Cinzel_Decorative({
 });
 
 export const metadata: Metadata = {
-  title: "Kashi Yatra 2026 | IIT BHU Cultural Festival",
-  description: "Kashi Yatra - The annual cultural festival of IIT (BHU) Varanasi. Experience the spiritual essence of Kashi through art, music, dance, and cultural extravaganza.",
-  keywords: ["Kashi Yatra", "IIT BHU", "Cultural Festival", "Varanasi", "College Fest"],
+  title: "Kashi Yatra 2027 | IIT BHU Cultural Festival",
+  description:
+    "Kashi Yatra - The annual cultural festival of IIT (BHU) Varanasi. Experience the spiritual essence of Kashi through art, music, dance, and cultural extravaganza.",
+  keywords: [
+    "Kashi Yatra",
+    "IIT BHU",
+    "Cultural Festival",
+    "Varanasi",
+    "College Fest",
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -37,9 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <GsapRegistration />
         <MotionConfig reducedMotion="user">
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
+          <SmoothScroll>{children}</SmoothScroll>
         </MotionConfig>
       </body>
     </html>

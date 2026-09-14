@@ -1,6 +1,6 @@
 /**
- * Position Constants for Kashi Yatra 2026
- * 
+ * Position Constants for Kashi Yatra 2027
+ *
  * Responsive positioning organized by element type.
  * Format: { mobile, sm, md, lg } for each breakpoint
  * Values use CSS units (%, px, vh, vw)
@@ -198,40 +198,40 @@ type PositionValue = {
 
 /**
  * Generate Tailwind position classes from position constant
- * @example posToClasses(POS_STONES.SCHEDULE) 
+ * @example posToClasses(POS_STONES.SCHEDULE)
  * => "bottom-[21%] left-[5%] sm:bottom-[17%] sm:left-[8%]"
  */
 export function posToClasses(pos: PositionValue): string {
   const classes: string[] = [];
-  
+
   if (pos.mobile) {
     Object.entries(pos.mobile).forEach(([prop, val]) => {
       if (prop === "transform") return; // Skip transform for classes
       classes.push(`${prop}-[${val}]`);
     });
   }
-  
+
   if (pos.sm) {
     Object.entries(pos.sm).forEach(([prop, val]) => {
       if (prop === "transform") return;
       classes.push(`sm:${prop}-[${val}]`);
     });
   }
-  
+
   if (pos.md) {
     Object.entries(pos.md).forEach(([prop, val]) => {
       if (prop === "transform") return;
       classes.push(`md:${prop}-[${val}]`);
     });
   }
-  
+
   if (pos.lg) {
     Object.entries(pos.lg).forEach(([prop, val]) => {
       if (prop === "transform") return;
       classes.push(`lg:${prop}-[${val}]`);
     });
   }
-  
+
   return classes.join(" ");
 }
 

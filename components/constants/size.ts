@@ -1,6 +1,6 @@
 /**
- * Size Constants for Kashi Yatra 2026
- * 
+ * Size Constants for Kashi Yatra 2027
+ *
  * Responsive sizes organized by element type.
  * Format: { mobile, sm, md, lg } or { width, height } for each breakpoint
  */
@@ -20,7 +20,7 @@ export const SIZE_RIVER = {
 
 /** Stepping stone sizes (width = height for square stones) */
 export const SIZE_STONES = {
-  SCHEDULE: { mobile: 70, desktop: 130},
+  SCHEDULE: { mobile: 70, desktop: 130 },
   EVENTS: { mobile: 100, desktop: 130 },
   REGISTER: { mobile: 85, desktop: 130 },
   GALLERY: { mobile: 70, desktop: 120 },
@@ -110,22 +110,22 @@ export const SIZE_DIYA = {
 /** Boat sizes */
 export const SIZE_BOATS = {
   PILGRIM: {
-    mobile: { width: "8rem" },    // w-32
-    sm: { width: "10rem" },       // w-40
-    md: { width: "13rem" },       // w-52
-    lg: { width: "15rem" },       // w-60
+    mobile: { width: "8rem" }, // w-32
+    sm: { width: "10rem" }, // w-40
+    md: { width: "13rem" }, // w-52
+    lg: { width: "15rem" }, // w-60
   },
   STEAMER: {
-    mobile: { width: "9rem" },    // w-36
-    sm: { width: "11rem" },       // w-44
-    md: { width: "14rem" },       // w-56
-    lg: { width: "16rem" },       // w-64
+    mobile: { width: "9rem" }, // w-36
+    sm: { width: "11rem" }, // w-44
+    md: { width: "14rem" }, // w-56
+    lg: { width: "16rem" }, // w-64
   },
   SIMPLE: {
-    mobile: { width: "5rem" },    // w-20
-    sm: { width: "6rem" },        // w-24
-    md: { width: "7rem" },        // w-28
-    lg: { width: "8rem" },        // w-32
+    mobile: { width: "5rem" }, // w-20
+    sm: { width: "6rem" }, // w-24
+    md: { width: "7rem" }, // w-28
+    lg: { width: "8rem" }, // w-32
   },
 } as const;
 
@@ -156,10 +156,10 @@ export const SIZE_VIBES_RICKSHAW = {
 
 /** Lamppost size */
 export const SIZE_VIBES_LAMPPOST = {
-  mobile: { width: "2.5rem", height: "8rem" },   // w-10 h-32
-  sm: { width: "5rem", height: "20rem" },        // w-20 h-80
-  md: { width: "6rem", height: "24rem" },        // w-24 h-96
-  lg: { width: "7rem", height: "420px" },        // w-28 h-[420px]
+  mobile: { width: "2.5rem", height: "8rem" }, // w-10 h-32
+  sm: { width: "5rem", height: "20rem" }, // w-20 h-80
+  md: { width: "6rem", height: "24rem" }, // w-24 h-96
+  lg: { width: "7rem", height: "420px" }, // w-28 h-[420px]
 } as const;
 
 /** Food items (desktop only) */
@@ -170,18 +170,18 @@ export const SIZE_VIBES_FOOD = {
     lg: { width: "800px", height: "800px" },
   },
   PAAN: {
-    sm: { width: "24rem", height: "24rem" },     // w-96 h-96
+    sm: { width: "24rem", height: "24rem" }, // w-96 h-96
     md: { width: "450px", height: "450px" },
     lg: { width: "550px", height: "550px" },
   },
   LASSI: {
-    sm: { width: "18rem", height: "24rem" },     // w-72 h-96
-    md: { width: "24rem", height: "500px" },     // w-96 h-[500px]
+    sm: { width: "18rem", height: "24rem" }, // w-72 h-96
+    md: { width: "24rem", height: "500px" }, // w-96 h-[500px]
     lg: { width: "450px", height: "600px" },
   },
   MALAIYO: {
-    sm: { width: "18rem", height: "18rem" },     // w-72 h-72
-    md: { width: "24rem", height: "24rem" },     // w-96 h-96
+    sm: { width: "18rem", height: "18rem" }, // w-72 h-72
+    md: { width: "24rem", height: "24rem" }, // w-96 h-96
     lg: { width: "450px", height: "450px" },
   },
 } as const;
@@ -194,7 +194,9 @@ export const SIZE_VIBES_FOOD = {
  * Generate Tailwind width classes from size constant
  * @example sizeToWidthClasses(SIZE_BOATS.PILGRIM) => "w-32 sm:w-40 md:w-52 lg:w-60"
  */
-export function sizeToWidthClasses(size: Record<string, { width: string } | string>): string {
+export function sizeToWidthClasses(
+  size: Record<string, { width: string } | string>,
+): string {
   const classes: string[] = [];
   if (typeof size.mobile === "object" && "width" in size.mobile) {
     classes.push(`w-[${size.mobile.width}]`);

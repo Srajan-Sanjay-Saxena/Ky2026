@@ -145,7 +145,7 @@ const PageTitle = memo(function PageTitle() {
           className="text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold"
           style={{ color: COLORS.BRIGHT_GOLD }}
         >
-          Kashi Yatra 2026
+          Kashi Yatra 2027
         </span>
         <div
           className="h-px w-16 sm:w-24"
@@ -191,7 +191,12 @@ const PageTitle = memo(function PageTitle() {
             boxShadow: `0 4px 20px ${JAZZ_COLORS.HOT_PINK}30`,
           }}
         >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -229,42 +234,46 @@ export function EventsPageContent() {
           )`,
         }}
       >
-      {/* Background decorative elements */}
-      <div
-        className="fixed inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage: `
+        {/* Background decorative elements */}
+        <div
+          className="fixed inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage: `
             radial-gradient(circle at 20% 30%, ${JAZZ_COLORS.HOT_PINK} 0%, transparent 50%),
             radial-gradient(circle at 80% 70%, ${JAZZ_COLORS.ROYAL_PURPLE} 0%, transparent 50%)
           `,
-        }}
-      />
+          }}
+        />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <PageTitle />
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <PageTitle />
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
-          {EVENT_CATEGORIES.map((category, index) => (
-            <CategoryCard key={category.id} category={category} index={index} />
-          ))}
-        </div>
+          {/* Categories Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+            {EVENT_CATEGORIES.map((category, index) => (
+              <CategoryCard
+                key={category.id}
+                category={category}
+                index={index}
+              />
+            ))}
+          </div>
 
-        {/* Bottom decorative element */}
-        <div className="mt-16 sm:mt-20 text-center">
-          <div
-            className="inline-block px-6 py-3 rounded-full text-sm"
-            style={{
-              background: `${COLORS.BRIGHT_GOLD}10`,
-              border: `1px solid ${COLORS.BRIGHT_GOLD}30`,
-              color: COLORS.BRIGHT_GOLD,
-            }}
-          >
-            Click on any category to explore events
+          {/* Bottom decorative element */}
+          <div className="mt-16 sm:mt-20 text-center">
+            <div
+              className="inline-block px-6 py-3 rounded-full text-sm"
+              style={{
+                background: `${COLORS.BRIGHT_GOLD}10`,
+                border: `1px solid ${COLORS.BRIGHT_GOLD}30`,
+                color: COLORS.BRIGHT_GOLD,
+              }}
+            >
+              Click on any category to explore events
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
     </>
   );
 }

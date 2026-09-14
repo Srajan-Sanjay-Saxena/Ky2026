@@ -1,6 +1,6 @@
 /**
- * Z-Index Constants for Kashi Yatra 2026
- * 
+ * Z-Index Constants for Kashi Yatra 2027
+ *
  * Organized by section for easy management.
  * Higher numbers = closer to viewer (on top)
  */
@@ -29,24 +29,24 @@ export const Z_HERO = {
   MOON: 5,
   VARANASI_BACK: 6,
   MOON_REFLECTION: 14,
-  
+
   // Title area
   TITLE: 20,
   BIRDS: 30,
-  
+
   // Buildings
   TEMPLE: 50,
   GHATS: 100,
-  
+
   // River elements (layered from bottom to top)
   RIVER: 70,
-  
+
   // Lotus flowers (individual z-indexes)
   LOTUS_1: 75,
   LOTUS_2: 75,
   LOTUS_3: 76,
   LOTUS_4: 76,
-  
+
   // Diyas (individual z-indexes)
   DIYA_1: 76,
   DIYA_2: 76,
@@ -54,12 +54,12 @@ export const Z_HERO = {
   DIYA_4: 77,
   DIYA_5: 77,
   DIYA_6: 77,
-  
+
   // Boats (individual z-indexes)
   BOAT_PILGRIM: 81,
   BOAT_STEAMER: 82,
   BOAT_SIMPLE: 79,
-  
+
   // Stepping stones (individual z-indexes)
   STONE_SCHEDULE: 80,
   STONE_EVENTS: 80,
@@ -74,26 +74,26 @@ export const Z_HERO = {
 export const Z_VIBES = {
   // Background elements
   MANDALA: 5,
-  
+
   // Gate composition
   GATE: 10,
   MAHAMANA: 5,
   GATE_IMAGE: 10,
-  
+
   // Food items
   TABLA_SITAR: 20,
   PAAN: 20,
   LASSI: 20,
   MALAIYO: 20,
-  
+
   // Road elements
   ROAD: 25,
   LAMPPOST: 28,
   DIYA_MOBILE: 30,
-  
+
   // Rickshaw
   RICKSHAW: 40,
-  
+
   // Road surface
   ROAD_SURFACE: 60,
 } as const;

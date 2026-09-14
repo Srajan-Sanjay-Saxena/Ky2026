@@ -1,5 +1,5 @@
 /**
- * Color Palette Constants for Kashi Yatra 2026
+ * Color Palette Constants for Kashi Yatra 2027
  *
  * Centralized color definitions, gradients, and backgrounds.
  * Import from this file for consistent theming across components.
@@ -304,11 +304,11 @@ export const CONCERT_COLORS = {
   NEON_PURPLE: "#9D4EDD",
   ELECTRIC_BLUE: "#7DF9FF",
   NEON_GOLD: "#FFD700",
-  
+
   // Warm blends
   WARM_PINK: "#FF6B9D",
   SUNSET_ORANGE: "#FF8C42",
-  
+
   // Backgrounds - Night sky bluish-black theme (matching Hero night)
   STAGE_TOP: "#050510",
   STAGE_DARK: "#0a0a1a",
@@ -337,20 +337,20 @@ export const JAZZ_COLORS = {
   BG_DEEP: "#0c0810",
   BG_ROYAL: "#150a14",
   BG_WINE: "#1f0c18",
-  
+
   // Royal accents
   GOLD: "#FFD700",
   GOLD_DARK: "#B8860B",
   ROSE_GOLD: "#E8B4B8",
   ROYAL_PURPLE: "#6B21A8",
   DEEP_MAGENTA: "#9D174D",
-  
+
   // Jazz neons
   ELECTRIC_BLUE: "#00D4FF",
   HOT_PINK: "#FF1493",
   LIME: "#ADFF2F",
   AMBER: "#FFBF00",
-  
+
   // Text
   CREAM: "#FDF6E3",
   IVORY: "#FFFFF0",
@@ -360,7 +360,13 @@ export const JAZZ_COLORS = {
 // HERO TIME-BASED SKY GRADIENTS
 // ═══════════════════════════════════════════════════════════════════
 
-export type TimeOfDay = 'dawn' | 'morning' | 'afternoon' | 'evening' | 'dusk' | 'night';
+export type TimeOfDay =
+  | "dawn"
+  | "morning"
+  | "afternoon"
+  | "evening"
+  | "dusk"
+  | "night";
 
 // Dawn - Early morning, sun just rising (5:00 - 7:00)
 export const GRADIENT_SKY_DAWN = `linear-gradient(180deg, 
@@ -380,10 +386,11 @@ export const GRADIENT_SKY_AFTERNOON = `linear-gradient(180deg,
   #9ac2e0 56%, #b0cce6 68%, #c6d6ec 80%, #dce0f2 90%, #f0e8e0 100%
 )`;
 
-// Dusk - Twilight (19:00 - 21:00)
+// Dusk - Twilight afterglow (19:00 - 21:00) - Warm purples, magentas with fading orange
 export const GRADIENT_SKY_DUSK = `linear-gradient(180deg,
-  #0a0a15 0%, #0f0f20 10%, #151528 20%, #1a1a35 32%, #252545 44%,
-  #303055 54%, #3a3a60 64%, #45456a 74%, #504f72 84%, #5a587a 94%, #656080 100%
+  #1a1035 0%, #251845 8%, #2f1f52 16%, #3a2560 24%, #452a6a 32%,
+  #523272 40%, #5e3a78 48%, #6a4280 56%, #754a85 64%, 
+  #80528a 72%, #8a5a8f 80%, #956292 88%, #a06a95 94%, #aa7298 100%
 )`;
 
 // Map time of day to gradient
@@ -398,25 +405,40 @@ export const TIME_GRADIENTS: Record<TimeOfDay, string> = {
 
 // Whether to show moon for each time period
 export const SHOW_MOON: Record<TimeOfDay, boolean> = {
-  dawn: false, morning: false, afternoon: false, evening: false, dusk: true, night: true,
+  dawn: false,
+  morning: false,
+  afternoon: false,
+  evening: false,
+  dusk: false,
+  night: true,
 };
 
 // Whether to show stars for each time period
 export const SHOW_STARS: Record<TimeOfDay, boolean> = {
-  dawn: false, morning: false, afternoon: false, evening: false, dusk: true, night: true,
+  dawn: false,
+  morning: false,
+  afternoon: false,
+  evening: false,
+  dusk: true,
+  night: true,
 };
 
 // Opacity for stars
 export const STARS_OPACITY: Record<TimeOfDay, number> = {
-  dawn: 0, morning: 0, afternoon: 0, evening: 0, dusk: 0.5, night: 1,
+  dawn: 0,
+  morning: 0,
+  afternoon: 0,
+  evening: 0,
+  dusk: 0.3,
+  night: 1,
 };
 
 // Get time of day from hour
 export function getTimeOfDay(hour: number): TimeOfDay {
-  if (hour >= 5 && hour < 7) return 'dawn';
-  if (hour >= 7 && hour < 11) return 'morning';
-  if (hour >= 11 && hour < 16) return 'afternoon';
-  if (hour >= 16 && hour < 19) return 'evening';
-  if (hour >= 19 && hour < 21) return 'dusk';
-  return 'night';
+  if (hour >= 5 && hour < 7) return "dawn";
+  if (hour >= 7 && hour < 11) return "morning";
+  if (hour >= 11 && hour < 16) return "afternoon";
+  if (hour >= 16 && hour < 19) return "evening";
+  if (hour >= 19 && hour < 21) return "dusk";
+  return "night";
 }
