@@ -2,12 +2,12 @@
 
 import { memo } from "react";
 
-export const Moon = memo(function Moon({ className = "" }: { className?: string }) {
+export const Moon = memo(function Moon({ className = "", isMobile = false }: { className?: string; isMobile?: boolean }) {
   return (
     <div className={`relative ${className}`}>
       {/* Outermost halo - very subtle */}
       <div
-        className="absolute inset-0 rounded-full moon-halo-outer"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'moon-halo-outer'}`}
         style={{
           transform: "scale(4)",
           background: "radial-gradient(circle, rgba(200,210,255,0.04) 0%, rgba(150,170,220,0.02) 40%, transparent 70%)",
@@ -16,7 +16,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
 
       {/* Outer atmospheric glow */}
       <div
-        className="absolute inset-0 rounded-full moon-glow-outer"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'moon-glow-outer'}`}
         style={{
           transform: "scale(2.5)",
           background: "radial-gradient(circle, rgba(200,210,255,0.1) 0%, rgba(150,170,220,0.05) 35%, transparent 65%)",
@@ -25,7 +25,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
 
       {/* Middle glow layer */}
       <div
-        className="absolute inset-0 rounded-full moon-glow-middle"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'moon-glow-middle'}`}
         style={{
           transform: "scale(1.8)",
           background: "radial-gradient(circle, rgba(220,230,255,0.15) 0%, rgba(180,200,240,0.08) 45%, transparent 75%)",
@@ -34,7 +34,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
 
       {/* Inner glow - closest to moon */}
       <div
-        className="absolute inset-0 rounded-full moon-glow-inner"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'moon-glow-inner'}`}
         style={{
           transform: "scale(1.3)",
           background: "radial-gradient(circle, rgba(255,255,250,0.25) 0%, rgba(230,240,255,0.12) 50%, transparent 85%)",
@@ -43,7 +43,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
 
       {/* Corona effect - subtle rays */}
       <div
-        className="absolute inset-0 moon-corona"
+        className={`absolute inset-0 ${isMobile ? '' : 'moon-corona'}`}
         style={{
           transform: "scale(2.2)",
           background: `
@@ -76,7 +76,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
 
       {/* Moon surface */}
       <div
-        className="relative w-full h-full rounded-full overflow-hidden moon-surface"
+        className={`relative w-full h-full rounded-full overflow-hidden ${isMobile ? '' : 'moon-surface'}`}
         style={{
           background: `
             radial-gradient(circle at 32% 32%, #fffef8 0%, #f8f4e8 20%, #f0e8d8 45%, #e4dcc8 70%, #d8d0b8 100%)
@@ -92,7 +92,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
       >
         {/* Animated light sweep across surface */}
         <div
-          className="absolute inset-0 rounded-full moon-light-sweep"
+          className={`absolute inset-0 rounded-full ${isMobile ? '' : 'moon-light-sweep'}`}
           style={{
             background: "linear-gradient(105deg, transparent 0%, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%, transparent 100%)",
           }}
@@ -208,7 +208,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
 
         {/* Highlight on edge - animated */}
         <div
-          className="absolute rounded-full moon-edge-highlight"
+          className={`absolute rounded-full ${isMobile ? '' : 'moon-edge-highlight'}`}
           style={{
             width: "100%",
             height: "100%",
@@ -227,7 +227,8 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
         />
       </div>
 
-      <style jsx>{`
+      {!isMobile && (
+        <style jsx>{`
         .moon-halo-outer {
           animation: moonHaloOuter 12s ease-in-out infinite;
         }
@@ -315,6 +316,7 @@ export const Moon = memo(function Moon({ className = "" }: { className?: string 
           50% { opacity: 1; }
         }
       `}</style>
+      )}
     </div>
   );
 });

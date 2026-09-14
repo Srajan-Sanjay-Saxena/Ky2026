@@ -83,8 +83,10 @@ const PARTICLES = Array.from({ length: PARTICLE_CONFIG.desktop }, (_, i) => ({
 }));
 
 function FloatingParticles({ isMobile, isInView }: { isMobile: boolean; isInView: boolean }) {
-  // Reduce particles on mobile for better performance
-  const particles = isMobile ? PARTICLES.slice(0, PARTICLE_CONFIG.mobile) : PARTICLES;
+  // Disable animated particles on mobile for better performance
+  if (isMobile) return null;
+  
+  const particles = PARTICLES;
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: Z_INDEX.particles }}>
@@ -143,7 +145,21 @@ function GeometricPattern() {
 // ============================================
 // Animated Paisley/Banarasi Pattern
 // ============================================
-function BanarasiPatternAnimated() {
+function BanarasiPatternAnimated({ isMobile }: { isMobile: boolean }) {
+  // Static on mobile
+  if (isMobile) {
+    return (
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4a853' stroke-width='0.5'%3E%3Cpath d='M40 10c-8 0-15 7-15 15s7 15 15 15 15-7 15-15-7-15-15-15zm0 5c5.5 0 10 4.5 10 10s-4.5 10-10 10-10-4.5-10-10 4.5-10 10-10z' opacity='0.15'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23d4a853' opacity='0.1'/%3E%3Cpath d='M20 60c0-11 9-20 20-20s20 9 20 20' opacity='0.08'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: "80px 80px",
+          opacity: 0.5,
+        }}
+      />
+    );
+  }
+
   return (
     <motion.div
       className="absolute inset-0 pointer-events-none"
@@ -243,7 +259,7 @@ export function PassesSection() {
 
       {/* Animated patterns */}
       <GeometricPattern />
-      <BanarasiPatternAnimated />
+      <BanarasiPatternAnimated isMobile={isMobile} />
 
       {/* Left Mandala - hidden on mobile */}
       {!isMobile && (
@@ -298,14 +314,18 @@ export function PassesSection() {
           {/* Decorative top element */}
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="w-16 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_LEFT }} />
-            <motion.span
-              animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              className="text-2xl"
-              style={{ color: COLORS.BRIGHT_GOLD }}
-            >
-              ✦
-            </motion.span>
+            {isMobile ? (
+              <span className="text-2xl" style={{ color: COLORS.BRIGHT_GOLD }}>✦</span>
+            ) : (
+              <motion.span
+                animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="text-2xl"
+                style={{ color: COLORS.BRIGHT_GOLD }}
+              >
+                ✦
+              </motion.span>
+            )}
             <span className="w-16 h-[1px]" style={{ background: GRADIENT_LINE_GOLD_RIGHT }} />
           </div>
 

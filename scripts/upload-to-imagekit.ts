@@ -9,7 +9,7 @@ import * as path from "path";
 import * as dotenv from "dotenv";
 
 // Load environment variables
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
 
 const imagekit = new ImageKit({
   publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,

@@ -10,6 +10,7 @@ import { CinematicSky } from "@/components/sections/Hero/Sky/CinematicSky";
 import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
 import { useTimeOfDay } from "@/hooks/useTimeOfDay";
+import { useIsMobile } from "@/hooks";
 import { MotionZone } from "@/components/motion";
 import { Z_HERO } from "@/components/constants";
 import { IMAGES } from "@/lib/images";
@@ -27,6 +28,7 @@ export function HeroSection() {
 
   // Get current time-based sky configuration
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
+  const isMobile = useIsMobile();
 
   // Show kites only during morning and evening
   const showKites = timeOfDay === 'morning' || timeOfDay === 'evening';
@@ -655,9 +657,9 @@ export function HeroSection() {
         style={{ transition: "all 1s ease-in-out" }}
       >
         {showMoon ? (
-          <Moon className="w-full h-full" />
+          <Moon className="w-full h-full" isMobile={isMobile} />
         ) : (
-          <Sun className="w-full h-full" />
+          <Sun className="w-full h-full" isMobile={isMobile} />
         )}
       </div>
 

@@ -2,12 +2,12 @@
 
 import { memo } from "react";
 
-export const Sun = memo(function Sun({ className = "" }: { className?: string }) {
+export const Sun = memo(function Sun({ className = "", isMobile = false }: { className?: string; isMobile?: boolean }) {
   return (
     <div className={`relative ${className}`}>
       {/* Outermost atmospheric halo - matches moon scale(4) */}
       <div
-        className="absolute inset-0 rounded-full sun-halo-outer"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-halo-outer'}`}
         style={{
           transform: "scale(4)",
           background: "radial-gradient(circle, rgba(255,200,100,0.06) 0%, rgba(255,160,60,0.03) 40%, transparent 70%)",
@@ -16,7 +16,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
 
       {/* Outer warm glow - matches moon scale(2.5) */}
       <div
-        className="absolute inset-0 rounded-full sun-glow-outer"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-glow-outer'}`}
         style={{
           transform: "scale(2.5)",
           background: "radial-gradient(circle, rgba(255,180,80,0.12) 0%, rgba(255,140,50,0.06) 35%, transparent 65%)",
@@ -25,7 +25,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
 
       {/* Middle intense glow - matches moon scale(1.8) */}
       <div
-        className="absolute inset-0 rounded-full sun-glow-middle"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-glow-middle'}`}
         style={{
           transform: "scale(1.8)",
           background: "radial-gradient(circle, rgba(255,220,150,0.2) 0%, rgba(255,180,100,0.1) 45%, transparent 75%)",
@@ -34,7 +34,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
 
       {/* Inner white-hot glow - matches moon scale(1.3) */}
       <div
-        className="absolute inset-0 rounded-full sun-glow-inner"
+        className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-glow-inner'}`}
         style={{
           transform: "scale(1.3)",
           background: "radial-gradient(circle, rgba(255,255,240,0.35) 0%, rgba(255,240,200,0.15) 50%, transparent 85%)",
@@ -43,7 +43,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
 
       {/* Corona rays - matches moon scale(2.2) */}
       <div
-        className="absolute inset-0 sun-corona"
+        className={`absolute inset-0 ${isMobile ? '' : 'sun-corona'}`}
         style={{
           transform: "scale(2.2)",
           background: `
@@ -96,7 +96,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
 
       {/* Sun surface - the actual disc */}
       <div
-        className="relative w-full h-full rounded-full overflow-hidden sun-surface"
+        className={`relative w-full h-full rounded-full overflow-hidden ${isMobile ? '' : 'sun-surface'}`}
         style={{
           background: `
             radial-gradient(circle at 35% 35%, 
@@ -121,7 +121,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
       >
         {/* Surface shimmer - light sweep */}
         <div
-          className="absolute inset-0 rounded-full sun-light-sweep"
+          className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-light-sweep'}`}
           style={{
             background: "linear-gradient(110deg, transparent 0%, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%, transparent 100%)",
           }}
@@ -161,7 +161,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
 
         {/* Subtle surface texture */}
         <div
-          className="absolute inset-0 rounded-full opacity-20 sun-texture"
+          className={`absolute inset-0 rounded-full opacity-20 ${isMobile ? '' : 'sun-texture'}`}
           style={{
             background: `
               radial-gradient(circle at 25% 40%, rgba(255,200,100,0.4) 0%, transparent 20%),
@@ -173,7 +173,8 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
         />
       </div>
 
-      <style jsx>{`
+      {!isMobile && (
+        <style jsx>{`
         .sun-halo-outer {
           animation: sunHaloOuter 8s ease-in-out infinite;
         }
@@ -263,6 +264,7 @@ export const Sun = memo(function Sun({ className = "" }: { className?: string })
           50% { opacity: 0.35; }
         }
       `}</style>
+      )}
     </div>
   );
 });
