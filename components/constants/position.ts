@@ -161,23 +161,6 @@ export const POS_VIBES_RICKSHAW = {
   bottom: "5px",
 } as const;
 
-/** Food items positions (desktop only) */
-export const POS_VIBES_FOOD = {
-  TABLA_SITAR: {
-    sm: { top: "-2%", right: "5%" },
-    md: { right: "7%" },
-  },
-  PAAN: {
-    sm: { top: "3%", left: "5%" },
-  },
-  LASSI: {
-    sm: { top: "35%", right: "1%" },
-  },
-  MALAIYO: {
-    sm: { top: "28%", left: "1%" },
-  },
-} as const;
-
 /** Mobile diya position (BanarasiVibes) */
 export const POS_VIBES_DIYA_MOBILE = {
   top: "38%",

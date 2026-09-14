@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react";
 import { Road } from "./Road";
 import { LampPost } from "./LampPost";
 import { BanarasiVibesMobile } from "./mobile";
-import { BanarasiVibesDesktop } from "./desktop";
 import { IMAGES } from "@/lib/images";
 import { MotionZone, useMotionZone } from "@/components/motion";
 import { usePrefersReducedMotion } from "@/hooks";
@@ -93,11 +92,29 @@ function BanarasiVibesContent() {
         }}
       />
 
+      {/* Rotating dancer Mandala — DESKTOP ONLY, continuous 360° spin.
+          Sits behind the gate as a spiritual backdrop. Rotation pauses when
+          the section scrolls off-screen (MotionZone) or when the user prefers
+          reduced motion. */}
+      <div
+        className="pointer-events-none hidden sm:block absolute left-1/2 -translate-x-1/2 top-[4%] w-[420px] h-[420px] md:w-[520px] md:h-[520px] lg:w-[600px] lg:h-[600px] opacity-40"
+        style={{ zIndex: 5 }}
+      >
+        <Image
+          src={IMAGES.vibes.mandala}
+          alt=""
+          fill
+          className="object-contain"
+          style={{
+            animation: "spin 40s linear infinite",
+            animationPlayState: prefersReducedMotion || !isAnimating ? "paused" : "running",
+            filter: "drop-shadow(0 0 30px rgba(255,180,50,0.35))",
+          }}
+        />
+      </div>
+
       {/* Mobile-only elements: Mandala, Diya with text */}
       <BanarasiVibesMobile />
-
-      {/* Desktop-only elements: Food items (Tabla, Paan, Lassi, Malaiyo) */}
-      <BanarasiVibesDesktop />
 
       {/* BHU Gate - both mobile and desktop */}
       <div
@@ -139,10 +156,38 @@ function BanarasiVibesContent() {
       {/* Custom Road */}
       <Road />
 
+      {/* Ganga Aarti Saint — DESKTOP ONLY, left side facing inward toward the gate */}
+      <div
+        className="pointer-events-none hidden sm:block absolute left-[-9%] w-[620px] h-[900px] ]"
+        style={{ bottom: "160px", zIndex: 0 }}
+      >
+        <Image
+          src={IMAGES.vibes.gangaAartiSaint}
+          alt="Priest performing Ganga Aarti"
+          fill
+          className="object-contain object-bottom"
+          style={{ filter: "drop-shadow(0 10px 25px rgba(0,0,0,0.6))" }}
+        />
+      </div>
+
+      {/* Bharatnatyam Dancer — DESKTOP ONLY, right side, mirrored to face inward */}
+      <div
+        className="pointer-events-none hidden sm:block absolute sm:right-[-8%] sm:w-[690px] sm:h-[800px]"
+        style={{ bottom: "100px", zIndex: 35 }}
+      >
+        <Image
+          src={IMAGES.vibes.bharatnatyamDancer}
+          alt="Classical Bharatnatyam dancer"
+          fill
+          className="object-contain object-bottom"
+          style={{ transform: "scaleX(-1)", filter: "drop-shadow(0 10px 25px rgba(0,0,0,0.6))" }}
+        />
+      </div>
+
       {/* Lamp Post - ON the road, smaller on mobile */}
       {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
       <MotionZone
-        className="absolute left-[2%] sm:left-[5%] w-10 h-32 sm:w-20 sm:h-80 md:w-24 md:h-96 lg:w-28 lg:h-[420px]"
+        className="absolute left-[2%] sm:left-[20%] w-10 h-32 sm:w-30 sm:h-80"
         style={{ bottom: "70px", zIndex: 28 }}
       >
         <LampPost className="w-full h-full" />

@@ -27,7 +27,6 @@ export {
   SIZE_VIBES_MAHAMANA,
   SIZE_VIBES_RICKSHAW,
   SIZE_VIBES_LAMPPOST,
-  SIZE_VIBES_FOOD,
   sizeToWidthClasses,
 } from "./size";
 
@@ -45,7 +44,6 @@ export {
   POS_VIBES_MAHAMANA,
   POS_VIBES_LAMPPOST,
   POS_VIBES_RICKSHAW,
-  POS_VIBES_FOOD,
   POS_VIBES_DIYA_MOBILE,
   posToClasses,
   getTransform,

@@ -918,7 +918,7 @@ export function HeroSection() {
       {/* GHAT PNG - Aligned with temple */}
       <div
         ref={ghatsRef}
-        className="absolute bottom-[24.5%] sm:bottom-[1%] left-[3%] sm:left-[-3%] w-[57%] sm:w-[55%]"
+        className="absolute bottom-[24.5%] sm:bottom-[0.5%] left-[3%] sm:left-[-3%] w-[57%] sm:w-[55%]"
         style={{
           zIndex: Z_HERO.GHATS,
         }}

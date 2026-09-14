@@ -695,12 +695,6 @@ body {
   }
 }
 
-/* DJ yo-yo bounce animation */
-@keyframes djBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
 /* Mystery question mark pulse - more dramatic */
 @keyframes mysteryPulse {
   0%, 100% { 
@@ -838,18 +832,4 @@ body {
 }
 
 
-/* Rockstar pulse/jump animation */
-@keyframes rockstarPulse {
-  0%, 100% { 
-    transform: translateY(0) scale(1); 
-  }
-  25% { 
-    transform: translateY(-8px) scale(1.02); 
-  }
-  50% { 
-    transform: translateY(-4px) scale(1.01); 
-  }
-  75% { 
-    transform: translateY(-10px) scale(1.03); 
-  }
-}
+/* Rockstar pulse/jump animation — removed (rockstar is now static) */

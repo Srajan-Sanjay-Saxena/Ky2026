@@ -162,30 +162,6 @@ export const SIZE_VIBES_LAMPPOST = {
   lg: { width: "7rem", height: "420px" }, // w-28 h-[420px]
 } as const;
 
-/** Food items (desktop only) */
-export const SIZE_VIBES_FOOD = {
-  TABLA_SITAR: {
-    sm: { width: "450px", height: "450px" },
-    md: { width: "600px", height: "600px" },
-    lg: { width: "800px", height: "800px" },
-  },
-  PAAN: {
-    sm: { width: "24rem", height: "24rem" }, // w-96 h-96
-    md: { width: "450px", height: "450px" },
-    lg: { width: "550px", height: "550px" },
-  },
-  LASSI: {
-    sm: { width: "18rem", height: "24rem" }, // w-72 h-96
-    md: { width: "24rem", height: "500px" }, // w-96 h-[500px]
-    lg: { width: "450px", height: "600px" },
-  },
-  MALAIYO: {
-    sm: { width: "18rem", height: "18rem" }, // w-72 h-72
-    md: { width: "24rem", height: "24rem" }, // w-96 h-96
-    lg: { width: "450px", height: "450px" },
-  },
-} as const;
-
 // ═══════════════════════════════════════════════════════════════════
 // HELPER: Tailwind class generator
 // ═══════════════════════════════════════════════════════════════════

@@ -52,45 +52,7 @@ export const ProNitesSection = memo(function ProNitesSection() {
         }
       );
 
-      // Headliner cards stagger in
-      gsap.fromTo(
-        headlinersRef.current?.children || [],
-        { y: 80, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: headlinersRef.current,
-            start: "top 85%",
-            end: "top 55%",
-            scrub: 1,
-          },
-        }
-      );
-
-      // Featuring cards stagger in
-      gsap.fromTo(
-        featuringRef.current?.children || [],
-        { y: 60, opacity: 0, scale: 0.95 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: featuringRef.current,
-            start: "top 90%",
-            end: "top 60%",
-            scrub: 1,
-          },
-        }
-      );
+      // Headliner & Featuring cards: no scroll animation (render statically on desktop)
 
       // Concert crowd rises from bottom
       gsap.fromTo(

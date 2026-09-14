@@ -28,12 +28,12 @@ export const IMAGES = {
     mahamana: `${IMAGEKIT_BASE}/vibes/mahamana.png`,
     bhuGate: `${IMAGEKIT_BASE}/vibes/bhu-gate.png`,
     rickshaw: `${IMAGEKIT_BASE}/vibes/rickshaw.png`,
-    lassi: `${IMAGEKIT_BASE}/vibes/lassi.png`,
-    malaiyo: `${IMAGEKIT_BASE}/vibes/malaiyo.png`,
-    paan: `${IMAGEKIT_BASE}/vibes/paan.png`,
-    tablaSitar: `${IMAGEKIT_BASE}/vibes/tabla-sitar.png`,
     background: `${IMAGEKIT_BASE}/vibes/vibes-bg.png`,
     roads: `${IMAGEKIT_BASE}/vibes/roads.png`,
+    // Desktop-only decorative characters (local public folder)
+    mandala: "/BanarasiVibes/banarasiVibesMandala.png",  // Rotating dancer mandala (360° spin)
+    gangaAartiSaint: "/BanarasiVibes/GangaArtiSaint.png",  // Priest performing Ganga aarti (faces right)
+    bharatnatyamDancer: "/BanarasiVibes/VIbeBharatnatiyamDancer.png",  // Classical dancer (faces right)
   },
   highlights: {
     durga: `${IMAGEKIT_BASE}/highlights/durga.svg`,

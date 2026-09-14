@@ -80,16 +80,14 @@ export const Z_VIBES = {
   MAHAMANA: 5,
   GATE_IMAGE: 10,
 
-  // Food items
-  TABLA_SITAR: 20,
-  PAAN: 20,
-  LASSI: 20,
-  MALAIYO: 20,
-
   // Road elements
   ROAD: 25,
   LAMPPOST: 28,
   DIYA_MOBILE: 30,
+
+  // Desktop-only characters (flanking the gate)
+  GANGA_AARTI_SAINT: 35,
+  BHARATNATYAM_DANCER: 35,
 
   // Rickshaw
   RICKSHAW: 40,

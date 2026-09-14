@@ -25,7 +25,7 @@ export const Rockstar = memo(function Rockstar() {
         }}
       />
       
-      {/* Rockstar image with animation */}
+      {/* Rockstar image - Static */}
       <Image
         src={IMAGES.misc.rockstar}
         alt="Rockstar"
@@ -34,7 +34,6 @@ export const Rockstar = memo(function Rockstar() {
         className="relative w-full h-auto"
         style={{
           filter: `drop-shadow(0 0 25px rgba(50,50,120,0.5)) drop-shadow(0 0 50px rgba(30,30,80,0.3))`,
-          animation: "rockstarPulse 3s ease-in-out infinite",
         }}
       />
     </div>
