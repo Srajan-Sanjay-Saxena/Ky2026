@@ -25,6 +25,7 @@ export function HeroSection() {
   const riverRef = useRef<HTMLDivElement>(null);
   const ghatsRef = useRef<HTMLDivElement>(null);
   const welcomeFlagRef = useRef<HTMLDivElement>(null);
+  const kitesRef = useRef<HTMLDivElement>(null);
 
   // Get current time-based sky configuration
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
@@ -118,6 +119,32 @@ export function HeroSection() {
 
     return () => ctx.revert();
   }, []);
+
+  // Entry animation: Kites - Desktop only, flies in after temple
+  useEffect(() => {
+    // Skip on mobile or if kites not shown
+    if (typeof window === "undefined" || window.innerWidth < 640 || !showKites) return;
+    if (!kitesRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Set initial state
+      gsap.set(kitesRef.current, { x: -150, y: 50, opacity: 0, scale: 0.6, rotation: -30 });
+      
+      // Animate in after temple (delay matches temple timeline: 0.8 + 0.5 + 0.2 = 1.5s)
+      gsap.to(kitesRef.current, {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotation: -10,
+        duration: 0.8,
+        delay: 1.6, // After temple + welcome flag starts
+        ease: "power2.out",
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [showKites]);
 
   // Continuous glow: Temple & Ghats (related visual effect)
   useEffect(() => {
@@ -700,9 +727,11 @@ export function HeroSection() {
       {/* Kites - Desktop only, top-left, visible during morning & evening only */}
       {showKites && (
         <div
+          ref={kitesRef}
           className="hidden sm:block absolute top-[8%] left-[5%] w-[20vw] max-w-[280px] pointer-events-none z-50"
           style={{
             transform: "rotate(-10deg)",
+            opacity: 0, // Start hidden, GSAP will animate it in
           }}
         >
           <Image

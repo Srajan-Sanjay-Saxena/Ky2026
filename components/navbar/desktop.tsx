@@ -71,20 +71,22 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
       >
         {secondaryLinks.map((link) => {
           const active = isActive(link.href);
+          
           return (
             <Link
               key={link.label}
               href={link.href}
               className="group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
-                         transition-colors duration-200"
+                         transition-all duration-300"
               style={{
                 fontFamily: "var(--font-ethereal), serif",
                 fontWeight: 900,
                 fontSize: "clamp(12px, 1vw, 17px)",
-                color: active ? "#7a1f10" : "#3a1505",
+                color: active ? "#5c1a08" : "#3a1505",
                 textShadow: active
-                  ? "0 0 15px rgba(255,215,0,0.6), 0 1px 1px rgba(255,245,215,0.7)"
+                  ? "0 0 12px rgba(255,100,50,0.7), 0 0 25px rgba(255,80,30,0.5)"
                   : "0 1px 1px rgba(255,245,215,0.7)",
+                filter: active ? "drop-shadow(0 0 6px rgba(255,120,50,0.6))" : undefined,
               }}
             >
               <SpiritualIcon kind={link.icon} />

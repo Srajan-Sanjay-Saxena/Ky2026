@@ -75,7 +75,7 @@ export const NavbarMobile = memo(function NavbarMobile() {
           }}
         />
 
-        {/* Faint mystical mandala watermark */}
+        {/* Faint mystical mandala watermark - center */}
         <span
           aria-hidden
           className="naksha-mandala absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
@@ -85,6 +85,22 @@ export const NavbarMobile = memo(function NavbarMobile() {
             opacity: 0.14,
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%235a3410' stroke-width='1'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='78'/%3E%3Ccircle cx='100' cy='100' r='54'/%3E%3Ccircle cx='100' cy='100' r='30'/%3E%3Cg%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(45 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(90 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(135 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(180 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(225 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(270 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3Cg transform='rotate(315 100 100)'%3E%3Cpath d='M100 4 L108 30 L100 22 L92 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        />
+
+        {/* Second mystical mandala - bottom right (different design) */}
+        <span
+          aria-hidden
+          className="naksha-mandala absolute -bottom-8 -right-8 pointer-events-none"
+          style={{
+            width: "45%",
+            aspectRatio: "1",
+            opacity: 0.12,
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%235a3410' stroke-width='0.8'%3E%3Ccircle cx='100' cy='100' r='95'/%3E%3Ccircle cx='100' cy='100' r='80'/%3E%3Ccircle cx='100' cy='100' r='65'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='35'/%3E%3Ccircle cx='100' cy='100' r='20'/%3E%3C!-- 12-point lotus pattern --%3E%3Cg%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(30 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(60 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(90 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(120 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(150 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(180 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(210 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(240 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(270 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(300 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3Cg transform='rotate(330 100 100)'%3E%3Cellipse cx='100' cy='20' rx='8' ry='20' fill='%235a3410' fill-opacity='0.3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
