@@ -97,6 +97,7 @@ export const GlowingMoon = memo(function GlowingMoon() {
         style={{
           filter: `drop-shadow(0 0 40px rgba(255,255,255,0.25)) drop-shadow(0 0 80px rgba(220,220,255,0.15)) drop-shadow(0 0 120px rgba(180,180,220,0.1))`,
           animation: "moonRotate 120s linear infinite",
+          willChange: "transform",
         }}
         priority
       />

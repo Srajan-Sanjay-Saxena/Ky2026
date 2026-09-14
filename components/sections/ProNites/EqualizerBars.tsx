@@ -28,6 +28,8 @@ export const EqualizerBars = memo(function EqualizerBars({
             animation: `equalizerBounce ${0.4 + i * 0.1}s ease-in-out infinite`,
             animationDelay: `${i * 0.08}s`,
             height: "100%",
+            transformOrigin: "bottom",
+            willChange: "transform",
             boxShadow: `0 0 8px ${color}80`,
           }}
         />

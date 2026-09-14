@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GRADIENT_STAGE, CONCERT_COLORS, ARTISTS } from "./constants";
 import { HeadlinerCard, FeaturingCard } from "./ArtistCard";
-import { SpotlightBeams } from "./SpotlightBeams";
 import { SectionTitle } from "./SectionTitle";
 import { GlowingMoon, Rockstar, TopBorder, BottomBorder, GridOverlay } from "./DecorativeElements";
 import { IMAGES } from "@/lib/images";
@@ -87,7 +86,6 @@ export const ProNitesSection = memo(function ProNitesSection() {
         style={{ background: GRADIENT_STAGE }}
       >
       {/* ═══ Background Elements ═══ */}
-      <SpotlightBeams />
       <GlowingMoon />
       <Rockstar />
       <GridOverlay />

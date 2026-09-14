@@ -22,6 +22,7 @@ const MysterySilhouette = memo(function MysterySilhouette({
         style={{
           background: `radial-gradient(circle, ${accentColor}20 0%, transparent 70%)`,
           animation: "pulseSlow 2s ease-in-out infinite",
+          willChange: "transform, opacity",
         }}
       />
       

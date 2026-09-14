@@ -1,37 +1,64 @@
 "use client";
 
 import Image from "next/image";
-import { memo } from "react";
+import { memo, type ReactNode } from "react";
 import { IMAGES } from "@/lib/images";
 import { COLORS, JAZZ_COLORS } from "@/components/constants/palette";
 import { CornerOrnaments } from "./CornerOrnaments";
 
-const infoCards = [
+// ═══════════════════════════════════════════════════════════════════
+// ROYAL GOLD LINE ICONS
+// ═══════════════════════════════════════════════════════════════════
+const iconProps = {
+  width: 30,
+  height: 30,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: COLORS.BRIGHT_GOLD,
+  strokeWidth: 1.5,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const EmailIcon = (
+  <svg {...iconProps}>
+    <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+    <path d="M3 6l9 6 9-6" />
+  </svg>
+);
+
+const PhoneIcon = (
+  <svg {...iconProps}>
+    <path d="M6.5 3.5c.5 0 .9.3 1.1.8l1.3 3c.2.5.1 1-.3 1.4L7.4 10c1 2 2.6 3.6 4.6 4.6l1.3-1.2c.4-.4.9-.5 1.4-.3l3 1.3c.5.2.8.6.8 1.1v3c0 .8-.7 1.5-1.5 1.4C9.6 19.4 4.6 14.4 4.1 6.5 4 5.2 4.7 4.5 5.5 4.5z" />
+  </svg>
+);
+
+const PinIcon = (
+  <svg {...iconProps}>
+    <path d="M12 21c4-4.5 7-8 7-11a7 7 0 10-14 0c0 3 3 6.5 7 11z" />
+    <circle cx="12" cy="10" r="2.5" />
+  </svg>
+);
+
+const infoCards: { icon: ReactNode; label: string; value: string; href: string }[] = [
   {
-    icon: "📧",
+    icon: EmailIcon,
     label: "Email",
     value: "contact@kashiyatra.org.in",
     href: "mailto:contact@kashiyatra.org.in",
   },
   {
-    icon: "📞",
+    icon: PhoneIcon,
     label: "Call Us",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210",
+    value: "+91 79069 49235",
+    href: "tel:+917906949235",
   },
   {
-    icon: "📍",
+    icon: PinIcon,
     label: "Find Us",
     value: "IIT (BHU) Varanasi, Uttar Pradesh 221005",
     href: "https://maps.google.com/?q=IIT+BHU+Varanasi",
   },
-];
-
-const socials = [
-  { icon: "📷", label: "Instagram", href: "https://instagram.com/kashiyatra_iitbhu" },
-  { icon: "📘", label: "Facebook", href: "https://facebook.com/kashiyatra" },
-  { icon: "💼", label: "LinkedIn", href: "https://linkedin.com/company/kashiyatra" },
-  { icon: "▶️", label: "YouTube", href: "https://youtube.com/@kashiyatra" },
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -41,13 +68,13 @@ export const ContactInfo = memo(function ContactInfo() {
   return (
     <section className="relative py-14 sm:py-20 px-4 sm:px-6 overflow-hidden">
       {/* Royal letter scroll - Desktop only, top-right flourish */}
-      <div className="hidden lg:block absolute -right-10 -top-4 w-72 h-72 opacity-70 pointer-events-none rotate-6 lg:animate-[floatOm_7s_ease-in-out_infinite]">
+      <div className="hidden lg:block absolute -right-16 -top-10 w-[28rem] h-[28rem] opacity-75 pointer-events-none rotate-6 lg:animate-[floatOm_7s_ease-in-out_infinite]">
         <Image
           src={IMAGES.contact.envelopeScroll}
           alt=""
           fill
           className="object-contain"
-          style={{ filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.4))" }}
+          style={{ filter: "drop-shadow(0 12px 36px rgba(0,0,0,0.45))" }}
         />
       </div>
 
@@ -64,7 +91,7 @@ export const ContactInfo = memo(function ContactInfo() {
         </h2>
 
         {/* Info cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
           {infoCards.map((card) => (
             <a
               key={card.label}
@@ -79,7 +106,21 @@ export const ContactInfo = memo(function ContactInfo() {
               }}
             >
               <CornerOrnaments />
-              <span className="text-4xl sm:text-5xl mb-4 block">{card.icon}</span>
+
+              {/* Icon in a gold-ringed medallion */}
+              <div className="flex justify-center mb-4">
+                <div
+                  className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full"
+                  style={{
+                    background: `radial-gradient(circle, ${COLORS.DEEP_MAROON} 0%, ${COLORS.DARK_MAROON} 100%)`,
+                    border: `1.5px solid ${COLORS.BRIGHT_GOLD}70`,
+                    boxShadow: `inset 0 0 12px rgba(0,0,0,0.5), 0 0 16px ${COLORS.BRIGHT_GOLD}30`,
+                  }}
+                >
+                  {card.icon}
+                </div>
+              </div>
+
               <h3
                 className="text-lg sm:text-xl font-bold mb-2"
                 style={{ color: COLORS.BRIGHT_GOLD, fontFamily: "Georgia, serif" }}
@@ -89,29 +130,6 @@ export const ContactInfo = memo(function ContactInfo() {
               <p className="text-sm leading-relaxed break-words" style={{ color: "rgba(255,255,255,0.75)" }}>
                 {card.value}
               </p>
-            </a>
-          ))}
-        </div>
-
-        {/* Socials */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              className="flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105"
-              style={{
-                background: `linear-gradient(180deg, rgba(139,21,56,0.35) 0%, rgba(90,15,37,0.45) 100%)`,
-                border: `2px solid ${COLORS.BRIGHT_GOLD}`,
-                color: COLORS.BRIGHT_GOLD,
-                boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
-              }}
-            >
-              <span className="text-lg">{s.icon}</span>
-              <span className="uppercase tracking-wider">{s.label}</span>
             </a>
           ))}
         </div>

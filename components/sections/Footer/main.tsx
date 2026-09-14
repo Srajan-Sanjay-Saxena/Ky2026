@@ -211,7 +211,7 @@ export function FooterSection() {
 
       {/* Single large mandala - slow clockwise rotation */}
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] sm:w-[80vw] sm:h-[80vw] pointer-events-none footer-mandala-slow"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] sm:w-[52vw] sm:h-[52vw] max-w-[720px] max-h-[720px] pointer-events-none footer-mandala-slow"
         style={{ opacity: 0.12 }}
       >
         <MandalaRing className="w-full h-full text-[#FFD700]" />

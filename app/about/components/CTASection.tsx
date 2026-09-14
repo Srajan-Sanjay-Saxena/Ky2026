@@ -79,7 +79,7 @@ export const CTASection = memo(function CTASection() {
           <CornerOrnaments />
 
           {/* Top decorative mandala element */}
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 sm:w-20 sm:h-20">
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20 w-16 h-16 sm:w-20 sm:h-20">
             <Image
               src={IMAGES.about.omLotus}
               alt=""

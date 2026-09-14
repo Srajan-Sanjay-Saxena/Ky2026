@@ -60,10 +60,10 @@ export const ContactForm = memo(function ContactForm() {
               textShadow: "0 2px 20px rgba(255,215,0,0.3)",
             }}
           >
-            Send a Message
+            Get In Touch
           </h2>
           <p className="text-center text-sm mb-8" style={{ color: "rgba(255,255,255,0.6)" }}>
-            Our team will respond within a couple of days.
+            Leave your details and our team will reach out to you.
           </p>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
@@ -96,80 +96,65 @@ export const ContactForm = memo(function ContactForm() {
               </label>
             </div>
 
-            <label className="block">
-              <span className="text-xs uppercase tracking-wider" style={{ color: COLORS.GOLD }}>
-                Subject
-              </span>
-              <input
-                type="text"
-                name="subject"
-                placeholder="What is this about?"
-                className="mt-2 w-full rounded-lg px-4 py-3 text-sm outline-none focus:border-yellow-400/70 transition-colors"
-                style={fieldStyle}
-              />
-            </label>
-
-            <label className="block">
-              <span className="text-xs uppercase tracking-wider" style={{ color: COLORS.GOLD }}>
-                Message
-              </span>
-              <textarea
-                name="message"
-                required
-                rows={5}
-                placeholder="Write your message..."
-                className="mt-2 w-full rounded-lg px-4 py-3 text-sm outline-none focus:border-yellow-400/70 transition-colors resize-none"
-                style={fieldStyle}
-              />
-            </label>
-
-            {/* Submit - ornate gold button (matches About CTA) */}
-            <div className="flex justify-center pt-2">
+            {/* Submit - refined ornate royal button */}
+            <div className="flex justify-center pt-3">
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="group relative w-full sm:w-auto disabled:opacity-70"
+                className="group relative w-full sm:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
               >
+                {/* Soft outer aura on hover */}
                 <div
-                  className="absolute -inset-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute -inset-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: `linear-gradient(135deg, ${COLORS.BRIGHT_GOLD}50, ${COLORS.SAFFRON}30)`,
-                    filter: "blur(10px)",
+                    background: `radial-gradient(ellipse at center, ${COLORS.BRIGHT_GOLD}55, ${COLORS.SAFFRON}25, transparent 70%)`,
+                    filter: "blur(12px)",
                   }}
                 />
+
+                {/* Gold frame */}
                 <div
-                  className="relative px-12 sm:px-16 py-4 text-center overflow-hidden"
+                  className="relative rounded-xl p-[2px] transition-transform duration-300 group-hover:scale-[1.03] group-active:scale-[0.98]"
                   style={{
-                    background: `linear-gradient(180deg, #FFD700 0%, #E8B820 20%, #D4A853 50%, #B8860B 80%, #8B6914 100%)`,
-                    border: `3px solid #8B6914`,
-                    boxShadow:
-                      "0 8px 32px rgba(255,215,0,0.4), 0 4px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.2)",
+                    background: `linear-gradient(180deg, #FFE9A8 0%, #E8B820 40%, #B8860B 70%, #8B6914 100%)`,
+                    boxShadow: `0 10px 30px rgba(255,215,0,0.3), 0 4px 12px rgba(0,0,0,0.35)`,
                   }}
                 >
-                  {/* Shimmer - desktop only */}
                   <div
-                    className="hidden lg:block absolute inset-0 opacity-30"
+                    className="relative rounded-[10px] px-10 sm:px-14 py-3.5 overflow-hidden"
                     style={{
-                      background:
-                        "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.8) 50%, transparent 60%)",
-                      animation: "shimmerSlide 3s infinite",
+                      background: `linear-gradient(180deg, #FFD84D 0%, #F0C020 45%, #D4A017 100%)`,
+                      boxShadow: `inset 0 2px 3px rgba(255,255,255,0.6), inset 0 -2px 4px rgba(0,0,0,0.25)`,
                     }}
-                  />
-                  <span
-                    className="relative z-10 font-bold text-sm sm:text-base uppercase tracking-[0.2em] flex items-center justify-center gap-3"
-                    style={{ color: "#1a0a14", textShadow: "0 1px 0 rgba(255,255,255,0.3)" }}
                   >
-                    <span className="text-lg">✉️</span>
-                    <span>{status === "sent" ? "Message Sent" : status === "sending" ? "Sending…" : "Send Message"}</span>
-                    <span className="text-lg">✉️</span>
-                  </span>
+                    {/* Shimmer sweep - desktop only */}
+                    <div
+                      className="hidden lg:block absolute inset-0 opacity-40"
+                      style={{
+                        background:
+                          "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.85) 50%, transparent 60%)",
+                        animation: "shimmerSlide 3.5s infinite",
+                      }}
+                    />
+                    <span
+                      className="relative z-10 font-black text-sm sm:text-base uppercase tracking-[0.22em] flex items-center justify-center gap-3"
+                      style={{ color: "#3d0a18", textShadow: "0 1px 0 rgba(255,255,255,0.35)" }}
+                    >
+                      {/* Gold-dark envelope glyph */}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3d0a18" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+                        <path d="M3 6l9 6 9-6" />
+                      </svg>
+                      <span>{status === "sent" ? "Received!" : status === "sending" ? "Sending…" : "Reach Out"}</span>
+                    </span>
+                  </div>
                 </div>
               </button>
             </div>
 
             {status === "sent" && (
               <p className="text-center text-sm" style={{ color: JAZZ_COLORS.LIME }}>
-                🙏 Thank you! Your message has reached us.
+                🙏 Thank you! We&apos;ve received your details and will reach out soon.
               </p>
             )}
           </form>
