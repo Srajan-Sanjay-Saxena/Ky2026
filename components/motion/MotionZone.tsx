@@ -1,15 +1,14 @@
 "use client";
 
+import { usePrefersReducedMotion } from "@/hooks";
 import {
-  useRef,
-  useEffect,
-  useState,
   ReactNode,
   createContext,
   useContext,
-  useCallback,
+  useEffect,
+  useRef,
+  useState
 } from "react";
-import { usePrefersReducedMotion } from "@/hooks";
 
 /**
  * MotionZone Context
@@ -33,7 +32,12 @@ const MotionZoneContext = createContext<MotionZoneContextValue>({ isAnimating: t
  * <motion.div animate={isAnimating ? { scale: [1, 1.1, 1] } : {}} />
  */
 export function useMotionZone() {
-  return useContext(MotionZoneContext);
+
+  const context = useContext(MotionZoneContext);
+  if (context === undefined) {
+    throw new Error("useMotionZone must be used within a MotionZone");
+  }
+  return context;
 }
 
 interface MotionZoneProps {

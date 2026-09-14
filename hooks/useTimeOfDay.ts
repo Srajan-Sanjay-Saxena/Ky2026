@@ -21,7 +21,7 @@ interface TimeOfDayState {
 
 // ⚠️ DEV OVERRIDE: Set to a specific time period for testing, or null for real time
 // Options: 'dawn' | 'morning' | 'afternoon' | 'evening' | 'dusk' | 'night' | null
-const DEV_TIME_OVERRIDE: TimeOfDay | null = null; // Change to null for production
+const DEV_TIME_OVERRIDE: TimeOfDay | null = 'night'; // Change to null for production
 
 /**
  * Hook that returns current time of day and associated sky configuration.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import { MandalaRing } from "./MandlaRing";
 import { FestSparkles } from "./Sparkles";
 import { TempleBell } from "./TempleBell";
 import { IMAGES } from "@/lib/images";
+import { MotionZone, useMotionZone } from "@/components/motion";
 
 const highlights = [
   {
@@ -28,26 +29,13 @@ const highlights = [
   },
 ];
 
-export function FestHighlightsSection() {
+// Inner component that can access MotionZone context
+function FestHighlightsContent() {
+  const { isAnimating } = useMotionZone();
   const sectionRef = useRef<HTMLDivElement>(null);
   const templeRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const decorRef = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
-
-  // Intersection Observer to pause animations when off-screen
-  useEffect(() => {
-    const element = sectionRef.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.05, rootMargin: "100px" }
-    );
-
-    observer.observe(element);
-    return () => observer.unobserve(element);
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -135,7 +123,6 @@ export function FestHighlightsSection() {
   return (
     <section
       ref={sectionRef}
-      data-inview={isInView}
       className="relative min-h-screen py-10 sm:py-12 md:py-16 overflow-hidden"
       style={{
         background: `linear-gradient(135deg, 
@@ -150,7 +137,7 @@ export function FestHighlightsSection() {
       {/* Background Mandala - smaller on mobile */}
       <div
         className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[350px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] pointer-events-none opacity-15"
-        style={{ animation: isInView ? "spin 60s linear infinite" : "none" }}
+        style={{ animation: isAnimating ? "spin 60s linear infinite" : "none" }}
       >
         <MandalaRing className="w-full h-full text-[#FF6B00]" />
       </div>
@@ -390,12 +377,12 @@ export function FestHighlightsSection() {
                 Three electrifying days of music, dance, and unforgettable experiences.
               </p>
 
-              {/* Highlight Cards - Royal ornate design - All 4 cards on all screen sizes */}
+              {/* Highlight Cards - Royal ornate design - First 2 on mobile, all 4 on desktop */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                 {highlights.map((item, i) => (
                   <div
                     key={i}
-                    className="highlight-card relative p-3 sm:p-5 rounded-xl transition-all duration-300 sm:hover:scale-[1.02] cursor-pointer overflow-hidden group"
+                    className={"highlight-card relative p-3 sm:p-5 rounded-xl transition-all duration-300 sm:hover:scale-[1.02] cursor-pointer overflow-hidden group" + (i >= 2 ? " hidden sm:block" : "")}
                     style={{
                       background: "linear-gradient(145deg, rgba(139,21,56,0.35), rgba(92,10,31,0.4), rgba(45,24,16,0.35))",
                       border: "2px solid rgba(184,134,11,0.5)",
@@ -459,5 +446,14 @@ export function FestHighlightsSection() {
       {/* FEST VIBES - Colorful sparkles and confetti */}
       <FestSparkles />
     </section>
+  );
+}
+
+// Exported component wraps content with MotionZone
+export function FestHighlightsSection() {
+  return (
+    <MotionZone threshold={0.05} rootMargin="100px">
+      <FestHighlightsContent />
+    </MotionZone>
   );
 }

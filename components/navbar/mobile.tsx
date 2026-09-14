@@ -2,6 +2,7 @@
 
 import { memo, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { primaryLinks, secondaryLinks } from "./constants";
 
 /**
@@ -10,6 +11,15 @@ import { primaryLinks, secondaryLinks } from "./constants";
  */
 export const NavbarMobile = memo(function NavbarMobile() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Check if a link is active
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
+  const allLinks = [...primaryLinks, ...secondaryLinks];
 
   return (
     <div className="md:hidden">
@@ -147,45 +157,76 @@ export const NavbarMobile = memo(function NavbarMobile() {
             </span>
           </div>
 
-          {[...primaryLinks, ...secondaryLinks].map((link, i, arr) => (
-            <div key={link.label} className="flex flex-col">
-              <Link
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="naksha-link naksha-item flex items-center justify-center gap-2 px-3 py-2 rounded-md
-                           text-[15px] uppercase tracking-[0.18em] text-center
-                           text-[#3d1e0a] transition-all duration-300"
-                style={{
-                  fontWeight: 900,
-                  textShadow: "0 1px 1px rgba(255,245,215,0.6)",
-                  opacity: open ? 1 : 0,
-                  transform: open ? "translateY(0)" : "translateY(-8px)",
-                  transitionDelay: open ? `${120 + i * 70}ms` : "0ms",
-                }}
-              >
-                <span aria-hidden className="text-[#b8860b] text-[9px]">◆</span>
-                {link.label}
-                <span aria-hidden className="text-[#b8860b] text-[9px]">◆</span>
-              </Link>
-              {/* mystical divider between items */}
-              {i < arr.length - 1 && (
-                <span
-                  aria-hidden
-                  className="flex items-center justify-center gap-2 py-0.5 text-[#8a5a1a] opacity-60"
+          {allLinks.map((link, i, arr) => {
+            const active = isActive(link.href);
+            return (
+              <div key={link.label} className="flex flex-col">
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="naksha-link naksha-item flex items-center justify-center gap-2 px-3 py-2 rounded-md
+                             text-[15px] uppercase tracking-[0.18em] text-center
+                             transition-all duration-300"
+                  style={{
+                    fontWeight: 900,
+                    color: active ? "#3a1505" : "#3d1e0a",
+                    background: active
+                      ? "linear-gradient(135deg, rgba(255,215,0,0.7) 0%, rgba(255,230,100,0.8) 50%, rgba(255,215,0,0.7) 100%)"
+                      : "transparent",
+                    boxShadow: active
+                      ? "0 0 25px rgba(255,215,0,0.8), 0 0 50px rgba(255,180,0,0.5), inset 0 0 15px rgba(255,255,200,0.6)"
+                      : "none",
+                    textShadow: active
+                      ? "0 0 10px rgba(255,215,0,0.8), 0 0 20px rgba(255,180,0,0.6), 0 1px 1px rgba(255,245,215,0.8)"
+                      : "0 1px 1px rgba(255,245,215,0.6)",
+                    border: active ? "1px solid rgba(255,230,100,0.9)" : "1px solid transparent",
+                    opacity: open ? 1 : 0,
+                    transform: open ? (active ? "translateY(0) scale(1.02)" : "translateY(0)") : "translateY(-8px)",
+                    transitionDelay: open ? `${120 + i * 70}ms` : "0ms",
+                  }}
                 >
+                  <span 
+                    aria-hidden 
+                    className="text-[9px]"
+                    style={{ 
+                      color: active ? "#FFD700" : "#b8860b",
+                      filter: active ? "drop-shadow(0 0 4px rgba(255,215,0,0.9))" : "none",
+                    }}
+                  >
+                    {active ? "✦" : "◆"}
+                  </span>
+                  {link.label}
+                  <span 
+                    aria-hidden 
+                    className="text-[9px]"
+                    style={{ 
+                      color: active ? "#FFD700" : "#b8860b",
+                      filter: active ? "drop-shadow(0 0 4px rgba(255,215,0,0.9))" : "none",
+                    }}
+                  >
+                    {active ? "✦" : "◆"}
+                  </span>
+                </Link>
+                {/* mystical divider between items */}
+                {i < arr.length - 1 && (
                   <span
-                    className="h-px w-8"
-                    style={{ background: "linear-gradient(90deg, transparent, #8a5a1a)" }}
-                  />
-                  <span className="text-[9px]">✦</span>
-                  <span
-                    className="h-px w-8"
-                    style={{ background: "linear-gradient(90deg, #8a5a1a, transparent)" }}
-                  />
-                </span>
-              )}
-            </div>
-          ))}
+                    aria-hidden
+                    className="flex items-center justify-center gap-2 py-0.5 text-[#8a5a1a] opacity-60"
+                  >
+                    <span
+                      className="h-px w-8"
+                      style={{ background: "linear-gradient(90deg, transparent, #8a5a1a)" }}
+                    />
+                    <span className="text-[9px]">✦</span>
+                    <span
+                      className="h-px w-8"
+                      style={{ background: "linear-gradient(90deg, #8a5a1a, transparent)" }}
+                    />
+                  </span>
+                )}
+              </div>
+            );
+          })}
         </nav>
       </div>
     </div>

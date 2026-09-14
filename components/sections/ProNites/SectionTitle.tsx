@@ -9,7 +9,7 @@ export const SectionTitle = memo(function SectionTitle() {
     <div className="text-center mb-12 sm:mb-16">
       {/* Eyebrow */}
       <div className="flex items-center justify-center gap-4 mb-4">
-        <EqualizerBars className="opacity-80" color={CONCERT_COLORS.NEON_PINK} />
+        <EqualizerBars className="hidden sm:flex opacity-80" color={CONCERT_COLORS.NEON_PINK} />
         <span
           className="text-xs sm:text-sm uppercase tracking-[0.3em] font-bold"
           style={{
@@ -19,7 +19,7 @@ export const SectionTitle = memo(function SectionTitle() {
         >
           Pro Nites 2026
         </span>
-        <EqualizerBars className="opacity-80" color={CONCERT_COLORS.NEON_PINK} />
+        <EqualizerBars className="hidden sm:flex opacity-80" color={CONCERT_COLORS.NEON_PINK} />
       </div>
       
       {/* Main title */}

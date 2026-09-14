@@ -2,6 +2,7 @@
 
 import { memo } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { primaryLinks, secondaryLinks, ShineIcon, SpiritualIcon } from "./constants";
 
 /**
@@ -9,6 +10,14 @@ import { primaryLinks, secondaryLinks, ShineIcon, SpiritualIcon } from "./consta
  * Hidden on mobile (md:flex)
  */
 export const NavbarDesktop = memo(function NavbarDesktop() {
+  const pathname = usePathname();
+
+  // Check if a link is active
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
   return (
     <>
       {/* PRIMARY NAV — centered on the bar midline */}
@@ -17,31 +26,42 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
         aria-label="Primary"
         style={{ transform: "translateY(8%)" }}
       >
-        {primaryLinks.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className="nav-pill group flex items-center gap-1.5 lg:gap-2
-                       px-3 lg:px-4 py-1 lg:py-1.5 rounded-full
-                       tracking-[0.12em] uppercase whitespace-nowrap
-                       text-[#3a1505] hover:text-[#5a1205]
-                       transition-all duration-300 hover:scale-[1.05]"
-            style={{
-              fontFamily: "var(--font-ethereal), serif",
-              fontWeight: 900,
-              fontSize: "clamp(12px, 1.05vw, 18px)",
-              background:
-                "linear-gradient(135deg, rgba(255,215,0,0.28) 0%, rgba(212,168,83,0.18) 50%, rgba(184,134,11,0.28) 100%)",
-              border: "1px solid rgba(255,215,0,0.55)",
-              boxShadow:
-                "0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,245,200,0.35)",
-              textShadow: "0 1px 1px rgba(255,245,215,0.7)",
-            }}
-          >
-            <ShineIcon />
-            {link.label}
-          </Link>
-        ))}
+        {primaryLinks.map((link) => {
+          const active = isActive(link.href);
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="nav-pill group flex items-center gap-1.5 lg:gap-2
+                         px-3 lg:px-4 py-1 lg:py-1.5 rounded-full
+                         tracking-[0.12em] uppercase whitespace-nowrap
+                         transition-all duration-300 hover:scale-[1.05]"
+              style={{
+                fontFamily: "var(--font-ethereal), serif",
+                fontWeight: 900,
+                fontSize: "clamp(12px, 1.05vw, 18px)",
+                color: active ? "#3a1505" : "#3a1505",
+                background: active
+                  ? "linear-gradient(135deg, rgba(255,215,0,0.85) 0%, rgba(255,180,0,0.75) 30%, rgba(255,230,100,0.9) 50%, rgba(255,180,0,0.75) 70%, rgba(255,215,0,0.85) 100%)"
+                  : "linear-gradient(135deg, rgba(255,215,0,0.28) 0%, rgba(212,168,83,0.18) 50%, rgba(184,134,11,0.28) 100%)",
+                border: active 
+                  ? "2px solid rgba(255,230,100,1)" 
+                  : "1px solid rgba(255,215,0,0.55)",
+                boxShadow: active
+                  ? "0 0 25px rgba(255,215,0,0.9), 0 0 50px rgba(255,180,0,0.7), 0 0 80px rgba(255,215,0,0.5), 0 0 120px rgba(255,200,50,0.3), inset 0 0 20px rgba(255,255,200,0.5), 0 2px 8px rgba(0,0,0,0.3)"
+                  : "0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,245,200,0.35)",
+                textShadow: active
+                  ? "0 0 8px rgba(255,215,0,0.8), 0 0 15px rgba(255,180,0,0.6), 0 1px 1px rgba(255,245,215,0.9)"
+                  : "0 1px 1px rgba(255,245,215,0.7)",
+                transform: active ? "scale(1.08)" : undefined,
+                animation: active ? "goldenPulse 2s ease-in-out infinite" : undefined,
+              }}
+            >
+              <ShineIcon />
+              {link.label}
+            </Link>
+          );
+        })}
       </nav>
 
       {/* SECONDARY LINKS (LOGIN / CONTACT) with spiritual icons */}
@@ -49,23 +69,29 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
         className="absolute right-[2%] inset-y-0 hidden sm:flex items-center gap-4 z-10"
         style={{ transform: "translateY(11%)" }}
       >
-        {secondaryLinks.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className="group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
-                       text-[#3a1505] hover:text-[#7a1f10] transition-colors duration-200
-                       drop-shadow-[0_1px_1px_rgba(255,245,215,0.7)]"
-            style={{
-              fontFamily: "var(--font-ethereal), serif",
-              fontWeight: 900,
-              fontSize: "clamp(12px, 1vw, 17px)",
-            }}
-          >
-            <SpiritualIcon kind={link.icon} />
-            {link.label}
-          </Link>
-        ))}
+        {secondaryLinks.map((link) => {
+          const active = isActive(link.href);
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
+                         transition-colors duration-200"
+              style={{
+                fontFamily: "var(--font-ethereal), serif",
+                fontWeight: 900,
+                fontSize: "clamp(12px, 1vw, 17px)",
+                color: active ? "#7a1f10" : "#3a1505",
+                textShadow: active
+                  ? "0 0 15px rgba(255,215,0,0.6), 0 1px 1px rgba(255,245,215,0.7)"
+                  : "0 1px 1px rgba(255,245,215,0.7)",
+              }}
+            >
+              <SpiritualIcon kind={link.icon} />
+              {link.label}
+            </Link>
+          );
+        })}
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { memo } from "react";
 import Link from "next/link";
 import { EventCategory, SubEvent } from "@/config/events.config";
 import { COLORS, JAZZ_COLORS } from "@/components/constants/palette";
+import { Navbar } from "@/components/navbar/NavbarDesign";
 
 // ═══════════════════════════════════════════════════════════════════
 // SUB-EVENT CARD COMPONENT
@@ -256,18 +257,24 @@ const CategoryHeader = memo(function CategoryHeader({
 // ═══════════════════════════════════════════════════════════════════
 export function CategoryPageContent({ category }: { category: EventCategory }) {
   return (
-    <main
-      className="min-h-screen py-20 sm:py-28 px-4 sm:px-6"
-      style={{
-        background: `linear-gradient(180deg, 
-          ${JAZZ_COLORS.BG_DEEP} 0%, 
-          ${category.color}08 20%,
-          ${JAZZ_COLORS.BG_WINE} 50%,
-          ${category.color}05 80%,
-          ${JAZZ_COLORS.BG_DEEP} 100%
-        )`,
-      }}
-    >
+    <>
+      {/* Fixed navbar - always visible */}
+      <div className="fixed inset-x-0 top-0 z-[200]">
+        <Navbar position="relative" topOffset={18} />
+      </div>
+
+      <main
+        className="min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6"
+        style={{
+          background: `linear-gradient(180deg, 
+            ${JAZZ_COLORS.BG_DEEP} 0%, 
+            ${category.color}08 20%,
+            ${JAZZ_COLORS.BG_WINE} 50%,
+            ${category.color}05 80%,
+            ${JAZZ_COLORS.BG_DEEP} 100%
+          )`,
+        }}
+      >
       {/* Background decorative elements */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.03]"
@@ -319,5 +326,6 @@ export function CategoryPageContent({ category }: { category: EventCategory }) {
         </div>
       </div>
     </main>
+    </>
   );
 }
