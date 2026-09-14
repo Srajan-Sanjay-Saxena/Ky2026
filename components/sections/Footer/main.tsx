@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MandalaRing } from "@/components/sections/FestHighlights/MandlaRing";
 import { DiyaSvg } from "@/components/sections/Hero/River/diya/DiyaSvg";
+import { MotionZone } from "@/components/motion";
 import {
   COLORS,
   GRADIENT_FOOTER,
@@ -251,18 +252,21 @@ export function FooterSection() {
       />
 
       {/* ═══ Corner Diyas ═══ */}
-      <div className="absolute top-6 left-[5%] sm:left-[8%] w-8 h-10 sm:w-10 sm:h-12 opacity-70">
-        <DiyaSvg className="w-full h-full" />
-      </div>
-      <div className="absolute top-8 right-[5%] sm:right-[8%] w-6 h-8 sm:w-8 sm:h-10 opacity-50">
-        <DiyaSvg className="w-full h-full" />
-      </div>
-      <div className="hidden md:block absolute top-16 left-[20%] w-5 h-7 opacity-40">
-        <DiyaSvg className="w-full h-full" />
-      </div>
-      <div className="hidden md:block absolute top-12 right-[22%] w-6 h-8 opacity-45">
-        <DiyaSvg className="w-full h-full" />
-      </div>
+      {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
+      <MotionZone className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-6 left-[5%] sm:left-[8%] w-8 h-10 sm:w-10 sm:h-12 opacity-70">
+          <DiyaSvg className="w-full h-full" />
+        </div>
+        <div className="absolute top-8 right-[5%] sm:right-[8%] w-6 h-8 sm:w-8 sm:h-10 opacity-50">
+          <DiyaSvg className="w-full h-full" />
+        </div>
+        <div className="hidden md:block absolute top-16 left-[20%] w-5 h-7 opacity-40">
+          <DiyaSvg className="w-full h-full" />
+        </div>
+        <div className="hidden md:block absolute top-12 right-[22%] w-6 h-8 opacity-45">
+          <DiyaSvg className="w-full h-full" />
+        </div>
+      </MotionZone>
 
       {/* ═══ Main Content ═══ */}
       <div
