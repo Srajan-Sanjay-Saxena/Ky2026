@@ -25,13 +25,14 @@ export function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const riverRef = useRef<HTMLDivElement>(null);
   const ghatsRef = useRef<HTMLDivElement>(null);
+  const welcomeFlagRef = useRef<HTMLDivElement>(null);
 
   // Get current time-based sky configuration
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
   const isMobile = useIsMobile();
 
-  // Show kites only during morning and evening
-  const showKites = timeOfDay === 'morning' || timeOfDay === 'evening';
+  // Show kites in all times except night
+  const showKites = timeOfDay !== 'night';
 
   // Entry animation: Celestial body (Moon or Sun)
   useEffect(() => {
@@ -77,6 +78,7 @@ export function HeroSection() {
     const ctx = gsap.context(() => {
       gsap.set(templeRef.current, { y: 250, opacity: 0 });
       gsap.set(ghatsRef.current, { x: -250, opacity: 0 });
+      gsap.set(welcomeFlagRef.current, { y: -100, opacity: 0, scale: 0.8 });
 
       const tl = gsap.timeline({ delay: 0.8 });
 
@@ -103,6 +105,16 @@ export function HeroSection() {
         ghatsRef.current,
         { x: -40, opacity: 1, duration: 0.5, ease: "none" },
         "<",
+      ).to(
+        welcomeFlagRef.current,
+        { 
+          y: 0, 
+          opacity: 1, 
+          scale: 1, 
+          duration: 0.6, 
+          ease: "back.out(1.7)" 
+        },
+        ">0.2", // Start 0.2s after temple/ghats animation ends
       );
     }, containerRef);
 
@@ -665,10 +677,12 @@ export function HeroSection() {
 
       {/* Welcome Flag - Desktop only, top-right, tilted with wave animation */}
       <div
+        ref={welcomeFlagRef}
         className="hidden sm:block absolute -top-[5%] right-[0%] w-[26vw] max-w-[450px] pointer-events-none z-15"
         style={{
           transform: "rotate(15deg)",
           transformOrigin: "left top",
+          opacity: 0, // Start hidden, GSAP will animate it in
         }}
       >
         <Image

@@ -49,6 +49,16 @@ export const IMAGES = {
     kites: "/kites.png",  // Kites for Hero section - morning/evening only
     rockstar: "/rockstar.png",  // Rockstar for ProNites section
   },
+  about: {
+    mandalaOrnament: "/about/mandlaOrnament.png",  // Gold mandala frame with hollow center
+    peacock: "/about/peacock_nobg.png",  // Royal peacock motif
+    omLotus: "/about/omLotus.png",  // Pink lotus with Om symbol
+    mysticDivider: "/about/mysticDivider.png",  // Gold horizontal divider
+    diyaCluster: "/about/diyaCluster.png",  // Cluster of brass diyas
+    cornerOrnament: "/about/cornerOrnament.png",  // Gold corner ornament
+    bhuGate: "/about/bhuRoyalGate.png",  // IIT BHU gate illustration
+    ghatsSilhouette: "/about/ghatSaloutte.png",  // Varanasi ghats panoramic
+  },
 } as const;
 
 /**
