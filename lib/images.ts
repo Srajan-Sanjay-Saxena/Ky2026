@@ -59,6 +59,22 @@ export const IMAGES = {
     bhuGate: `${IMAGEKIT_BASE}/about/bhu-royal-gate.png`,
     ghatsSilhouette: `${IMAGEKIT_BASE}/about/ghats-silhouette.png`,
   },
+  contact: {
+    // Reused from the About page for visual consistency
+    mandalaOrnament: "/about/mandlaOrnament.png",  // Gold mandala frame with hollow center
+    peacock: "/about/peacock_nobg.png",  // Royal peacock motif
+    omLotus: "/about/omLotus.png",  // Pink lotus with Om symbol
+    mysticDivider: "/about/mysticDivider.png",  // Gold horizontal divider
+    diyaCluster: "/about/diyaCluster.png",  // Cluster of brass diyas
+    cornerOrnament: "/about/cornerOrnament.png",  // Gold corner ornament
+    ghatsSilhouette: "/about/ghatSaloutte.png",  // Varanasi ghats panoramic
+    // New decorative assets for the Contact page (files live in public/Contact/)
+    envelopeScroll: "/Contact/envelopeScrolled.png",  // Ornate maroon & gold rolled letter with wax lotus seal
+    conch: "/Contact/conch.png",  // Golden Shankha (conch) with paisley engraving
+    lotusMandala: "/Contact/lotusMandla.png",  // Concentric gold lotus mandala for backdrops
+    floatingDiya: "/Contact/floatingDiya.png",  // Single glowing brass diya with flame
+  },
+
 } as const;
 
 /**
