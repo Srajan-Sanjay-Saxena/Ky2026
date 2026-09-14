@@ -1,4 +1,4 @@
-import { JAZZ_COLORS } from "./palette";
+import { JAZZ_COLORS } from "@/components/constants/palette";
 
 // ═══════════════════════════════════════════════════════════════════
 // EXPERIENCE STATS DATA - With custom SVG icons

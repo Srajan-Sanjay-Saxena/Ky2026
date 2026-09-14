@@ -58,6 +58,13 @@ const IMAGES_TO_UPLOAD: ImageToUpload[] = [
   
   // Misc
   { localFile: "lord_shiva.png", remoteName: "lord-shiva.png", folder: "/misc" },
+  { localFile: "MoonBG.png", remoteName: "moon-bg.png", folder: "/misc" },
+  { localFile: "Dj.png", remoteName: "dj.png", folder: "/misc" },
+  { localFile: "silhoutte.png", remoteName: "concert-crowd.png", folder: "/misc" },
+  { localFile: "SareeDrape.png", remoteName: "saree-drape.png", folder: "/misc" },
+  { localFile: "welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
+  { localFile: "kites.png", remoteName: "kites.png", folder: "/misc" },
+  { localFile: "rockstar.png", remoteName: "rockstar.png", folder: "/misc" },
 ];
 
 async function uploadImage(img: ImageToUpload, publicDir: string): Promise<{ name: string; url: string } | null> {

@@ -292,3 +292,129 @@ export const GRADIENT_LINE_GOLD_RIGHT = `linear-gradient(90deg, ${COLORS.GOLD}, 
 
 /** Border image gradient for ornate borders */
 export const GRADIENT_BORDER_ORNATE = `linear-gradient(90deg, transparent 0%, ${COLORS.DARK_GOLD} 15%, ${COLORS.GOLD} 30%, ${COLORS.BRIGHT_GOLD} 50%, ${COLORS.GOLD} 70%, ${COLORS.DARK_GOLD} 85%, transparent 100%)`;
+
+// ═══════════════════════════════════════════════════════════════════
+// CONCERT / PRONITES COLORS (Neon concert vibes)
+// ═══════════════════════════════════════════════════════════════════
+
+export const CONCERT_COLORS = {
+  // Neon accents
+  NEON_PINK: "#FF1493",
+  NEON_CYAN: "#00FFFF",
+  NEON_PURPLE: "#9D4EDD",
+  ELECTRIC_BLUE: "#7DF9FF",
+  NEON_GOLD: "#FFD700",
+  
+  // Warm blends
+  WARM_PINK: "#FF6B9D",
+  SUNSET_ORANGE: "#FF8C42",
+  
+  // Backgrounds
+  STAGE_TOP: "#0d0a18",
+  STAGE_DARK: "#0a0612",
+  STAGE_PURPLE: "#1a0a2e",
+  STAGE_GLOW: "#2d1052",
+  CARD_BG: "#120820",
+} as const;
+
+export const GRADIENT_STAGE = `linear-gradient(180deg, 
+  ${CONCERT_COLORS.STAGE_TOP} 0%,
+  ${CONCERT_COLORS.STAGE_DARK} 15%,
+  ${CONCERT_COLORS.STAGE_PURPLE} 35%,
+  ${CONCERT_COLORS.STAGE_GLOW} 60%,
+  ${CONCERT_COLORS.STAGE_PURPLE} 80%,
+  ${CONCERT_COLORS.STAGE_DARK} 100%
+)`;
+
+// ═══════════════════════════════════════════════════════════════════
+// FESTIVAL VIBES / JAZZ COLORS (Royal jazz, vintage meets neon)
+// ═══════════════════════════════════════════════════════════════════
+
+export const JAZZ_COLORS = {
+  // Deep royal backgrounds
+  BG_DEEP: "#0c0810",
+  BG_ROYAL: "#150a14",
+  BG_WINE: "#1f0c18",
+  
+  // Royal accents
+  GOLD: "#FFD700",
+  GOLD_DARK: "#B8860B",
+  ROSE_GOLD: "#E8B4B8",
+  ROYAL_PURPLE: "#6B21A8",
+  DEEP_MAGENTA: "#9D174D",
+  
+  // Jazz neons
+  ELECTRIC_BLUE: "#00D4FF",
+  HOT_PINK: "#FF1493",
+  LIME: "#ADFF2F",
+  AMBER: "#FFBF00",
+  
+  // Text
+  CREAM: "#FDF6E3",
+  IVORY: "#FFFFF0",
+} as const;
+
+// ═══════════════════════════════════════════════════════════════════
+// HERO TIME-BASED SKY GRADIENTS
+// ═══════════════════════════════════════════════════════════════════
+
+export type TimeOfDay = 'dawn' | 'morning' | 'afternoon' | 'evening' | 'dusk' | 'night';
+
+// Dawn - Early morning, sun just rising (5:00 - 7:00)
+export const GRADIENT_SKY_DAWN = `linear-gradient(180deg, 
+  #1a1a2e 0%, #2d2040 8%, #4a3055 16%, #6d4070 24%, #8b5080 32%,
+  #b06888 40%, #d4847a 50%, #e8a070 60%, #f5bc6a 72%, #fcd472 84%, #ffe580 100%
+)`;
+
+// Morning - Bright daylight (7:00 - 11:00)
+export const GRADIENT_SKY_MORNING = `linear-gradient(180deg,
+  #87CEEB 0%, #98d4ee 10%, #a8daf0 20%, #b8e0f3 32%, #c8e6f5 44%,
+  #d8ecf8 56%, #e8f2fa 68%, #f0f6fc 80%, #f8fafd 90%, #ffffff 100%
+)`;
+
+// Afternoon - Warm golden sun high (11:00 - 16:00)
+export const GRADIENT_SKY_AFTERNOON = `linear-gradient(180deg,
+  #4a90c2 0%, #5a9ac8 10%, #6aa4ce 20%, #7aaed4 32%, #8ab8da 44%,
+  #9ac2e0 56%, #b0cce6 68%, #c6d6ec 80%, #dce0f2 90%, #f0e8e0 100%
+)`;
+
+// Dusk - Twilight (19:00 - 21:00)
+export const GRADIENT_SKY_DUSK = `linear-gradient(180deg,
+  #0a0a15 0%, #0f0f20 10%, #151528 20%, #1a1a35 32%, #252545 44%,
+  #303055 54%, #3a3a60 64%, #45456a 74%, #504f72 84%, #5a587a 94%, #656080 100%
+)`;
+
+// Map time of day to gradient
+export const TIME_GRADIENTS: Record<TimeOfDay, string> = {
+  dawn: GRADIENT_SKY_DAWN,
+  morning: GRADIENT_SKY_MORNING,
+  afternoon: GRADIENT_SKY_AFTERNOON,
+  evening: GRADIENT_SKY_EVENING,
+  dusk: GRADIENT_SKY_DUSK,
+  night: GRADIENT_SKY_NIGHT,
+};
+
+// Whether to show moon for each time period
+export const SHOW_MOON: Record<TimeOfDay, boolean> = {
+  dawn: false, morning: false, afternoon: false, evening: false, dusk: true, night: true,
+};
+
+// Whether to show stars for each time period
+export const SHOW_STARS: Record<TimeOfDay, boolean> = {
+  dawn: false, morning: false, afternoon: false, evening: false, dusk: true, night: true,
+};
+
+// Opacity for stars
+export const STARS_OPACITY: Record<TimeOfDay, number> = {
+  dawn: 0, morning: 0, afternoon: 0, evening: 0, dusk: 0.5, night: 1,
+};
+
+// Get time of day from hour
+export function getTimeOfDay(hour: number): TimeOfDay {
+  if (hour >= 5 && hour < 7) return 'dawn';
+  if (hour >= 7 && hour < 11) return 'morning';
+  if (hour >= 11 && hour < 16) return 'afternoon';
+  if (hour >= 16 && hour < 19) return 'evening';
+  if (hour >= 19 && hour < 21) return 'dusk';
+  return 'night';
+}

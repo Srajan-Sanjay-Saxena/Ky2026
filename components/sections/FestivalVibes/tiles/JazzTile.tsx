@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { JAZZ_COLORS } from "../palette";
+import { JAZZ_COLORS } from "@/components/constants/palette";
 import { JazzIcon } from "../icons";
 import { OrnateFrame } from "../decorations";
 import type { ExperienceTile } from "../experiences.config";

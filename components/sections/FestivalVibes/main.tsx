@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { IMAGES } from "@/lib/images";
-import { JAZZ_COLORS } from "./palette";
+import { JAZZ_COLORS } from "@/components/constants/palette";
 import { EXPERIENCES } from "./experiences.config";
 import { JazzTile } from "./tiles";
 import { SectionTitle } from "./decorations";
