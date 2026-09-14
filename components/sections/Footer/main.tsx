@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MandalaRing } from "@/components/sections/FestHighlights/MandlaRing";
 import { DiyaSvg } from "@/components/sections/Hero/River/diya/DiyaSvg";
 import { MotionZone } from "@/components/motion";
+import { usePrefersReducedMotion } from "@/hooks";
 import {
   COLORS,
   GRADIENT_FOOTER,
@@ -157,8 +158,11 @@ const quickLinks = [
 export function FooterSection() {
   const footerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -179,7 +183,7 @@ export function FooterSection() {
     }, footerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <footer

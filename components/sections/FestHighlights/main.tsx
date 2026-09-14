@@ -13,6 +13,7 @@ import { FestSparkles } from "./Sparkles";
 import { TempleBell } from "./TempleBell";
 import { IMAGES } from "@/lib/images";
 import { MotionZone, useMotionZone } from "@/components/motion";
+import { usePrefersReducedMotion } from "@/hooks";
 
 const highlights = [
   {
@@ -32,12 +33,15 @@ const highlights = [
 // Inner component that can access MotionZone context
 function FestHighlightsContent() {
   const { isAnimating } = useMotionZone();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const sectionRef = useRef<HTMLDivElement>(null);
   const templeRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const decorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // Temple reveal
       gsap.fromTo(
@@ -118,7 +122,7 @@ function FestHighlightsContent() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section

@@ -10,7 +10,7 @@ import { CinematicSky } from "@/components/sections/Hero/Sky/CinematicSky";
 import { FlyingBirds } from "@/components/sections/Hero/Sky/Birds";
 import { River } from "@/components/sections/Hero/River";
 import { useTimeOfDay } from "@/hooks/useTimeOfDay";
-import { useIsMobile } from "@/hooks";
+import { useIsMobile, usePrefersReducedMotion } from "@/hooks";
 import { MotionZone } from "@/components/motion";
 import { Z_HERO } from "@/components/constants";
 import { IMAGES } from "@/lib/images";
@@ -30,6 +30,7 @@ export function HeroSection() {
   // Get current time-based sky configuration
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
   const isMobile = useIsMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Show kites in all times except night
   const showKites = timeOfDay !== 'night';
@@ -123,6 +124,8 @@ export function HeroSection() {
 
   // Continuous glow: Temple & Ghats (related visual effect)
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       gsap.to(templeRef.current, {
         filter:
@@ -144,12 +147,13 @@ export function HeroSection() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   // Parallax scroll: Celestial body & Temple (related scroll behavior) - Desktop only
   useEffect(() => {
     // Skip parallax on mobile for performance
     if (typeof window !== "undefined" && window.innerWidth < 640) return;
+    if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -167,7 +171,7 @@ export function HeroSection() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section

@@ -10,6 +10,7 @@ import { EXPERIENCES } from "./experiences.config";
 import { JazzTile } from "./tiles";
 import { SectionTitle } from "./decorations";
 import { MotionZone } from "@/components/motion";
+import { usePrefersReducedMotion } from "@/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,9 +25,12 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
   const djRef = useRef<HTMLDivElement>(null);
   const sareeDrapeRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // GSAP ScrollTrigger animations
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // Title fade in and slide up
       gsap.fromTo(
@@ -123,7 +127,7 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <MotionZone>

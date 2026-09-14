@@ -11,6 +11,7 @@ import { SectionTitle } from "./SectionTitle";
 import { GlowingMoon, Rockstar, TopBorder, BottomBorder, GridOverlay } from "./DecorativeElements";
 import { IMAGES } from "@/lib/images";
 import { MotionZone } from "@/components/motion";
+import { usePrefersReducedMotion } from "@/hooks";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,9 +25,12 @@ export const ProNitesSection = memo(function ProNitesSection() {
   const headlinersRef = useRef<HTMLDivElement>(null);
   const featuringRef = useRef<HTMLDivElement>(null);
   const crowdRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // GSAP ScrollTrigger animations
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // Title fade in and slide up
       gsap.fromTo(
@@ -106,7 +110,7 @@ export const ProNitesSection = memo(function ProNitesSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   const headliners = ARTISTS.filter(a => a.isHeadliner);
   const supporting = ARTISTS.filter(a => !a.isHeadliner);

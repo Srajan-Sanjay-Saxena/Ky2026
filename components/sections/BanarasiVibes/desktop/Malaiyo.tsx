@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { IMAGES } from "@/lib/images";
+import { usePrefersReducedMotion } from "@/hooks";
 
 /**
  * Banarasi Malaiyo image with sway animation
@@ -12,8 +13,11 @@ import { IMAGES } from "@/lib/images";
  */
 export const Malaiyo = memo(function Malaiyo() {
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       gsap.to(ref.current, {
         y: -8,
@@ -27,7 +31,7 @@ export const Malaiyo = memo(function Malaiyo() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div
