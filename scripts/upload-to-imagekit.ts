@@ -32,55 +32,55 @@ interface ImageToUpload {
 // Define all images to upload with their target folders
 const IMAGES_TO_UPLOAD: ImageToUpload[] = [
   // Passes
-  { localFile: "YatriPass_nobg.png", remoteName: "yatri-pass.png", folder: "/passes" },
-  { localFile: "darbarPass_nobg.png", remoteName: "darbar-pass.png", folder: "/passes" },
-  { localFile: "swarnimPass_nobg.png", remoteName: "swarnim-pass.png", folder: "/passes" },
+  // { localFile: "YatriPass_nobg.png", remoteName: "yatri-pass.png", folder: "/passes" },
+  // { localFile: "darbarPass_nobg.png", remoteName: "darbar-pass.png", folder: "/passes" },
+  // { localFile: "swarnimPass_nobg.png", remoteName: "swarnim-pass.png", folder: "/passes" },
   
-  // Hero section
-  { localFile: "kashiyatra.png", remoteName: "kashiyatra-logo.png", folder: "/hero" },
-  { localFile: "ghats.png", remoteName: "ghats.png", folder: "/hero" },
-  { localFile: "kashivishwanath.png", remoteName: "kashivishwanath-temple.png", folder: "/hero" },
-  { localFile: "varanasiBack.png", remoteName: "varanasi-back.png", folder: "/hero" },
-  { localFile: "stone.png", remoteName: "stepping-stone.png", folder: "/hero" },
+  // // Hero section
+  // { localFile: "kashiyatra.png", remoteName: "kashiyatra-logo.png", folder: "/hero" },
+  // { localFile: "ghats.png", remoteName: "ghats.png", folder: "/hero" },
+  // { localFile: "kashivishwanath.png", remoteName: "kashivishwanath-temple.png", folder: "/hero" },
+  // { localFile: "varanasiBack.png", remoteName: "varanasi-back.png", folder: "/hero" },
+  // { localFile: "stone.png", remoteName: "stepping-stone.png", folder: "/hero" },
   
-  // Navbar
-  { localFile: "Nav.png", remoteName: "nav-bg.png", folder: "/navbar" },
-  { localFile: "NavBadge.png", remoteName: "nav-badge.png", folder: "/navbar" },
+  // // Navbar
+  // { localFile: "Nav.png", remoteName: "nav-bg.png", folder: "/navbar" },
+  // { localFile: "NavBadge.png", remoteName: "nav-badge.png", folder: "/navbar" },
   
-  // Banarasi Vibes
-  { localFile: "mahamana.png", remoteName: "mahamana.png", folder: "/vibes" },
-  { localFile: "bhuGate.png", remoteName: "bhu-gate.png", folder: "/vibes" },
-  { localFile: "rickshaw_nobg.png", remoteName: "rickshaw.png", folder: "/vibes" },
-  { localFile: "lassi_nobg.png", remoteName: "lassi.png", folder: "/vibes" },
-  { localFile: "malaiyo_nobg.png", remoteName: "malaiyo.png", folder: "/vibes" },
-  { localFile: "paan_nobg.png", remoteName: "paan.png", folder: "/vibes" },
-  { localFile: "tabla_sitar_nobg.png", remoteName: "tabla-sitar.png", folder: "/vibes" },
-  { localFile: "vibesBG.png", remoteName: "vibes-bg.png", folder: "/vibes" },
-  { localFile: "roads.png", remoteName: "roads.png", folder: "/vibes" },
+  // // Banarasi Vibes
+  // { localFile: "mahamana.png", remoteName: "mahamana.png", folder: "/vibes" },
+  // { localFile: "bhuGate.png", remoteName: "bhu-gate.png", folder: "/vibes" },
+  // { localFile: "rickshaw_nobg.png", remoteName: "rickshaw.png", folder: "/vibes" },
+  // { localFile: "lassi_nobg.png", remoteName: "lassi.png", folder: "/vibes" },
+  // { localFile: "malaiyo_nobg.png", remoteName: "malaiyo.png", folder: "/vibes" },
+  // { localFile: "paan_nobg.png", remoteName: "paan.png", folder: "/vibes" },
+  // { localFile: "tabla_sitar_nobg.png", remoteName: "tabla-sitar.png", folder: "/vibes" },
+  // { localFile: "vibesBG.png", remoteName: "vibes-bg.png", folder: "/vibes" },
+  // { localFile: "roads.png", remoteName: "roads.png", folder: "/vibes" },
   
-  // Fest Highlights
-  { localFile: "durga.svg", remoteName: "durga.svg", folder: "/highlights" },
-  { localFile: "durga_temple.svg", remoteName: "durga-temple.svg", folder: "/highlights" },
+  // // Fest Highlights
+  // { localFile: "durga.svg", remoteName: "durga.svg", folder: "/highlights" },
+  // { localFile: "durga_temple.svg", remoteName: "durga-temple.svg", folder: "/highlights" },
   
-  // Misc
-  { localFile: "lord_shiva.png", remoteName: "lord-shiva.png", folder: "/misc" },
-  { localFile: "MoonBG.png", remoteName: "moon-bg.png", folder: "/misc" },
-  { localFile: "DJ.png", remoteName: "dj.png", folder: "/misc" },
-  { localFile: "silhoutte.png", remoteName: "concert-crowd.png", folder: "/misc" },
-  { localFile: "SareeDrape.png", remoteName: "saree-drape.png", folder: "/misc" },
-  { localFile: "welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
-  { localFile: "kites.png", remoteName: "kites.png", folder: "/misc" },
+  // // Misc
+  // { localFile: "lord_shiva.png", remoteName: "lord-shiva.png", folder: "/misc" },
+  // { localFile: "MoonBG.png", remoteName: "moon-bg.png", folder: "/misc" },
+  // { localFile: "DJ.png", remoteName: "dj.png", folder: "/misc" },
+  // { localFile: "silhoutte.png", remoteName: "concert-crowd.png", folder: "/misc" },
+  // { localFile: "SareeDrape.png", remoteName: "saree-drape.png", folder: "/misc" },
+  // { localFile: "welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
+  // { localFile: "kites.png", remoteName: "kites.png", folder: "/misc" },
   { localFile: "rockstar.png", remoteName: "rockstar.png", folder: "/misc" },
 
   // About page
-  { localFile: "about/mandlaOrnament.png", remoteName: "mandala-ornament.png", folder: "/about" },
-  { localFile: "about/peacock_nobg.png", remoteName: "peacock.png", folder: "/about" },
-  { localFile: "about/omLotus.png", remoteName: "om-lotus.png", folder: "/about" },
-  { localFile: "about/mysticDivider.png", remoteName: "mystic-divider.png", folder: "/about" },
-  { localFile: "about/diyaCluster.png", remoteName: "diya-cluster.png", folder: "/about" },
-  { localFile: "about/cornerOrnament.png", remoteName: "corner-ornament.png", folder: "/about" },
-  { localFile: "about/bhuRoyalGate.png", remoteName: "bhu-royal-gate.png", folder: "/about" },
-  { localFile: "about/ghatSaloutte.png", remoteName: "ghats-silhouette.png", folder: "/about" },
+  // { localFile: "about/mandlaOrnament.png", remoteName: "mandala-ornament.png", folder: "/about" },
+  // { localFile: "about/peacock_nobg.png", remoteName: "peacock.png", folder: "/about" },
+  // { localFile: "about/omLotus.png", remoteName: "om-lotus.png", folder: "/about" },
+  // { localFile: "about/mysticDivider.png", remoteName: "mystic-divider.png", folder: "/about" },
+  // { localFile: "about/diyaCluster.png", remoteName: "diya-cluster.png", folder: "/about" },
+  // { localFile: "about/cornerOrnament.png", remoteName: "corner-ornament.png", folder: "/about" },
+  // { localFile: "about/bhuRoyalGate.png", remoteName: "bhu-royal-gate.png", folder: "/about" },
+  // { localFile: "about/ghatSaloutte.png", remoteName: "ghats-silhouette.png", folder: "/about" },
 ];
 
 async function checkIfExists(folder: string, fileName: string): Promise<boolean> {

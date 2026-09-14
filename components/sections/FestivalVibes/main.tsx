@@ -204,9 +204,9 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         {/* DJ Character - Bottom Right Corner - MASSIVE (Desktop only) with yo-yo animation */}
         <div
           ref={djRef}
-          className="hidden sm:block absolute -bottom-[10%] -right-[13%] w-[70vw] max-w-[1300px] pointer-events-none"
+          className="hidden sm:block absolute -bottom-[10%] -right-[19%] w-[70vw] max-w-[1300px] pointer-events-none"
           style={{
-            zIndex: 2,
+            zIndex: 20,
             opacity: 0,
             animation: "djBounce 2s ease-in-out infinite",
           }}

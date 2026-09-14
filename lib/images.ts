@@ -42,12 +42,12 @@ export const IMAGES = {
   misc: {
     lordShiva: `${IMAGEKIT_BASE}/misc/lord-shiva.png`,
     moonBg: `${IMAGEKIT_BASE}/misc/moon-bg.png`,
-    dj: `${IMAGEKIT_BASE}/misc/dj.png`,
+    dj: `${IMAGEKIT_BASE}/misc/dj.png?v=2`,
     concertCrowd: `${IMAGEKIT_BASE}/misc/concert-crowd.png`,
     sareeDrape: `${IMAGEKIT_BASE}/misc/saree-drape.png`,
     welcomeFlag: `${IMAGEKIT_BASE}/misc/welcome-flag.png`,
     kites: `${IMAGEKIT_BASE}/misc/kites.png`,
-    rockstar: `${IMAGEKIT_BASE}/misc/rockstar.png`,
+    rockstar: `${IMAGEKIT_BASE}/misc/rockstar.png?v=2`,
   },
   about: {
     mandalaOrnament: `${IMAGEKIT_BASE}/about/mandala-ornament.png`,

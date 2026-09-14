@@ -12,7 +12,7 @@ import { CONCERT_COLORS } from "./constants";
 export const Rockstar = memo(function Rockstar() {
   return (
     <div
-      className="hidden sm:block absolute top-[15%] -left-[20%] w-[78vw] max-w-[1350px] pointer-events-none"
+      className="hidden sm:block absolute top-[15%] -left-[15%] w-[58vw] max-w-[1150px] pointer-events-none"
       style={{ zIndex: 3 }}
     >
       {/* Glow behind rockstar - subtle dark blue */}

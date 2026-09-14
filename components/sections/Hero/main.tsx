@@ -29,18 +29,10 @@ export function HeroSection() {
   const kitesRef = useRef<HTMLDivElement>(null);
 
   // Get current time-based sky configuration
-<<<<<<< Updated upstream
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
   const isMobile = useIsMobile();
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  // Show kites in all times except night
-  const showKites = timeOfDay !== 'night';
-=======
-  const { gradient, showMoon, showStars, starsOpacity, timeOfDay } =
-    useTimeOfDay();
->>>>>>> Stashed changes
-
+  
   // Entry animation: Celestial body (Moon or Sun)
   useEffect(() => {
     const ctx = gsap.context(() => {
