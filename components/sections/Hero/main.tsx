@@ -183,6 +183,12 @@ export function HeroSection() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
+      // Use quickTo for performant scroll-driven animations
+      // quickTo creates a reusable setter instead of spawning new tweens
+      const celestialY = gsap.quickTo(celestialRef.current, "y", { duration: 0.1, ease: "none" });
+      const templeY = gsap.quickTo(templeRef.current, "y", { duration: 0.1, ease: "none" });
+      const ghatsX = gsap.quickTo(ghatsRef.current, "x", { duration: 0.1, ease: "none" });
+
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
@@ -190,9 +196,9 @@ export function HeroSection() {
         scrub: 1,
         onUpdate: (self) => {
           const p = self.progress;
-          gsap.to(celestialRef.current, { y: p * -200, duration: 0.1 });
-          gsap.to(templeRef.current, { y: p * 60, duration: 0.1 });
-          gsap.to(ghatsRef.current, { x: p * -100, duration: 0.1 });
+          celestialY(p * -200);
+          templeY(p * 60);
+          ghatsX(p * -100 - 40); // -40 is the base x position from entry animation
         },
       });
     }, containerRef);
