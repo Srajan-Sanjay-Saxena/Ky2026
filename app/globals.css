@@ -565,7 +565,14 @@ body {
    Pause animations when elements are not visible to save GPU/CPU
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Parent with data-inview="false" pauses all child animations */
+/* MotionZone: pause all descendant CSS animations when zone is paused */
+[data-motion-paused="true"] *,
+[data-motion-paused="true"] *::before,
+[data-motion-paused="true"] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Legacy: Parent with data-inview="false" pauses all child animations */
 [data-inview="false"] * {
   animation-play-state: paused !important;
 }
