@@ -23,13 +23,14 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
   const titleRef = useRef<HTMLDivElement>(null);
   const tilesRef = useRef<HTMLDivElement>(null);
   const djRef = useRef<HTMLDivElement>(null);
-  const sareeDrapeRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // GSAP ScrollTrigger animations
+  // GSAP ScrollTrigger animations - Desktop only
   useEffect(() => {
     if (prefersReducedMotion) return;
+    // Skip scroll animations on mobile for performance
+    if (typeof window !== "undefined" && window.innerWidth < 640) return;
 
     const ctx = gsap.context(() => {
       // Title fade in and slide up
@@ -84,25 +85,6 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
             start: "top 70%",
             end: "top 30%",
             scrub: 1.5,
-          },
-        },
-      );
-
-      // Saree drape slides in from top-right
-      gsap.fromTo(
-        sareeDrapeRef.current,
-        { y: -100, x: 100, opacity: 0 },
-        {
-          y: 0,
-          x: 0,
-          opacity: 0.7,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-            end: "top 45%",
-            scrub: 1,
           },
         },
       );
@@ -177,13 +159,12 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
           }}
         />
 
-        {/* Banarasi Saree Drape - Top Right Corner (Desktop only) */}
+        {/* Banarasi Saree Drape - Top Right Corner (Desktop only) - Static */}
         <div
-          ref={sareeDrapeRef}
           className="hidden lg:block absolute -top-[10%] -right-[15%] w-[80vw] max-w-[1000px] pointer-events-none"
           style={{
             zIndex: 1,
-            opacity: 0,
+            opacity: 0.7,
             maskImage: "linear-gradient(to bottom, black 40%, transparent 95%)",
             WebkitMaskImage:
               "linear-gradient(to bottom, black 40%, transparent 95%)",

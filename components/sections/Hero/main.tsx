@@ -32,7 +32,7 @@ export function HeroSection() {
   const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
   const isMobile = useIsMobile();
   const prefersReducedMotion = usePrefersReducedMotion();
-  
+
   // Entry animation: Celestial body (Moon or Sun)
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -918,7 +918,7 @@ export function HeroSection() {
       {/* GHAT PNG - Aligned with temple */}
       <div
         ref={ghatsRef}
-        className="absolute bottom-[29%] sm:bottom-[28%] md:bottom-[25.5%] left-[-5%] sm:left-[-3%] md:left-[-2%] w-[52%] sm:w-[55%] md:w-[50%]"
+        className="absolute bottom-[24.5%] sm:bottom-[1%] left-[3%] sm:left-[-3%] w-[57%] sm:w-[55%]"
         style={{
           zIndex: Z_HERO.GHATS,
         }}
@@ -959,7 +959,7 @@ export function HeroSection() {
           alt="Varanasi Ghats"
           width={1000}
           height={600}
-          className="w-full h-auto max-h-[26vh] sm:max-h-[35vh] md:max-h-[40vh] object-contain sm:drop-shadow-[0_0_20px_rgba(255,100,100,0.4)]"
+          className="w-full h-auto max-h-[26vh] sm:max-h-[100vh] object-contain sm:drop-shadow-[0_0_20px_rgba(255,100,100,0.4)]"
           priority
         />
       </div>

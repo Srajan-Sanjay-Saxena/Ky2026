@@ -416,22 +416,10 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Mobile decorative quote (shown on mobile only) */}
-        <div className="lg:hidden fixed bottom-20 left-0 right-0 text-center px-6">
-          <p
-            className="text-sm italic"
-            style={{
-              color: `${ROYAL_COLORS.CREAM}50`,
-              fontFamily: "Georgia, serif",
-            }}
-          >
-            &ldquo;A journey of a thousand miles begins with a single
-            step&rdquo;
-          </p>
-        </div>
+        {/* Mobile decorative quote - REMOVED on mobile as per request */}
 
-        {/* Bottom decorative text */}
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 text-center">
+        {/* Bottom decorative text - Desktop only */}
+        <div className="hidden sm:block fixed bottom-6 left-1/2 -translate-x-1/2 text-center">
           <p
             className="text-xs tracking-[0.3em] uppercase"
             style={{ color: `${ROYAL_COLORS.GOLD}40` }}

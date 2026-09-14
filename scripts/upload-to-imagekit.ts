@@ -38,7 +38,7 @@ const IMAGES_TO_UPLOAD: ImageToUpload[] = [
   
   // // Hero section
   // { localFile: "kashiyatra.png", remoteName: "kashiyatra-logo.png", folder: "/hero" },
-  // { localFile: "ghats.png", remoteName: "ghats.png", folder: "/hero" },
+  { localFile: "ghats.png", remoteName: "ghats.png", folder: "/hero" },
   // { localFile: "kashivishwanath.png", remoteName: "kashivishwanath-temple.png", folder: "/hero" },
   // { localFile: "varanasiBack.png", remoteName: "varanasi-back.png", folder: "/hero" },
   // { localFile: "stone.png", remoteName: "stepping-stone.png", folder: "/hero" },
@@ -70,7 +70,7 @@ const IMAGES_TO_UPLOAD: ImageToUpload[] = [
   // { localFile: "SareeDrape.png", remoteName: "saree-drape.png", folder: "/misc" },
   // { localFile: "welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
   // { localFile: "kites.png", remoteName: "kites.png", folder: "/misc" },
-  { localFile: "rockstar.png", remoteName: "rockstar.png", folder: "/misc" },
+  // { localFile: "rockstar.png", remoteName: "rockstar.png", folder: "/misc" },
 
   // About page
   // { localFile: "about/mandlaOrnament.png", remoteName: "mandala-ornament.png", folder: "/about" },

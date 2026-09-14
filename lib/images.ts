@@ -15,7 +15,7 @@ export const IMAGES = {
   },
   hero: {
     logo: `${IMAGEKIT_BASE}/hero/kashiyatra-logo.png`,
-    ghats: `${IMAGEKIT_BASE}/hero/ghats.png`,
+    ghats: `${IMAGEKIT_BASE}/hero/ghats.png?v=2`,
     temple: `${IMAGEKIT_BASE}/hero/kashivishwanath-temple.png`,
     varanasiBack: `${IMAGEKIT_BASE}/hero/varanasi-back.png`,
     steppingStone: `${IMAGEKIT_BASE}/hero/stepping-stone.png`,

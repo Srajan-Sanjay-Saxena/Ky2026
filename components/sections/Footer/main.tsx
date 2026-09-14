@@ -70,7 +70,7 @@ const quickLinks = [
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse"
+        className="w-4 h-4 sm:w-5 sm:h-5 sm:animate-pulse"
       >
         <path
           d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
@@ -99,8 +99,15 @@ const quickLinks = [
           cy="15"
           r="2"
           fill="currentColor"
-          className="animate-ping"
+          className="hidden sm:block sm:animate-ping"
           style={{ animationDuration: "2s" }}
+        />
+        <circle
+          cx="12"
+          cy="15"
+          r="2"
+          fill="currentColor"
+          className="sm:hidden"
         />
       </svg>
     ),
@@ -123,8 +130,15 @@ const quickLinks = [
           y1="8"
           x2="20"
           y2="14"
-          className="animate-bounce"
+          className="hidden sm:block sm:animate-bounce"
           style={{ transformOrigin: "center", animationDuration: "1s" }}
+        />
+        <line
+          x1="20"
+          y1="8"
+          x2="20"
+          y2="14"
+          className="sm:hidden"
         />
         <line x1="17" y1="11" x2="23" y2="11" />
       </svg>

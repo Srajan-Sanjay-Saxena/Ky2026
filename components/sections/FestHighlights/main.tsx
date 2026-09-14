@@ -41,6 +41,8 @@ function FestHighlightsContent() {
 
   useEffect(() => {
     if (prefersReducedMotion) return;
+    // Skip animations on mobile for performance
+    if (typeof window !== "undefined" && window.innerWidth < 640) return;
 
     const ctx = gsap.context(() => {
       // Temple reveal
@@ -249,24 +251,26 @@ function FestHighlightsContent() {
           }}
         />
 
-        {/* Divine particles around Durga */}
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={`durga-particle-${i}`}
-            className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
-            style={{
-              left: `${10 + (i % 5) * 20}%`,
-              top: `${10 + Math.floor(i / 5) * 30}%`,
-              background:
-                i % 2 === 0
-                  ? "radial-gradient(circle, #FFD700 0%, transparent 70%)"
-                  : "radial-gradient(circle, #FF4500 0%, transparent 70%)",
-              animation: `floatParticle ${2 + (i % 3)}s ease-in-out infinite`,
-              animationDelay: `${i * 0.2}s`,
-              boxShadow: "0 0 8px rgba(255,215,0,0.6)",
-            }}
-          />
-        ))}
+        {/* Divine particles around Durga - Desktop only */}
+        <div className="hidden sm:block">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={`durga-particle-${i}`}
+              className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
+              style={{
+                left: `${10 + (i % 5) * 20}%`,
+                top: `${10 + Math.floor(i / 5) * 30}%`,
+                background:
+                  i % 2 === 0
+                    ? "radial-gradient(circle, #FFD700 0%, transparent 70%)"
+                    : "radial-gradient(circle, #FF4500 0%, transparent 70%)",
+                animation: `floatParticle ${2 + (i % 3)}s ease-in-out infinite`,
+                animationDelay: `${i * 0.2}s`,
+                boxShadow: "0 0 8px rgba(255,215,0,0.6)",
+              }}
+            />
+          ))}
+        </div>
 
         <Image
           src={IMAGES.highlights.durga}

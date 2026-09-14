@@ -473,22 +473,42 @@ body {
   filter: blur(2px);
 }
 
-/* ── Footer: Royal Mandala Animations ── */
+/* ── Footer: Royal Mandala Animations - Desktop only ── */
 .footer-mandala-slow {
-  animation: footerMandalaRotate 120s linear infinite;
+  animation: none; /* Static on mobile */
 }
 .footer-mandala-reverse {
-  animation: footerMandalaRotate 80s linear infinite reverse;
+  animation: none;
 }
 .footer-mandala-fast {
-  animation: footerMandalaRotate 45s linear infinite;
+  animation: none;
 }
 .footer-card-mandala {
-  animation: footerCardMandalaRotate 30s linear infinite;
+  animation: none;
 }
 .footer-card-mandala-reverse {
-  animation: footerCardMandalaRotate 25s linear infinite reverse;
+  animation: none;
 }
+
+/* Enable animations on desktop (sm and up) */
+@media (min-width: 640px) {
+  .footer-mandala-slow {
+    animation: footerMandalaRotate 120s linear infinite;
+  }
+  .footer-mandala-reverse {
+    animation: footerMandalaRotate 80s linear infinite reverse;
+  }
+  .footer-mandala-fast {
+    animation: footerMandalaRotate 45s linear infinite;
+  }
+  .footer-card-mandala {
+    animation: footerCardMandalaRotate 30s linear infinite;
+  }
+  .footer-card-mandala-reverse {
+    animation: footerCardMandalaRotate 25s linear infinite reverse;
+  }
+}
+
 @keyframes footerMandalaRotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
