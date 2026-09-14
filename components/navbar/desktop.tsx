@@ -13,7 +13,7 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
     <>
       {/* PRIMARY NAV — centered on the bar midline */}
       <nav
-        className="absolute left-[19%] right-[26%] inset-y-0 hidden md:flex items-center justify-center gap-4 lg:gap-8 z-10"
+        className="absolute left-[19%] right-[26%] inset-y-0 hidden sm:flex items-center justify-center gap-4 z-10"
         aria-label="Primary"
         style={{ transform: "translateY(8%)" }}
       >
@@ -46,7 +46,7 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
 
       {/* SECONDARY LINKS (LOGIN / CONTACT) with spiritual icons */}
       <div
-        className="absolute right-[2%] inset-y-0 hidden md:flex items-center gap-4 lg:gap-6 z-10"
+        className="absolute right-[2%] inset-y-0 hidden sm:flex items-center gap-4 z-10"
         style={{ transform: "translateY(11%)" }}
       >
         {secondaryLinks.map((link) => (

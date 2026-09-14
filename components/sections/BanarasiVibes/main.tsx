@@ -84,6 +84,7 @@ export function BanarasiVibesSection() {
   return (
     <section
       ref={sectionRef}
+      data-section="banarasi-vibes"
       data-inview={isInView}
       className="relative min-h-screen overflow-hidden"
       style={{

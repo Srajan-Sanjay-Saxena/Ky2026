@@ -41,6 +41,13 @@ export const IMAGES = {
   },
   misc: {
     lordShiva: `${IMAGEKIT_BASE}/misc/lord-shiva.png`,
+    moonBg: "/MoonBG.png",  // Local public folder - large decorative moon
+    dj: "/Dj.png",  // Local public folder - DJ character for ProNites
+    concertCrowd: "/silhoutte.png",  // Concert crowd silhouette for ProNites
+    sareeDrape: "/SareeDrape.png",  // Banarasi saree drape for FestivalVibes
+    welcomeFlag: "/welcomeFlag.png",  // Welcome flag for Hero section
+    kites: "/kites.png",  // Kites for Hero section - morning/evening only
+    rockstar: "/rockstar.png",  // Rockstar for ProNites section
   },
 } as const;
 

@@ -1,5 +1,7 @@
 import {
   HeroSection,
+  ProNitesSection,
+  FestivalVibesSection,
   BanarasiVibesSection,
   FooterSection,
   FestHighlightsSection,
@@ -16,10 +18,16 @@ export default function Home() {
       <div className="sticky top-0 h-screen z-0">
         <HeroSection />
       </div>
-      <div className="sticky top-0 z-10">
-        <BanarasiVibesSection />
+      <div className="relative z-10">
+        <ProNitesSection />
+      </div>
+      <div className="relative z-15">
+        <FestivalVibesSection />
       </div>
       <div className="sticky top-0 z-20">
+        <BanarasiVibesSection />
+      </div>
+      <div className="sticky top-0 z-30">
         <FestHighlightsSection />
       </div>
       <div className="relative z-70">
@@ -28,4 +36,3 @@ export default function Home() {
     </main>
   );
 }
-// see the iamge lord shiva animation is feeling like cartoonish not a god feel

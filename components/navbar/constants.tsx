@@ -5,7 +5,7 @@ import { IMAGES } from "@/lib/images";
 export const NAV_ASPECT = 2928 / 209; // ≈ 14.01
 
 export const primaryLinks = [
-  { label: "HOME", href: "#hero" },
+  { label: "HOME", href: "/" },
   { label: "EVENTS", href: "/events" },
   { label: "SCHEDULE", href: "/schedule" },
   { label: "PASSES", href: "/passes" },
@@ -103,10 +103,10 @@ export function SpiritualIcon({ kind }: { kind: "om" | "lotus" }) {
 export function NavBadge() {
   return (
     <Link
-      href="#hero"
+      href="/"
       aria-label="Kashi Yatra — Home"
-      className="absolute left-[14%] top-[52%] -translate-x-1/2 -translate-y-1/2 z-10
-                 h-[116%] sm:h-[124%] md:h-[132%] aspect-square
+      className="absolute left-[16%] top-[52%] -translate-x-1/2 -translate-y-1/2 z-10
+                 h-[116%] sm:h-[124%] aspect-square
                  transition-transform duration-300 hover:scale-105"
     >
       {/* Outer soft halo */}

@@ -199,6 +199,7 @@ export function FooterSection() {
     <footer
       id="footer"
       ref={footerRef}
+      data-section="footer"
       data-inview={isInView}
       className="relative pt-16 sm:pt-20 md:pt-28 pb-8 sm:pb-10 overflow-hidden"
       style={{ background: GRADIENT_FOOTER }}

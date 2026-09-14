@@ -614,3 +614,180 @@ body {
     filter: none !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRO NITES / CONCERT SECTION ANIMATIONS
+   Funky concert vibes - equalizer, spotlights, neon pulses
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Equalizer bar bounce animation */
+@keyframes equalizerBounce {
+  0%, 100% { height: 30%; }
+  50% { height: 100%; }
+}
+
+/* Slow pulse for mystery elements */
+@keyframes pulseSlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* DJ yo-yo bounce animation */
+@keyframes djBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Mystery question mark pulse - more dramatic */
+@keyframes mysteryPulse {
+  0%, 100% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+/* Orbiting particles around mystery question mark */
+@keyframes orbitParticle {
+  0% { 
+    transform: rotate(0deg) translateX(30px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% { 
+    transform: rotate(360deg) translateX(30px) rotate(-360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Scan lines moving effect */
+@keyframes scanLines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* Gradient shift for animated borders */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Spotlight sweep animation */
+@keyframes spotlightSweep {
+  0% { transform: rotate(-25deg); opacity: 0.3; }
+  50% { transform: rotate(25deg); opacity: 0.6; }
+  100% { transform: rotate(-25deg); opacity: 0.3; }
+}
+
+/* Neon border pulse */
+@keyframes neonPulse {
+  0%, 100% { opacity: 0.5; filter: blur(8px); }
+  50% { opacity: 1; filter: blur(12px); }
+}
+
+/* Stage light flicker */
+@keyframes stageFlicker {
+  0%, 100% { opacity: 0.8; }
+  10% { opacity: 1; }
+  20% { opacity: 0.6; }
+  30% { opacity: 0.9; }
+  50% { opacity: 1; }
+  70% { opacity: 0.7; }
+  90% { opacity: 0.95; }
+}
+
+/* Festival Vibes bento tile hover glow */
+@keyframes tileGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(157, 78, 221, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(255, 20, 147, 0.3); }
+}
+
+/* Confetti float */
+@keyframes confettiFloat {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* Mobile: Slow down concert animations */
+@media (max-width: 639px) {
+  @keyframes equalizerBounce {
+    0%, 100% { height: 40%; }
+    50% { height: 90%; }
+  }
+  
+  .spotlight-beam {
+    display: none !important;
+  }
+}
+
+
+/* Marquee scroll animation for vibes section */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+/* Moon continuous rotation - desktop only (very slow for subtle effect) */
+@keyframes moonRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/* Welcome Flag waving animation */
+@keyframes flagWave {
+  0%, 100% { 
+    transform: skewX(0deg) scaleX(1); 
+  }
+  25% { 
+    transform: skewX(-2deg) scaleX(1.02); 
+  }
+  50% { 
+    transform: skewX(1deg) scaleX(0.98); 
+  }
+  75% { 
+    transform: skewX(-1deg) scaleX(1.01); 
+  }
+}
+
+
+/* Kites floating animation - gentle sway and bob */
+@keyframes kitesFloat {
+  0%, 100% { 
+    transform: translateY(0) rotate(-10deg); 
+  }
+  25% { 
+    transform: translateY(-8px) rotate(-12deg); 
+  }
+  50% { 
+    transform: translateY(-3px) rotate(-8deg); 
+  }
+  75% { 
+    transform: translateY(-10px) rotate(-11deg); 
+  }
+}
+
+
+/* Rockstar pulse/jump animation */
+@keyframes rockstarPulse {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+  }
+  25% { 
+    transform: translateY(-8px) scale(1.02); 
+  }
+  50% { 
+    transform: translateY(-4px) scale(1.01); 
+  }
+  75% { 
+    transform: translateY(-10px) scale(1.03); 
+  }
+}

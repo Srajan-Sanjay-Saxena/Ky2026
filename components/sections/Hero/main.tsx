@@ -25,7 +25,10 @@ export function HeroSection() {
   const ghatsRef = useRef<HTMLDivElement>(null);
 
   // Get current time-based sky configuration
-  const { gradient, showMoon, showStars, starsOpacity } = useTimeOfDay();
+  const { gradient, showMoon, showStars, starsOpacity, timeOfDay } = useTimeOfDay();
+
+  // Show kites only during morning and evening
+  const showKites = timeOfDay === 'morning' || timeOfDay === 'evening';
 
   // Entry animation: Celestial body (Moon or Sun)
   useEffect(() => {
@@ -638,10 +641,17 @@ export function HeroSection() {
       </div>
 
       {/* Celestial Body - Moon or Sun based on time of day */}
+      {/* Sun is smaller during morning (rising sun effect) */}
       <div
         ref={celestialRef}
-        className="absolute top-[2%] sm:top-[3%] md:top-[4%] left-1/2 -translate-x-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 z-5"
-        style={{ transition: "opacity 1s ease-in-out" }}
+        className={`absolute top-[2%] sm:top-[3%] left-1/2 -translate-x-1/2 z-5 ${
+          showMoon
+            ? "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28"  // Original moon size
+            : timeOfDay === 'morning'
+              ? "w-12 h-12 sm:w-14 sm:h-14"  // Smaller sun in morning only
+              : "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28"  // Normal sun size
+        }`}
+        style={{ transition: "all 1s ease-in-out" }}
       >
         {showMoon ? (
           <Moon className="w-full h-full" />
@@ -649,6 +659,50 @@ export function HeroSection() {
           <Sun className="w-full h-full" />
         )}
       </div>
+
+      {/* Welcome Flag - Desktop only, top-right, tilted with wave animation */}
+      <div
+        className="hidden sm:block absolute -top-[5%] right-[0%] w-[26vw] max-w-[450px] pointer-events-none z-15"
+        style={{
+          transform: "rotate(15deg)",
+          transformOrigin: "left top",
+        }}
+      >
+        <Image
+          src={IMAGES.misc.welcomeFlag}
+          alt="Welcome to Kashi Yatra"
+          width={400}
+          height={250}
+          className="w-full h-auto"
+          style={{
+            animation: "flagWave 3s ease-in-out infinite",
+            transformOrigin: "left center",
+            filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))",
+          }}
+        />
+      </div>
+
+      {/* Kites - Desktop only, top-left, visible during morning & evening only */}
+      {showKites && (
+        <div
+          className="hidden sm:block absolute top-[8%] left-[5%] w-[20vw] max-w-[280px] pointer-events-none z-50"
+          style={{
+            transform: "rotate(-10deg)",
+          }}
+        >
+          <Image
+            src={IMAGES.misc.kites}
+            alt="Flying Kites"
+            width={350}
+            height={300}
+            className="w-full h-auto"
+            style={{
+              animation: "kitesFloat 4s ease-in-out infinite",
+              filter: "drop-shadow(0 6px 15px rgba(0,0,0,0.25))",
+            }}
+          />
+        </div>
+      )}
 
       {/* Title - Mobile optimized */}
       <h1
@@ -744,6 +798,53 @@ export function HeroSection() {
               />
             ))}
           </div>
+        </div>
+
+        {/* Mobile tagline - premium minimal styling */}
+        <div className="sm:hidden mt-8 px-4 text-center">
+          {/* Main tagline - elegant serif */}
+          <p
+            className="text-base tracking-wide leading-relaxed"
+            style={{
+              fontFamily: "'Georgia', 'Times New Roman', serif",
+              fontStyle: "italic",
+              fontWeight: 400,
+              color: "rgba(253,246,227,0.85)",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Where the sacred Ganga meets
+          </p>
+          <p
+            className="text-lg tracking-wide font-semibold mt-1"
+            style={{
+              fontFamily: "'Georgia', 'Times New Roman', serif",
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            the rhythm of celebration
+          </p>
+          
+          {/* Subtle divider */}
+          <div 
+            className="mx-auto mt-4 mb-3 w-12 h-px"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent)",
+            }}
+          />
+          
+          {/* Date badge */}
+          <p
+            className="text-xs uppercase tracking-[0.25em] font-medium"
+            style={{
+              color: "rgba(255,215,0,0.7)",
+            }}
+          >
+            February 2026
+          </p>
         </div>
       </h1>
 
