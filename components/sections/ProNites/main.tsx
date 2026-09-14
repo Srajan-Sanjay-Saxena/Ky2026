@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,6 +10,7 @@ import { SpotlightBeams } from "./SpotlightBeams";
 import { SectionTitle } from "./SectionTitle";
 import { GlowingMoon, Rockstar, TopBorder, BottomBorder, GridOverlay } from "./DecorativeElements";
 import { IMAGES } from "@/lib/images";
+import { MotionZone } from "@/components/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,20 +24,6 @@ export const ProNitesSection = memo(function ProNitesSection() {
   const headlinersRef = useRef<HTMLDivElement>(null);
   const featuringRef = useRef<HTMLDivElement>(null);
   const crowdRef = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
-
-  // Pause animations when off-screen
-  useEffect(() => {
-    const element = sectionRef.current;
-    if (!element) return;
-    
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.05, rootMargin: "100px" }
-    );
-    observer.observe(element);
-    return () => observer.unobserve(element);
-  }, []);
 
   // GSAP ScrollTrigger animations
   useEffect(() => {
@@ -125,12 +112,12 @@ export const ProNitesSection = memo(function ProNitesSection() {
   const supporting = ARTISTS.filter(a => !a.isHeadliner);
 
   return (
-    <section
-      ref={sectionRef}
-      data-inview={isInView}
-      className="relative py-20 sm:py-28 overflow-hidden"
-      style={{ background: GRADIENT_STAGE }}
-    >
+    <MotionZone>
+      <section
+        ref={sectionRef}
+        className="relative py-20 sm:py-28 overflow-hidden"
+        style={{ background: GRADIENT_STAGE }}
+      >
       {/* ═══ Background Elements ═══ */}
       <SpotlightBeams />
       <GlowingMoon />
@@ -206,5 +193,6 @@ export const ProNitesSection = memo(function ProNitesSection() {
 
       <BottomBorder />
     </section>
+    </MotionZone>
   );
 });

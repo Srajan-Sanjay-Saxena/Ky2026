@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { JAZZ_COLORS } from "../palette";
+import { JAZZ_COLORS } from "@/components/constants/palette";
 
 // ═══════════════════════════════════════════════════════════════════
 // SECTION TITLE - Royal jazz typography

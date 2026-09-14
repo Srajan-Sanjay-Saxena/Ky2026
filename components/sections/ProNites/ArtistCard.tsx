@@ -110,7 +110,7 @@ export const HeadlinerCard = memo(function HeadlinerCard({
           {artist.name}
         </h3>
         
-        <div className="flex justify-center">
+        <div className="hidden sm:flex justify-center">
           <EqualizerBars color={accentColor} size="lg" />
         </div>
         
@@ -178,7 +178,7 @@ export const FeaturingCard = memo(function FeaturingCard({
           {artist.name}
         </h4>
         
-        <div className="flex justify-center mt-2 opacity-60 sm:group-hover:opacity-100 sm:transition-opacity">
+        <div className="hidden sm:flex justify-center mt-2 opacity-60 sm:group-hover:opacity-100 sm:transition-opacity">
           <EqualizerBars color={accentColor} size="sm" />
         </div>
       </div>

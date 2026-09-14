@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import {
   type TimeOfDay,
+  TIME_GRADIENTS,
+  SHOW_MOON,
+  SHOW_STARS,
+  STARS_OPACITY,
   getTimeOfDay,
-  TimeGradients,
-  ShowMoon,
-  ShowStars,
-  StarsOpacity,
-} from "@/components/sections/Hero/palette/hero.bg.pallete";
+} from "@/components/constants/palette";
 
 interface TimeOfDayState {
   timeOfDay: TimeOfDay;
@@ -21,7 +21,7 @@ interface TimeOfDayState {
 
 // ⚠️ DEV OVERRIDE: Set to a specific time period for testing, or null for real time
 // Options: 'dawn' | 'morning' | 'afternoon' | 'evening' | 'dusk' | 'night' | null
-const DEV_TIME_OVERRIDE: TimeOfDay | null = null; // Change to null for production
+const DEV_TIME_OVERRIDE: TimeOfDay | null = 'night'; // Change to null for production
 
 /**
  * Hook that returns current time of day and associated sky configuration.
@@ -41,10 +41,10 @@ export function useTimeOfDay(): TimeOfDayState {
     const defaultTime: TimeOfDay = DEV_TIME_OVERRIDE ?? 'night';
     return {
       timeOfDay: defaultTime,
-      gradient: TimeGradients[defaultTime],
-      showMoon: ShowMoon[defaultTime],
-      showStars: ShowStars[defaultTime],
-      starsOpacity: StarsOpacity[defaultTime],
+      gradient: TIME_GRADIENTS[defaultTime],
+      showMoon: SHOW_MOON[defaultTime],
+      showStars: SHOW_STARS[defaultTime],
+      starsOpacity: STARS_OPACITY[defaultTime],
       hour: 12,
     };
   });
@@ -60,10 +60,10 @@ export function useTimeOfDay(): TimeOfDayState {
 
       setState({
         timeOfDay,
-        gradient: TimeGradients[timeOfDay],
-        showMoon: ShowMoon[timeOfDay],
-        showStars: ShowStars[timeOfDay],
-        starsOpacity: StarsOpacity[timeOfDay],
+        gradient: TIME_GRADIENTS[timeOfDay],
+        showMoon: SHOW_MOON[timeOfDay],
+        showStars: SHOW_STARS[timeOfDay],
+        starsOpacity: STARS_OPACITY[timeOfDay],
         hour,
       });
     };

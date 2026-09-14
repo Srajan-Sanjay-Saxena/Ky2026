@@ -2,34 +2,20 @@
 
 import gsap from "gsap";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Road } from "./Road";
 import { LampPost } from "./LampPost";
 import { BanarasiVibesMobile } from "./mobile";
 import { BanarasiVibesDesktop } from "./desktop";
 import { IMAGES } from "@/lib/images";
-import { MotionZone } from "@/components/motion";
+import { MotionZone, useMotionZone } from "@/components/motion";
 
-export function BanarasiVibesSection() {
+// Inner component that can access MotionZone context
+function BanarasiVibesContent() {
+  const { isAnimating } = useMotionZone();
   const sectionRef = useRef<HTMLDivElement>(null);
   const gateRef = useRef<HTMLDivElement>(null);
   const rickshawRef = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
-
-  // Intersection Observer to pause animations when off-screen
-  useEffect(() => {
-    const element = sectionRef.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.05, rootMargin: "100px" }
-    );
-
-    observer.observe(element);
-    return () => observer.unobserve(element);
-  }, []);
-
   const rickshawAnimRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
@@ -71,22 +57,21 @@ export function BanarasiVibesSection() {
     return () => ctx.revert();
   }, []);
 
-  // Pause/resume rickshaw animation based on visibility
+  // Pause/resume rickshaw animation based on MotionZone context
   useEffect(() => {
     if (rickshawAnimRef.current) {
-      if (isInView) {
+      if (isAnimating) {
         rickshawAnimRef.current.resume();
       } else {
         rickshawAnimRef.current.pause();
       }
     }
-  }, [isInView]);
+  }, [isAnimating]);
 
   return (
     <section
       ref={sectionRef}
       data-section="banarasi-vibes"
-      data-inview={isInView}
       className="relative min-h-screen overflow-hidden"
       style={{
         borderRadius: "24px 24px 0 0",
@@ -201,5 +186,14 @@ export function BanarasiVibesSection() {
         />
       </div>
     </section>
+  );
+}
+
+// Exported component wraps content with MotionZone
+export function BanarasiVibesSection() {
+  return (
+    <MotionZone threshold={0.05} rootMargin="100px">
+      <BanarasiVibesContent />
+    </MotionZone>
   );
 }

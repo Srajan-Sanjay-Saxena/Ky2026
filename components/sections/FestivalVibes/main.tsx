@@ -1,14 +1,15 @@
 "use client";
 
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { IMAGES } from "@/lib/images";
-import { JAZZ_COLORS } from "./palette";
+import { JAZZ_COLORS } from "@/components/constants/palette";
 import { EXPERIENCES } from "./experiences.config";
 import { JazzTile } from "./tiles";
 import { SectionTitle } from "./decorations";
+import { MotionZone } from "@/components/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,20 +24,6 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
   const djRef = useRef<HTMLDivElement>(null);
   const sareeDrapeRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
-
-  // Intersection observer for animation pausing
-  useEffect(() => {
-    const element = sectionRef.current;
-    if (!element) return;
-    
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.05, rootMargin: "100px" }
-    );
-    observer.observe(element);
-    return () => observer.unobserve(element);
-  }, []);
 
   // GSAP ScrollTrigger animations
   useEffect(() => {
@@ -139,18 +126,18 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      data-inview={isInView}
-      className="relative py-16 sm:py-20 md:py-28 overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(ellipse at 20% 0%, ${JAZZ_COLORS.ROYAL_PURPLE}20 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 100%, ${JAZZ_COLORS.DEEP_MAGENTA}15 0%, transparent 50%),
-          linear-gradient(180deg, ${JAZZ_COLORS.BG_DEEP} 0%, ${JAZZ_COLORS.BG_ROYAL} 30%, ${JAZZ_COLORS.BG_WINE} 70%, ${JAZZ_COLORS.BG_DEEP} 100%)
-        `,
-      }}
-    >
+    <MotionZone>
+      <section
+        ref={sectionRef}
+        className="relative py-16 sm:py-20 md:py-28 overflow-hidden"
+        style={{
+          background: `
+            radial-gradient(ellipse at 20% 0%, ${JAZZ_COLORS.ROYAL_PURPLE}20 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 100%, ${JAZZ_COLORS.DEEP_MAGENTA}15 0%, transparent 50%),
+            linear-gradient(180deg, ${JAZZ_COLORS.BG_DEEP} 0%, ${JAZZ_COLORS.BG_ROYAL} 30%, ${JAZZ_COLORS.BG_WINE} 70%, ${JAZZ_COLORS.BG_DEEP} 100%)
+          `,
+        }}
+      >
       {/* Art deco pattern overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
@@ -160,9 +147,9 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         }}
       />
 
-      {/* Floating orbs */}
+      {/* Floating orbs - Desktop only */}
       <div
-        className="absolute top-[10%] left-[5%] w-64 h-64 rounded-full pointer-events-none"
+        className="hidden sm:block absolute top-[10%] left-[5%] w-64 h-64 rounded-full pointer-events-none"
         style={{
           background: `radial-gradient(circle, ${JAZZ_COLORS.HOT_PINK}15 0%, transparent 60%)`,
           filter: "blur(60px)",
@@ -170,7 +157,7 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         }}
       />
       <div
-        className="absolute bottom-[20%] right-[10%] w-80 h-80 rounded-full pointer-events-none"
+        className="hidden sm:block absolute bottom-[20%] right-[10%] w-80 h-80 rounded-full pointer-events-none"
         style={{
           background: `radial-gradient(circle, ${JAZZ_COLORS.GOLD}10 0%, transparent 60%)`,
           filter: "blur(80px)",
@@ -178,7 +165,7 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         }}
       />
       <div
-        className="absolute top-[40%] right-[5%] w-48 h-48 rounded-full pointer-events-none"
+        className="hidden sm:block absolute top-[40%] right-[5%] w-48 h-48 rounded-full pointer-events-none"
         style={{
           background: `radial-gradient(circle, ${JAZZ_COLORS.ELECTRIC_BLUE}12 0%, transparent 60%)`,
           filter: "blur(50px)",
@@ -296,5 +283,6 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         </svg>
       </div>
     </section>
+    </MotionZone>
   );
 });
