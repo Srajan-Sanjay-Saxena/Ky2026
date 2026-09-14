@@ -4,12 +4,14 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Don't initialize Lenis on mobile - native scroll is smoother
@@ -62,6 +64,16 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       lenisRef.current = null;
     };
   }, []);
+
+  // Reset scroll position on route change
+  useEffect(() => {
+    if (lenisRef.current) {
+      // Instant scroll to top (no animation)
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    // Also refresh ScrollTrigger for new page content
+    ScrollTrigger.refresh();
+  }, [pathname]);
 
   return <>{children}</>;
 }

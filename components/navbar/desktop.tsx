@@ -7,7 +7,7 @@ import { primaryLinks, secondaryLinks, ShineIcon, SpiritualIcon } from "./consta
 
 /**
  * Desktop Navbar - Primary nav links and secondary links
- * Hidden on mobile (md:flex)
+ * Hidden on mobile (sm:flex)
  */
 export const NavbarDesktop = memo(function NavbarDesktop() {
   const pathname = usePathname();

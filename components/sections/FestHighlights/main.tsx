@@ -155,7 +155,7 @@ function FestHighlightsContent() {
         <div className="decor-item hidden sm:block absolute top-[10%] left-[5%] w-8 sm:w-10 md:w-12 h-16 sm:h-20 md:h-24 text-[#FFD700] opacity-30">
           <Trishul className="w-full h-full" />
         </div>
-        <div className="decor-item hidden md:block absolute top-[15%] right-[5%] w-8 md:w-10 h-16 md:h-20 text-[#FF6B00] opacity-25">
+        <div className="decor-item hidden sm:block absolute top-[15%] right-[5%] w-8 sm:w-10 h-16 sm:h-20 text-[#FF6B00] opacity-25">
           <Trishul className="w-full h-full" />
         </div>
 
@@ -166,12 +166,12 @@ function FestHighlightsContent() {
         <div className="decor-item hidden sm:block absolute top-[25%] right-[3%] w-10 md:w-12 h-12 md:h-14">
           <LampSVG className="w-full h-full" />
         </div>
-        <div className="decor-item hidden md:block absolute bottom-[10%] right-[8%] w-8 md:w-10 h-10 md:h-12">
+        <div className="decor-item hidden sm:block absolute bottom-[10%] right-[8%] w-8 sm:w-10 h-10 sm:h-12">
           <LampSVG className="w-full h-full" />
         </div>
 
         {/* Bells - hidden on mobile */}
-        <div className="decor-item hidden md:block absolute top-[8%] left-[12%] w-8 md:w-10 h-12 md:h-14 text-[#DAA520] opacity-40">
+        <div className="decor-item hidden sm:block absolute top-[8%] left-[12%] w-8 sm:w-10 h-12 sm:h-14 text-[#DAA520] opacity-40">
           <BellSVG className="w-full h-full" />
         </div>
         <div className="decor-item hidden lg:block absolute bottom-[25%] right-[5%] w-6 md:w-8 h-10 md:h-12 text-[#B8860B] opacity-35">
@@ -182,7 +182,7 @@ function FestHighlightsContent() {
         <div className="decor-item hidden sm:block absolute bottom-[5%] left-[15%] w-14 sm:w-16 md:w-20 h-8 sm:h-10 md:h-12 opacity-50">
           <LotusSVG className="w-full h-full" />
         </div>
-        <div className="decor-item hidden md:block absolute top-[5%] right-[15%] w-12 md:w-16 h-8 md:h-10 opacity-40">
+        <div className="decor-item hidden sm:block absolute top-[5%] right-[15%] w-12 sm:w-16 h-8 sm:h-10 opacity-40">
           <LotusSVG className="w-full h-full" />
         </div>
       </div>

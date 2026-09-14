@@ -353,14 +353,14 @@ export function PassesSection() {
 
         {/* Hover instruction */}
         <motion.p
-          className="text-center text-gray-500 text-sm mb-8 hidden md:block"
+          className="text-center text-gray-500 text-sm mb-8 hidden sm:block"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.5 } } }}
         >
           [ HOVER TO SEE BENEFITS ]
         </motion.p>
 
         {/* Pass cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10 justify-items-center items-end">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 lg:gap-10 justify-items-center items-end">
           {PASSES.map((pass, index) => (
             <PassCard key={pass.id} pass={pass} index={index} onSelect={handleSelect} />
           ))}
@@ -368,7 +368,7 @@ export function PassesSection() {
 
         {/* Mobile tap instruction */}
         <motion.p
-          className="text-center text-gray-500 text-sm mt-8 md:hidden"
+          className="text-center text-gray-500 text-sm mt-8 sm:hidden"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.5 } } }}
         >
           [ TAP TO SEE BENEFITS ]
