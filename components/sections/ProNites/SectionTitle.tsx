@@ -14,11 +14,7 @@ export const SectionTitle = memo(function SectionTitle() {
           color={CONCERT_COLORS.NEON_PINK}
         />
         <span
-          className="text-xs sm:text-sm uppercase tracking-[0.3em] font-bold"
-          style={{
-            color: CONCERT_COLORS.NEON_PINK,
-            textShadow: `0 0 20px ${CONCERT_COLORS.NEON_PINK}`,
-          }}
+          className="text-xs sm:text-sm uppercase tracking-[0.3em] font-bold text-[#FFD700] sm:text-[#FF1493] [text-shadow:0_1px_8px_rgba(0,0,0,0.95)] sm:[text-shadow:0_0_20px_#FF1493]"
         >
           Pro Nites 2027
         </span>
@@ -67,8 +63,7 @@ export const SectionTitle = memo(function SectionTitle() {
 
       {/* Subtitle */}
       <p
-        className="mt-6 text-sm sm:text-base max-w-lg mx-auto leading-relaxed"
-        style={{ color: "rgba(255,255,255,0.5)" }}
+        className="mt-6 text-sm sm:text-base max-w-lg mx-auto leading-relaxed font-semibold sm:font-normal text-[#FFD700] sm:text-white/50 [text-shadow:0_1px_8px_rgba(0,0,0,0.95)] sm:[text-shadow:none]"
       >
         Three nights. Unlimited energy. The biggest artists hit the stage.
       </p>

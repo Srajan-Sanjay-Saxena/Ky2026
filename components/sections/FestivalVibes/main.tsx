@@ -159,9 +159,9 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
           }}
         />
 
-        {/* Banarasi Saree Drape - Top Right Corner (Desktop only) - Static */}
+        {/* Banarasi Saree Drape - Top Right Corner - Static (all screens) */}
         <div
-          className="hidden lg:block absolute -top-[10%] -right-[15%] w-[80vw] max-w-[1000px] pointer-events-none"
+          className="absolute -top-[2%] -right-[15%] w-[80vw] max-w-[1000px] pointer-events-none"
           style={{
             zIndex: 1,
             opacity: 0.7,
@@ -182,7 +182,7 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
           />
         </div>
 
-        {/* DJ Character - Bottom Right Corner - MASSIVE (Desktop only) - Static */}
+        {/* DJ Character - Bottom Right Corner - MASSIVE (Desktop only, scroll-revealed) - Static */}
         <div
           ref={djRef}
           className="hidden sm:block absolute -bottom-[10%] -right-[19%] w-[70vw] max-w-[1300px] pointer-events-none"
@@ -207,6 +207,23 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
             className="relative w-full h-auto"
             style={{
               filter: `drop-shadow(0 0 60px ${JAZZ_COLORS.HOT_PINK}70) drop-shadow(0 0 120px ${JAZZ_COLORS.GOLD}40)`,
+            }}
+          />
+        </div>
+
+        {/* DJ Character - Mobile only, static, lower z-index (no animation) */}
+        <div
+          className="sm:hidden absolute -bottom-[6%] -right-[22%] w-[85vw] pointer-events-none"
+          style={{ zIndex: 1, opacity: 0.85 }}
+        >
+          <Image
+            src={IMAGES.misc.dj}
+            alt="DJ"
+            width={1200}
+            height={1400}
+            className="relative w-full h-auto"
+            style={{
+              filter: `drop-shadow(0 0 30px ${JAZZ_COLORS.HOT_PINK}50)`,
             }}
           />
         </div>

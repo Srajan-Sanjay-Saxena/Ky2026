@@ -473,6 +473,18 @@ body {
   filter: blur(2px);
 }
 
+/* ── ProNites: moon rotation (desktop only; static on mobile) ── */
+.pronites-moon-rotate {
+  /* static by default (mobile) */
+}
+@media (min-width: 640px) {
+  .pronites-moon-rotate {
+    animation: moonRotate 120s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+}
+
 /* ── Footer: Royal Mandala Animations - Desktop only ── */
 .footer-mandala-slow {
   animation: none; /* Static on mobile */

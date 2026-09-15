@@ -6,14 +6,13 @@ import { IMAGES } from "@/lib/images";
 import { CONCERT_COLORS } from "./constants";
 
 /**
- * Rockstar - Top-left corner with animation
- * Desktop only for performance
+ * Rockstar - Top-left corner (static image)
+ * Shown on all screens; lower z-index on mobile.
  */
 export const Rockstar = memo(function Rockstar() {
   return (
     <div
-      className="hidden sm:block absolute top-[15%] -left-[15%] w-[58vw] max-w-[1150px] pointer-events-none"
-      style={{ zIndex: 3 }}
+      className="absolute top-[15%] -left-[15%] w-[58vw] max-w-[1150px] pointer-events-none z-[40]"
     >
       {/* Glow behind rockstar - subtle dark blue */}
       <div
@@ -48,8 +47,7 @@ export const Rockstar = memo(function Rockstar() {
 export const GlowingMoon = memo(function GlowingMoon() {
   return (
     <div
-      className="hidden sm:block absolute -top-[50%] -right-[45%] w-[110vw] aspect-square pointer-events-none"
-      style={{ zIndex: 1 }}
+      className="absolute -top-[36vh] -left-[5vw] w-[180vw] aspect-square sm:-top-[50%] sm:left-auto sm:-right-[55%] sm:w-[110vw] pointer-events-none z-[1]"
     >
       {/* Radiance rings - white glow rings around moon */}
       <div
@@ -88,16 +86,14 @@ export const GlowingMoon = memo(function GlowingMoon() {
         }}
       />
       
-      {/* Moon image - slow continuous rotation on desktop */}
+      {/* Moon image - static on mobile, slow rotation on desktop (via CSS class) */}
       <Image
         src={IMAGES.misc.moonBg}
         alt=""
         fill
-        className="object-contain"
+        className="object-contain pronites-moon-rotate"
         style={{
           filter: `drop-shadow(0 0 40px rgba(255,255,255,0.25)) drop-shadow(0 0 80px rgba(220,220,255,0.15)) drop-shadow(0 0 120px rgba(180,180,220,0.1))`,
-          animation: "moonRotate 120s linear infinite",
-          willChange: "transform",
         }}
         priority
       />
@@ -106,14 +102,13 @@ export const GlowingMoon = memo(function GlowingMoon() {
 });
 
 /**
- * DJCharacter - DJ image in bottom-left corner
- * Desktop only for performance
+ * DJCharacter - DJ image in bottom-left corner (static)
+ * Shown on all screens; lower z-index on mobile.
  */
 export const DJCharacter = memo(function DJCharacter() {
   return (
     <div
-      className="hidden sm:block absolute -bottom-[8%] -left-[3%] w-[38vw] pointer-events-none"
-      style={{ zIndex: 2 }}
+      className="absolute -bottom-[8%] -left-[3%] w-[38vw] pointer-events-none z-[1] sm:z-[2]"
     >
       {/* Glow behind DJ - subtle dark blue */}
       <div

@@ -769,6 +769,26 @@ export function HeroSection() {
         </div>
       )}
 
+      {/* Kites - Mobile only, floating animation, hidden at night */}
+      {timeOfDay !== "night" && (
+        <div
+          className="sm:hidden absolute top-[8%] left-[5%] w-[34vw] pointer-events-none z-50"
+          style={{ transform: "rotate(-10deg)" }}
+        >
+          <Image
+            src={IMAGES.misc.kites}
+            alt="Flying Kites"
+            width={350}
+            height={300}
+            className="w-full h-auto"
+            style={{
+              animation: "kitesFloat 4s ease-in-out infinite",
+              filter: "drop-shadow(0 6px 15px rgba(0,0,0,0.25))",
+            }}
+          />
+        </div>
+      )}
+
       {/* Title - Mobile optimized */}
       <h1
         ref={titleRef}

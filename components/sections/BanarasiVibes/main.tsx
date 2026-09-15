@@ -116,6 +116,30 @@ function BanarasiVibesContent() {
       {/* Mobile-only elements: Mandala, Diya with text */}
       <BanarasiVibesMobile />
 
+      {/* Mobile-only tagline — sits in the band between the diya and the gate */}
+      <div
+        className="sm:hidden absolute left-1/2 -translate-x-1/2 top-[52%] w-[86%] text-center pointer-events-none"
+        style={{ zIndex: 12 }}
+      >
+        <p
+          className="text-[15px] leading-relaxed font-semibold"
+          style={{
+            fontFamily: "var(--font-ethereal), 'Noto Sans Devanagari', serif",
+            color: "#FDF6E3",
+            textShadow: "0 1px 6px rgba(0,0,0,0.6)",
+          }}
+        >
+          Where the ghats hum with aarti bells and the streets breathe
+          centuries of culture —
+          <span style={{ color: "#FFD700" }}> the eternal spirit of Banaras</span>.
+        </p>
+        <div className="flex items-center justify-center gap-2 mt-3">
+          <span className="h-px w-8" style={{ background: "linear-gradient(90deg, transparent, #FFD700)" }} />
+          <span className="text-[10px]" style={{ color: "#FFD700" }}>◆</span>
+          <span className="h-px w-8" style={{ background: "linear-gradient(90deg, #FFD700, transparent)" }} />
+        </div>
+      </div>
+
       {/* BHU Gate - both mobile and desktop */}
       <div
         ref={gateRef}
@@ -156,10 +180,9 @@ function BanarasiVibesContent() {
       {/* Custom Road */}
       <Road />
 
-      {/* Ganga Aarti Saint — DESKTOP ONLY, left side facing inward toward the gate */}
+      {/* Ganga Aarti Saint — left side facing inward toward the gate (mobile + desktop) */}
       <div
-        className="pointer-events-none hidden sm:block absolute left-[-9%] w-[620px] h-[900px] ]"
-        style={{ bottom: "160px", zIndex: 0 }}
+        className="pointer-events-none absolute left-[-14%] bottom-[70px] w-[200px] h-[300px] z-[2] sm:left-[-9%] sm:bottom-[160px] sm:w-[620px] sm:h-[900px] sm:z-0"
       >
         <Image
           src={IMAGES.vibes.gangaAartiSaint}
@@ -170,10 +193,9 @@ function BanarasiVibesContent() {
         />
       </div>
 
-      {/* Bharatnatyam Dancer — DESKTOP ONLY, right side, mirrored to face inward */}
+      {/* Bharatnatyam Dancer — right side, mirrored to face inward (mobile + desktop) */}
       <div
-        className="pointer-events-none hidden sm:block absolute sm:right-[-8%] sm:w-[690px] sm:h-[800px]"
-        style={{ bottom: "100px", zIndex: 35 }}
+        className="pointer-events-none absolute right-[-14%] bottom-[70px] w-[190px] h-[290px] z-[2] sm:right-[-8%] sm:bottom-[100px] sm:w-[690px] sm:h-[800px] sm:z-[35]"
       >
         <Image
           src={IMAGES.vibes.bharatnatyamDancer}

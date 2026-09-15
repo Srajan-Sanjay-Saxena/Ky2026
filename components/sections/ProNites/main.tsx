@@ -1,14 +1,12 @@
 "use client";
 
 import { memo, useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GRADIENT_STAGE, CONCERT_COLORS, ARTISTS } from "./constants";
 import { HeadlinerCard, FeaturingCard } from "./ArtistCard";
 import { SectionTitle } from "./SectionTitle";
 import { GlowingMoon, Rockstar, TopBorder, BottomBorder, GridOverlay } from "./DecorativeElements";
-import { IMAGES } from "@/lib/images";
 import { MotionZone } from "@/components/motion";
 import { usePrefersReducedMotion } from "@/hooks";
 
@@ -23,7 +21,6 @@ export const ProNitesSection = memo(function ProNitesSection() {
   const titleRef = useRef<HTMLDivElement>(null);
   const headlinersRef = useRef<HTMLDivElement>(null);
   const featuringRef = useRef<HTMLDivElement>(null);
-  const crowdRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // GSAP ScrollTrigger animations - Desktop only
@@ -52,24 +49,6 @@ export const ProNitesSection = memo(function ProNitesSection() {
       );
 
       // Headliner & Featuring cards: no scroll animation (render statically on desktop)
-
-      // Concert crowd rises from bottom
-      gsap.fromTo(
-        crowdRef.current,
-        { y: 150, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-            end: "top 20%",
-            scrub: 1.5,
-          },
-        }
-      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -90,28 +69,6 @@ export const ProNitesSection = memo(function ProNitesSection() {
       <Rockstar />
       <GridOverlay />
       <TopBorder />
-
-      {/* Concert Crowd Silhouette - Bottom Left (Desktop only) */}
-      <div 
-        ref={crowdRef}
-        className="hidden sm:block absolute -bottom-20 -left-30 w-[90vw] max-w-[1300px] pointer-events-none"
-        style={{ 
-          zIndex: 100,
-          maskImage: "linear-gradient(to right, black 50%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to right, black 50%, transparent 100%)",
-        }}
-      >
-        <Image
-          src={IMAGES.misc.concertCrowd}
-          alt=""
-          width={1600}
-          height={800}
-          className="w-full h-auto"
-          style={{
-            filter: `drop-shadow(0 0 30px rgba(40,40,100,0.5))`,
-          }}
-        />
-      </div>
 
       {/* ═══ Main Content ═══ */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
