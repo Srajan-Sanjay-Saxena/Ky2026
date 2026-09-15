@@ -3,18 +3,16 @@
 import { memo } from "react";
 import Image from "next/image";
 import { IMAGES } from "@/lib/images";
-import { CONCERT_COLORS } from "./constants";
+import { CONCERT_COLORS } from "../constants";
 
 /**
- * Rockstar - Top-left corner (static image)
+ * DancingGirlFestiveVibes - Top-left corner (static image)
  * Shown on all screens; lower z-index on mobile.
  */
-export const Rockstar = memo(function Rockstar() {
+export const DancingGirlFestiveVibes = memo(function DancingGirlFestiveVibes() {
   return (
-    <div
-      className="absolute top-[15%] -left-[15%] w-[58vw] max-w-[1150px] pointer-events-none z-[40]"
-    >
-      {/* Glow behind rockstar - subtle dark blue */}
+    <div className="absolute top-[15%] -left-[15%] w-[58vw] max-w-[1150px] pointer-events-none z-[40]">
+      {/* Glow behind DancingGirlFestiveVibes - subtle dark blue */}
       <div
         className="absolute inset-0"
         style={{
@@ -23,11 +21,11 @@ export const Rockstar = memo(function Rockstar() {
           transform: "scale(1.3)",
         }}
       />
-      
-      {/* Rockstar image - Static */}
+
+      {/* DancingGirlFestiveVibes image - Static */}
       <Image
-        src={IMAGES.misc.rockstar}
-        alt="Rockstar"
+        src={IMAGES.misc.DancingGirlFestiveVibes}
+        alt="DancingGirlFestiveVibes"
         width={400}
         height={500}
         className="relative w-full h-auto"
@@ -46,9 +44,7 @@ export const Rockstar = memo(function Rockstar() {
  */
 export const GlowingMoon = memo(function GlowingMoon() {
   return (
-    <div
-      className="absolute -top-[36vh] -left-[5vw] w-[180vw] aspect-square sm:-top-[50%] sm:left-auto sm:-right-[55%] sm:w-[110vw] pointer-events-none z-[1]"
-    >
+    <div className="absolute -top-[36vh] -right-[100vw] w-[180vw] aspect-square sm:-top-[50%] sm:left-auto sm:-right-[55%] sm:w-[110vw] pointer-events-none z-[1]">
       {/* Radiance rings - white glow rings around moon */}
       <div
         className="absolute inset-0 rounded-full"
@@ -65,7 +61,7 @@ export const GlowingMoon = memo(function GlowingMoon() {
           transform: "scale(1.5)",
         }}
       />
-      
+
       {/* Inner white glow */}
       <div
         className="absolute inset-0 rounded-full"
@@ -75,7 +71,7 @@ export const GlowingMoon = memo(function GlowingMoon() {
           transform: "scale(1.1)",
         }}
       />
-      
+
       {/* Soft outer white radiance */}
       <div
         className="absolute inset-0 rounded-full"
@@ -85,7 +81,7 @@ export const GlowingMoon = memo(function GlowingMoon() {
           transform: "scale(1.4)",
         }}
       />
-      
+
       {/* Moon image - static on mobile, slow rotation on desktop (via CSS class) */}
       <Image
         src={IMAGES.misc.moonBg}
@@ -101,40 +97,6 @@ export const GlowingMoon = memo(function GlowingMoon() {
   );
 });
 
-/**
- * DJCharacter - DJ image in bottom-left corner (static)
- * Shown on all screens; lower z-index on mobile.
- */
-export const DJCharacter = memo(function DJCharacter() {
-  return (
-    <div
-      className="absolute -bottom-[8%] -left-[3%] w-[38vw] pointer-events-none z-[1] sm:z-[2]"
-    >
-      {/* Glow behind DJ - subtle dark blue */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse at 50% 70%, rgba(30,30,80,0.35) 0%, rgba(20,20,60,0.2) 30%, transparent 60%)`,
-          filter: "blur(40px)",
-          transform: "scale(1.2)",
-        }}
-      />
-      
-      {/* DJ image */}
-      <Image
-        src={IMAGES.misc.dj}
-        alt="DJ"
-        width={600}
-        height={700}
-        className="relative w-full h-auto"
-        style={{
-          filter: `drop-shadow(0 0 30px rgba(50,50,120,0.5)) drop-shadow(0 0 60px rgba(30,30,80,0.3))`,
-        }}
-        priority
-      />
-    </div>
-  );
-});
 
 /**
  * NeonBorders - Top and bottom neon line borders

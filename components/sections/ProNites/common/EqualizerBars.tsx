@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { CONCERT_COLORS } from "./constants";
+import { CONCERT_COLORS } from "../constants";
 
 interface EqualizerBarsProps {
   className?: string;

@@ -3,8 +3,7 @@
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { Road } from "./Road";
-import { LampPost } from "./LampPost";
+import { Road, LampPost } from "./common";
 import { BanarasiVibesMobile } from "./mobile";
 import { IMAGES } from "@/lib/images";
 import { MotionZone, useMotionZone } from "@/components/motion";
@@ -118,7 +117,7 @@ function BanarasiVibesContent() {
 
       {/* Mobile-only tagline — sits in the band between the diya and the gate */}
       <div
-        className="sm:hidden absolute left-1/2 -translate-x-1/2 top-[52%] w-[86%] text-center pointer-events-none"
+        className="sm:hidden absolute left-1/2 -translate-x-1/2 top-[44%] w-[86%] text-center pointer-events-none"
         style={{ zIndex: 12 }}
       >
         <p
@@ -180,9 +179,9 @@ function BanarasiVibesContent() {
       {/* Custom Road */}
       <Road />
 
-      {/* Ganga Aarti Saint — left side facing inward toward the gate (mobile + desktop) */}
+      {/* Ganga Aarti Saint — Desktop only, left side facing inward toward the gate */}
       <div
-        className="pointer-events-none absolute left-[-14%] bottom-[70px] w-[200px] h-[300px] z-[2] sm:left-[-9%] sm:bottom-[160px] sm:w-[620px] sm:h-[900px] sm:z-0"
+        className="pointer-events-none hidden sm:block absolute sm:left-[-9%] sm:bottom-[160px] sm:w-[620px] sm:h-[900px] sm:z-0"
       >
         <Image
           src={IMAGES.vibes.gangaAartiSaint}
@@ -193,9 +192,9 @@ function BanarasiVibesContent() {
         />
       </div>
 
-      {/* Bharatnatyam Dancer — right side, mirrored to face inward (mobile + desktop) */}
+      {/* Bharatnatyam Dancer — Desktop only, right side, mirrored to face inward */}
       <div
-        className="pointer-events-none absolute right-[-14%] bottom-[70px] w-[190px] h-[290px] z-[2] sm:right-[-8%] sm:bottom-[100px] sm:w-[690px] sm:h-[800px] sm:z-[35]"
+        className="pointer-events-none hidden sm:block absolute sm:right-[-8%] sm:bottom-[100px] sm:w-[690px] sm:h-[800px] sm:z-[35]"
       >
         <Image
           src={IMAGES.vibes.bharatnatyamDancer}

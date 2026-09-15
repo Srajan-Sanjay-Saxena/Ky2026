@@ -3,8 +3,8 @@
 import { memo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import type { PassConfig } from "./passes.config";
-import { ANIMATION } from "./passes.config";
+import type { PassConfig } from "../passes.config";
+import { ANIMATION } from "../passes.config";
 import { useIsMobile } from "@/hooks";
 import {
   COLORS,

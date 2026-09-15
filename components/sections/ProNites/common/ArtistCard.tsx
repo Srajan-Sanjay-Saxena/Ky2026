@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { CONCERT_COLORS, Artist } from "./constants";
+import { CONCERT_COLORS, Artist } from "../constants";
 import { EqualizerBars } from "./EqualizerBars";
 
 // ═══════════════════════════════════════════════════════════════════

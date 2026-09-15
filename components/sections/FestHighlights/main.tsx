@@ -2,15 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { LampSVG } from "./Lamp";
-import { BellSVG } from "./Bell";
-import { LotusSVG } from "./Lotus";
-import { Trishul } from "./Trishul";
-import { MandalaRing } from "./MandlaRing";
-import { FestSparkles } from "./Sparkles";
-import { TempleBell } from "./TempleBell";
+import {
+  LampSVG,
+  BellSVG,
+  LotusSVG,
+  Trishul,
+  FestSparkles,
+  TempleBell,
+  BackgroundMandala,
+} from "./common";
+import { FloatingParticles } from "./desktop";
+import { GoddessDurga } from "./desktop";
+import { MobileTemple } from "./mobile";
 import { IMAGES } from "@/lib/images";
 import { MotionZone, useMotionZone } from "@/components/motion";
 import { usePrefersReducedMotion } from "@/hooks";
@@ -141,12 +145,7 @@ function FestHighlightsContent() {
       }}
     >
       {/* Background Mandala - smaller on mobile */}
-      <div
-        className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[350px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] pointer-events-none opacity-15"
-        style={{ animation: isAnimating ? "spin 60s linear infinite" : "none" }}
-      >
-        <MandalaRing className="w-full h-full text-[#FF6B00]" />
-      </div>
+      <BackgroundMandala isAnimating={isAnimating} />
 
       {/* Floating Decorative Elements - hidden on mobile */}
       <div
@@ -190,112 +189,23 @@ function FestHighlightsContent() {
       </div>
 
       {/* Floating particles - Desktop only */}
-      <div className="hidden sm:block absolute inset-0 pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              width: 2 + Math.random() * 4,
-              height: 2 + Math.random() * 4,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: i % 2 === 0 ? "#FF6B00" : "#FFD700",
-              opacity: 0.3 + Math.random() * 0.3,
-              animation: `floatParticle ${5 + Math.random() * 5}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 3}s`,
-            }}
-          />
-        ))}
-      </div>
+      <FloatingParticles />
 
       {/* TEMPLE BELLS - Desktop only */}
-      <TempleBell 
-        className="hidden lg:flex absolute top-0 right-[12%] z-40" 
-        chainLength={180} 
-        size="md" 
+      <TempleBell
+        className="hidden lg:flex absolute top-0 right-[12%] z-40"
+        chainLength={180}
+        size="md"
       />
-      <TempleBell 
-        className="hidden xl:flex absolute top-0 left-[8%] z-40" 
-        chainLength={120} 
-        size="sm" 
-        delayed 
+      <TempleBell
+        className="hidden xl:flex absolute top-0 left-[8%] z-40"
+        chainLength={120}
+        size="sm"
+        delayed
       />
 
       {/* GODDESS DURGA - Divine presence - BEHIND content on desktop */}
-      <div className="absolute right-0 bottom-0 w-[50%] sm:w-[40%] md:w-[35%] lg:w-[30%] xl:w-[28%] pointer-events-none z-[5]">
-        {/* Divine aura behind Durga */}
-        <div
-          className="absolute inset-[-30%] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,69,0,0.15) 0%, rgba(176,63,35,0.08) 40%, transparent 70%)",
-            animation: "durgaAura 4s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="absolute inset-[-15%] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,215,0,0.12) 0%, rgba(255,140,0,0.06) 40%, transparent 70%)",
-            animation: "durgaAura 3s ease-in-out infinite reverse",
-          }}
-        />
-
-        {/* Rotating sacred ring */}
-        <div
-          className="absolute inset-[-20%] rounded-full pointer-events-none"
-          style={{
-            border: "1px solid rgba(255,215,0,0.1)",
-            animation: "rotateDurga 25s linear infinite",
-          }}
-        />
-
-        {/* Divine particles around Durga - Desktop only */}
-        <div className="hidden sm:block">
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={`durga-particle-${i}`}
-              className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
-              style={{
-                left: `${10 + (i % 5) * 20}%`,
-                top: `${10 + Math.floor(i / 5) * 30}%`,
-                background:
-                  i % 2 === 0
-                    ? "radial-gradient(circle, #FFD700 0%, transparent 70%)"
-                    : "radial-gradient(circle, #FF4500 0%, transparent 70%)",
-                animation: `floatParticle ${2 + (i % 3)}s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`,
-                boxShadow: "0 0 8px rgba(255,215,0,0.6)",
-              }}
-            />
-          ))}
-        </div>
-
-        <Image
-          src={IMAGES.highlights.durga}
-          alt="Goddess Durga"
-          width={800}
-          height={1000}
-          className="w-full h-auto relative"
-          style={{
-            filter:
-              "drop-shadow(0 0 30px rgba(255,69,0,0.5)) drop-shadow(0 0 60px rgba(255,215,0,0.3))",
-            animation: "durgaShimmer 4s ease-in-out infinite",
-          }}
-          priority
-        />
-
-        {/* Bottom glow */}
-        <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[15%] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 100% 100% at 50% 100%, rgba(255,140,0,0.4) 0%, transparent 70%)",
-            filter: "blur(10px)",
-          }}
-        />
-      </div>
+      <GoddessDurga />
 
       {/* TEMPLE - Absolute positioned, large, on left */}
       <div
@@ -346,19 +256,7 @@ function FestHighlightsContent() {
       </div>
 
       {/* Mobile Temple - Shows only on mobile/tablet */}
-      <div className="lg:hidden w-full px-4 pt-16 sm:pt-20 mb-6 sm:mb-8">
-        <Image
-          src={IMAGES.highlights.durgaTemple}
-          alt="Kashi Yatra Festival Venue"
-          width={800}
-          height={500}
-          className="w-full h-auto"
-          style={{
-            filter: "drop-shadow(0 0 20px rgba(176,63,35,0.4))",
-          }}
-          priority
-        />
-      </div>
+      <MobileTemple />
 
       {/* CONTENT - Centered on desktop with temple on left as backdrop */}
       <div className="relative z-10 min-h-[35vh] sm:min-h-[45vh] lg:min-h-[85vh] flex items-start sm:items-center pt-4 sm:pt-10 lg:pt-8">
@@ -382,7 +280,8 @@ function FestHighlightsContent() {
                 className="text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 opacity-85 max-w-lg mx-auto"
                 style={{ color: "#FDF6E3" }}
               >
-                Three electrifying days of music, dance, and unforgettable experiences.
+                Three electrifying days of music, dance, and unforgettable
+                experiences.
               </p>
 
               {/* Highlight Cards - Royal ornate design - First 2 on mobile, all 4 on desktop */}
@@ -390,49 +289,66 @@ function FestHighlightsContent() {
                 {highlights.map((item, i) => (
                   <div
                     key={i}
-                    className={"highlight-card relative p-3 sm:p-5 rounded-xl transition-all duration-300 sm:hover:scale-[1.02] cursor-pointer overflow-hidden group" + (i >= 2 ? " hidden sm:block" : "")}
+                    className={
+                      "highlight-card relative p-3 sm:p-5 rounded-xl transition-all duration-300 sm:hover:scale-[1.02] cursor-pointer overflow-hidden group" +
+                      (i >= 2 ? " hidden sm:block" : "")
+                    }
                     style={{
-                      background: "linear-gradient(145deg, rgba(139,21,56,0.35), rgba(92,10,31,0.4), rgba(45,24,16,0.35))",
+                      background:
+                        "linear-gradient(145deg, rgba(139,21,56,0.35), rgba(92,10,31,0.4), rgba(45,24,16,0.35))",
                       border: "2px solid rgba(184,134,11,0.5)",
-                      boxShadow: "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,215,0,0.08)",
+                      boxShadow:
+                        "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,215,0,0.08)",
                       backdropFilter: "blur(8px)",
                     }}
                   >
                     {/* Shimmer effect on hover - desktop only */}
-                    <div 
+                    <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden sm:block"
                       style={{
-                        background: "linear-gradient(105deg, transparent 40%, rgba(255,215,0,0.06) 50%, transparent 60%)",
+                        background:
+                          "linear-gradient(105deg, transparent 40%, rgba(255,215,0,0.06) 50%, transparent 60%)",
                       }}
                     />
-                    
+
                     {/* Corner ornaments */}
                     <div className="absolute top-1 left-1 sm:top-2 sm:left-2 w-4 sm:w-5 h-4 sm:h-5 border-t-2 border-l-2 border-[#FFD700] opacity-60" />
                     <div className="absolute top-1 right-1 sm:top-2 sm:right-2 w-4 sm:w-5 h-4 sm:h-5 border-t-2 border-r-2 border-[#FFD700] opacity-60" />
                     <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 w-4 sm:w-5 h-4 sm:h-5 border-b-2 border-l-2 border-[#FFD700] opacity-60" />
                     <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 w-4 sm:w-5 h-4 sm:h-5 border-b-2 border-r-2 border-[#FFD700] opacity-60" />
-                    
+
                     {/* Top decorative line */}
-                    <div 
+                    <div
                       className="absolute top-2 sm:top-3 left-6 sm:left-8 right-6 sm:right-8 h-[1px]"
-                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.25), transparent)" }}
+                      style={{
+                        background:
+                          "linear-gradient(90deg, transparent, rgba(255,215,0,0.25), transparent)",
+                      }}
                     />
-                    
-                    <span className="text-2xl sm:text-4xl mb-2 sm:mb-3 block relative z-10">{item.icon}</span>
-                    <h4 
+
+                    <span className="text-2xl sm:text-4xl mb-2 sm:mb-3 block relative z-10">
+                      {item.icon}
+                    </span>
+                    <h4
                       className="font-bold text-[#FFD700] text-xs sm:text-base mb-1 sm:mb-1.5 relative z-10 uppercase tracking-wider"
-                      style={{ fontFamily: "var(--font-ethereal), serif", textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}
+                      style={{
+                        fontFamily: "var(--font-ethereal), serif",
+                        textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+                      }}
                     >
                       {item.title}
                     </h4>
                     <p className="text-[10px] sm:text-sm text-[#FDF6E3] opacity-80 relative z-10">
                       {item.desc}
                     </p>
-                    
+
                     {/* Bottom decorative line */}
-                    <div 
+                    <div
                       className="absolute bottom-2 sm:bottom-3 left-6 sm:left-8 right-6 sm:right-8 h-[1px]"
-                      style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent)" }}
+                      style={{
+                        background:
+                          "linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent)",
+                      }}
                     />
                   </div>
                 ))}

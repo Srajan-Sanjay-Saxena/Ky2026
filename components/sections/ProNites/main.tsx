@@ -4,9 +4,16 @@ import { memo, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GRADIENT_STAGE, CONCERT_COLORS, ARTISTS } from "./constants";
-import { HeadlinerCard, FeaturingCard } from "./ArtistCard";
-import { SectionTitle } from "./SectionTitle";
-import { GlowingMoon, Rockstar, TopBorder, BottomBorder, GridOverlay } from "./DecorativeElements";
+import {
+  HeadlinerCard,
+  FeaturingCard,
+  SectionTitle,
+  GlowingMoon,
+  DancingGirlFestiveVibes,
+  TopBorder,
+  BottomBorder,
+  GridOverlay,
+} from "./common";
 import { MotionZone } from "@/components/motion";
 import { usePrefersReducedMotion } from "@/hooks";
 
@@ -45,7 +52,7 @@ export const ProNitesSection = memo(function ProNitesSection() {
             end: "top 50%",
             scrub: 1,
           },
-        }
+        },
       );
 
       // Headliner & Featuring cards: no scroll animation (render statically on desktop)
@@ -54,8 +61,8 @@ export const ProNitesSection = memo(function ProNitesSection() {
     return () => ctx.revert();
   }, [prefersReducedMotion]);
 
-  const headliners = ARTISTS.filter(a => a.isHeadliner);
-  const supporting = ARTISTS.filter(a => !a.isHeadliner);
+  const headliners = ARTISTS.filter((a) => a.isHeadliner);
+  const supporting = ARTISTS.filter((a) => !a.isHeadliner);
 
   return (
     <MotionZone>
@@ -64,58 +71,70 @@ export const ProNitesSection = memo(function ProNitesSection() {
         className="relative py-20 sm:py-28 overflow-hidden"
         style={{ background: GRADIENT_STAGE }}
       >
-      {/* ═══ Background Elements ═══ */}
-      <GlowingMoon />
-      <Rockstar />
-      <GridOverlay />
-      <TopBorder />
+        {/* ═══ Background Elements ═══ */}
+        <GlowingMoon />
+        <DancingGirlFestiveVibes />
+        <GridOverlay />
+        <TopBorder />
 
-      {/* ═══ Main Content ═══ */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-        <div ref={titleRef}>
-          <SectionTitle />
-        </div>
+        {/* ═══ Main Content ═══ */}
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+          <div ref={titleRef}>
+            <SectionTitle />
+          </div>
 
-        {/* Headliners */}
-        <div className="mb-12 sm:mb-16">
-          <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
-            <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-amber-500/50" />
-            <span
-              className="text-xs sm:text-sm uppercase tracking-[0.2em] font-bold"
-              style={{ color: CONCERT_COLORS.NEON_GOLD, textShadow: `0 0 15px ${CONCERT_COLORS.NEON_GOLD}80` }}
+          {/* Headliners */}
+          <div className="mb-12 sm:mb-16">
+            <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
+              <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-amber-500/50" />
+              <span
+                className="text-xs sm:text-sm uppercase tracking-[0.2em] font-bold"
+                style={{
+                  color: CONCERT_COLORS.NEON_GOLD,
+                  textShadow: `0 0 15px ${CONCERT_COLORS.NEON_GOLD}80`,
+                }}
+              >
+                ★ Headliners ★
+              </span>
+              <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-amber-500/50" />
+            </div>
+
+            <div
+              ref={headlinersRef}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-2xl mx-auto"
             >
-              ★ Headliners ★
-            </span>
-            <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-amber-500/50" />
+              {headliners.map((artist, i) => (
+                <HeadlinerCard key={artist.id} artist={artist} index={i} />
+              ))}
+            </div>
           </div>
-          
-          <div ref={headlinersRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-2xl mx-auto">
-            {headliners.map((artist, i) => (
-              <HeadlinerCard key={artist.id} artist={artist} index={i} />
-            ))}
+
+          {/* Featuring */}
+          <div className="mb-6 sm:mb-8">
+            <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
+              <div className="h-px w-8 sm:w-16 bg-gradient-to-r from-transparent to-white/20" />
+              <span
+                className="text-xs sm:text-sm uppercase tracking-[0.15em] font-medium"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+              >
+                Featuring
+              </span>
+              <div className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-white/20" />
+            </div>
+
+            <div
+              ref={featuringRef}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 max-w-4xl mx-auto"
+            >
+              {supporting.map((artist, i) => (
+                <FeaturingCard key={artist.id} artist={artist} index={i} />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Featuring */}
-        <div className="mb-6 sm:mb-8">
-          <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
-            <div className="h-px w-8 sm:w-16 bg-gradient-to-r from-transparent to-white/20" />
-            <span className="text-xs sm:text-sm uppercase tracking-[0.15em] font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>
-              Featuring
-            </span>
-            <div className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-white/20" />
-          </div>
-          
-          <div ref={featuringRef} className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 max-w-4xl mx-auto">
-            {supporting.map((artist, i) => (
-              <FeaturingCard key={artist.id} artist={artist} index={i} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <BottomBorder />
-    </section>
+        <BottomBorder />
+      </section>
     </MotionZone>
   );
 });

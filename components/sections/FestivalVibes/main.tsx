@@ -1,14 +1,16 @@
 "use client";
 
 import { memo, useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { IMAGES } from "@/lib/images";
 import { JAZZ_COLORS } from "@/components/constants/palette";
 import { EXPERIENCES } from "./experiences.config";
 import { JazzTile } from "./tiles";
 import { SectionTitle } from "./decorations";
+import { SareeDrape } from "./desktop";
+import { FloatingOrbs } from "./desktop";
+import { MobileDJ } from "./mobile";
+import { BackgroundDecor, BottomBorder, DesktopDJ } from "./desktop";
 import { MotionZone } from "@/components/motion";
 import { usePrefersReducedMotion } from "@/hooks";
 
@@ -125,108 +127,19 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         }}
       >
         {/* Art deco pattern overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23FFD700' stroke-width='0.5'/%3E%3C/svg%3E")`,
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <BackgroundDecor />
 
         {/* Floating orbs - Desktop only */}
-        <div
-          className="hidden sm:block absolute top-[10%] left-[5%] w-64 h-64 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${JAZZ_COLORS.HOT_PINK}15 0%, transparent 60%)`,
-            filter: "blur(60px)",
-            animation: "pulseSlow 6s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="hidden sm:block absolute bottom-[20%] right-[10%] w-80 h-80 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${JAZZ_COLORS.GOLD}10 0%, transparent 60%)`,
-            filter: "blur(80px)",
-            animation: "pulseSlow 8s ease-in-out infinite 2s",
-          }}
-        />
-        <div
-          className="hidden sm:block absolute top-[40%] right-[5%] w-48 h-48 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle, ${JAZZ_COLORS.ELECTRIC_BLUE}12 0%, transparent 60%)`,
-            filter: "blur(50px)",
-            animation: "pulseSlow 5s ease-in-out infinite 1s",
-          }}
-        />
+        <FloatingOrbs />
 
         {/* Banarasi Saree Drape - Top Right Corner - Static (all screens) */}
-        <div
-          className="absolute -top-[2%] -right-[15%] w-[80vw] max-w-[1000px] pointer-events-none"
-          style={{
-            zIndex: 1,
-            opacity: 0.7,
-            maskImage: "linear-gradient(to bottom, black 40%, transparent 95%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 40%, transparent 95%)",
-          }}
-        >
-          <Image
-            src={IMAGES.misc.sareeDrape}
-            alt=""
-            width={1200}
-            height={1600}
-            className="w-full h-auto"
-            style={{
-              filter: `drop-shadow(0 0 40px ${JAZZ_COLORS.DEEP_MAGENTA}40)`,
-            }}
-          />
-        </div>
+        <SareeDrape />
 
-        {/* DJ Character - Bottom Right Corner - MASSIVE (Desktop only, scroll-revealed) - Static */}
-        <div
-          ref={djRef}
-          className="hidden sm:block absolute -bottom-[10%] -right-[19%] w-[70vw] max-w-[1300px] pointer-events-none"
-          style={{
-            zIndex: 20,
-            opacity: 0,
-          }}
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `radial-gradient(ellipse at 50% 70%, ${JAZZ_COLORS.HOT_PINK}50 0%, ${JAZZ_COLORS.ROYAL_PURPLE}30 40%, transparent 70%)`,
-              filter: "blur(80px)",
-              transform: "scale(1.5)",
-            }}
-          />
-          <Image
-            src={IMAGES.misc.dj}
-            alt="DJ"
-            width={1200}
-            height={1400}
-            className="relative w-full h-auto"
-            style={{
-              filter: `drop-shadow(0 0 60px ${JAZZ_COLORS.HOT_PINK}70) drop-shadow(0 0 120px ${JAZZ_COLORS.GOLD}40)`,
-            }}
-          />
-        </div>
+        {/* DJ Character - Desktop only, scroll-revealed via GSAP */}
+        <DesktopDJ ref={djRef} />
 
         {/* DJ Character - Mobile only, static, lower z-index (no animation) */}
-        <div
-          className="sm:hidden absolute -bottom-[6%] -right-[22%] w-[85vw] pointer-events-none"
-          style={{ zIndex: 1, opacity: 0.85 }}
-        >
-          <Image
-            src={IMAGES.misc.dj}
-            alt="DJ"
-            width={1200}
-            height={1400}
-            className="relative w-full h-auto"
-            style={{
-              filter: `drop-shadow(0 0 30px ${JAZZ_COLORS.HOT_PINK}50)`,
-            }}
-          />
-        </div>
+        <MobileDJ />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
           {/* Section Title */}
@@ -275,19 +188,7 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
         </div>
 
         {/* Bottom decorative border */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            className="w-full h-8"
-            viewBox="0 0 1200 32"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 32 Q300 0 600 16 T1200 32"
-              fill={JAZZ_COLORS.GOLD}
-              opacity="0.1"
-            />
-          </svg>
-        </div>
+        <BottomBorder />
       </section>
     </MotionZone>
   );
