@@ -424,7 +424,7 @@ export default function LoginPage() {
             className="text-xs tracking-[0.3em] uppercase"
             style={{ color: `${ROYAL_COLORS.GOLD}40` }}
           >
-            February 2027 • Varanasi
+            14th–17th January 2027 • Varanasi
           </p>
         </div>
       </main>

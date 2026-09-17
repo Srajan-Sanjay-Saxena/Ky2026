@@ -174,7 +174,7 @@ export const FestivalVibesSection = memo(function FestivalVibesSection() {
                   textShadow: `0 0 10px ${JAZZ_COLORS.GOLD}50`,
                 }}
               >
-                FEBRUARY 2027
+                14–17 JANUARY 2027
               </span>
               <span style={{ color: JAZZ_COLORS.CREAM, opacity: 0.3 }}>•</span>
               <span

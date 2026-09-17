@@ -21,7 +21,7 @@ export interface ExperienceTile {
 export const EXPERIENCES: ExperienceTile[] = [
   { 
     id: "crowd", 
-    stat: "15K+", 
+    stat: "90K+", 
     label: "Footfall", 
     sublabel: "Expected",
     color: JAZZ_COLORS.HOT_PINK, 
