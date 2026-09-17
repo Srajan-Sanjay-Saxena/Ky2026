@@ -65,7 +65,7 @@ export const TitleBadge = memo(function TitleBadge() {
               animation: "textGlow 2s ease-in-out infinite",
             }}
           >
-            २०२६
+            २०२७
           </span>
         </div>
 
@@ -133,7 +133,7 @@ export const TitleBadge = memo(function TitleBadge() {
             color: "rgba(255,215,0,0.7)",
           }}
         >
-          February 2027
+          14th–17th January 2027
         </p>
       </div>
     </>

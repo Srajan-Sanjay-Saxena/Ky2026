@@ -153,7 +153,7 @@ export function FooterSection() {
                 <span className="text-xl" style={{ color: COLORS.SAFFRON }}>
                   ✦
                 </span>
-                <span>March 15-17, 2027</span>
+                <span>January 14-17, 2027</span>
               </li>
             </ul>
           </FooterCard>

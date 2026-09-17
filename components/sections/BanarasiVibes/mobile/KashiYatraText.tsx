@@ -25,7 +25,7 @@ export const KashiYatraText = memo(function KashiYatraText() {
           textShadow: "0 0 15px rgba(218,165,32,0.7), 0 1px 3px rgba(0,0,0,0.4)",
         }}
       >
-        २०२६
+        २०२७
       </span>
     </div>
   );
