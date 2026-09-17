@@ -13,8 +13,8 @@ export const primaryLinks = [
 ];
 
 export const secondaryLinks: { label: string; href: string; icon: "om" | "lotus" }[] = [
-  { label: "LOGIN", href: "/login", icon: "om" },
   { label: "CONTACT", href: "/contact", icon: "lotus" },
+  { label: "LOGIN", href: "/login", icon: "om" },
 ];
 
 /**

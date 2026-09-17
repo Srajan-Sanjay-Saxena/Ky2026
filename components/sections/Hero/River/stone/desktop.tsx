@@ -57,7 +57,7 @@ export const StonesDesktop = memo(function StonesDesktop() {
       >
         <SteppingStone
           label="Register"
-          href="/register"
+          href="/login"
           size={SIZE_STONES.REGISTER.desktop}
           phase={-1.6}
         />

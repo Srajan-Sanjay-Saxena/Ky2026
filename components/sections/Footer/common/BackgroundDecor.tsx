@@ -45,19 +45,13 @@ export const BackgroundDecor = memo(function BackgroundDecor() {
         style={{ background: GRADIENT_FOOTER_GLOW }}
       />
 
-      {/* ═══ Corner Diyas ═══ */}
+      {/* ═══ Corner Diyas — Mobile only ═══ */}
       {/* Wrapped in MotionZone to pause SMIL animations when off-screen */}
-      <MotionZone className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-14 sm:top-16 left-[5%] sm:left-[8%] w-8 h-10 sm:w-10 sm:h-12 opacity-70">
+      <MotionZone className="absolute inset-0 pointer-events-none sm:hidden">
+        <div className="absolute top-14 left-[5%] w-8 h-10 opacity-70">
           <DiyaSvg className="w-full h-full" />
         </div>
-        <div className="absolute top-16 sm:top-18 right-[5%] sm:right-[8%] w-6 h-8 sm:w-8 sm:h-10 opacity-50">
-          <DiyaSvg className="w-full h-full" />
-        </div>
-        <div className="hidden sm:block absolute top-24 left-[20%] w-5 h-7 opacity-40">
-          <DiyaSvg className="w-full h-full" />
-        </div>
-        <div className="hidden sm:block absolute top-20 right-[22%] w-6 h-8 opacity-45">
+        <div className="absolute top-16 right-[5%] w-6 h-8 opacity-50">
           <DiyaSvg className="w-full h-full" />
         </div>
       </MotionZone>

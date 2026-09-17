@@ -65,7 +65,7 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
 
       {/* SECONDARY LINKS (LOGIN / CONTACT) with spiritual icons */}
       <div
-        className="absolute right-[2%] inset-y-0 hidden sm:flex items-center gap-4 z-10"
+        className="absolute right-[3%] inset-y-0 hidden sm:flex items-center gap-4 z-10"
         style={{ transform: "translateY(11%)" }}
       >
         {secondaryLinks.map((link) => {
@@ -75,8 +75,8 @@ export const NavbarDesktop = memo(function NavbarDesktop() {
             <Link
               key={link.label}
               href={link.href}
-              className="group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
-                         transition-all duration-300"
+              className={`group flex items-center gap-1.5 lg:gap-2 tracking-[0.1em] uppercase whitespace-nowrap
+                         transition-all duration-300 ${link.label === "LOGIN" ? "ml-3" : ""}`}
               style={{
                 fontFamily: "var(--font-ethereal), serif",
                 fontWeight: 900,

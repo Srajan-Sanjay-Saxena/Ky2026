@@ -4,8 +4,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import {
-  LampSVG,
-  BellSVG,
   LotusSVG,
   Trishul,
   FestSparkles,
@@ -160,24 +158,9 @@ function FestHighlightsContent() {
           <Trishul className="w-full h-full" />
         </div>
 
-        {/* Diyas */}
-        <div className="decor-item absolute bottom-[20%] left-[3%] w-10 sm:w-12 md:w-14 h-12 sm:h-14 md:h-16">
-          <LampSVG className="w-full h-full" />
-        </div>
-        <div className="decor-item hidden sm:block absolute top-[25%] right-[3%] w-10 md:w-12 h-12 md:h-14">
-          <LampSVG className="w-full h-full" />
-        </div>
-        <div className="decor-item hidden sm:block absolute bottom-[10%] right-[8%] w-8 sm:w-10 h-10 sm:h-12">
-          <LampSVG className="w-full h-full" />
-        </div>
+        {/* Diyas removed */}
 
-        {/* Bells - hidden on mobile */}
-        <div className="decor-item hidden sm:block absolute top-[8%] left-[12%] w-8 sm:w-10 h-12 sm:h-14 text-[#DAA520] opacity-40">
-          <BellSVG className="w-full h-full" />
-        </div>
-        <div className="decor-item hidden lg:block absolute bottom-[25%] right-[5%] w-6 md:w-8 h-10 md:h-12 text-[#B8860B] opacity-35">
-          <BellSVG className="w-full h-full" />
-        </div>
+        {/* Floating Bells removed (TempleBells with SHM remain) */}
 
         {/* Lotus - hidden on small mobile */}
         <div className="decor-item hidden sm:block absolute bottom-[5%] left-[15%] w-14 sm:w-16 md:w-20 h-8 sm:h-10 md:h-12 opacity-50">

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono, Cinzel_Decorative } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import GsapRegistration from "@/lib/GsapRegistration";
 import { SmoothScroll } from "@/lib/SmoothScroll";
+import { PageLoader } from "@/components/loader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +45,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <GsapRegistration />
+        <Suspense fallback={null}>
+          <PageLoader />
+        </Suspense>
         <MotionConfig reducedMotion="user">
           <SmoothScroll>{children}</SmoothScroll>
         </MotionConfig>

@@ -57,7 +57,7 @@ export const StonesMobile = memo(function StonesMobile() {
       >
         <SteppingStone
           label="Register"
-          href="/register"
+          href="/login"
           size={SIZE_STONES.REGISTER.mobile}
           phase={-1.6}
         />
