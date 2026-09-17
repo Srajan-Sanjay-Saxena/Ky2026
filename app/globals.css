@@ -891,16 +891,12 @@ body {
     backface-visibility: hidden;
   }
   .footer-card-mandala {
-    animation: footerCardMandalaRotate 30s linear infinite;
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    /* Static - no animation, just GPU hints for rendering */
+    will-change: auto;
   }
   .footer-card-mandala-reverse {
-    animation: footerCardMandalaRotate 25s linear infinite reverse;
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    /* Static - no animation, just GPU hints for rendering */
+    will-change: auto;
   }
 }
 
