@@ -9,7 +9,7 @@ import { CornerOrnaments } from "./CornerOrnaments";
 // ═══════════════════════════════════════════════════════════════════
 const stats = [
   { value: "15+", label: "Years of Legacy", icon: "🏛️" },
-  { value: "15K+", label: "Expected Footfall", icon: "👥" },
+  { value: "90K+", label: "Expected Footfall", icon: "👥" },
   { value: "50+", label: "Events", icon: "🎭" },
   { value: "100+", label: "Colleges", icon: "🎓" },
 ];
