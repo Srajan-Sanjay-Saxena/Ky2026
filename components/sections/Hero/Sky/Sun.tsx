@@ -2,42 +2,109 @@
 
 import { memo } from "react";
 
-export const Sun = memo(function Sun({ className = "", isMobile = false }: { className?: string; isMobile?: boolean }) {
+type TimeVariant = "dawn" | "day";
+
+export const Sun = memo(function Sun({ 
+  className = "", 
+  isMobile = false,
+  variant = "day"
+}: { 
+  className?: string; 
+  isMobile?: boolean;
+  variant?: TimeVariant;
+}) {
+  // Dawn has softer, paler colors (rising sun)
+  const isDawn = variant === "dawn";
+  
+  const colors = isDawn ? {
+    haloOuter: "rgba(255,230,180,0.04)",
+    haloOuterMid: "rgba(255,210,150,0.02)",
+    glowOuter: "rgba(255,220,170,0.08)",
+    glowOuterMid: "rgba(255,200,140,0.04)",
+    glowMiddle: "rgba(255,240,200,0.15)",
+    glowMiddleMid: "rgba(255,220,180,0.08)",
+    glowInner: "rgba(255,255,245,0.25)",
+    glowInnerMid: "rgba(255,250,230,0.12)",
+    surface: `radial-gradient(circle at 35% 35%, 
+      #FFFEF8 0%, 
+      #FFFBF0 15%, 
+      #FFF5E0 30%, 
+      #FFE8C0 50%, 
+      #FFD8A0 70%, 
+      #FFC880 85%,
+      #FFB860 100%
+    )`,
+    boxShadow: `
+      0 0 30px rgba(255,230,180,0.6),
+      0 0 60px rgba(255,210,150,0.4),
+      0 0 90px rgba(255,190,130,0.25),
+      0 0 130px rgba(255,180,120,0.1),
+      inset -3px -3px 15px rgba(255,180,100,0.2),
+      inset 3px 3px 12px rgba(255,255,230,0.4)
+    `,
+  } : {
+    haloOuter: "rgba(255,200,100,0.06)",
+    haloOuterMid: "rgba(255,160,60,0.03)",
+    glowOuter: "rgba(255,180,80,0.12)",
+    glowOuterMid: "rgba(255,140,50,0.06)",
+    glowMiddle: "rgba(255,220,150,0.2)",
+    glowMiddleMid: "rgba(255,180,100,0.1)",
+    glowInner: "rgba(255,255,240,0.35)",
+    glowInnerMid: "rgba(255,240,200,0.15)",
+    surface: `radial-gradient(circle at 35% 35%, 
+      #FFFEF8 0%, 
+      #FFF8E8 15%, 
+      #FFE8C0 30%, 
+      #FFD080 50%, 
+      #FFA840 70%, 
+      #FF8020 85%,
+      #FF6000 100%
+    )`,
+    boxShadow: `
+      0 0 40px rgba(255,200,100,0.8),
+      0 0 80px rgba(255,160,60,0.5),
+      0 0 120px rgba(255,120,40,0.3),
+      0 0 180px rgba(255,100,30,0.15),
+      inset -4px -4px 20px rgba(255,100,0,0.3),
+      inset 4px 4px 15px rgba(255,255,200,0.4)
+    `,
+  };
+
   return (
     <div className={`relative ${className}`}>
-      {/* Outermost atmospheric halo - matches moon scale(4) */}
+      {/* Outermost atmospheric halo */}
       <div
         className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-halo-outer'}`}
         style={{
           transform: "scale(4)",
-          background: "radial-gradient(circle, rgba(255,200,100,0.06) 0%, rgba(255,160,60,0.03) 40%, transparent 70%)",
+          background: `radial-gradient(circle, ${colors.haloOuter} 0%, ${colors.haloOuterMid} 40%, transparent 70%)`,
         }}
       />
 
-      {/* Outer warm glow - matches moon scale(2.5) */}
+      {/* Outer warm glow */}
       <div
         className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-glow-outer'}`}
         style={{
           transform: "scale(2.5)",
-          background: "radial-gradient(circle, rgba(255,180,80,0.12) 0%, rgba(255,140,50,0.06) 35%, transparent 65%)",
+          background: `radial-gradient(circle, ${colors.glowOuter} 0%, ${colors.glowOuterMid} 35%, transparent 65%)`,
         }}
       />
 
-      {/* Middle intense glow - matches moon scale(1.8) */}
+      {/* Middle intense glow */}
       <div
         className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-glow-middle'}`}
         style={{
           transform: "scale(1.8)",
-          background: "radial-gradient(circle, rgba(255,220,150,0.2) 0%, rgba(255,180,100,0.1) 45%, transparent 75%)",
+          background: `radial-gradient(circle, ${colors.glowMiddle} 0%, ${colors.glowMiddleMid} 45%, transparent 75%)`,
         }}
       />
 
-      {/* Inner white-hot glow - matches moon scale(1.3) */}
+      {/* Inner white-hot glow */}
       <div
         className={`absolute inset-0 rounded-full ${isMobile ? '' : 'sun-glow-inner'}`}
         style={{
           transform: "scale(1.3)",
-          background: "radial-gradient(circle, rgba(255,255,240,0.35) 0%, rgba(255,240,200,0.15) 50%, transparent 85%)",
+          background: `radial-gradient(circle, ${colors.glowInner} 0%, ${colors.glowInnerMid} 50%, transparent 85%)`,
         }}
       />
 
@@ -98,25 +165,8 @@ export const Sun = memo(function Sun({ className = "", isMobile = false }: { cla
       <div
         className={`relative w-full h-full rounded-full overflow-hidden ${isMobile ? '' : 'sun-surface'}`}
         style={{
-          background: `
-            radial-gradient(circle at 35% 35%, 
-              #FFFEF8 0%, 
-              #FFF8E8 15%, 
-              #FFE8C0 30%, 
-              #FFD080 50%, 
-              #FFA840 70%, 
-              #FF8020 85%,
-              #FF6000 100%
-            )
-          `,
-          boxShadow: `
-            0 0 40px rgba(255,200,100,0.8),
-            0 0 80px rgba(255,160,60,0.5),
-            0 0 120px rgba(255,120,40,0.3),
-            0 0 180px rgba(255,100,30,0.15),
-            inset -4px -4px 20px rgba(255,100,0,0.3),
-            inset 4px 4px 15px rgba(255,255,200,0.4)
-          `,
+          background: colors.surface,
+          boxShadow: colors.boxShadow,
         }}
       >
         {/* Surface shimmer - light sweep */}

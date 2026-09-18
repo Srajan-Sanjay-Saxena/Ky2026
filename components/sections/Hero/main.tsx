@@ -30,7 +30,6 @@ export function HeroSection() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const riverRef = useRef<HTMLDivElement>(null);
   const ghatsRef = useRef<HTMLDivElement>(null);
-  const welcomeFlagRef = useRef<HTMLDivElement>(null);
   const kitesRef = useRef<HTMLDivElement>(null);
 
   // Get current time-based sky configuration
@@ -82,7 +81,6 @@ export function HeroSection() {
     const ctx = gsap.context(() => {
       gsap.set(templeRef.current, { y: 250, opacity: 0 });
       gsap.set(ghatsRef.current, { x: -250, opacity: 0 });
-      gsap.set(welcomeFlagRef.current, { y: -100, opacity: 0, scale: 0.8 });
 
       const tl = gsap.timeline({ delay: 0.8 });
 
@@ -110,17 +108,6 @@ export function HeroSection() {
           ghatsRef.current,
           { x: -40, opacity: 1, duration: 0.5, ease: "none" },
           "<",
-        )
-        .to(
-          welcomeFlagRef.current,
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          },
-          ">0.2", // Start 0.2s after temple/ghats animation ends
         );
     }, containerRef);
 
@@ -152,7 +139,7 @@ export function HeroSection() {
         scale: 1,
         rotation: -10,
         duration: 0.8,
-        delay: 1.6, // After temple + welcome flag starts
+        delay: 1.6, // After temple + ghats animation
         ease: "power2.out",
       });
     }, containerRef);
@@ -295,51 +282,29 @@ export function HeroSection() {
       </MotionZone>
 
       {/* Celestial Body - Moon or Sun based on time of day */}
-      {/* Sun is smaller during morning (rising sun effect) */}
+      {/* Dawn sun positioned on right side (rising from horizon), others centered */}
       <div
         ref={celestialRef}
-        className={`absolute top-[2%] sm:top-[3%] left-1/2 -translate-x-1/2 z-5 ${
+        className={`absolute z-5 ${
           showMoon
-            ? "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" // Original moon size
-            : timeOfDay === "morning"
-              ? "w-12 h-12 sm:w-14 sm:h-14" // Smaller sun in morning only
-              : "w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" // Normal sun size
+            ? "top-[2%] sm:top-[3%] left-1/2 -translate-x-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" // Moon - centered, high
+            : timeOfDay === "dawn"
+              ? "top-[12%] sm:top-[8%] right-[8%] sm:right-[12%] w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20" // Dawn - right side, rising
+              : timeOfDay === "morning"
+                ? "top-[5%] sm:top-[6%] left-1/2 -translate-x-1/2 w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24" // Morning - centered, rising
+                : "top-[2%] sm:top-[3%] left-1/2 -translate-x-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28" // Afternoon/evening - centered, high
         }`}
         style={{ transition: "all 1s ease-in-out" }}
       >
         {showMoon ? (
           <Moon className="w-full h-full" isMobile={isMobile} />
         ) : (
-          <Sun className="w-full h-full" isMobile={isMobile} />
+          <Sun className="w-full h-full" isMobile={isMobile} variant={timeOfDay === "dawn" ? "dawn" : "day"} />
         )}
       </div>
 
-      {/* Welcome Flag - Desktop only, top-right, tilted with wave animation */}
-      <div
-        ref={welcomeFlagRef}
-        className="hidden sm:block absolute -top-[5%] right-[0%] w-[26vw] max-w-[450px] pointer-events-none z-15"
-        style={{
-          transform: "rotate(15deg)",
-          transformOrigin: "left top",
-          opacity: 0, // Start hidden, GSAP will animate it in
-        }}
-      >
-        <Image
-          src={IMAGES.misc.welcomeFlag}
-          alt="Welcome to Kashi Yatra"
-          width={400}
-          height={250}
-          className="w-full h-auto"
-          style={{
-            animation: "flagWave 3s ease-in-out infinite",
-            transformOrigin: "left center",
-            filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))",
-          }}
-        />
-      </div>
-
-      {/* Kites - Desktop only, top-left, hidden at night */}
-      {timeOfDay !== "night" && (
+      {/* Kites - Desktop only, top-left, hidden at night and dawn */}
+      {timeOfDay !== "night" && timeOfDay !== "dawn" && (
         <div
           ref={kitesRef}
           className="hidden sm:block absolute top-[8%] left-[5%] w-[20vw] max-w-[280px] pointer-events-none z-50"

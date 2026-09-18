@@ -369,9 +369,11 @@ export type TimeOfDay =
   | "night";
 
 // Dawn - Early morning, sun just rising (5:00 - 7:00)
+// Cooler tones: deep blue transitioning through soft lavender/pink to pale peach/gold
 export const GRADIENT_SKY_DAWN = `linear-gradient(180deg, 
-  #1a1a2e 0%, #2d2040 8%, #4a3055 16%, #6d4070 24%, #8b5080 32%,
-  #b06888 40%, #d4847a 50%, #e8a070 60%, #f5bc6a 72%, #fcd472 84%, #ffe580 100%
+  #1a2040 0%, #252850 8%, #303565 16%, #3d4578 24%, #4a5588 32%,
+  #5a6898 40%, #7080a8 48%, #9098b8 56%, #b0a8c0 64%,
+  #d0b8c8 72%, #e8c8c0 80%, #f5d8b8 88%, #fce8b0 94%, #fff4c0 100%
 )`;
 
 // Morning - Bright daylight (7:00 - 11:00)
