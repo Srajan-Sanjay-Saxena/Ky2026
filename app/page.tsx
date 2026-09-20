@@ -5,15 +5,15 @@ import {
   BanarasiVibesSection,
   FooterSection,
   FestHighlightsSection,
-} from "@/components/sections";
-import { ScrollNavbar } from "@/components/navbar/Navbar";
+} from "@/components/pages/home/sections";
+import { Navbar } from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
     <main>
       {/* Page-level navbar: hidden over the Hero, revealed for every section
           below it. Sits above all section wrappers so nothing paints over it. */}
-      <ScrollNavbar />
+      <Navbar />
 
       <div className="sticky top-0 h-screen z-0">
         <HeroSection />

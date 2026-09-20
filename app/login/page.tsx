@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Navbar } from "@/components/navbar/NavbarDesign";
+import { NavbarDesign as Navbar } from "@/components/navbar/Design";
 
 // Royal color palette
 const ROYAL_COLORS = {

@@ -1,0 +1,1 @@
+export { FestHighlightsSection } from "./main";

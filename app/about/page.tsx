@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { AboutPageContent } from "./AboutPageContent";
+import { AboutPageContent } from "@/components/pages/about/AboutPageContent";
 
 export const metadata: Metadata = {
   title: "About | Kashi Yatra 2027",

@@ -1,1 +1,0 @@
-export { MobileTemple } from "./MobileTemple";

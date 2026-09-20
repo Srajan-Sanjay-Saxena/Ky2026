@@ -1,7 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCategoryBySlug, getAllCategorySlugs } from "@/config/events.config";
-import { CategoryPageContent } from "./CategoryPageContent";
+import {
+  getCategoryBySlug,
+  getAllCategorySlugs,
+} from "@/components/pages/events/config/events.config";
+import { CategoryPageContent } from "@/components/pages/events/CategoryPageContent";
 
 interface PageProps {
   params: Promise<{ category: string }>;

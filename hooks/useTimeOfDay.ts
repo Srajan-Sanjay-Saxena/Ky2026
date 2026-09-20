@@ -8,7 +8,7 @@ import {
   SHOW_STARS,
   STARS_OPACITY,
   getTimeOfDay,
-} from "@/components/constants/palette";
+} from "@/components/pages/home/constants/palette";
 
 interface TimeOfDayState {
   timeOfDay: TimeOfDay;
@@ -26,7 +26,7 @@ const DEV_TIME_OVERRIDE: TimeOfDay | null = null; // Change to null for producti
 /**
  * Hook that returns current time of day and associated sky configuration.
  * Updates every minute to check for time period changes.
- * 
+ *
  * Time periods:
  * - Dawn:      5:00 - 7:00
  * - Morning:   7:00 - 11:00
@@ -38,7 +38,7 @@ const DEV_TIME_OVERRIDE: TimeOfDay | null = null; // Change to null for producti
 export function useTimeOfDay(): TimeOfDayState {
   const [state, setState] = useState<TimeOfDayState>(() => {
     // Use override if set, otherwise default to night for SSR
-    const defaultTime: TimeOfDay = DEV_TIME_OVERRIDE ?? 'night';
+    const defaultTime: TimeOfDay = DEV_TIME_OVERRIDE ?? "night";
     return {
       timeOfDay: defaultTime,
       gradient: TIME_GRADIENTS[defaultTime],

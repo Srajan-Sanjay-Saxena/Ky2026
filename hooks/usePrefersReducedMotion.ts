@@ -5,6 +5,14 @@ import { useState, useEffect } from "react";
 const QUERY = "(prefers-reduced-motion: reduce)";
 
 /**
+ * It's an accessibility feature that detects if the user has enabled "reduce motion" in their device settings.
+
+ *  Why people use it
+   - Motion sickness / vestibular disorders (animations make them dizzy/nauseous)
+   - Epilepsy (some animations can trigger seizures)
+   - ADHD / focus issues (animations are distracting)
+   - Just personal preference
+
  * Hook to detect user's reduced motion preference.
  * 
  * Returns true if user has enabled "Reduce Motion" in their OS settings.
@@ -19,7 +27,6 @@ const QUERY = "(prefers-reduced-motion: reduce)";
  *   gsap.to(ref.current, { rotation: 360, repeat: -1 });
  * }, [prefersReducedMotion]);
  * 
- * // Simplify Framer Motion (though MotionConfig handles this automatically)
  * <motion.div animate={prefersReducedMotion ? {} : { y: [0, -10, 0] }} />
  */
 export function usePrefersReducedMotion(): boolean {
