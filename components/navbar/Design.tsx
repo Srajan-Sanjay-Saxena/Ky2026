@@ -19,15 +19,20 @@ import { NavBadge } from "./common/NavBadge";
  *   - NavbarDesktop (md+) - Primary nav links and secondary links
  *   - NavbarMobile (< md) - Hamburger menu with dropdown
  */
+
+type NavPositionType = "fixed" | "sticky" | "relative" | "absolute";
+
+type NavbarDesignProps = {
+  className: string;
+  position: NavPositionType;
+  topOffset: number;
+};
+
 export function NavbarDesign({
   className = "",
   position = "fixed",
   topOffset = 0,
-}: {
-  className?: string;
-  position?: "fixed" | "absolute" | "sticky" | "relative";
-  topOffset?: number;
-}) {
+}: NavbarDesignProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
