@@ -23,9 +23,9 @@ import { NavBadge } from "./common/NavBadge";
 type NavPositionType = "fixed" | "sticky" | "relative" | "absolute";
 
 type NavbarDesignProps = {
-  className: string;
-  position: NavPositionType;
-  topOffset: number;
+  className?: string;
+  position?: NavPositionType;
+  topOffset?: number;
 };
 
 export function NavbarDesign({

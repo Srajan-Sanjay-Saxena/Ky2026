@@ -404,12 +404,18 @@ export const PassCard = memo(function PassCard({
           {/* Internal flip container */}
           <div
             className="relative flex-1 flex items-center justify-center p-3 cursor-pointer z-10"
-            style={{ perspective: "800px" }}
+            style={{ 
+              perspective: "800px",
+              WebkitPerspective: "800px",
+            }}
             onClick={handleFlip}
           >
             <motion.div
               className="relative w-full h-full"
-              style={{ transformStyle: "preserve-3d" }}
+              style={{ 
+                transformStyle: "preserve-3d",
+                WebkitTransformStyle: "preserve-3d",
+              }}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
               transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             >
@@ -419,6 +425,8 @@ export const PassCard = memo(function PassCard({
                 style={{
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
+                  transform: "rotateY(0deg)", // Explicit transform for Safari
+                  zIndex: isFlipped ? 0 : 1,
                 }}
               >
                 {isMobile ? (
@@ -510,6 +518,7 @@ export const PassCard = memo(function PassCard({
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
                   transform: "rotateY(180deg)",
+                  zIndex: isFlipped ? 1 : 0,
                 }}
               >
                 {/* Rich gradient background */}
