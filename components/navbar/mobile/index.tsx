@@ -79,7 +79,7 @@ export const NavbarMobile = memo(function NavbarMobile() {
         {/* Faint mystical mandala watermark - center */}
         <span
           aria-hidden
-          className="naksha-mandala absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          className="naksha-mandala absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-[spin_60s_linear_infinite]"
           style={{
             width: "78%",
             aspectRatio: "1",
@@ -89,6 +89,7 @@ export const NavbarMobile = memo(function NavbarMobile() {
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            willChange: "transform",
           }}
         />
 

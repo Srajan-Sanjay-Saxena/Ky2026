@@ -16,11 +16,11 @@ export const BHUGate = memo(function BHUGate({ ref }: BHUGateProps) {
   return (
     <div
       ref={ref}
-      className="absolute left-1/2 -translate-x-1/2 w-[85%] sm:w-[65%] md:w-[55%] lg:w-[48%] bottom-[60px] sm:bottom-[-150px]"
+      className="absolute left-[50.7%] -translate-x-1/2 w-[85%] sm:w-[48%] bottom-[50px] sm:bottom-[-170px]"
       style={{ zIndex: 10 }}
     >
       {/* Mahamana statue - positioned in center archway */}
-      <div className="absolute left-1/2 -translate-x-1/2 w-[58%] sm:w-[45%] z-[5] bottom-[50px] sm:bottom-[280px]">
+      <div className="absolute left-1/2 -translate-x-1/2 w-[58%] sm:w-[58%] z-[5] bottom-[50px] sm:bottom-[292px]">
         <Image
           src={IMAGES.vibes.mahamana}
           alt="Mahamana Malviya"

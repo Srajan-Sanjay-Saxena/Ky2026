@@ -1,1 +1,0 @@
-export { FestivalVibesSection } from "./main";

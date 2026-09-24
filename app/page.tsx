@@ -1,7 +1,7 @@
 import {
   HeroSection,
   ProNitesSection,
-  FestivalVibesSection,
+  TheExperience,
   BanarasiVibesSection,
   FooterSection,
   FestHighlightsSection,
@@ -22,7 +22,7 @@ export default function Home() {
         <ProNitesSection />
       </div>
       <div className="relative z-15">
-        <FestivalVibesSection />
+        <TheExperience />
       </div>
       <div className="sticky top-0 z-20">
         <BanarasiVibesSection />

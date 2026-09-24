@@ -87,6 +87,93 @@ function BanarasiVibesContent() {
         }}
       />
 
+      {/* Top Text Content - simple and clean */}
+      <div className="absolute top-3 sm:top-5 md:top-6 left-0 right-0 z-[35] pointer-events-none">
+        <div className="text-center px-4">
+          {/* Main heading - no box, just text with shadow */}
+          <h2
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2"
+            style={{
+              fontFamily: "'Cinzel Decorative', serif",
+              color: "#FFD700",
+              textShadow: "0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7), 0 0 40px rgba(255,215,0,0.3)",
+            }}
+          >
+            The Spirit of Banaras
+          </h2>
+          
+          {/* Simple divider */}
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span
+              className="h-[1px] w-10 sm:w-16"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.6))" }}
+            />
+            <span className="text-xs sm:text-sm" style={{ color: "#FFD700" }}>✦</span>
+            <span
+              className="h-[1px] w-10 sm:w-16"
+              style={{ background: "linear-gradient(90deg, rgba(255,215,0,0.6), transparent)" }}
+            />
+          </div>
+
+          {/* Key highlights - inline */}
+          <div className="flex items-center justify-center gap-3 sm:gap-6 mb-3">
+            <span
+              className="text-[10px] sm:text-xs tracking-wider"
+              style={{
+                color: "#FFD700",
+                textShadow: "0 1px 4px rgba(0,0,0,0.9)",
+                fontFamily: "'Cinzel', serif",
+              }}
+            >
+              ✦ Music
+            </span>
+            <span
+              className="text-[10px] sm:text-xs tracking-wider"
+              style={{
+                color: "#FFD700",
+                textShadow: "0 1px 4px rgba(0,0,0,0.9)",
+                fontFamily: "'Cinzel', serif",
+              }}
+            >
+              ✦ Dance
+            </span>
+            <span
+              className="text-[10px] sm:text-xs tracking-wider"
+              style={{
+                color: "#FFD700",
+                textShadow: "0 1px 4px rgba(0,0,0,0.9)",
+                fontFamily: "'Cinzel', serif",
+              }}
+            >
+              ✦ Art
+            </span>
+            <span
+              className="text-[10px] sm:text-xs tracking-wider"
+              style={{
+                color: "#FFD700",
+                textShadow: "0 1px 4px rgba(0,0,0,0.9)",
+                fontFamily: "'Cinzel', serif",
+              }}
+            >
+              ✦ Culture
+            </span>
+          </div>
+
+          {/* Subtitle - simple text */}
+          <p
+            className="text-xs sm:text-sm md:text-base"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              color: "#FDF6E3",
+              textShadow: "0 2px 6px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.7)",
+              letterSpacing: "0.05em",
+            }}
+          >
+            Where ancient traditions dance with timeless grace
+          </p>
+        </div>
+      </div>
+
       {/* Desktop-only elements */}
       <BanarasiVibesDesktop
         isAnimating={isAnimating}

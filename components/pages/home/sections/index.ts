@@ -1,6 +1,6 @@
 export { HeroSection } from "./Hero";
 export { FestHighlightsSection } from "./FestHighlights";
-export { FestivalVibesSection } from "./FestivalVibes";
+export { TheExperience } from "./TheExperience";
 export { PassesSection } from "@/components/pages/passes";
 export { ProNitesSection } from "./ProNites";
 export { BanarasiVibesSection } from "./BanarasiVibes";

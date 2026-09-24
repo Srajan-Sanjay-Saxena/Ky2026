@@ -5,10 +5,11 @@ import { OuterMandala } from "./OuterMandala";
 import { InnerMandala } from "./InnerMandala";
 import { KashiYatraText } from "./KashiYatraText";
 import { MobileTagline } from "./MobileTagline";
+import { IMAGES } from "@/lib/images";
 
 /**
  * Mobile-only elements for BanarasiVibes section
- * Shows: Mandala Rangoli, Glowing Diya with Kashi Yatra text, Tagline
+ * Shows: Mandala Rangoli, Glowing Diya with Kashi Yatra text, Tagline, Static Auto
  * Hidden on sm+ (>= 640px)
  */
 export const BanarasiVibesMobile = memo(function BanarasiVibesMobile() {
@@ -39,6 +40,29 @@ export const BanarasiVibesMobile = memo(function BanarasiVibesMobile() {
 
       {/* Tagline */}
       <MobileTagline />
+
+      {/* Static Auto Rickshaw - Mobile only */}
+      <div
+        className="sm:hidden absolute w-[70px] h-[50px] pointer-events-none"
+        style={{
+          right: "15%",
+          bottom: "58px",
+          zIndex: 35,
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={IMAGES.vibes.rickshaw}
+          alt="Auto Rickshaw"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            filter: "drop-shadow(2px 2px 6px rgba(0,0,0,0.5))",
+            transform: "scaleX(-1)",
+          }}
+        />
+      </div>
     </>
   );
 });

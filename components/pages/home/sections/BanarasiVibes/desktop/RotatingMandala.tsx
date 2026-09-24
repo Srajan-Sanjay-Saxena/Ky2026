@@ -15,7 +15,7 @@ export const RotatingMandala = memo(function RotatingMandala({
 }: RotatingMandalaProps) {
   return (
     <div
-      className="pointer-events-none hidden sm:block absolute left-1/2 -translate-x-1/2 top-[4%] w-[420px] h-[420px] md:w-[520px] md:h-[520px] lg:w-[600px] lg:h-[600px] opacity-40"
+      className="pointer-events-none hidden sm:block absolute left-1/2 -translate-x-1/2 top-[12%] w-[380px] h-[380px] md:w-[480px] md:h-[480px] lg:w-[550px] lg:h-[550px] opacity-35"
       style={{ zIndex: 5 }}
     >
       <Image

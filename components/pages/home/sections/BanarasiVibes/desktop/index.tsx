@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, RefObject } from "react";
 import { RotatingMandala } from "./RotatingMandala";
 import { GangaAartiSaint } from "./GangaAartiSaint";
 import { BharatnatyamDancer } from "./BharatnatyamDancer";
@@ -9,7 +9,7 @@ import { Rickshaw } from "./Rickshaw";
 interface BanarasiVibesDesktopProps {
   isAnimating: boolean;
   prefersReducedMotion: boolean;
-  rickshawRef?: React.Ref<HTMLDivElement>;
+  rickshawRef?: RefObject<HTMLDivElement | null>;
 }
 
 /**

@@ -7,12 +7,13 @@ import { JAZZ_COLORS } from "@/components/pages/home/constants/palette";
 import { EXPERIENCES } from "./data/experiences.config";
 import { JazzTile } from "./tiles";
 import { SectionTitle } from "./decorations";
-import { SareeDrape } from "./desktop";
-import { FloatingOrbs } from "./desktop";
-import { MobileDJ } from "./mobile";
-import { BackgroundDecor, BottomBorder, DesktopDJ } from "./desktop";
 import { MotionZone } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks";
+import { BackgroundDecor, BottomBorder } from "./desktop/BackgroundDecor";
+import { FloatingOrbs } from "./desktop/FloatingOrbs";
+import { SareeDrape } from "./desktop/SareeDrape";
+import { DesktopDJ } from "./desktop/DesktopDJ";
+import { MobileDJ } from "./mobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 // MAIN FESTIVAL VIBES SECTION
 // ═══════════════════════════════════════════════════════════════════
 
-export const FestivalVibesSection = memo(function FestivalVibesSection() {
+export const TheExperience = memo(function TheExperience() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const tilesRef = useRef<HTMLDivElement>(null);

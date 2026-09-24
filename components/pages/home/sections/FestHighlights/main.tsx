@@ -10,6 +10,7 @@ import {
   TempleBell,
   BackgroundMandala,
 } from "./common";
+import { MerchIcon, FoodIcon, AccommodationIcon, CulturalAccessIcon } from "./icons";
 import { IMAGES } from "@/lib/images";
 import { MotionZone, useMotionZone } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks";
@@ -18,16 +19,24 @@ import { FloatingParticles, GoddessDurga } from "./desktop";
 
 const highlights = [
   {
-    icon: "🎭",
-    title: "Cultural Nights",
-    desc: "Classical dance & music performances",
+    icon: MerchIcon,
+    title: "Exclusive Merch",
+    desc: "Premium hoodies & festival gear",
   },
-  { icon: "🎪", title: "Grand Stage", desc: "State-of-the-art sound & lights" },
-  { icon: "🏆", title: "Competitions", desc: "Win from ₹10L+ prize pool" },
+  { 
+    icon: FoodIcon, 
+    title: "Delicious Food", 
+    desc: "Authentic Banarasi cuisine & snacks" 
+  },
+  { 
+    icon: AccommodationIcon, 
+    title: "Accommodation", 
+    desc: "Comfortable stay on IIT BHU campus" 
+  },
   {
-    icon: "🎤",
-    title: "Pro Shows",
-    desc: "Celebrity performances & DJ nights",
+    icon: CulturalAccessIcon,
+    title: "Cultural Access",
+    desc: "Entry to all events & pro-shows",
   },
 ];
 
@@ -248,26 +257,49 @@ function FestHighlightsContent() {
               ref={contentRef}
               className="w-full lg:w-[55%] xl:w-[50%] text-center lg:text-center"
             >
+              {/* Royal top ornament */}
+              <div className="flex items-center justify-center gap-3 mb-4 sm:mb-6">
+                <span
+                  className="h-[1px] w-12 sm:w-20"
+                  style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.6))" }}
+                />
+                <span className="text-lg sm:text-xl" style={{ color: "#FFD700" }}>༺ ✦ ༻</span>
+                <span
+                  className="h-[1px] w-12 sm:w-20"
+                  style={{ background: "linear-gradient(90deg, rgba(255,215,0,0.6), transparent)" }}
+                />
+              </div>
+
               <h2
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 whitespace-nowrap"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4"
                 style={{
                   textShadow: "0 0 30px rgba(255,215,0,0.5)",
+                  fontFamily: "'Cinzel Decorative', serif",
                 }}
               >
                 <span style={{ color: "#FFD700" }}>The Grand </span>
                 <span style={{ color: "#FF4500" }}>Cultural Fest</span>
               </h2>
 
+              {/* Subtitle */}
               <p
-                className="text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 opacity-85 max-w-lg mx-auto"
-                style={{ color: "#FDF6E3" }}
+                className="text-xs sm:text-sm tracking-[0.3em] uppercase mb-4 sm:mb-5"
+                style={{ color: "#FF6B00", fontWeight: 600 }}
               >
-                Three electrifying days of music, dance, and unforgettable
-                experiences.
+                ॥ What Awaits You ॥
+              </p>
+
+              <p
+                className="text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 opacity-90 max-w-xl mx-auto"
+                style={{ color: "#FDF6E3", lineHeight: "1.8" }}
+              >
+                Experience four electrifying days of music, dance, and unforgettable moments. 
+                From exclusive merchandise to authentic Banarasi flavors — we&apos;ve got everything 
+                to make your Kashi Yatra truly memorable.
               </p>
 
               {/* Highlight Cards - Royal ornate design - First 2 on mobile, all 4 on desktop */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                 {highlights.map((item, i) => (
                   <div
                     key={i}
@@ -309,13 +341,14 @@ function FestHighlightsContent() {
                     />
 
                     <span className="text-2xl sm:text-4xl mb-2 sm:mb-3 block relative z-10">
-                      {item.icon}
+                      <item.icon size={40} className="mx-auto" />
                     </span>
                     <h4
                       className="font-bold text-[#FFD700] text-xs sm:text-base mb-1 sm:mb-1.5 relative z-10 uppercase tracking-wider"
                       style={{
-                        fontFamily: "var(--font-ethereal), serif",
+                        fontFamily: "'Cinzel', serif",
                         textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+                        letterSpacing: "0.15em",
                       }}
                     >
                       {item.title}

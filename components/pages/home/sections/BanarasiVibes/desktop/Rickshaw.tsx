@@ -1,10 +1,10 @@
 "use client";
 
-import { memo } from "react";
+import { memo, RefObject } from "react";
 import { IMAGES } from "@/lib/images";
 
 interface RickshawProps {
-  ref?: React.Ref<HTMLDivElement>;
+  ref?: RefObject<HTMLDivElement | null>;
 }
 
 export const Rickshaw = memo(function Rickshaw({ ref }: RickshawProps) {

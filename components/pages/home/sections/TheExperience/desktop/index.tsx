@@ -1,10 +1,10 @@
 "use client";
 
 import { memo } from "react";
+import { BackgroundDecor } from "./BackgroundDecor";
+import { DesktopDJ } from "./DesktopDJ";
 import { FloatingOrbs } from "./FloatingOrbs";
 import { SareeDrape } from "./SareeDrape";
-import { BackgroundDecor, BottomBorder } from "./BackgroundDecor";
-import { DesktopDJ } from "./DesktopDJ";
 
 interface FestivalVibesDesktopProps {
   djRef?: React.Ref<HTMLDivElement>;
@@ -34,9 +34,3 @@ export const FestivalVibesDesktop = memo(function FestivalVibesDesktop({
     </>
   );
 });
-
-// Re-export for backward compatibility
-export { FloatingOrbs } from "./FloatingOrbs";
-export { SareeDrape } from "./SareeDrape";
-export { BackgroundDecor, BottomBorder } from "./BackgroundDecor";
-export { DesktopDJ } from "./DesktopDJ";
