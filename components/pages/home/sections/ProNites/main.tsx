@@ -13,6 +13,7 @@ import {
   TopBorder,
   BottomBorder,
   GridOverlay,
+  CrowdSilhouette,
 } from "./common";
 import { MotionZone } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks";
@@ -132,6 +133,9 @@ export const ProNitesSection = memo(function ProNitesSection() {
             </div>
           </div>
         </div>
+
+        {/* Crowd Silhouette at bottom */}
+        <CrowdSilhouette />
 
         <BottomBorder />
       </section>

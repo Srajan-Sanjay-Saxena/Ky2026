@@ -74,6 +74,7 @@ function BanarasiVibesContent() {
       style={{
         borderRadius: "24px 24px 0 0",
         boxShadow: "0 -20px 60px rgba(0,0,0,0.8)",
+        backgroundColor: "#1a1a1a", // Fallback to match road color
       }}
     >
       {/* Background image */}
@@ -88,7 +89,7 @@ function BanarasiVibesContent() {
       />
 
       {/* Top Text Content - simple and clean */}
-      <div className="absolute top-3 sm:top-5 md:top-6 left-0 right-0 z-[35] pointer-events-none">
+      <div className="absolute top-8 sm:top-5 md:top-6 left-0 right-0 z-[35] pointer-events-none">
         <div className="text-center px-4">
           {/* Main heading - no box, just text with shadow */}
           <h2
@@ -193,7 +194,7 @@ function BanarasiVibesContent() {
       {/* Common: Lamp Post */}
       <MotionZone
         className="absolute left-[2%] sm:left-[20%] w-10 h-32 sm:w-30 sm:h-80"
-        style={{ bottom: "70px", zIndex: 28 }}
+        style={{ bottom: "45px", zIndex: 28 }}
       >
         <LampPost className="w-full h-full" />
       </MotionZone>

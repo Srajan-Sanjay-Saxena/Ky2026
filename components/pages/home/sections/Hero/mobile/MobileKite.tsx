@@ -15,7 +15,7 @@ export const MobileKite = memo(function MobileKite() {
       style={{ transform: "rotate(-10deg)" }}
     >
       <Image
-        src={IMAGES.misc.kites}
+        src={IMAGES.hero.kites}
         alt="Flying Kites"
         width={350}
         height={300}

@@ -18,7 +18,7 @@ import { Kandeels } from "@/components/pages/home/sections/Hero/desktop";
 import { DriftingClouds } from "@/components/pages/home/sections/Hero/desktop";
 import { EmberField } from "@/components/pages/home/sections/Hero/desktop";
 import { MobileKite } from "@/components/pages/home/sections/Hero/mobile";
-import { TitleBadge } from "@/components/pages/home/sections/Hero/common";
+import { TitleBadge, Ghats } from "@/components/pages/home/sections/Hero/common";
 
 // Register plugin at module level (runs once when file is imported)
 gsap.registerPlugin(ScrollTrigger);
@@ -327,7 +327,7 @@ export function HeroSection() {
           }}
         >
           <Image
-            src={IMAGES.misc.kites}
+            src={IMAGES.hero.kites}
             alt="Flying Kites"
             width={350}
             height={300}
@@ -346,7 +346,7 @@ export function HeroSection() {
       {/* Title - Mobile optimized */}
       <h1
         ref={titleRef}
-        className="absolute top-[12%] sm:top-[14%] md:top-[18%] left-1/2 -translate-x-1/2 text-center z-20 w-full px-4"
+        className="absolute top-[12%] sm:top-[14%] md:top-[18%] left-1/2 -translate-x-1/2 text-center z-[1000] w-full px-4"
       >
         <Image
           src={IMAGES.hero.logo}
@@ -364,54 +364,8 @@ export function HeroSection() {
         <TitleBadge />
       </h1>
 
-      {/* GHAT PNG - Aligned with temple */}
-      <div
-        ref={ghatsRef}
-        className="absolute bottom-[24.5%] sm:bottom-[0.5%] left-[3%] sm:left-[-3%] w-[57%] sm:w-[55%]"
-        style={{
-          zIndex: Z_HERO.GHATS,
-        }}
-      >
-        {/* Soft divine glow behind ghats - Desktop only */}
-        <div
-          className="hidden sm:block absolute top-[20%] left-1/2 -translate-x-1/2 w-[70%] h-[50%] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse, rgba(255,150,150,0.15) 0%, transparent 70%)",
-            animation: "ghatsAura 3s ease-in-out infinite",
-          }}
-        />
-
-        {/* Subtle floating light particles - Desktop only */}
-        <div className="hidden sm:block">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={`ghat-particle-${i}`}
-              className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
-              style={{
-                left: `${25 + (i % 3) * 25}%`,
-                top: `${30 + Math.floor(i / 3) * 20}%`,
-                background:
-                  i % 2 === 0
-                    ? "radial-gradient(circle, #FFB6C1 0%, transparent 70%)"
-                    : "radial-gradient(circle, #FF6B6B 0%, transparent 70%)",
-                animation: `floatParticle ${2.5 + (i % 3)}s ease-in-out infinite`,
-                animationDelay: `${i * 0.3}s`,
-                boxShadow: "0 0 8px rgba(255,150,150,0.6)",
-              }}
-            />
-          ))}
-        </div>
-
-        <Image
-          src={IMAGES.hero.ghats}
-          alt="Varanasi Ghats"
-          width={1000}
-          height={600}
-          className="w-full h-auto max-h-[26vh] sm:max-h-[100vh] object-contain sm:drop-shadow-[0_0_20px_rgba(255,100,100,0.4)]"
-          priority
-        />
-      </div>
+      {/* GHATS - Day/Night variants with different positioning */}
+      <Ghats ref={ghatsRef} timeOfDay={timeOfDay} />
 
       {/* TEMPLE PNG - Highest z-index, aligned with ghats */}
       <div

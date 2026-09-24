@@ -22,7 +22,7 @@ export const SareeDrape = memo(function SareeDrape() {
       }}
     >
       <Image
-        src={IMAGES.misc.sareeDrape}
+        src={IMAGES.festivalVibes.sareeDrape}
         alt=""
         width={1200}
         height={1600}

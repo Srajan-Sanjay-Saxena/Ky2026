@@ -11,7 +11,7 @@ import { CONCERT_COLORS } from "../constants";
  */
 export const DancingGirlFestiveVibes = memo(function DancingGirlFestiveVibes() {
   return (
-    <div className="absolute top-[15%] -left-[15%] w-[58vw] max-w-[1150px] pointer-events-none z-[40]">
+    <div className="absolute top-[15%] sm:top-[3%] -left-[2%] w-[38vw] pointer-events-none z-[40]">
       {/* Glow behind DancingGirlFestiveVibes - subtle dark blue */}
       <div
         className="absolute inset-0"
@@ -24,7 +24,7 @@ export const DancingGirlFestiveVibes = memo(function DancingGirlFestiveVibes() {
 
       {/* DancingGirlFestiveVibes image - Static */}
       <Image
-        src={IMAGES.misc.DancingGirlFestiveVibes}
+        src={IMAGES.proNites.aerobics}
         alt="DancingGirlFestiveVibes"
         width={400}
         height={500}
@@ -44,52 +44,50 @@ export const DancingGirlFestiveVibes = memo(function DancingGirlFestiveVibes() {
  */
 export const GlowingMoon = memo(function GlowingMoon() {
   return (
-    <div className="absolute -top-[36vh] -right-[100vw] w-[180vw] aspect-square sm:-top-[50%] sm:left-auto sm:-right-[55%] sm:w-[110vw] pointer-events-none z-[1]">
-      {/* Radiance rings - white glow rings around moon */}
+    <div className="absolute -top-[36vh] -right-[100vw] w-[180vw] aspect-square sm:-top-[50%] sm:left-auto sm:-right-[45%] sm:w-[90vw] pointer-events-none z-[1]">
+      {/* Radiance rings - bluish-white glow rings around moon */}
       <div
         className="absolute inset-0 rounded-full"
         style={{
           background: `radial-gradient(circle, 
             transparent 35%, 
-            rgba(255,255,255,0.03) 40%, 
+            rgba(173,216,255,0.05) 40%, 
             transparent 45%,
-            rgba(255,255,255,0.02) 50%,
+            rgba(200,230,255,0.03) 50%,
             transparent 55%,
-            rgba(255,255,255,0.015) 60%,
+            rgba(180,220,255,0.02) 60%,
             transparent 65%
           )`,
-          transform: "scale(1.5)",
         }}
       />
 
-      {/* Inner white glow */}
+      {/* Inner bluish-white glow */}
       <div
         className="absolute inset-0 rounded-full"
         style={{
-          background: `radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(220,220,255,0.08) 20%, transparent 50%)`,
+          background: `radial-gradient(circle, rgba(200,230,255,0.2) 0%, rgba(150,200,255,0.1) 20%, transparent 50%)`,
           filter: "blur(40px)",
           transform: "scale(1.1)",
         }}
       />
 
-      {/* Soft outer white radiance */}
+      {/* Soft outer bluish-white radiance */}
       <div
         className="absolute inset-0 rounded-full"
         style={{
-          background: `radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(200,210,255,0.03) 30%, transparent 60%)`,
+          background: `radial-gradient(circle, rgba(180,220,255,0.08) 0%, rgba(140,190,255,0.04) 30%, transparent 60%)`,
           filter: "blur(80px)",
-          transform: "scale(1.4)",
         }}
       />
 
       {/* Moon image - static on mobile, slow rotation on desktop (via CSS class) */}
       <Image
-        src={IMAGES.misc.moonBg}
+        src={IMAGES.proNites.moon}
         alt=""
         fill
         className="object-contain pronites-moon-rotate"
         style={{
-          filter: `drop-shadow(0 0 40px rgba(255,255,255,0.25)) drop-shadow(0 0 80px rgba(220,220,255,0.15)) drop-shadow(0 0 120px rgba(180,180,220,0.1))`,
+          filter: `drop-shadow(0 0 40px rgba(180,220,255,0.3)) drop-shadow(0 0 80px rgba(150,200,255,0.2)) drop-shadow(0 0 120px rgba(120,180,255,0.15))`,
         }}
         priority
       />
@@ -168,5 +166,35 @@ export const GridOverlay = memo(function GridOverlay() {
         backgroundSize: "60px 60px",
       }}
     />
+  );
+});
+
+/**
+ * CrowdSilhouette - Concert crowd at the bottom
+ * Shows on both mobile and desktop
+ */
+export const CrowdSilhouette = memo(function CrowdSilhouette() {
+  return (
+    <div className="hidden sm:block sm:absolute sm:-bottom-[150px] h-[100px] sm:h-[400px] sm:w-[1500px] pointer-events-none z-[500]">
+      {/* Glow behind the crowd */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-full"
+        style={{
+          background: `linear-gradient(to top, rgba(100,80,180,0.3) 0%, transparent 70%)`,
+        }}
+      />
+      
+      {/* Silhouette image */}
+      <Image
+        src={IMAGES.proNites.silhouette}
+        alt=""
+        fill
+        className="object-cover object-bottom"
+        style={{
+          opacity: 0.85,
+          filter: "drop-shadow(0 -5px 20px rgba(100,80,180,0.4))",
+        }}
+      />
+    </div>
   );
 });

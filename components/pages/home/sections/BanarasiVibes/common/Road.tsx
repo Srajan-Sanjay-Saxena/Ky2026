@@ -4,27 +4,19 @@ import { memo } from "react";
 export const Road = memo(function Road() {
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 h-[120px] sm:h-[140px] md:h-[160px]"
+      className="absolute bottom-0 left-0 right-0 h-[80px] sm:h-[140px] md:h-[160px]"
       style={{ zIndex: 25 }}
     >
-      {/* Footpath/Sidewalk */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[25px]"
-        style={{
-          background:
-            "linear-gradient(180deg, #8B7355 0%, #A0826D 50%, #6B5344 100%)",
-        }}
-      />
       {/* Curb */}
       <div
-        className="absolute top-[25px] left-0 right-0 h-[8px]"
+        className="absolute top-0 left-0 right-0 h-[8px]"
         style={{
           background: "linear-gradient(180deg, #D4D4D4 0%, #9E9E9E 100%)",
         }}
       />
       {/* Main Road */}
       <div
-        className="absolute top-[33px] left-0 right-0 bottom-0"
+        className="absolute top-[8px] left-0 right-0 bottom-0"
         style={{
           background:
             "linear-gradient(180deg, #2C2C2C 0%, #1A1A1A 30%, #252525 70%, #1F1F1F 100%)",

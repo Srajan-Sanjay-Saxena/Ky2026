@@ -36,7 +36,7 @@ export const Z_HERO = {
 
   // Buildings
   TEMPLE: 50,
-  GHATS: 69,
+  GHATS: 71,
 
   // River elements (layered from bottom to top)
   RIVER: 70,

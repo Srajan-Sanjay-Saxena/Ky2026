@@ -16,7 +16,7 @@ export const MobileDJ = memo(function MobileDJ() {
       style={{ zIndex: 1, opacity: 0.85 }}
     >
       <Image
-        src={IMAGES.misc.dj}
+        src={IMAGES.festivalVibes.dj}
         alt="DJ"
         width={1200}
         height={1400}

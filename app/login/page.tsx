@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { NavbarDesign as Navbar } from "@/components/navbar/Design";
+import { IMAGES } from "@/lib/images";
 
 // Royal color palette
 const ROYAL_COLORS = {
@@ -95,7 +96,7 @@ export default function LoginPage() {
               />
 
               <Image
-                src="/mysticLogin.png"
+                src={IMAGES.login.mysticGate}
                 alt="Gateway to Kashi Yatra"
                 width={600}
                 height={800}

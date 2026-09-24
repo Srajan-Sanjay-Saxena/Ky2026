@@ -29,7 +29,7 @@ export const DesktopDJ = memo(
           }}
         />
         <Image
-          src={IMAGES.misc.dj}
+          src={IMAGES.festivalVibes.dj}
           alt="DJ"
           width={1200}
           height={1400}

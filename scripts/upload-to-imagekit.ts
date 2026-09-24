@@ -30,57 +30,105 @@ interface ImageToUpload {
 }
 
 // Define all images to upload with their target folders
+// Organized by: common/, desktop/, mobile/ subfolders
 const IMAGES_TO_UPLOAD: ImageToUpload[] = [
-  // Passes
-  // { localFile: "YatriPass_nobg.png", remoteName: "yatri-pass.png", folder: "/passes" },
-  // { localFile: "darbarPass_nobg.png", remoteName: "darbar-pass.png", folder: "/passes" },
-  // { localFile: "swarnimPass_nobg.png", remoteName: "swarnim-pass.png", folder: "/passes" },
+  // ============================================
+  // PASSES
+  // ============================================
+  { localFile: "passes/common/yatriPass.png", remoteName: "yatri-pass.png", folder: "/passes" },
+  { localFile: "passes/common/darbarPass.png", remoteName: "darbar-pass.png", folder: "/passes" },
+  { localFile: "passes/common/swarnimPass.png", remoteName: "swarnim-pass.png", folder: "/passes" },
 
-  // // Hero section
-  // { localFile: "kashiyatra.png", remoteName: "kashiyatra-logo.png", folder: "/hero" },
-  // { localFile: "ghats.png", remoteName: "ghats.png", folder: "/hero" },
-  // { localFile: "kashivishwanath.png", remoteName: "kashivishwanath-temple.png", folder: "/hero" },
-  // { localFile: "varanasiBack.png", remoteName: "varanasi-back.png", folder: "/hero" },
-  // { localFile: "stone.png", remoteName: "stepping-stone.png", folder: "/hero" },
+  // ============================================
+  // HERO SECTION - All common
+  // ============================================
+  { localFile: "home/hero/common/kashiyatra.png", remoteName: "kashiyatra-logo.png", folder: "/hero/common" },
+  { localFile: "home/hero/common/ghatsDay.png", remoteName: "ghats-day.png", folder: "/hero/common" },
+  { localFile: "home/hero/common/ghatsNight.png", remoteName: "ghats-night.png", folder: "/hero/common" },
+  { localFile: "home/hero/common/kashivishwanath.png", remoteName: "kashivishwanath-temple.png", folder: "/hero/common" },
+  { localFile: "home/hero/common/varanasiTownBG.png", remoteName: "varanasi-back.png", folder: "/hero/common" },
+  { localFile: "home/hero/common/stone.png", remoteName: "stepping-stone.png", folder: "/hero/common" },
+  { localFile: "home/hero/common/kites.png", remoteName: "kites.png", folder: "/hero/common" },
 
-  // // Navbar
-  // { localFile: "Nav.png", remoteName: "nav-bg.png", folder: "/navbar" },
-  // { localFile: "NavBadge.png", remoteName: "nav-badge.png", folder: "/navbar" },
+  // ============================================
+  // NAVBAR - All common
+  // ============================================
+  { localFile: "navbar/common/navBg.png", remoteName: "nav-bg.png", folder: "/navbar/common" },
+  { localFile: "navbar/common/navBadge.png", remoteName: "nav-badge.png", folder: "/navbar/common" },
 
-  // // Banarasi Vibes
-  // { localFile: "mahamana.png", remoteName: "mahamana.png", folder: "/vibes" },
-  // { localFile: "bhuGate.png", remoteName: "bhu-gate.png", folder: "/vibes" },
-  // { localFile: "rickshaw_nobg.png", remoteName: "rickshaw.png", folder: "/vibes" },
-  // { localFile: "lassi_nobg.png", remoteName: "lassi.png", folder: "/vibes" },
-  // { localFile: "malaiyo_nobg.png", remoteName: "malaiyo.png", folder: "/vibes" },
-  // { localFile: "paan_nobg.png", remoteName: "paan.png", folder: "/vibes" },
-  // { localFile: "tabla_sitar_nobg.png", remoteName: "tabla-sitar.png", folder: "/vibes" },
-  // { localFile: "vibesBG.png", remoteName: "vibes-bg.png", folder: "/vibes" },
-  // { localFile: "roads.png", remoteName: "roads.png", folder: "/vibes" },
+  // ============================================
+  // BANARASI VIBES SECTION
+  // ============================================
+  // Common
+  { localFile: "home/banarasiVibes/common/vibesBG.png", remoteName: "vibes-bg.png", folder: "/vibes/common" },
+  { localFile: "home/banarasiVibes/common/mahamana.png", remoteName: "mahamana.png", folder: "/vibes/common" },
+  { localFile: "home/banarasiVibes/common/bhuGate.png", remoteName: "bhu-gate.png", folder: "/vibes/common" },
+  { localFile: "home/banarasiVibes/common/rickshaw.png", remoteName: "rickshaw.png", folder: "/vibes/common" },
 
-  // // Fest Highlights
-  // { localFile: "durga.svg", remoteName: "durga.svg", folder: "/highlights" },
-  // { localFile: "durga_temple.svg", remoteName: "durga-temple.svg", folder: "/highlights" },
+  // Desktop-only
+  { localFile: "home/banarasiVibes/desktop/mandala.png", remoteName: "mandala.png", folder: "/vibes/desktop" },
+  { localFile: "home/banarasiVibes/desktop/gangaArtiSaint.png", remoteName: "ganga-aarti-saint.png", folder: "/vibes/desktop" },
+  { localFile: "home/banarasiVibes/desktop/bharatnatiyamDancer.png", remoteName: "bharatnatyam-dancer.png", folder: "/vibes/desktop" },
 
-  // // Misc
-  // { localFile: "lord_shiva.png", remoteName: "lord-shiva.png", folder: "/misc" },
-  // { localFile: "MoonBG.png", remoteName: "moon-bg.png", folder: "/misc" },
-  // { localFile: "DJ.png", remoteName: "dj.png", folder: "/misc" },
-  // { localFile: "silhoutte.png", remoteName: "concert-crowd.png", folder: "/misc" },
-  // { localFile: "SareeDrape.png", remoteName: "saree-drape.png", folder: "/misc" },
-  // { localFile: "welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
-  // { localFile: "kites.png", remoteName: "kites.png", folder: "/misc" },
-  { localFile: "DancingGirlFestiveVibes.png", remoteName: "DancingGirlFestiveVibes.png", folder: "/misc" },
+  // Mobile-only
+  { localFile: "home/banarasiVibes/mobile/rangoliBg.png", remoteName: "rangoli-bg.png", folder: "/vibes/mobile" },
+  { localFile: "home/banarasiVibes/mobile/trishul.png", remoteName: "trishul.png", folder: "/vibes/mobile" },
+  { localFile: "home/banarasiVibes/mobile/lotusPairs.png", remoteName: "lotus-pairs.png", folder: "/vibes/mobile" },
+  { localFile: "home/banarasiVibes/mobile/etherealDancer.png", remoteName: "ethereal-dancer.png", folder: "/vibes/mobile" },
+  { localFile: "home/banarasiVibes/mobile/diyaPairs.png", remoteName: "diya-pairs.png", folder: "/vibes/mobile" },
+  { localFile: "home/banarasiVibes/mobile/conchShell.png", remoteName: "conch-shell.png", folder: "/vibes/mobile" },
+  { localFile: "home/banarasiVibes/mobile/varanasiSaloutte.png", remoteName: "varanasi-silhouette.png", folder: "/vibes/mobile" },
 
-  // About page
-  // { localFile: "about/mandlaOrnament.png", remoteName: "mandala-ornament.png", folder: "/about" },
-  // { localFile: "about/peacock_nobg.png", remoteName: "peacock.png", folder: "/about" },
-  // { localFile: "about/omLotus.png", remoteName: "om-lotus.png", folder: "/about" },
-  // { localFile: "about/mysticDivider.png", remoteName: "mystic-divider.png", folder: "/about" },
-  // { localFile: "about/diyaCluster.png", remoteName: "diya-cluster.png", folder: "/about" },
-  // { localFile: "about/cornerOrnament.png", remoteName: "corner-ornament.png", folder: "/about" },
-  // { localFile: "about/bhuRoyalGate.png", remoteName: "bhu-royal-gate.png", folder: "/about" },
-  // { localFile: "about/ghatSaloutte.png", remoteName: "ghats-silhouette.png", folder: "/about" },
+  // ============================================
+  // FEST HIGHLIGHTS
+  // ============================================
+  { localFile: "home/festiveHighlights/common/durga_temple.svg", remoteName: "durga-temple.svg", folder: "/highlights/common" },
+  { localFile: "home/festiveHighlights/desktop/durga.svg", remoteName: "durga.svg", folder: "/highlights/desktop" },
+
+  // ============================================
+  // FESTIVAL VIBES / THE EXPERIENCE
+  // ============================================
+  { localFile: "home/theExperience/common/baddie.png", remoteName: "dj.png", folder: "/festival-vibes/common" },
+  { localFile: "home/theExperience/common/sareeDrape.png", remoteName: "saree-drape.png", folder: "/festival-vibes/common" },
+
+  // ============================================
+  // PRO NITES
+  // ============================================
+  { localFile: "home/proNites/common/proNiteDancingGirl.png", remoteName: "dancing-girl.png", folder: "/pro-nites/common" },
+  { localFile: "home/proNites/common/moon.png", remoteName: "moon.png", folder: "/pro-nites/common" },
+  { localFile: "home/proNites/common/silhoutte.png", remoteName: "silhouette.png", folder: "/pro-nites/common" },
+  { localFile: "home/proNites/common/aerobics.png", remoteName: "aerobics.png", folder: "/pro-nites/common" },
+
+  // ============================================
+  // MISCELLANEOUS
+  // ============================================
+  { localFile: "miscellaneous/common/lord_shiva.png", remoteName: "lord-shiva.png", folder: "/misc" },
+  { localFile: "miscellaneous/common/welcomeFlag.png", remoteName: "welcome-flag.png", folder: "/misc" },
+
+  // ============================================
+  // ABOUT PAGE - All common
+  // ============================================
+  { localFile: "about/common/mandlaOrnament.png", remoteName: "mandala-ornament.png", folder: "/about/common" },
+  { localFile: "about/common/peacock_nobg.png", remoteName: "peacock.png", folder: "/about/common" },
+  { localFile: "about/common/omLotus.png", remoteName: "om-lotus.png", folder: "/about/common" },
+  { localFile: "about/common/mysticDivider.png", remoteName: "mystic-divider.png", folder: "/about/common" },
+  { localFile: "about/common/diyaCluster.png", remoteName: "diya-cluster.png", folder: "/about/common" },
+  { localFile: "about/common/cornerOrnament.png", remoteName: "corner-ornament.png", folder: "/about/common" },
+  { localFile: "about/common/bhuRoyalGate.png", remoteName: "bhu-royal-gate.png", folder: "/about/common" },
+  { localFile: "about/common/ghatSaloutte.png", remoteName: "ghats-silhouette.png", folder: "/about/common" },
+
+  // ============================================
+  // CONTACT PAGE - All common
+  // ============================================
+  { localFile: "contact/common/envelopeScrolled.png", remoteName: "envelope-scroll.png", folder: "/contact/common" },
+  { localFile: "contact/common/conch.png", remoteName: "conch.png", folder: "/contact/common" },
+  { localFile: "contact/common/lotusMandla.png", remoteName: "lotus-mandala.png", folder: "/contact/common" },
+  { localFile: "contact/common/floatingDiya.png", remoteName: "floating-diya.png", folder: "/contact/common" },
+
+  // ============================================
+  // LOGIN PAGE - All common
+  // ============================================
+  { localFile: "login/common/mysticGate.png", remoteName: "mystic-gate.png", folder: "/login/common" },
 ];
 
 async function checkIfExists(
@@ -176,36 +224,6 @@ async function main() {
   if (failed.length > 0) {
     console.log("\nFailed files:", failed.join(", "));
   }
-
-  console.log("\n" + "═".repeat(60));
-  console.log("📝 IMAGES CONFIG (copy to config/images.ts)");
-  console.log("═".repeat(60));
-
-  // Group by folder
-  const grouped: Record<string, string[]> = {};
-  for (const r of results) {
-    const folder = r.name.split("/")[1]; // e.g., "passes" from "/passes/yatri-pass.png"
-    if (!grouped[folder]) grouped[folder] = [];
-    const key = r.name
-      .split("/")
-      .pop()!
-      .replace(/[-.]([a-z])/g, (_, c) => c.toUpperCase())
-      .replace(/\.(png|jpg|svg|webp)$/, "");
-    grouped[folder].push(`    ${key}: \`\${IMAGEKIT_BASE}${r.name}\`,`);
-  }
-
-  console.log(`
-const IMAGEKIT_BASE = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || "https://ik.imagekit.io/bi3ktgt58";
-
-export const IMAGES = {`);
-
-  for (const [folder, lines] of Object.entries(grouped)) {
-    console.log(`  ${folder}: {`);
-    lines.forEach((line) => console.log(line));
-    console.log(`  },`);
-  }
-
-  console.log(`} as const;`);
 }
 
 main().catch(console.error);
